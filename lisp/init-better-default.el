@@ -1,3 +1,6 @@
+;; encoding
+(set-language-environment "UTF-8")
+
 ;; 禁用响铃
 (setq ring-bell-function 'ignore)
 

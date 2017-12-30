@@ -30,6 +30,12 @@
                          add-node-modules-path
                          ;;
                          popwin
+			 ;;
+			 expand-region
+			 ;;
+			 iedit
+			 ;;
+			 org-pomodoro
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -83,5 +89,7 @@
 
 ;; 开启全局company
 (global-company-mode 1)
+
+(require 'org-pomodoro)
 
 (provide 'init-packages)

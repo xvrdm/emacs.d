@@ -24,6 +24,22 @@
 ;; minefunc 增强occur
 (global-set-key (kbd "M-s o") 'occur-dwim)
 
+;; counsel-imenu bind
+(global-set-key (kbd "M-s i") 'counsel-imenu)
+
+;; expand bind
+(require 'expand-region)
+(global-set-key (kbd "M-s =") 'er/expand-region)
+
+;; iedit bind
+(global-set-key (kbd "M-s e") 'iedit-mode)
+
+;; org bind
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+;; minefunc org template
+(global-set-key (kbd "C-c r") 'org-capture)
+
 ;; dired重用buffer
 (with-eval-after-load 'dired
       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
