@@ -47,6 +47,11 @@
 			 ;;
 			 window-numbering
 			 ;;
+			 evil-surround
+			 ;;
+			 evil-nerd-commenter
+			 ;;
+			 which-key
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -124,7 +129,17 @@
 ;; evil setting
 (evil-mode)
 
-;;
+;; window-numbering setting
 (window-numbering-mode t)
+
+;; evil-surround setting
+(require 'evil-surround)
+(global-evil-surround-mode)
+
+;; evil-nerd-commenter
+(evilnc-default-hotkeys)
+
+;; which-key
+(which-key-mode 1)
 
 (provide 'init-packages)

@@ -16,7 +16,7 @@
 (global-set-key (kbd "C-x C-m") 'open-init-file)
 
 ;;
-(global-set-key (kbd "C-c p f") 'counsel-git)
+;; (global-set-key (kbd "C-c p f") 'counsel-git)
 
 ;; 打开recent files
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
@@ -52,7 +52,7 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 ;; helm-ag bind
-(global-set-key (kbd "C-c p s") 'helm-ag)
+;; (global-set-key (kbd "C-c p s") 'helm-ag)
 
 ;; auto-yasnippet bind
 (global-set-key (kbd "H-w") #'aya-create)
@@ -60,5 +60,20 @@
 
 ;; set C-w delte a word backward
 (global-set-key (kbd "C-w") 'backward-kill-word)
+
+;; evil-nerd-commenter Vim key bindings
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-key
+  "ci" 'evilnc-comment-or-uncomment-lines
+  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "cc" 'evilnc-copy-and-comment-lines
+  "cp" 'evilnc-comment-or-uncomment-paragraphs
+  "cr" 'comment-or-uncomment-region
+  "cv" 'evilnc-toggle-invert-comment-line-by-line
+  "."  'evilnc-copy-and-comment-operator
+  "\\" 'evilnc-comment-operator ; if you prefer backslash key
+  )
 
 (provide 'init-keybindings)
