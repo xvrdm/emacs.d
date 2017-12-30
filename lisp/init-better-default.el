@@ -23,5 +23,16 @@
 (recentf-mode 1)
 (setq recentf-max-menu-item 10)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; dired递归copy delete
+(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
+
+(put 'dired-find-alternate-file 'disabled nil)
+
+(require 'dired-x)
+
+(setq dired-dwim-target t)
 
 (provide 'init-better-default)
