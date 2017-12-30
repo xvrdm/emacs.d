@@ -60,7 +60,6 @@
 (setq enable-recursive-minibuffers t)
 
 ;; smartparens setting
-(require 'smartparens-config)
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 
