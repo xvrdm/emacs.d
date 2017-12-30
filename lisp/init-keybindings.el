@@ -21,6 +21,9 @@
 ;; 打开recent files
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
+;; minefunc 增强occur
+(global-set-key (kbd "M-s o") 'occur-dwim)
+
 ;; dired重用buffer
 (with-eval-after-load 'dired
       (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
