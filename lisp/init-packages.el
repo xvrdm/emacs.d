@@ -40,6 +40,13 @@
 			 helm-ag
 			 ;;
 			 auto-yasnippet
+			 ;;
+			 evil
+			 ;;
+			 evil-leader
+			 ;;
+			 window-numbering
+			 ;;
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -73,6 +80,7 @@
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+(sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
 
 ;; js2-mode setting
 (setq auto-mode-alist
@@ -94,10 +102,29 @@
 ;; 开启全局company
 (global-company-mode 1)
 
-;; org-pomodoro bind
+;; org-pomodoro setting
 (require 'org-pomodoro)
 
+;; yasnippet setting
+(require 'yasnippet)
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
+
+
+
+;; evil leader key
+(global-evil-leader-mode)
+(evil-leader/set-key
+  "e" 'find-file
+  "b" 'switch-to-buffer
+  "k" 'kill-buffer)
+
+(evil-leader/set-leader ";")
+
+;; evil setting
+(evil-mode)
+
+;;
+(window-numbering-mode t)
 
 (provide 'init-packages)

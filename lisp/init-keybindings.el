@@ -54,4 +54,11 @@
 ;; helm-ag bind
 (global-set-key (kbd "C-c p s") 'helm-ag)
 
+;; auto-yasnippet bind
+(global-set-key (kbd "H-w") #'aya-create)
+(global-set-key (kbd "H-y") #'aya-expand)
+
+;; set C-w delte a word backward
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
 (provide 'init-keybindings)

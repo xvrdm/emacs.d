@@ -6,7 +6,9 @@
  '(custom-safe-themes
    (quote
     ("8ed752276957903a270c797c4ab52931199806ccd9f0c3bb77f6f4b9e71b9272" default)))
- )
+ '(package-selected-packages
+   (quote
+    (window-numbering company monokai-theme hungry-delete swiper counsel smartparens js2-mode nodejs-repl add-node-modules-path popwin expand-region iedit org-pomodoro helm-ag auto-yasnippet evil evil-leader))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
