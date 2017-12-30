@@ -17,4 +17,11 @@
 					    ("lf" "liang.feng")
 					    ))
 
+
+;; 打开recent files
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-item 10)
+
+
 (provide 'init-better-default)

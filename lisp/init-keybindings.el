@@ -12,17 +12,13 @@
 (global-set-key (kbd "C-h C-v") 'find-variable)
 (global-set-key (kbd "C-h C-k") 'find-function-on-key)
 
-;; 快速打开配置文件
-(defun open-init-file()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
+;; minefunc 快速打开配置文件
 (global-set-key (kbd "C-x C-m") 'open-init-file)
 
+;;
+(global-set-key (kbd "C-c p f") 'counsel-git)
 
 ;; 打开recent files
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-item 10)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 (provide 'init-keybindings)

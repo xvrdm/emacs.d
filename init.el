@@ -7,6 +7,7 @@
 ;; add feauther to load-path
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
+(require 'init-minefunc)
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-org)
