@@ -42,6 +42,16 @@
 
 ;; dired重用buffer
 (with-eval-after-load 'dired
-      (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+;; 使用 c-n/c-p 来选择 company 的候选补全项
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+;; helm-ag bind
+(global-set-key (kbd "C-c p s") 'helm-ag)
 
 (provide 'init-keybindings)

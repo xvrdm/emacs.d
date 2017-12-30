@@ -36,6 +36,8 @@
 			 iedit
 			 ;;
 			 org-pomodoro
+			 ;;
+			 helm-ag
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
