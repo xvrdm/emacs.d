@@ -1,83 +1,28 @@
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+;; add feauther to load-path
 
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+(require 'init-packages)
 
 ;; cl - Common List Extension
 (require 'cl)
 
-;; packages list
-(defvar liang/packages '(
-			 company
-			 ;; themes
-			 monokai-theme
-			 ;; --- Better Editor ---
-			 hungry-delete
-			 ;;
-			 swiper
-			 ;;
-			 counsel
-			 ;;
-			 smartparens
-			 ;;
-			 js2-mode
-			 ;;
-			 nodejs-repl
-			 ;;
-			 add-node-modules-path
-			 ) "Default packages")
-
-(setq package-selected-packages liang/packages)
-
-(defun liang/packages-installed-p()
-  (loop for pkg in liang/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (liang/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg liang/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-;; hungry-delete seting
-(global-hungry-delete-mode)
-(require 'hungry-delete)
+;; 禁用响铃
+(setq ring-bell-function 'ignore)
 
 ;; swiper setting
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-
-;; smartparens setting
-(require 'smartparens-config)
-;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(smartparens-global-mode t)
-
-;; js2-mode setting
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
-
-;; nodejs-repl setting
-(require 'nodejs-repl)
-
-;; setting add-node-modules-path
-(eval-after-load 'js2-mode
-    '(add-hook 'js2-mode-hook #'add-node-modules-path))
-
-;; Theme
-(load-theme 'monokai t)
 
 ;; 括号匹配高亮
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -94,8 +39,17 @@
 ;; 行号
 (global-linum-mode 1)
 
+;; abbrev
+(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(
+					    ("lf" "liang.feng")
+					    ))
+
 ;; 更改光标样式
 ;; (setq cursor-type 'bar)
+
+;; auto reload file
+(global-auto-revert-mode t)
 
 ;; 关闭启动画面
 (setq inhibit-splash-screen 1)
@@ -110,11 +64,9 @@
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-x C-m") 'open-init-file)
 
-;; 开启全局company
-(global-company-mode 1)
-
 ;; 禁用备份文件
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; org-mode
 (setq org-agenda-files '("~/org"))
@@ -150,3 +102,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
