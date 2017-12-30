@@ -62,7 +62,7 @@
 ;; smartparens setting
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
-
+(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
 
 ;; js2-mode setting
 (setq auto-mode-alist

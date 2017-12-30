@@ -1,7 +1,4 @@
 
-;; 括号匹配高亮
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-
 ;; 高亮当前行
 ;; (global-hl-line-mode 1)
 
@@ -10,9 +7,6 @@
 
 ;; 关闭滚动条
 ;; (scroll-bar-mode -1)
-
-;; 行号
-(global-linum-mode 1)
 
 ;; 更改光标样式
 ;; (setq cursor-type 'bar)
