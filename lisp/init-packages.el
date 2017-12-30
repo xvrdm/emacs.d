@@ -38,6 +38,8 @@
 			 org-pomodoro
 			 ;;
 			 helm-ag
+			 ;;
+			 auto-yasnippet
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -56,7 +58,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(load-theme 'monokai t)
+;;(load-theme 'monokai t)
 
 ;; hungry-delete seting
 (global-hungry-delete-mode)
@@ -92,6 +94,10 @@
 ;; 开启全局company
 (global-company-mode 1)
 
+;; org-pomodoro bind
 (require 'org-pomodoro)
+
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 
 (provide 'init-packages)
