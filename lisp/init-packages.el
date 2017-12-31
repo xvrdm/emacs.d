@@ -116,7 +116,6 @@
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
 
-
 ;; evil leader key
 (global-evil-leader-mode)
 (evil-leader/set-key
