@@ -52,6 +52,10 @@
 			 evil-nerd-commenter
 			 ;;
 			 which-key
+			 ;;
+			 ;; emacs-ycmd
+			 ;;
+			 ;; company-ycmd
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -140,5 +144,18 @@
 
 ;; which-key
 (which-key-mode 1)
+
+;; emacs-ycmd
+;; (require 'ycmd)
+;; (add-hook 'after-init-hook #'global-ycmd-mode)
+;; (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+;; (require 'company-ycmd)
+;; (company-ycmd-setup)
+
+;; irony setting
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 (provide 'init-packages)
