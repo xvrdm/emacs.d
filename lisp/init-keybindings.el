@@ -76,5 +76,7 @@
   "\\" 'evilnc-comment-operator ; if you prefer backslash key
   )
 
+;; youdao-dictionary bindings
+(global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
 
 (provide 'init-keybindings)

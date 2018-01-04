@@ -1,8 +1,17 @@
 ;; evil leader key
+(setq evil-leader/in-all-states t)
+
 (global-evil-leader-mode)
+
 (evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
+  "f" 'find-file
+  "v" 'switch-to-buffer
+  "p" 'switch-to-prev-buffer
+  "q" 'evil-buffer
+  "a" 'evil-first-non-blank
+  "e" 'evil-end-of-line
+  "z" 'save-buffer
+  "SPC" 'counsel-M-x
   "k" 'kill-buffer)
 
 (evil-leader/set-leader ";")

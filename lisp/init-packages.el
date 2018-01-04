@@ -1,10 +1,22 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+;;  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                           ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
-(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+ (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+;; (setq package-archives
+   ;;   '(;; uncomment below line if you need use GNU ELPA
+        ;; ("gnu" . "https://elpa.gnu.org/packages/")
+   ;;     ("localelpa" . "~/.emacs.d/localelpa/")
+        ;; ("my-js2-mode" . "https://raw.githubusercontent.com/redguardtoo/js2-mode/release/") ; github has some issue
+        ;; {{ backup repositories
+        ;; ("melpa" . "http://mirrors.163.com/elpa/melpa/")
+        ;; ("melpa-stable" . "http://mirrors.163.com/elpa/melpa-stable/")
+        ;; }}
+   ;;     ("melpa" . "https://melpa.org/packages/")
+   ;;     ("melpa-stable" . "https://stable.melpa.org/packages/")
+   ;;     )))
 
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
@@ -56,10 +68,8 @@
                          which-key
                          ;;
                          window-numbering
-                         ;;
-                         ;; emacs-ycmd
-                         ;;
-                         ;; company-ycmd
+			 ;;
+			 youdao-dictionary
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -127,10 +137,26 @@
 (window-numbering-mode t)
 
 ;; emacs-ycmd
-;; (require 'ycmd)
-;; (add-hook 'after-init-hook #'global-ycmd-mode)
-;; (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;; (require 'company-ycmd)
-;; (company-ycmd-setup)
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+(set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+(require 'company-ycmd)
+(company-ycmd-setup)
+
+;; youdao-dictionary
+;; Enable Cache
+(setq url-automatic-caching t)
+;; Integrate with popwin-el (https://github.com/m2ym/popwin-el)
+(push "*Youdao Dictionary*" popwin:special-display-config)
+
+;; Set file path for saving search history
+;; (setq youdao-dictionary-search-history-file "~/.emacs.d/.youdao")
+
+;; Enable Chinese word segmentation support (支持中文分词)
+;; (setq youdao-dictionary-use-chinese-word-segmentation t)
+
+;; popwin
+(require 'popwin)
+(popwin-mode t)
 
 (provide 'init-packages)
