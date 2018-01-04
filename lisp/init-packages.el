@@ -1,8 +1,10 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                           ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+;;                           ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
 
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
@@ -30,32 +32,34 @@
                          add-node-modules-path
                          ;;
                          popwin
+                         ;;
+                         expand-region
+                         ;;
+                         iedit
+                         ;;
+                         org-pomodoro
+                         ;;
+                         helm-ag
+                         ;;
+                         auto-yasnippet
+                         ;;
+                         evil
+                         ;;
+                         evil-leader
 			 ;;
-			 expand-region
-			 ;;
-			 iedit
-			 ;;
-			 org-pomodoro
-			 ;;
-			 helm-ag
-			 ;;
-			 auto-yasnippet
-			 ;;
-			 evil
-			 ;;
-			 evil-leader
-			 ;;
-			 window-numbering
-			 ;;
-			 evil-surround
-			 ;;
-			 evil-nerd-commenter
-			 ;;
-			 which-key
-			 ;;
-			 ;; emacs-ycmd
-			 ;;
-			 ;; company-ycmd
+			 evil-escape
+                         ;;
+                         evil-surround
+                         ;;
+                         evil-nerd-commenter
+                         ;;
+                         which-key
+                         ;;
+                         window-numbering
+                         ;;
+                         ;; emacs-ycmd
+                         ;;
+                         ;; company-ycmd
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -119,31 +123,8 @@
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-
-;; evil leader key
-(global-evil-leader-mode)
-(evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
-  "k" 'kill-buffer)
-
-(evil-leader/set-leader ";")
-
-;; evil setting
-(evil-mode)
-
 ;; window-numbering setting
 (window-numbering-mode t)
-
-;; evil-surround setting
-(require 'evil-surround)
-(global-evil-surround-mode)
-
-;; evil-nerd-commenter
-(evilnc-default-hotkeys)
-
-;; which-key
-(which-key-mode 1)
 
 ;; emacs-ycmd
 ;; (require 'ycmd)
@@ -151,11 +132,5 @@
 ;; (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
 ;; (require 'company-ycmd)
 ;; (company-ycmd-setup)
-
-;; irony setting
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 (provide 'init-packages)
