@@ -70,6 +70,10 @@
                          window-numbering
 			 ;;
 			 youdao-dictionary
+			 ;;
+			 ycmd
+			 ;;
+			 company-ycmd
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
