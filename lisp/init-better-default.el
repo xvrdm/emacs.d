@@ -49,4 +49,14 @@
 
 (setq dired-dwim-target t)
 
+;; When you visit a file, point goes to the last place where it was when you previously visited the same file.
+(save-place-mode 1)
+
+;; tab settings
+(setq-default indent-tabs-mode nil) ; tab 改为插入空格
+(setq c-basic-offset 4) ; c c++ 缩进4个空格
+;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
+(setq default-tab-width 4)
+
+
 (provide 'init-better-default)

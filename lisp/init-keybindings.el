@@ -79,4 +79,10 @@
 ;; youdao-dictionary bindings
 (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
 
+;;evil-easymotion
+(evilem-default-keybindings "SPC")
+
+;; switch cpp and h
+(global-set-key (kbd "C-x C-o") 'ff-find-other-file)
+
 (provide 'init-keybindings)

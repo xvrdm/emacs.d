@@ -55,11 +55,13 @@
                          ;;
                          auto-yasnippet
                          ;;
+                         yasnippet
+                         ;;
                          evil
                          ;;
                          evil-leader
-			 ;;
-			 evil-escape
+                         ;;
+                         evil-escape
                          ;;
                          evil-surround
                          ;;
@@ -68,12 +70,14 @@
                          which-key
                          ;;
                          window-numbering
-			 ;;
-			 youdao-dictionary
-			 ;;
-			 ycmd
-			 ;;
-			 company-ycmd
+                         ;;
+                         youdao-dictionary
+                         ;;
+                         ycmd
+                         ;;
+                         company-ycmd
+                         ;;
+                         evil-easymotion
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -134,8 +138,9 @@
 
 ;; yasnippet setting
 (require 'yasnippet)
-(yas-reload-all)
-(add-hook 'prog-mode-hook #'yas-minor-mode)
+(yas-global-mode 1)
+;; (yas-reload-all)
+;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
 ;; window-numbering setting
 (window-numbering-mode t)
@@ -162,5 +167,9 @@
 ;; popwin
 (require 'popwin)
 (popwin-mode t)
+
+;; which-key
+(require 'which-key)
+(which-key-mode)
 
 (provide 'init-packages)

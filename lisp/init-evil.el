@@ -12,6 +12,7 @@
   "e" 'evil-end-of-line
   "z" 'save-buffer
   "SPC" 'counsel-M-x
+  "ss" 'ff-find-other-file
   "k" 'kill-buffer)
 
 (evil-leader/set-leader ";")
