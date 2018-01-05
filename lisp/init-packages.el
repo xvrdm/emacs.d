@@ -78,6 +78,8 @@
                          company-ycmd
                          ;;
                          evil-easymotion
+                         ;;
+                         counsel-gtags
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -171,5 +173,26 @@
 ;; which-key
 (require 'which-key)
 (which-key-mode)
+
+;; gtags(global)
+;; (autoload 'gtags-mode "gtags" "" t)
+
+;; emacs-counsel-gtags
+(add-hook 'c-mode-hook 'counsel-gtags-mode)
+(add-hook 'c++-mode-hook 'counsel-gtags-mode)
+
+;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
+(add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+
+;; Please note `file-truename' must be used!
+(setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               "/usr/local/include"
+                               ":"
+                               (file-truename "~/proj2")
+                               ":"
+                               (file-truename "~/proj1")))
+(setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
+(setq company-backends '((company-dabbrev-code company-gtags)))
 
 (provide 'init-packages)

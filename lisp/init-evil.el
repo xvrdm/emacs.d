@@ -13,6 +13,7 @@
   "z" 'save-buffer
   "SPC" 'counsel-M-x
   "ss" 'ff-find-other-file
+  "mm" 'evil-jump-item
   "k" 'kill-buffer)
 
 (evil-leader/set-leader ";")
