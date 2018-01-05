@@ -201,7 +201,7 @@
 (which-key-mode)
 
 ;; gtags(global)
-(load "/usr/share/emacs/site-lisp/global/gtags.el")
+(load "/usr/local/share/gtags/gtags.el")
 (autoload 'gtags-mode "gtags" "" t)
 
 ;; emacs-counsel-gtags
