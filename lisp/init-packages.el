@@ -80,6 +80,10 @@
                          evil-easymotion
                          ;;
                          counsel-gtags
+                         ;;
+                         smart-mode-line
+                         ;;
+                         doom-themes
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -194,5 +198,28 @@
                                (file-truename "~/proj1")))
 (setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
 (setq company-backends '((company-dabbrev-code company-gtags)))
+
+;; smart-mode-line
+;; (setq sml/theme 'dark)
+;; (setq sml/theme 'light)
+;; (setq sml/theme 'respectful)
+;; (sml/setup)
+;; (setq sml/no-confirm-load-theme t)
+
+;; doom-themes ;;;;;;;;;;;;;;;;;;;;;
+(require 'doom-themes)
+;; Global settings (defaults)
+(setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
+      doom-themes-enable-italic nil) ; if nil, italics is universally disabled
+;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
+;; may have their own settings.
+(load-theme 'doom-one t)
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+;; Enable custom neotree theme
+(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
+;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-packages)
