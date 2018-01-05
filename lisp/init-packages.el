@@ -213,7 +213,9 @@
       doom-themes-enable-italic nil) ; if nil, italics is universally disabled
 ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
 ;; may have their own settings.
-(load-theme 'doom-one t)
+(load-theme 'doom-nova t)
+;; (load-theme 'doom-vibrant t)
+;; (load-theme 'doom-one t)
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
 ;; Enable custom neotree theme
