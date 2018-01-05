@@ -14,7 +14,23 @@
   "SPC" 'counsel-M-x
   "ss" 'ff-find-other-file
   "mm" 'evil-jump-item
+  "1" 'select-window-1
+  "2" 'select-window-2
+  "3" 'select-window-3
+  "4" 'select-window-4
+  "5" 'select-window-5
+  "6" 'select-window-6
+  "7" 'select-window-7
+  "tt" 'neotree-toggle
+  "rr" 'er/expand-region
+  "tb" 'projectile-speedbar-toggle
   "k" 'kill-buffer)
+
+
+ ;; (define-key evil-insert-state-map (kbd ";g") 'evil-normal-state)
+ ;; (define-key evil-insert-state-map (kbd ";a") 'evil-first-non-blank)
+ ;; (define-key evil-insert-state-map (kbd ";e") 'evil-end-of-line)
+ ;; (define-key evil-insert-state-map (kbd ";w") 'evil-delete-backward-word)
 
 (evil-leader/set-leader ";")
 

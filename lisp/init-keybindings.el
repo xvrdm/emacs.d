@@ -96,4 +96,7 @@
 (global-set-key (kbd "C-a") 'beginning-of-line)
 (global-set-key (kbd "C-e") 'end-of-line)
 
+;; projectile-speedbar
+(global-set-key (kbd "M-<f2>") 'projectile-speedbar-open-current-buffer-in-tree)
+
 (provide 'init-keybindings)

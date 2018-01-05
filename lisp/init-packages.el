@@ -84,6 +84,20 @@
                          smart-mode-line
                          ;;
                          doom-themes
+                         ;;
+                         function-args
+                         ;;
+                         neotree
+                         ;;
+                         projectile-speedbar
+                         ;;
+                         linum-relative
+                         ;;
+                         rainbow-delimiters
+                         ;;
+                         focus   
+                         ;;
+                         beacon
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -102,7 +116,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-;;(load-theme 'monokai t)
+(load-theme 'monokai t)
+;;(load-theme 'wombat t)
 
 ;; hungry-delete seting
 (global-hungry-delete-mode)
@@ -153,10 +168,17 @@
 
 ;; emacs-ycmd
 (require 'ycmd)
-(add-hook 'after-init-hook #'global-ycmd-mode)
-(set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+(add-hook 'after-init-hook 'global-ycmd-mode)
+(add-hook 'c++-mode-hook 'ycmd-mode)
+(set-variable 'ycmd-server-command
+              '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
 (require 'company-ycmd)
 (company-ycmd-setup)
+;;;; Set always complete immediately
+(setq company-idle-delay 0)
+
+;; (require 'ycmd-test)
+;; (ert-run-tests-interactively "ycmd-test")
 
 ;; youdao-dictionary
 ;; Enable Cache
@@ -179,7 +201,8 @@
 (which-key-mode)
 
 ;; gtags(global)
-;; (autoload 'gtags-mode "gtags" "" t)
+(load "/usr/share/emacs/site-lisp/global/gtags.el")
+(autoload 'gtags-mode "gtags" "" t)
 
 ;; emacs-counsel-gtags
 (add-hook 'c-mode-hook 'counsel-gtags-mode)
@@ -207,21 +230,43 @@
 ;; (setq sml/no-confirm-load-theme t)
 
 ;; doom-themes ;;;;;;;;;;;;;;;;;;;;;
-(require 'doom-themes)
+;; (require 'doom-themes)
 ;; Global settings (defaults)
-(setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
-      doom-themes-enable-italic nil) ; if nil, italics is universally disabled
+;; (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
+  ;;    doom-themes-enable-italic nil) ; if nil, italics is universally disabled
 ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
 ;; may have their own settings.
-(load-theme 'doom-nova t)
+;; (load-theme 'doom-nova t)
 ;; (load-theme 'doom-vibrant t)
 ;; (load-theme 'doom-one t)
 ;; Enable flashing mode-line on errors
-(doom-themes-visual-bell-config)
+;; (doom-themes-visual-bell-config)
 ;; Enable custom neotree theme
-(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+;;
+;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 ;; Corrects (and improves) org-mode's native fontification.
-(doom-themes-org-config)
+;; (doom-themes-org-config)
 ;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
+
+;; function-args
+(require 'function-args)
+(fa-config-default)
+
+;; neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; projectile-speedbar
+(require 'projectile-speedbar)
+
+;; linum-relative
+(require 'linum-relative)
+(linum-relative-toggle)
+
+;; rainbow-delimiters
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; beacon
+(beacon-mode 1)
 
 (provide 'init-packages)

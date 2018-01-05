@@ -56,5 +56,4 @@
     (when (gtags-root-dir)
       (gtags-update-current-file))))
 
-
 (provide 'init-minefunc)
