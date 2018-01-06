@@ -22,6 +22,8 @@
   "6" 'select-window-6
   "7" 'select-window-7
   "tt" 'neotree-toggle
+  "yy" 'youdao-dictionary-search-at-point
+  "yd" 'youdao-dictionary-search
   "rr" 'er/expand-region
   "tb" 'projectile-speedbar-toggle
   "k" 'kill-buffer)
@@ -45,7 +47,7 @@
 (evilnc-default-hotkeys)
 
 ;; evil-escape
-(setq-default evil-escape-key-sequence ";g")
-(evil-esc-mode 1)
+(setq-default evil-escape-key-sequence "jf")
+(setq-default evil-escape-delay 0)
 
 (provide 'init-evil)

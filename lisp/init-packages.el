@@ -171,7 +171,7 @@
 (add-hook 'after-init-hook 'global-ycmd-mode)
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (set-variable 'ycmd-server-command
-              '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+              '("python" "/home/feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
 (require 'company-ycmd)
 (company-ycmd-setup)
 ;;;; Set always complete immediately
@@ -268,5 +268,8 @@
 
 ;; beacon
 (beacon-mode 1)
+
+;; evil-escape
+(evil-escape-mode t)
 
 (provide 'init-packages)
