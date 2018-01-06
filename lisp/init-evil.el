@@ -4,6 +4,15 @@
 (global-evil-leader-mode)
 
 (evil-leader/set-key
+  ;; switch window
+  "1" 'select-window-1
+  "2" 'select-window-2
+  "3" 'select-window-3
+  "4" 'select-window-4
+  "5" 'select-window-5
+  "6" 'select-window-6
+  "7" 'select-window-7
+  ;;
   "ff" 'find-file
   "sb" 'switch-to-buffer
   "sp" 'switch-to-prev-buffer
@@ -14,16 +23,9 @@
   "SPC" 'counsel-M-x
   "ss" 'ff-find-other-file
   "mm" 'evil-jump-item
-  "1" 'select-window-1
-  "2" 'select-window-2
-  "3" 'select-window-3
-  "4" 'select-window-4
-  "5" 'select-window-5
-  "6" 'select-window-6
-  "7" 'select-window-7
   "tt" 'neotree-toggle
   "yy" 'youdao-dictionary-search-at-point
-  "yd" 'youdao-dictionary-search
+  "yd" 'youdao-dictionary-search-from-input
   "rr" 'er/expand-region
   "tb" 'projectile-speedbar-toggle
   "fs" 'isearch-forward-regexp
