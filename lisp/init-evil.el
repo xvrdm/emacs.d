@@ -1,5 +1,5 @@
 ;; evil leader key
-(setq evil-leader/in-all-states t)
+;; (setq evil-leader/in-all-states t)
 
 (global-evil-leader-mode)
 
