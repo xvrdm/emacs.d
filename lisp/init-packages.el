@@ -98,6 +98,12 @@
                          focus   
                          ;;
                          beacon
+                         ;;
+                         powerline
+                         ;; themes for powerline
+                         powerline-evil
+                         ;; themes for powerline
+                         airline-themes
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -276,5 +282,21 @@
 (require 'evil-surround)
 (require 'evil-nerd-commenter)
 (require 'evil-easymotion)
+
+;; powerline
+(require 'powerline)
+;; (powerline-default-theme)
+;; (powerline-center-theme)
+;; (powerline-center-evil-theme)
+;; (powerline-evil-center-color-theme)
+
+;; powerline-evil
+(require 'powerline-evil)
+
+;; airline-themes
+(require 'airline-themes)
+;; (load-theme 'airline-light)
+;; (load-theme 'airline-dark)
+(airline-themes-set-modeline)
 
 (provide 'init-packages)

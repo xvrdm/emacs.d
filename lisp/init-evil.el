@@ -4,13 +4,13 @@
 (global-evil-leader-mode)
 
 (evil-leader/set-key
-  "f" 'find-file
-  "v" 'switch-to-buffer
-  "p" 'switch-to-prev-buffer
-  "q" 'evil-buffer
-  "a" 'evil-first-non-blank
-  "e" 'evil-end-of-line
-  "z" 'save-buffer
+  "ff" 'find-file
+  "sb" 'switch-to-buffer
+  "sp" 'switch-to-prev-buffer
+  "qq" 'evil-buffer
+  "aa" 'evil-first-non-blank
+  "ee" 'evil-end-of-line
+  "zz" 'save-buffer
   "SPC" 'counsel-M-x
   "ss" 'ff-find-other-file
   "mm" 'evil-jump-item
@@ -26,7 +26,10 @@
   "yd" 'youdao-dictionary-search
   "rr" 'er/expand-region
   "tb" 'projectile-speedbar-toggle
-  "k" 'kill-buffer)
+  "fs" 'isearch-forward-regexp
+  "bs" 'isearch-backward-regexp
+  "rs" 'replace-regexp
+  "kb" 'kill-buffer)
 
 
  ;; (define-key evil-insert-state-map (kbd ";g") 'evil-normal-state)
