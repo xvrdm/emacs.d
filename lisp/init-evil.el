@@ -40,14 +40,14 @@
 (evil-mode)
 
 ;; evil-surround setting
-(require 'evil-surround)
 (global-evil-surround-mode)
 
 ;; evil-nerd-commenter
 (evilnc-default-hotkeys)
 
 ;; evil-escape
-(setq-default evil-escape-key-sequence "jf")
-(setq-default evil-escape-delay 0)
+(evil-escape-mode 1)
+(setq-default evil-escape-delay 0.3)
+(setq-default evil-escape-key-sequence ";g")
 
 (provide 'init-evil)

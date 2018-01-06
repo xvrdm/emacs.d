@@ -67,6 +67,8 @@
                          ;;
                          evil-nerd-commenter
                          ;;
+                         evil-easymotion
+                         ;;
                          which-key
                          ;;
                          window-numbering
@@ -76,8 +78,6 @@
                          ycmd
                          ;;
                          company-ycmd
-                         ;;
-                         evil-easymotion
                          ;;
                          counsel-gtags
                          ;;
@@ -269,7 +269,12 @@
 ;; beacon
 (beacon-mode 1)
 
-;; evil-escape
-(evil-escape-mode t)
+;; evil
+(require 'evil)
+(require 'evil-leader)
+(require 'evil-escape)
+(require 'evil-surround)
+(require 'evil-nerd-commenter)
+(require 'evil-easymotion)
 
 (provide 'init-packages)
