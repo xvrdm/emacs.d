@@ -56,7 +56,7 @@
                          auto-yasnippet
                          ;;
                          yasnippet
-                         ;;
+                         ;;;;;;;;;;;;;;;;;;;;;;;;;;;
                          evil
                          ;;
                          evil-leader
@@ -69,6 +69,14 @@
                          ;;
                          evil-easymotion
                          ;;
+                         evil-matchit
+                         ;;
+                         evil-exchange
+                         ;;
+                         evil-iedit-state
+                         ;;
+                         general
+                         ;;;;;;;;;;;;;;;;;;;;;;;;;
                          which-key
                          ;;
                          window-numbering
@@ -301,6 +309,7 @@
 ;; beacon
 (beacon-mode 1)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; evil
 (require 'evil)
 (require 'evil-leader)
@@ -308,6 +317,24 @@
 (require 'evil-surround)
 (require 'evil-nerd-commenter)
 (require 'evil-easymotion)
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
+(require 'evil-exchange)
+;; change default key bindings (if you want) HERE
+;; (setq evil-exchange-key (kbd "zx"))
+(evil-exchange-install)
+;; {{ @see https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#replacing-text-with-iedit
+;; same keybindgs as spacemacs:
+;;  - "SPC s e" to start `iedit-mode'
+;;  - "TAB" to toggle current occurrence
+;;  - "n" next, "N" previous (obviously we use "p" for yank)
+;;  - "gg" the first occurence, "G" the last occurence
+;;  - Please note ";;" or `avy-goto-char-timer' is also useful
+(require 'evil-iedit-state)
+(require 'general)
+(general-evil-setup t)
+;; }}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; powerline
 (require 'powerline)

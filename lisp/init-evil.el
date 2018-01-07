@@ -62,11 +62,6 @@
 (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
 (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
 
- ;; (define-key evil-insert-state-map (kbd ";g") 'evil-normal-state)
- ;; (define-key evil-insert-state-map (kbd ";a") 'evil-first-non-blank)
- ;; (define-key evil-insert-state-map (kbd ";e") 'evil-end-of-line)
- ;; (define-key evil-insert-state-map (kbd ";w") 'evil-delete-backward-word)
-
 (evil-leader/set-leader ";")
 
 ;; evil setting
@@ -86,5 +81,323 @@
 ;;evil-easymotion
 (evilem-default-keybindings "SPC")
 
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; As a general RULE, mode specific evil leader keys started
+;; with uppercased character or 'g' or special character except "=" and "-"
+(evil-declare-key 'normal org-mode-map
+  "gh" 'outline-up-heading
+  "gl" 'outline-next-visible-heading
+  "gj" 'outline-forward-same-level
+  "gk" 'outline-backward-same-level
+  "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+  "^" 'org-beginning-of-line ; ditto
+  "<" (lambda () (interactive) (org-demote-or-promote 1)) ; out-dent
+  ">" 'org-demote-or-promote ; indent
+  (kbd "TAB") 'org-cycle)
+
+(evil-declare-key 'normal markdown-mode-map
+  "gh" 'outline-up-heading
+  "gl" 'outline-next-visible-heading
+  "gj" 'outline-forward-same-level
+  "gk" 'outline-backward-same-level
+    (kbd "TAB") 'org-cycle)
+
+;; I prefer Emacs way after pressing ":" in evil-mode
+(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+(define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
+(define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
+
+(define-key evil-normal-state-map "Y" (kbd "y$"))
+;; (define-key evil-normal-state-map (kbd "RET") 'ivy-switch-buffer-by-pinyin) ; RET key is preserved for occur buffer
+(define-key evil-normal-state-map "go" 'goto-char)
+(define-key evil-normal-state-map (kbd "M-y") 'counsel-browse-kill-ring)
+(define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
+(define-key evil-insert-state-map (kbd "C-x C-n") 'evil-complete-next-line)
+(define-key evil-insert-state-map (kbd "C-x C-p") 'evil-complete-previous-line)
+
+;; I learn this trick from ReneFroger, need latest expand-region
+;; @see https://github.com/redguardtoo/evil-matchit/issues/38
+(define-key evil-visual-state-map (kbd "v") 'er/expand-region)
+(define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+(define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
+(define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
+(global-set-key (kbd "C-r") 'undo-tree-redo)
+
+;; My frequently used commands are listed here
+;; For example, for line like `"ef" 'end-of-defun`
+;;   You can either press `,ef` or `M-x end-of-defun` to execute it
+
+;; {{ use `,` as leader key
+(nvmap :prefix ","
+       "=" 'increase-default-font-height ; GUI emacs onl
+       "-" 'decrease-default-font-height ; GUI emacs only
+       "bf" 'beginning-of-defun
+       "bu" 'backward-up-list
+       "bb" 'back-to-previous-buffer
+       "ef" 'end-of-defun
+       "mf" 'mark-defun
+       "em" 'erase-message-buffer
+       "eb" 'eval-buffer
+       "sd" 'sudo-edit
+       "sc" 'scratch
+       "ee" 'eval-expression
+       "aa" 'copy-to-x-clipboard ; used frequently
+       "aw" 'ace-swap-window
+       "af" 'ace-maximize-window
+       "ac" 'aya-create
+       "ae" 'aya-expand
+       "zz" 'paste-from-x-clipboard ; used frequently
+       "cy" 'strip-convert-lines-into-one-big-string
+       "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
+       "es" 'goto-edge-by-comparing-font-face
+       "vj" 'my-validate-json-or-js-expression
+       "kc" 'kill-ring-to-clipboard
+       "mcr" 'my-create-regex-from-kill-ring
+       "ntt" 'neotree-toggle
+       "ntf" 'neotree-find ; open file in current buffer in neotree
+       "ntd" 'neotree-project-dir
+       "nth" 'neotree-hide
+       "nts" 'neotree-show
+       "fn" 'cp-filename-of-current-buffer
+       "fp" 'cp-fullpath-of-current-buffer
+       "dj" 'dired-jump ;; open the dired from current file
+       "ff" 'toggle-full-window ;; I use WIN+F in i3
+       "ip" 'find-file-in-project
+       "kk" 'find-file-in-project-by-selected
+       "kn" 'find-file-with-similar-name ; ffip v5.3.1
+       "fd" 'find-directory-in-project-by-selected
+       "trm" 'get-term
+       "tff" 'toggle-frame-fullscreen
+       "tfm" 'toggle-frame-maximized
+       "ti" 'fastdef-insert
+       "th" 'fastdef-insert-from-history
+       ;; "ci" 'evilnc-comment-or-uncomment-lines
+       ;; "cl" 'evilnc-comment-or-uncomment-to-the-line
+       ;; "cc" 'evilnc-copy-and-comment-lines
+       ;; "cp" 'evilnc-comment-or-uncomment-paragraphs
+       "epy" 'emmet-expand-yas
+       "epl" 'emmet-expand-line
+       "rd" 'evilmr-replace-in-defun
+       "rb" 'evilmr-replace-in-buffer
+       "ts" 'evilmr-tag-selected-region ;; recommended
+       "tua" 'artbollocks-mode
+       "cby" 'cb-switch-between-controller-and-view
+       "cbu" 'cb-get-url-from-controller
+       "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
+       "rt" 'counsel-etags-recent-tag
+       "ft" 'counsel-etags-find-tag
+       "mm" 'counsel-bookmark-goto
+       "mk" 'bookmark-set
+       "yy" 'counsel-browse-kill-ring
+       "cf" 'counsel-grep ; grep current buffer
+       "gf" 'counsel-git ; find file
+       "gg" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
+       "gm" 'counsel-git-find-my-file
+       "gs" (lambda ()
+              (interactive)
+              (let* ((ffip-diff-backends
+                      '(("Show git commit" . (let* ((git-cmd "git --no-pager log --date=short --pretty=format:'%h|%ad|%s|%an'")
+                                                       (collection (split-string (shell-command-to-string git-cmd) "\n" t))
+                                                       (item (ffip-completing-read "git log:" collection)))
+                                                  (when item
+                                                    (shell-command-to-string (format "git show %s" (car (split-string item "|" t))))))))))
+                (ffip-show-diff 0)))
+       "gd" 'ffip-show-diff-by-description ;find-file-in-project 5.3.0+
+       "sf" 'counsel-git-show-file
+       "sh" 'my-select-from-search-text-history
+       "df" 'counsel-git-diff-file
+       "rjs" 'run-js
+       "jsr" 'js-send-region
+       "jsb" 'js-clear-send-buffer
+       "rmz" 'run-mozilla
+       "rpy" 'run-python
+       "rlu" 'run-lua
+       "tci" 'toggle-company-ispell
+       "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
+       "it" 'issue-tracker-increment-issue-id-under-cursor
+       "ls" 'highlight-symbol
+       "lq" 'highlight-symbol-query-replace
+       "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
+       "bm" 'pomodoro-start ;; beat myself
+       "ii" 'counsel-imenu
+       "ij" 'rimenu-jump
+       "." 'evil-ex
+       ;; @see https://github.com/pidu/git-timemachine
+       ;; p: previous; n: next; w:hash; W:complete hash; g:nth version; q:quit
+       "tt" 'dumb-jump-go
+       "tb" 'dumb-jump-back
+       "tm" 'my-git-timemachine
+       "tdb" 'tidy-buffer
+       "tdl" 'tidy-current-line
+       ;; toggle overview,  @see http://emacs.wordpress.com/2007/01/16/quick-and-dirty-code-folding/
+       "ov" 'my-overview-of-current-buffer
+       "or" 'open-readme-in-git-root-directory
+       "oo" 'compile
+       "c$" 'org-archive-subtree ; `C-c $'
+       ;; org-do-demote/org-do-premote support selected region
+       "c<" 'org-do-promote ; `C-c C-<'
+       "c>" 'org-do-demote ; `C-c C->'
+       "cam" 'org-tags-view ; `C-c a m': search items in org-file-apps by tag
+       "cxi" 'org-clock-in ; `C-c C-x C-i'
+       "cxo" 'org-clock-out ; `C-c C-x C-o'
+       "cxr" 'org-clock-report ; `C-c C-x C-r'
+       "qq" 'counsel-etags-grep
+       "dd" 'counsel-etags-grep-symbol-at-point
+       "xc" 'save-buffers-kill-terminal
+       "rr" 'my-counsel-recentf
+       "rh" 'counsel-yank-bash-history ; bash history command => yank-ring
+       "rf" 'counsel-goto-recent-directory
+       "da" 'diff-region-tag-selected-as-a
+       "db" 'diff-region-compare-with-b
+       "di" 'evilmi-delete-items
+       "si" 'evilmi-select-items
+       "jb" 'js-beautify
+       "jp" 'my-print-json-path
+       "sep" 'string-edit-at-point
+       "sec" 'string-edit-conclude
+       "sea" 'string-edit-abort
+       "xe" 'eval-last-sexp
+       "x0" 'delete-window
+       "x1" 'delete-other-windows
+       "x2" 'my-split-window-vertically
+       "x3" 'my-split-window-horizontally
+       "s2" 'ffip-split-window-vertically
+       "s3" 'ffip-split-window-horizontally
+       "rw" 'rotate-windows
+       "ru" 'undo-tree-save-state-to-register ; C-x r u
+       "rU" 'undo-tree-restore-state-from-register ; C-x r U
+       "xt" 'toggle-window-split
+       "uu" 'winner-undo
+       "UU" 'winner-redo
+       "to" 'toggle-web-js-offset
+       "sl" 'sort-lines
+       "ulr" 'uniquify-all-lines-region
+       "ulb" 'uniquify-all-lines-buffer
+       "fc" 'cp-ffip-ivy-last
+       "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
+       "hd" 'describe-function
+       "hf" 'find-function
+       "hk" 'describe-key
+       "hv" 'describe-variable
+       "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+       "gr" 'counsel-gtags-find-symbol
+       "gu" 'counsel-gtags-update-tags
+       "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
+       "og" 'org-agenda
+       "otl" 'org-toggle-link-display
+       "oa" '(lambda ()
+               (interactive)
+               (unless (featurep 'org) (require 'org))
+               (counsel-org-agenda-headlines))
+       "om" 'toggle-org-or-message-mode
+       "ut" 'undo-tree-visualize
+       "ar" 'align-regexp
+       "bk" 'buf-move-up
+       "bj" 'buf-move-down
+       "bh" 'buf-move-left
+       "bl" 'buf-move-right
+       "0" 'select-window-0
+       "1" 'select-window-1
+       "2" 'select-window-2
+       "3" 'select-window-3
+       "4" 'select-window-4
+       "5" 'select-window-5
+       "6" 'select-window-6
+       "7" 'select-window-7
+       "8" 'select-window-8
+       "9" 'select-window-9
+       "xm" 'my-M-x
+       "xx" 'er/expand-region
+       "xf" 'ido-find-file
+       "xb" 'ivy-switch-buffer-by-pinyin
+       "xh" 'mark-whole-buffer
+       "xk" 'ido-kill-buffer
+       "xs" 'save-buffer
+       "xz" 'suspend-frame
+       "vm" 'vc-rename-file-and-buffer
+       "vc" 'vc-copy-file-and-rename-buffer
+       "xvv" 'vc-next-action ; 'C-x v v' in original
+       "vg" 'vc-annotate ; 'C-x v g' in original
+       "vl" 'vc-print-log
+       "vv" 'vc-msg-show
+       "hh" 'cliphist-paste-item
+       "yu" 'cliphist-select-item
+       "ih" 'my-goto-git-gutter ; use ivy-mode
+       "ir" 'ivy-resume
+       "ww" 'narrow-or-widen-dwim
+       "xnw" 'widen
+       "xnd" 'narrow-to-defun
+       "xnr" 'narrow-to-region
+;;       "ycr" 'my-yas-reload-all
+       "wf" 'popup-which-function)
+;; }}
+
+;; {{ Use `SPC` as leader key
+;; all keywords arguments are still supported
+(nvmap :prefix "SPC"
+       "ss" 'wg-create-workgroup ; save windows layout
+       "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
+       "sc" 'shell-command
+       "ll" 'my-wg-switch-workgroup ; load windows layout
+       "kk" 'scroll-other-window
+       "jj" 'scroll-other-window-up
+       "yy" 'hydra-launcher/body
+       "hh" 'multiple-cursors-hydra/body
+       "gi" 'gist-region ; only workable on my computer
+       "tt" 'my-toggle-indentation
+       "gs" 'git-gutter:set-start-revision
+       "gh" 'git-gutter-reset-to-head-parent
+       "gr" 'git-gutter-reset-to-default
+       "ps" 'profiler-start
+       "pr" 'profiler-report
+       "ud" 'my-gud-gdb
+       "uk" 'gud-kill-yes
+       "ur" 'gud-remove
+       "ub" 'gud-break
+       "uu" 'gud-run
+       "up" 'gud-print
+       "ue" 'gud-cls
+       "un" 'gud-next
+       "us" 'gud-step
+       "ui" 'gud-stepi
+       "uc" 'gud-cont
+       "uf" 'gud-finish
+       "ma" 'mc/mark-all-like-this-dwim
+       "md" 'mc/mark-all-like-this-in-defun
+       "mm" 'ace-mc-add-multiple-cursors
+       "mn" 'mc/mark-next-like-this
+       "ms" 'mc/skip-to-next-like-this
+       "me" 'mc/edit-lines)
+
+;; {{ Use `;` as leader key, for searching something
+(nvmap :prefix ";"
+       ;; Search character(s) at the beginning of word
+       ;; See https://github.com/abo-abo/avy/issues/70
+       ;; You can change the avy font-face in ~/.custom.el:
+       ;;  (eval-after-load 'avy
+       ;;   '(progn
+       ;;      (set-face-attribute 'avy-lead-face-0 nil :foreground "black")
+       ;;      (set-face-attribute 'avy-lead-face-0 nil :background "#f86bf3")))
+       ";" 'avy-goto-char-2
+       "w" 'avy-goto-word-or-subword-1
+       "a" 'avy-goto-char-timer
+       "db" 'sdcv-search-pointer ; in buffer
+       "dt" 'sdcv-search-input+ ; in tip
+       "dd" 'my-lookup-dict-org
+       "mm" 'lookup-doc-in-man
+       "gg" 'w3m-google-search
+       "gf" 'w3m-google-by-filetype
+       "gd" 'w3m-search-financial-dictionary
+       "gj" 'w3m-search-js-api-mdn
+       "ga" 'w3m-java-search
+       "gh" 'w3mext-hacker-search ; code search in all engines with firefox
+       "gq" 'w3m-stackoverflow-search
+       "mm" 'mpc-which-song
+       "mn" 'mpc-next-prev-song
+       "mp" '(lambda () (interactive) (mpc-next-prev-song t)))
+;; }}
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-evil)
