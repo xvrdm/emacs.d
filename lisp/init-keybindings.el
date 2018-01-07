@@ -99,4 +99,7 @@
 ;; projectile-speedbar
 (global-set-key (kbd "M-<f2>") 'projectile-speedbar-open-current-buffer-in-tree)
 
+;; browse-kill-ring
+(global-set-key "\C-cy" 'browse-kill-ring)
+
 (provide 'init-keybindings)

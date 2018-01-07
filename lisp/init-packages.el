@@ -106,6 +106,22 @@
                          airline-themes
                          ;;
                          dashboard
+                         ;;
+                         highlight-symbol
+                         ;;
+                         rainbow-mode
+                         ;;
+                         multifiles
+                         ;;
+                         fix-word
+                         ;;
+                         browse-kill-ring
+                         ;;
+                         indent-guide
+                         ;;
+                         irony
+                         ;;
+                         company-irony
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -176,14 +192,14 @@
 
 ;; emacs-ycmd
 (require 'ycmd)
-(add-hook 'after-init-hook 'global-ycmd-mode)
-(add-hook 'c++-mode-hook 'ycmd-mode)
+;; (add-hook 'after-init-hook 'global-ycmd-mode)
+;; (add-hook 'c++-mode-hook 'ycmd-mode)
 (set-variable 'ycmd-server-command
               '("python" "/home/feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-(require 'company-ycmd)
-(company-ycmd-setup)
+;; (require 'company-ycmd)
+;; (company-ycmd-setup)
 ;;;; Set always complete immediately
-(setq company-idle-delay 0)
+;; (setq company-idle-delay 0)
 
 ;; (require 'ycmd-test)
 ;; (ert-run-tests-interactively "ycmd-test")
@@ -305,5 +321,34 @@
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 
+;; highlight-symbol
+(require 'highlight-symbol)
+
+;; rainbow-mode
+(require 'rainbow-mode)
+(rainbow-mode 1)
+
+;; multifiles
+(require 'multifiles)
+
+;; fix-word
+(require 'fix-word)
+
+;; browse-kill-ring
+(require 'browse-kill-ring)
+
+;; indent-guide
+(require 'indent-guide)
+(indent-guide-global-mode)
+
+;; irony
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+;; company-irony
+(eval-after-load 'company
+    '(add-to-list 'company-backends 'company-irony))
 
 (provide 'init-packages)
