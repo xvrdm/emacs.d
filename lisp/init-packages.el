@@ -104,6 +104,8 @@
                          powerline-evil
                          ;; themes for powerline
                          airline-themes
+                         ;;
+                         dashboard
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -267,7 +269,7 @@
 
 ;; linum-relative
 (require 'linum-relative)
-(linum-relative-toggle)
+;; (linum-relative-toggle)
 
 ;; rainbow-delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -288,7 +290,7 @@
 ;; (powerline-default-theme)
 ;; (powerline-center-theme)
 ;; (powerline-center-evil-theme)
-;; (powerline-evil-center-color-theme)
+(powerline-evil-center-color-theme)
 
 ;; powerline-evil
 (require 'powerline-evil)
@@ -297,6 +299,11 @@
 (require 'airline-themes)
 ;; (load-theme 'airline-light)
 ;; (load-theme 'airline-dark)
-(airline-themes-set-modeline)
+;; (airline-themes-set-modeline)
+
+;; dashboard
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+
 
 (provide 'init-packages)

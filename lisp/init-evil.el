@@ -13,12 +13,12 @@
   "6" 'select-window-6
   "7" 'select-window-7
   ;;
+  "a" 'evil-first-non-blank
+  "e" 'evil-end-of-line
   "ff" 'find-file
   "sb" 'switch-to-buffer
   "sp" 'switch-to-prev-buffer
   "qq" 'evil-buffer
-  "aa" 'evil-first-non-blank
-  "ee" 'evil-end-of-line
   "zz" 'save-buffer
   "SPC" 'counsel-M-x
   "ss" 'ff-find-other-file
