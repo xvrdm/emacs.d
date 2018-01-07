@@ -104,6 +104,10 @@
                          powerline-evil
                          ;; themes for powerline
                          airline-themes
+                         ;; themes for powerline
+                         spaceline
+                         ;; A new implementation of Powerline for Emacs 
+                         telephone-line
                          ;;
                          dashboard
                          ;;
@@ -122,6 +126,10 @@
                          irony
                          ;;
                          company-irony
+                         ;;
+                         symon
+                         ;;
+                         markdown-mode
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -315,7 +323,16 @@
 (require 'airline-themes)
 ;; (load-theme 'airline-light)
 ;; (load-theme 'airline-dark)
-;; (airline-themes-set-modeline)
+(airline-themes-set-modeline)
+
+;; spaceline
+;; (require 'spaceline-config)
+;; (spaceline-spacemacs-theme)
+;; (spaceline-emacs-theme)
+
+;; telephone-line
+;; (require 'telephone-line-config)
+;; (telephone-line-evil-config)
 
 ;; dashboard
 (require 'dashboard)
@@ -350,5 +367,8 @@
 ;; company-irony
 (eval-after-load 'company
     '(add-to-list 'company-backends 'company-irony))
+
+;; symon
+(require 'symon)
 
 (provide 'init-packages)

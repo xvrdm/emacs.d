@@ -42,8 +42,25 @@
   "fs" 'isearch-forward-regexp
   "bs" 'isearch-backward-regexp
   "rs" 'replace-regexp
-  "kb" 'kill-buffer)
+  "kb" 'kill-buffer
+  "ci" 'evilnc-comment-or-uncomment-lines
+  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "cc" 'evilnc-copy-and-comment-lines
+  "cp" 'evilnc-comment-or-uncomment-paragraphs
+  "cr" 'comment-or-uncomment-region
+  "cv" 'evilnc-toggle-invert-comment-line-by-line
+  "."  'evilnc-copy-and-comment-operator
+  "\\" 'evilnc-comment-operator ; if you prefer backslash key
+  )
 
+(define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
+;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)
+(define-key evil-normal-state-map (kbd "M-i") 'fa-show)
+(define-key evil-normal-state-map (kbd "M-u") 'fix-word-upcase)
+(define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
+(define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
+(define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
 
  ;; (define-key evil-insert-state-map (kbd ";g") 'evil-normal-state)
  ;; (define-key evil-insert-state-map (kbd ";a") 'evil-first-non-blank)
@@ -65,5 +82,9 @@
 (evil-escape-mode 1)
 (setq-default evil-escape-delay 0.3)
 (setq-default evil-escape-key-sequence ";g")
+
+;;evil-easymotion
+(evilem-default-keybindings "SPC")
+
 
 (provide 'init-evil)

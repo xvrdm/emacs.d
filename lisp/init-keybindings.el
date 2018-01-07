@@ -61,26 +61,10 @@
 ;; set C-w delte a word backward
 (global-set-key (kbd "C-w") 'backward-kill-word)
 
-;; evil-nerd-commenter Vim key bindings
-(require 'evil-leader)
-(global-evil-leader-mode)
-(evil-leader/set-key
-  "ci" 'evilnc-comment-or-uncomment-lines
-  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
-  "cc" 'evilnc-copy-and-comment-lines
-  "cp" 'evilnc-comment-or-uncomment-paragraphs
-  "cr" 'comment-or-uncomment-region
-  "cv" 'evilnc-toggle-invert-comment-line-by-line
-  "."  'evilnc-copy-and-comment-operator
-  "\\" 'evilnc-comment-operator ; if you prefer backslash key
-  )
 
 ;; youdao-dictionary bindings
 ;; (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
 
-;;evil-easymotion
-(evilem-default-keybindings "SPC")
 
 ;; switch cpp and h
 (global-set-key (kbd "C-x C-o") 'ff-find-other-file)
@@ -101,5 +85,13 @@
 
 ;; browse-kill-ring
 (global-set-key "\C-cy" 'browse-kill-ring)
+
+;; fix-word
+(global-set-key (kbd "M-u") 'fix-word-upcase)
+(global-set-key (kbd "M-l") 'fix-word-downcase)
+(global-set-key (kbd "M-c") 'fix-word-capitalize)
+
+;; function-args
+;; (global-set-key (kbd "M-g") 'fa-abort)
 
 (provide 'init-keybindings)
