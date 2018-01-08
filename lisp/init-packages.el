@@ -137,9 +137,13 @@
                          ;;
                          company-irony
                          ;;
+                         ggtags
+                         ;;
                          symon
                          ;;
                          markdown-mode
+                         ;;
+                         ace-window
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -210,14 +214,15 @@
 
 ;; emacs-ycmd
 (require 'ycmd)
-;; (add-hook 'after-init-hook 'global-ycmd-mode)
+(add-hook 'after-init-hook 'global-ycmd-mode)
 ;; (add-hook 'c++-mode-hook 'ycmd-mode)
-(set-variable 'ycmd-server-command
-              '("python" "/home/feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;; (require 'company-ycmd)
-;; (company-ycmd-setup)
+(set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+(require 'company-ycmd)
+(company-ycmd-setup)
 ;;;; Set always complete immediately
-;; (setq company-idle-delay 0)
+(setq company-idle-delay 0.1)
+;;(add-to-list 'company-backends 'company-ycmd)
 
 ;; (require 'ycmd-test)
 ;; (ert-run-tests-interactively "ycmd-test")
@@ -268,16 +273,17 @@
 ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
 (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
 
-;; Please note `file-truename' must be used!
-(setenv "GTAGSLIBPATH" (concat "/usr/include"
-                               ":"
-                               "/usr/local/include"
-                               ":"
-                               (file-truename "~/proj2")
-                               ":"
-                               (file-truename "~/proj1")))
-(setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
-(setq company-backends '((company-dabbrev-code company-gtags)))
+;; note `file-truename' must be used!
+;; (setenv "GTAGSLIBPATH" (concat "/usr/include"
+;;                                ":"
+;;                                "/usr/local/include"
+;;                                ":"
+;;                                (file-truename "~/proj2")
+;;                                ":"
+;;                                (file-truename "~/proj1")))
+;; (setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
+;; (setq company-backends '((company-dabbrev-code company-gtags)))
+;; (add-to-list 'company-backends 'company-gtags)
 
 ;; smart-mode-line
 ;; (setq sml/theme 'dark)
@@ -404,16 +410,26 @@
 (indent-guide-global-mode)
 
 ;; irony
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;; (add-hook 'c++-mode-hook 'irony-mode)
+;; (add-hook 'c-mode-hook 'irony-mode)
+;; (add-hook 'objc-mode-hook 'irony-mode)
+;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;; company-irony
-(eval-after-load 'company
-    '(add-to-list 'company-backends 'company-irony))
+;; (eval-after-load 'company
+  ;;  '(add-to-list 'company-backends 'company-irony))
+
+;; ggtags
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
 
 ;; symon
 (require 'symon)
+
+;; ace-window
+(require 'ace-window)
 
 (provide 'init-packages)

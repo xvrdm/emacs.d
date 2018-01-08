@@ -56,4 +56,28 @@
     (when (gtags-root-dir)
       (gtags-update-current-file))))
 
+(defun scroll-other-window-up ()
+  (interactive)
+  (scroll-other-window '-))
+
+;; smex or counsel-M-x?
+(defvar my-use-smex nil
+  "Use `smex' instead of `counsel-M-x' when press M-x.")
+(defun my-M-x ()
+  (interactive)
+  (cond
+   (my-use-smex
+    (smex))
+   ((fboundp 'counsel-M-x)
+    ;; `counsel-M-x' will use `smex' to remember history
+    (counsel-M-x))
+   ((fboundp 'smex)
+    (smex))
+   (t
+    (execute-extended-command))))
+
+(defun my-append ()
+  (move-end-of-line)
+  (evil-write '\;))
+
 (provide 'init-minefunc)

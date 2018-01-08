@@ -22,6 +22,7 @@
   "hp" 'highlight-symbol-prev
   "hr" 'highlight-symbol-query-replace
   ;;
+  "pp" 'my-append
   "x2" 'split-window-below
   "x3" 'split-window-right
   "do" 'delete-other-windows
@@ -39,7 +40,7 @@
   "tt" 'neotree-toggle
   "yy" 'youdao-dictionary-search-at-point
   "yd" 'youdao-dictionary-search-from-input
-;;  "er" 'er/expand-region
+  ;; "er" 'er/expand-region
   "rf" 'recentf-open-files
   "ps" 'projectile-speedbar-toggle
   "sf" 'isearch-forward-regexp
@@ -275,7 +276,8 @@
        "uu" 'winner-undo
        "UU" 'winner-redo
        "to" 'toggle-web-js-offset
-       "sl" 'sort-lines
+       ;; liang.feng
+       ;; "sl" 'sort-lines
        "ulr" 'uniquify-all-lines-region
        "ulb" 'uniquify-all-lines-buffer
        "fc" 'cp-ffip-ivy-last
