@@ -26,23 +26,25 @@
   "x3" 'split-window-right
   "do" 'delete-other-windows
   "ff" 'find-file
-  "sb" 'switch-to-buffer
-  "sp" 'switch-to-prev-buffer
-  "qq" 'evil-buffer
+  ;;;;; buffer ;;;;;
+  "bk" 'kill-buffer
+  "bs" 'switch-to-buffer
+  "bp" 'switch-to-prev-buffer
+  "bb" 'evil-buffer
   "zz" 'save-buffer
-  "ss" 'ff-find-other-file
+  ;;;;;
+  "fo" 'ff-find-other-file
   "mm" 'evil-jump-item
   "mf" 'mf/mirror-region-in-multifile
   "tt" 'neotree-toggle
   "yy" 'youdao-dictionary-search-at-point
   "yd" 'youdao-dictionary-search-from-input
-  "rr" 'er/expand-region
+;;  "er" 'er/expand-region
   "rf" 'recentf-open-files
-  "tb" 'projectile-speedbar-toggle
-  "fs" 'isearch-forward-regexp
-  "bs" 'isearch-backward-regexp
-  "rs" 'replace-regexp
-  "kb" 'kill-buffer
+  "ps" 'projectile-speedbar-toggle
+  "sf" 'isearch-forward-regexp
+  "sb" 'isearch-backward-regexp
+  "sr" 'replace-regexp
   "ci" 'evilnc-comment-or-uncomment-lines
   "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
   "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
@@ -103,7 +105,7 @@
     (kbd "TAB") 'org-cycle)
 
 ;; I prefer Emacs way after pressing ":" in evil-mode
-(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-ex-completion-map (kbd "C-a") 'evil-first-non-blank)
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
@@ -119,6 +121,7 @@
 ;; I learn this trick from ReneFroger, need latest expand-region
 ;; @see https://github.com/redguardtoo/evil-matchit/issues/38
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
+(define-key evil-insert-state-map (kbd "C-a") 'evil-first-non-blank)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
 (define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
@@ -133,11 +136,11 @@
 (nvmap :prefix ","
        "=" 'increase-default-font-height ; GUI emacs onl
        "-" 'decrease-default-font-height ; GUI emacs only
-       "bf" 'beginning-of-defun
+       "fb" 'beginning-of-defun
        "bu" 'backward-up-list
        "bb" 'back-to-previous-buffer
-       "ef" 'end-of-defun
-       "mf" 'mark-defun
+       "fe" 'end-of-defun
+       "fm" 'mark-defun
        "em" 'erase-message-buffer
        "eb" 'eval-buffer
        "sd" 'sudo-edit
@@ -199,10 +202,10 @@
               (interactive)
               (let* ((ffip-diff-backends
                       '(("Show git commit" . (let* ((git-cmd "git --no-pager log --date=short --pretty=format:'%h|%ad|%s|%an'")
-                                                       (collection (split-string (shell-command-to-string git-cmd) "\n" t))
-                                                       (item (ffip-completing-read "git log:" collection)))
-                                                  (when item
-                                                    (shell-command-to-string (format "git show %s" (car (split-string item "|" t))))))))))
+                                                    (collection (split-string (shell-command-to-string git-cmd) "\n" t))
+                                                    (item (ffip-completing-read "git log:" collection)))
+                                               (when item
+                                                 (shell-command-to-string (format "git show %s" (car (split-string item "|" t))))))))))
                 (ffip-show-diff 0)))
        "gd" 'ffip-show-diff-by-description ;find-file-in-project 5.3.0+
        "sf" 'counsel-git-show-file
@@ -309,7 +312,7 @@
        "8" 'select-window-8
        "9" 'select-window-9
        "xm" 'my-M-x
-       "xx" 'er/expand-region
+       ;; "xx" 'er/expand-region
        "xf" 'ido-find-file
        "xb" 'ivy-switch-buffer-by-pinyin
        "xh" 'mark-whole-buffer

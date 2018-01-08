@@ -34,6 +34,8 @@
                          swiper
                          ;;
                          counsel
+                         ;; http://blog.binchen.org/#
+                         counsel-etags
                          ;;
                          smartparens
                          ;;
@@ -248,6 +250,21 @@
 (add-hook 'c-mode-hook 'counsel-gtags-mode)
 (add-hook 'c++-mode-hook 'counsel-gtags-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; counsel-etags
+(require 'counsel-etags)
+;;; auto update tags--->https://github.com/redguardtoo/counsel-etags
+;; Don't ask before rereading the TAGS files if they have changed
+(setq tags-revert-without-query t)
+;; Don't warn when TAGS files are large
+(setq large-file-warning-threshold nil)
+;; Setup auto update now
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook
+                      'counsel-etags-virtual-update-tags 'append 'local)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
 (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
 
@@ -338,10 +355,11 @@
 
 ;; powerline
 (require 'powerline)
-;; (powerline-default-theme)
+(powerline-default-theme)
 ;; (powerline-center-theme)
 ;; (powerline-center-evil-theme)
-(powerline-evil-center-color-theme)
+;; (powerline-vim-theme)
+;; (powerline-evil-center-color-theme)
 
 ;; powerline-evil
 (require 'powerline-evil)
