@@ -58,5 +58,17 @@
 ;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
 
+;; highlight call function
+(font-lock-add-keywords
+ 'c-mode
+ '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+
+(font-lock-add-keywords
+ 'c++-mode
+ '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+;; (font-lock-add-keywords
+;;  'c++-mode
+;;  '(("\\<[a-zA-Z_][a-zA-Z_0-9]*\\>[^()]*)("me=e-2 1 'font-lock-function-name-face)))
+
 
 (provide 'init-better-default)

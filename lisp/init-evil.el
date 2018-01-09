@@ -5,6 +5,8 @@
 
 (evil-leader/set-key
   ;; switch window
+  "x0" 'delete-window
+  "x1" 'delete-other-windows
   "1" 'select-window-1
   "2" 'select-window-2
   "3" 'select-window-3
@@ -56,6 +58,7 @@
   "."  'evilnc-copy-and-comment-operator
   "\\" 'evilnc-comment-operator ; if you prefer backslash key
   )
+  
 
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 ;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)

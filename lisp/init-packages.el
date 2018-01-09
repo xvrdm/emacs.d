@@ -144,6 +144,8 @@
                          markdown-mode
                          ;;
                          ace-window
+                         ;;
+                         hydra
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -431,5 +433,8 @@
 
 ;; ace-window
 (require 'ace-window)
+
+;; hydra
+(require 'hydra)
 
 (provide 'init-packages)
