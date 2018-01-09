@@ -124,6 +124,7 @@
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 (define-key evil-insert-state-map (kbd "C-a") 'evil-first-non-blank)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-insert-state-map (kbd "C-u") 'kill-whole-line)
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
 (define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
 (define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
@@ -303,7 +304,8 @@
        "bj" 'buf-move-down
        "bh" 'buf-move-left
        "bl" 'buf-move-right
-       "0" 'select-window-0
+       ;; "0" 'select-window-0
+       "0" 'delete-window
        "1" 'select-window-1
        "2" 'select-window-2
        "3" 'select-window-3
