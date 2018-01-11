@@ -447,8 +447,7 @@
 ;; hydra
 (require 'hydra)
 
-;; too slow to parse files
-;; color-identifiers-mode
+;; color-identifiers-mode--->too slow to parse files
 ;; (require 'color-identifiers-mode)
 ;; (add-hook 'after-init-hook 'global-color-identifiers-mode)
 ;; (run-with-idle-timer 1 t 'color-identifiers:refresh)

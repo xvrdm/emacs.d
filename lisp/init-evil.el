@@ -30,6 +30,11 @@
   "do" 'delete-other-windows
   "ff" 'find-file
   "fb" 'beginning-of-defun
+  "wf" 'popup-which-function
+  "ww" 'narrow-or-widen-dwim
+  "kk" 'scroll-other-window
+  "jj" 'scroll-other-window-up
+  "ii" 'counsel-imenu
   "xm" 'my-M-x
   "bk" 'buf-move-up
   "bj" 'buf-move-down
@@ -41,6 +46,7 @@
   "hv" 'describe-variable
   "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
   "gr" 'counsel-gtags-find-symbol
+  "fr" 'counsel-gtags-find-reference
   "gu" 'counsel-gtags-update-tags
   "qq" 'counsel-etags-grep
   "dd" 'counsel-etags-grep-symbol-at-point
@@ -166,48 +172,56 @@
 ;;   You can either press `,ef` or `M-x end-of-defun` to execute it
 
 ;; {{ use `,` as leader key
-(nvmap :prefix ","
+(nvmap :prefix "SPC"
        "=" 'increase-default-font-height ; GUI emacs onl
        "-" 'decrease-default-font-height ; GUI emacs only
-       "bu" 'backward-up-list
-       "bb" 'back-to-previous-buffer
-       "em" 'erase-message-buffer
-       "eb" 'eval-buffer
+       ;; liang.feng
+       ;; "bu" 'backward-up-list
+       ;; liang.feng
+       ;; "bb" 'back-to-previous-buffer
+       ;; liang.feng
+       ;; "em" 'erase-message-buffer
+       ;; liang.feng
+       ;; "eb" 'eval-buffer
        "sd" 'sudo-edit
-       "ee" 'eval-expression
+       ;; liang.feng
+       ;; "ee" 'eval-expression
        "aa" 'copy-to-x-clipboard ; used frequently
        "ac" 'aya-create
        "ae" 'aya-expand
        "zz" 'paste-from-x-clipboard ; used frequently
        "cy" 'strip-convert-lines-into-one-big-string
-       "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
-       "es" 'goto-edge-by-comparing-font-face
+       ;; liang.feng
+       ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
+       ;; liang.feng
+       ;; "es" 'goto-edge-by-comparing-font-face
        "vj" 'my-validate-json-or-js-expression
-       "kc" 'kill-ring-to-clipboard
+       ;; liang.feng
+       ;; "kc" 'kill-ring-to-clipboard
        "mcr" 'my-create-regex-from-kill-ring
        "ntt" 'neotree-toggle
        "ntf" 'neotree-find ; open file in current buffer in neotree
        "ntd" 'neotree-project-dir
        "nth" 'neotree-hide
-       "nts" 'neotree-show
+
        "fn" 'cp-filename-of-current-buffer
        "fp" 'cp-fullpath-of-current-buffer
        "ff" 'toggle-full-window ;; I use WIN+F in i3
        "ip" 'find-file-in-project
-       "kk" 'find-file-in-project-by-selected
-       "kn" 'find-file-with-similar-name ; ffip v5.3.1
+       ;; liang.feng
+       ;; "kk" 'find-file-in-project-by-selected
+       ;; liang.feng
+       ;; "kn" 'find-file-with-similar-name ; ffip v5.3.1
        "fd" 'find-directory-in-project-by-selected
        "trm" 'get-term
        "tff" 'toggle-frame-fullscreen
        "tfm" 'toggle-frame-maximized
        "ti" 'fastdef-insert
        "th" 'fastdef-insert-from-history
-       ;; "ci" 'evilnc-comment-or-uncomment-lines
-       ;; "cl" 'evilnc-comment-or-uncomment-to-the-line
-       ;; "cc" 'evilnc-copy-and-comment-lines
-       ;; "cp" 'evilnc-comment-or-uncomment-paragraphs
-       "epy" 'emmet-expand-yas
-       "epl" 'emmet-expand-line
+       ;; liang.feng
+       ;; "epy" 'emmet-expand-yas
+       ;; liang.feng
+       ;; "epl" 'emmet-expand-line
        "rd" 'evilmr-replace-in-defun
        "rb" 'evilmr-replace-in-buffer
        "ts" 'evilmr-tag-selected-region ;; recommended
@@ -229,19 +243,22 @@
        "sh" 'my-select-from-search-text-history
        "df" 'counsel-git-diff-file
        "rjs" 'run-js
-       "jsr" 'js-send-region
-       "jsb" 'js-clear-send-buffer
+       ;; liang.feng
+       ;; "jsr" 'js-send-region
+       ;; liang.feng
+       ;; "jsb" 'js-clear-send-buffer
        "rmz" 'run-mozilla
        "rpy" 'run-python
        "rlu" 'run-lua
        "tci" 'toggle-company-ispell
-       "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
+       ;; liang.feng
+       ;; "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
        "it" 'issue-tracker-increment-issue-id-under-cursor
        "ls" 'highlight-symbol
        "lq" 'highlight-symbol-query-replace
        "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
-       "bm" 'pomodoro-start ;; beat myself
-       "ii" 'counsel-imenu
+       ;;liang.feng
+       ;; "bm" 'pomodoro-start ;; beat myself
        "ij" 'rimenu-jump
        ;; @see https://github.com/pidu/git-timemachine
        ;; p: previous; n: next; w:hash; W:complete hash; g:nth version; q:quit
@@ -269,8 +286,10 @@
        "db" 'diff-region-compare-with-b
        "di" 'evilmi-delete-items
        "si" 'evilmi-select-items
-       "jb" 'js-beautify
-       "jp" 'my-print-json-path
+       ;; liang.feng
+       ;; "jb" 'js-beautify
+       ;; liang.feng
+       ;; "jp" 'my-print-json-path
        "sep" 'string-edit-at-point
        "sec" 'string-edit-conclude
        "sea" 'string-edit-abort
@@ -294,7 +313,8 @@
        "ulb" 'uniquify-all-lines-buffer
        "fc" 'cp-ffip-ivy-last
        "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
-       "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
+       ;; liang.feng
+       ;; "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
        "og" 'org-agenda
        "otl" 'org-toggle-link-display
        "oa" '(lambda ()
@@ -331,12 +351,11 @@
        "yu" 'cliphist-select-item
        "ih" 'my-goto-git-gutter ; use ivy-mode
        "ir" 'ivy-resume
-       "ww" 'narrow-or-widen-dwim
        "xnw" 'widen
        "xnd" 'narrow-to-defun
        "xnr" 'narrow-to-region
 ;;       "ycr" 'my-yas-reload-all
-       "wf" 'popup-which-function)
+       )
 ;; }}
 
 ;; {{ Use `SPC` as leader key
@@ -346,8 +365,6 @@
        "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
        "sc" 'shell-command
        "ll" 'my-wg-switch-workgroup ; load windows layout
-       "kk" 'scroll-other-window
-       "jj" 'scroll-other-window-up
        "yy" 'hydra-launcher/body
        "hh" 'multiple-cursors-hydra/body
        "gi" 'gist-region ; only workable on my computer
