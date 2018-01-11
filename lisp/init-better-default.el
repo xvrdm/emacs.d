@@ -58,19 +58,4 @@
 ;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
 
-;; highlight call function exculde (if,else,while,for)
-(font-lock-add-keywords
- 'c-mode
- '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
-(font-lock-add-keywords
- 'c-mode
- '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
-
-(font-lock-add-keywords
- 'c++-mode
- '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
-(font-lock-add-keywords
- 'c++-mode
- '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
-
 (provide 'init-better-default)

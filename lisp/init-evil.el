@@ -29,6 +29,35 @@
   "x3" 'split-window-right
   "do" 'delete-other-windows
   "ff" 'find-file
+  "fb" 'beginning-of-defun
+  "xm" 'my-M-x
+  "bk" 'buf-move-up
+  "bj" 'buf-move-down
+  "bh" 'buf-move-left
+  "bl" 'buf-move-right
+  "hd" 'describe-function
+  "hf" 'find-function
+  "hk" 'describe-key
+  "hv" 'describe-variable
+  "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+  "gr" 'counsel-gtags-find-symbol
+  "gu" 'counsel-gtags-update-tags
+  "qq" 'counsel-etags-grep
+  "dd" 'counsel-etags-grep-symbol-at-point
+  "fe" 'end-of-defun
+  "fm" 'mark-defun
+  "sc" 'scratch
+  "dj" 'dired-jump ;; open the dired from current file
+  "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
+  "rt" 'counsel-etags-recent-tag
+  "ft" 'counsel-etags-find-tag
+  "mm" 'counsel-bookmark-goto
+  "yy" 'counsel-browse-kill-ring
+  "cf" 'counsel-grep ; grep current buffer
+  "gf" 'counsel-git ; find file
+  "gg" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
+  "gm" 'counsel-git-find-my-file
+  ";" 'evil-ex
   ;;;;; buffer ;;;;;
   "bk" 'kill-buffer
   "bs" 'switch-to-buffer
@@ -58,7 +87,6 @@
   "."  'evilnc-copy-and-comment-operator
   "\\" 'evilnc-comment-operator ; if you prefer backslash key
   )
-  
 
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 ;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)
@@ -141,19 +169,13 @@
 (nvmap :prefix ","
        "=" 'increase-default-font-height ; GUI emacs onl
        "-" 'decrease-default-font-height ; GUI emacs only
-       "fb" 'beginning-of-defun
        "bu" 'backward-up-list
        "bb" 'back-to-previous-buffer
-       "fe" 'end-of-defun
-       "fm" 'mark-defun
        "em" 'erase-message-buffer
        "eb" 'eval-buffer
        "sd" 'sudo-edit
-       "sc" 'scratch
        "ee" 'eval-expression
        "aa" 'copy-to-x-clipboard ; used frequently
-       "aw" 'ace-swap-window
-       "af" 'ace-maximize-window
        "ac" 'aya-create
        "ae" 'aya-expand
        "zz" 'paste-from-x-clipboard ; used frequently
@@ -170,7 +192,6 @@
        "nts" 'neotree-show
        "fn" 'cp-filename-of-current-buffer
        "fp" 'cp-fullpath-of-current-buffer
-       "dj" 'dired-jump ;; open the dired from current file
        "ff" 'toggle-full-window ;; I use WIN+F in i3
        "ip" 'find-file-in-project
        "kk" 'find-file-in-project-by-selected
@@ -193,16 +214,7 @@
        "tua" 'artbollocks-mode
        "cby" 'cb-switch-between-controller-and-view
        "cbu" 'cb-get-url-from-controller
-       "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
-       "rt" 'counsel-etags-recent-tag
-       "ft" 'counsel-etags-find-tag
-       "mm" 'counsel-bookmark-goto
        "mk" 'bookmark-set
-       "yy" 'counsel-browse-kill-ring
-       "cf" 'counsel-grep ; grep current buffer
-       "gf" 'counsel-git ; find file
-       "gg" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
-       "gm" 'counsel-git-find-my-file
        "gs" (lambda ()
               (interactive)
               (let* ((ffip-diff-backends
@@ -231,7 +243,6 @@
        "bm" 'pomodoro-start ;; beat myself
        "ii" 'counsel-imenu
        "ij" 'rimenu-jump
-       "." 'evil-ex
        ;; @see https://github.com/pidu/git-timemachine
        ;; p: previous; n: next; w:hash; W:complete hash; g:nth version; q:quit
        "tt" 'dumb-jump-go
@@ -251,9 +262,6 @@
        "cxi" 'org-clock-in ; `C-c C-x C-i'
        "cxo" 'org-clock-out ; `C-c C-x C-o'
        "cxr" 'org-clock-report ; `C-c C-x C-r'
-       "qq" 'counsel-etags-grep
-       "dd" 'counsel-etags-grep-symbol-at-point
-       "xc" 'save-buffers-kill-terminal
        "rr" 'my-counsel-recentf
        "rh" 'counsel-yank-bash-history ; bash history command => yank-ring
        "rf" 'counsel-goto-recent-directory
@@ -286,13 +294,6 @@
        "ulb" 'uniquify-all-lines-buffer
        "fc" 'cp-ffip-ivy-last
        "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
-       "hd" 'describe-function
-       "hf" 'find-function
-       "hk" 'describe-key
-       "hv" 'describe-variable
-       "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-       "gr" 'counsel-gtags-find-symbol
-       "gu" 'counsel-gtags-update-tags
        "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
        "og" 'org-agenda
        "otl" 'org-toggle-link-display
@@ -303,10 +304,6 @@
        "om" 'toggle-org-or-message-mode
        "ut" 'undo-tree-visualize
        "ar" 'align-regexp
-       "bk" 'buf-move-up
-       "bj" 'buf-move-down
-       "bh" 'buf-move-left
-       "bl" 'buf-move-right
        ;; "0" 'select-window-0
        "0" 'delete-window
        "1" 'select-window-1
@@ -318,14 +315,12 @@
        "7" 'select-window-7
        "8" 'select-window-8
        "9" 'select-window-9
-       "xm" 'my-M-x
        ;; "xx" 'er/expand-region
        "xf" 'ido-find-file
        "xb" 'ivy-switch-buffer-by-pinyin
        "xh" 'mark-whole-buffer
        "xk" 'ido-kill-buffer
        "xs" 'save-buffer
-       "xz" 'suspend-frame
        "vm" 'vc-rename-file-and-buffer
        "vc" 'vc-copy-file-and-rename-buffer
        "xvv" 'vc-next-action ; 'C-x v v' in original
@@ -377,8 +372,12 @@
        "ma" 'mc/mark-all-like-this-dwim
        "md" 'mc/mark-all-like-this-in-defun
        "mm" 'ace-mc-add-multiple-cursors
+       "aw" 'ace-swap-window
+       "af" 'ace-maximize-window
        "mn" 'mc/mark-next-like-this
        "ms" 'mc/skip-to-next-like-this
+       "xc" 'save-buffers-kill-terminal
+       "xz" 'suspend-frame
        "me" 'mc/edit-lines)
 
 ;; {{ Use `;` as leader key, for searching something

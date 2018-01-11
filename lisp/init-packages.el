@@ -146,6 +146,16 @@
                          ace-window
                          ;;
                          hydra
+                         ;; too slow
+                         ;; color-identifiers-mode
+                         ;;
+                         rainbow-identifiers
+                         ;;
+                         highlight-numbers
+                         ;; only for elisp
+                         highlight-quoted
+                         ;; only for elisp
+                         highlight-defined
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -436,5 +446,24 @@
 
 ;; hydra
 (require 'hydra)
+
+;; too slow to parse files
+;; color-identifiers-mode
+;; (require 'color-identifiers-mode)
+;; (add-hook 'after-init-hook 'global-color-identifiers-mode)
+;; (run-with-idle-timer 1 t 'color-identifiers:refresh)
+
+;; rainbow-identifiers
+;;(require rainbow-identifiers-mode)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+
+;; highlight-numbers
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+
+;; highlight-quoted
+(add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
+
+;; highlight-defined
+(add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
 
 (provide 'init-packages)

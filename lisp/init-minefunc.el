@@ -78,7 +78,7 @@
 
 (defun my-append ()
   (move-end-of-line)
-  (evil-write '\;))
+  (evil-write ";"))
 
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist
@@ -104,5 +104,45 @@ want to use in the modeline *in lieu of* the original.")
                (setq mode-name mode-str)))))
 
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
+
+;; highlight call function exculde (if,else,while,for)
+;; https://www.emacswiki.org/emacs/AddKeywords
+;; https://www.emacswiki.org/emacs/FontLockKeywords
+(font-lock-add-keywords
+ 'c-mode
+ ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
+ '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+
+(font-lock-add-keywords
+ 'c-mode
+ '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
+
+(font-lock-add-keywords
+ 'c++-mode
+ ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
+  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+
+(font-lock-add-keywords
+ 'c++-mode
+ '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
+
+;; A highlighting printf format specifier like vim
+;; https://www.emacswiki.org/emacs/AddKeywords
+(defvar font-lock-format-specifier-face		
+  'font-lock-format-specifier-face
+  "Face name to use for format specifiers.")
+
+(defface font-lock-format-specifier-face
+  '((t (:foreground "OrangeRed1")))
+  "Font Lock mode face used to highlight format specifiers."
+  :group 'font-lock-faces)
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (font-lock-add-keywords nil
+                                    '(("[^%]\\(%\\([[:digit:]]+\\$\\)?[-+' #0*]*\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\(\\.\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?\\([hlLjzt]\\|ll\\|hh\\)?\\([aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)"
+                                       1 font-lock-format-specifier-face t)
+                                      ("\\(%%\\)" 
+                                       1 font-lock-format-specifier-face t)) )))
 
 (provide 'init-minefunc)
