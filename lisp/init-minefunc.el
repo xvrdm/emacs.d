@@ -111,7 +111,7 @@ want to use in the modeline *in lieu of* the original.")
 (font-lock-add-keywords
  'c-mode
  ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
- '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+ '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
 
 (font-lock-add-keywords
  'c-mode
@@ -120,7 +120,7 @@ want to use in the modeline *in lieu of* the original.")
 (font-lock-add-keywords
  'c++-mode
  ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
-  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+  '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
 
 (font-lock-add-keywords
  'c++-mode
