@@ -9,7 +9,7 @@
 (tool-bar-mode -1)
 
 ;; 关闭滚动条
-(scroll-bar-mode -1)
+;; (scroll-bar-mode -1)
 
 ;; 更改光标样式
 (set-default 'cursor-type 'hbar)
