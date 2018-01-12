@@ -28,6 +28,10 @@
                          company
                          ;; themes
                          monokai-theme
+                         zenburn-theme
+                         ample-theme
+                         ample-zen-theme
+                         atom-one-dark-theme
                          ;; --- Better Editor ---
                          hungry-delete
                          ;;
@@ -44,6 +48,8 @@
                          nodejs-repl
                          ;;
                          add-node-modules-path
+                         ;; Diminished modes are minor modes with no modeline display 
+                         diminish
                          ;;
                          popwin
                          ;;
@@ -108,6 +114,9 @@
                          focus   
                          ;;
                          beacon
+                         ;; A fork of powerline.el (based on an old uncredited version of
+                         ;; powerline.el - origin is unclear.) - this fork has multiple separator graphics. 
+                         main-line
                          ;;
                          powerline
                          ;; themes for powerline
@@ -156,6 +165,12 @@
                          highlight-quoted
                          ;; only for elisp
                          highlight-defined
+                         ;;
+                         major-mode-icons
+                         ;;
+                         mode-icons
+                         ;;
+                         ergoemacs-status
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -174,8 +189,30 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(load-theme 'monokai t)
+;; (load-theme 'monokai t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defvar zenburn-override-colors-alist
+;;   '(("zenburn-bg+05" . "#282828")
+;;     ("zenburn-bg+1"  . "#2F2F2F")
+;;     ("zenburn-bg+2"  . "#3F3F3F")
+;;     ("zenburn-bg+3"  . "#4F4F4F")))
+;; (load-theme 'zenburn t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(load-theme 'wombat t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; then in your init you can load all of the themes
+;; without enabling theme (or just load one)
+(load-theme 'ample t t)
+(load-theme 'ample-flat t t)
+(load-theme 'ample-light t t)
+;; choose one to enable
+(enable-theme 'ample)
+;; (enable-theme 'ample-flat)
+;; (enable-theme 'ample-light)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (load-theme 'ample-zen t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (load-theme 'atom-one-dark t)
 
 ;; hungry-delete seting
 (global-hungry-delete-mode)
@@ -370,17 +407,18 @@
 (general-evil-setup t)
 ;; }}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;; (require 'main-line)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline
-(require 'powerline)
-(powerline-default-theme)
+;; (require 'powerline)
+;; (powerline-default-theme)
 ;; (powerline-center-theme)
 ;; (powerline-center-evil-theme)
 ;; (powerline-vim-theme)
 ;; (powerline-evil-center-color-theme)
 
 ;; powerline-evil
-(require 'powerline-evil)
+;; (require 'powerline-evil)
 
 ;; airline-themes
 (require 'airline-themes)
@@ -464,5 +502,33 @@
 
 ;; highlight-defined
 (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+
+;; major-mode-icons
+;; (require major-mode-icons)
+;; (major-mode-icons-mode 1)
+
+;; mode-icons
+;; (require mode-icons)
+;; (mode-icons-mode)
+
+;; ergoemacs-status
+;; (require 'ergoemacs-status)
+;; (ergoemacs-status-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; diminish
+(require 'diminish)
+;; Hide jiggle-mode lighter from mode line
+(diminish 'CounselGtags)
+(diminish 'Global-Semantic-Idle-Scheduler)
+(diminish 'Abbrev)
+(diminish 'Global-Evil-Matchit)
+(diminish 'Global-Undo-Tree)
+(diminish 'Global-Hungry-Delete)
+(diminish 'Global-Evil-Surround)
+(diminish 'ycmd)
+;; Replace abbrev-mode lighter with "Abv"
+;; (diminish 'abbrev-mode "Abv")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-packages)
