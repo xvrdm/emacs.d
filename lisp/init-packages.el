@@ -67,7 +67,10 @@
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
                          evil
                          ;;
-                         evil-leader
+                         evil-collection
+                         ;;
+                         ;; replace by general
+                         ;; evil-leader
                          ;;
                          evil-escape
                          ;;
@@ -383,8 +386,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; evil
+;; https://github.com/jojojames/evil-collection
+(setq evil-want-integration nil)
 (require 'evil)
-(require 'evil-leader)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
+;; end https://github.com/jojojames/evil-collection
+;; (require 'evil-leader)
 (require 'evil-escape)
 (require 'evil-surround)
 (require 'evil-nerd-commenter)
@@ -517,16 +525,16 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; diminish
-(require 'diminish)
+;; (require 'diminish)
 ;; Hide jiggle-mode lighter from mode line
-(diminish 'CounselGtags)
-(diminish 'Global-Semantic-Idle-Scheduler)
-(diminish 'Abbrev)
-(diminish 'Global-Evil-Matchit)
-(diminish 'Global-Undo-Tree)
-(diminish 'Global-Hungry-Delete)
-(diminish 'Global-Evil-Surround)
-(diminish 'ycmd)
+;; (diminish 'CounselGtags)
+;; (diminish 'Global-Semantic-Idle-Scheduler)
+;; (diminish 'Abbrev)
+;; (diminish 'Global-Evil-Matchit)
+;; (diminish 'Global-Undo-Tree)
+;; (diminish 'Global-Hungry-Delete)
+;; (diminish 'Global-Evil-Surround)
+;; (diminish 'ycmd)
 ;; Replace abbrev-mode lighter with "Abv"
 ;; (diminish 'abbrev-mode "Abv")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

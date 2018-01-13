@@ -58,4 +58,8 @@
 ;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
 
+;; Underscore "_" is not a word character
+;; https://github.com/emacs-evil/evil
+(add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
 (provide 'init-better-default)
