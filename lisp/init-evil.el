@@ -31,8 +31,6 @@
 (setq-default evil-escape-delay 0.3)
 (setq-default evil-escape-key-sequence ";g")
 
-;;evil-easymotion
-(evilem-default-keybindings "SPC")
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
@@ -139,12 +137,13 @@
        "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
        "rt" 'counsel-etags-recent-tag
        "ft" 'counsel-etags-find-tag
-       "cmg" 'counsel-bookmark-goto
-       "yy" 'counsel-browse-kill-ring
+       "bm" 'counsel-bookmark-goto
+       "br" 'counsel-browse-kill-ring
+       "kr" 'browse-kill-ring
        "cf" 'counsel-grep ; grep current buffer
-       "gf" 'counsel-git ; find file
-       "gg" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
-       "gm" 'counsel-git-find-my-file
+       "cg" 'counsel-git ; find file
+       "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
+       "cm" 'counsel-git-find-my-file
        ";" 'evil-ex
   ;;;;; buffer ;;;;;
        "bk" 'kill-buffer
@@ -152,7 +151,7 @@
        "bp" 'switch-to-prev-buffer
        "bb" 'evil-buffer
        "zz" 'save-buffer
-  ;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
        "fo" 'ff-find-other-file
        "mm" 'evil-jump-item
        "mf" 'mf/mirror-region-in-multifile
@@ -188,7 +187,7 @@
        "dt" 'sdcv-search-input+ ; in tip
        "dd" 'my-lookup-dict-org
        "lm" 'lookup-doc-in-man
-       "gg" 'w3m-google-search
+       "gs" 'w3m-google-search
        "gf" 'w3m-google-by-filetype
        "gd" 'w3m-search-financial-dictionary
        "gj" 'w3m-search-js-api-mdn
@@ -203,7 +202,7 @@
  ;; {{ Use `SPC` as one leader key
 (nvmap :prefix "SPC"
        "ss" 'wg-create-workgroup ; save windows layout
-       "ei" 'evil-iedit-state/iedit-mode ; start iedit in emacs
+       "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
        "sc" 'shell-command
        "ll" 'my-wg-switch-workgroup ; load windows layout
        "yy" 'hydra-launcher/body
@@ -388,17 +387,6 @@
        "om" 'toggle-org-or-message-mode
        "ut" 'undo-tree-visualize
        "ar" 'align-regexp
-       ;; "0" 'select-window-0
-       "0" 'delete-window
-       "1" 'select-window-1
-       "2" 'select-window-2
-       "3" 'select-window-3
-       "4" 'select-window-4
-       "5" 'select-window-5
-       "6" 'select-window-6
-       "7" 'select-window-7
-       "8" 'select-window-8
-       "9" 'select-window-9
        ;; "xx" 'er/expand-region
        "xf" 'ido-find-file
        "xb" 'ivy-switch-buffer-by-pinyin
@@ -420,6 +408,11 @@
        ;; "ycr" 'my-yas-reload-all
        "xnr" 'narrow-to-region)
 ;; }}
+
+;; must put after "nvmap :prefix \"SPC\""
+;;evil-easymotion
+(evilem-default-keybindings "SPC")
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-evil)

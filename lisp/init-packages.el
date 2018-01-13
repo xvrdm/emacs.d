@@ -72,6 +72,12 @@
                          ;; replace by general
                          ;; evil-leader
                          ;;
+                         evil-org
+                         ;;
+                         evil-smartparens
+                         ;;
+                         evil-visualstar
+                         ;;
                          evil-escape
                          ;;
                          evil-surround
@@ -79,12 +85,16 @@
                          evil-nerd-commenter
                          ;;
                          evil-easymotion
+                         ;; easy motion pulgin
+                         evil-snipe
                          ;;
                          evil-matchit
                          ;;
                          evil-exchange
                          ;;
                          evil-iedit-state
+                         ;;
+                         evil-indent-plus
                          ;;
                          general
                          ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -228,9 +238,14 @@
 
 ;; smartparens setting
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
+(require 'smartparens-config)
 (smartparens-global-mode t)
 (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
 (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+;; https://emacs-china.org/t/smartparens/2778/7
+;; fix hungry-delete & smartparents conflict
+(defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
+  (save-match-data (sp-delete-pair (ad-get-arg 0))))
 
 ;; js2-mode setting
 (setq auto-mode-alist
@@ -261,7 +276,7 @@
 ;; (yas-reload-all)
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-;; window-numbering setting
+
 (window-numbering-mode t)
 
 ;; emacs-ycmd
@@ -418,21 +433,23 @@
 ;; (require 'main-line)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline
-;; (require 'powerline)
+(require 'powerline)
 ;; (powerline-default-theme)
 ;; (powerline-center-theme)
 ;; (powerline-center-evil-theme)
 ;; (powerline-vim-theme)
 ;; (powerline-evil-center-color-theme)
+;; (powerline-evil-vim-theme)
+(powerline-evil-vim-color-theme)
 
 ;; powerline-evil
 ;; (require 'powerline-evil)
 
 ;; airline-themes
-(require 'airline-themes)
+;; (require 'airline-themes)
 ;; (load-theme 'airline-light)
-;; (load-theme 'airline-dark)
-(airline-themes-set-modeline)
+;; (load-theme 'airline-da rk)
+;; (airline-themes-set-modeline)
 
 ;; spaceline
 ;; (require 'spaceline-config)
@@ -538,5 +555,44 @@
 ;; Replace abbrev-mode lighter with "Abv"
 ;; (diminish 'abbrev-mode "Abv")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+(require 'evil-snipe)
+(evil-snipe-mode +1)
+(evil-snipe-override-mode +1)
+;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
+;; https://github.com/hlissner/evil-snipe
+(evil-snipe-override-mode 1)
+;; https://github.com/hlissner/evil-snipe#integration-into-avy/evil-easymotion
+;; (define-key evil-snipe-parent-transient-map (kbd "C-;")
+;;  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+;;  (evilem-create 'evil-snipe-repeat
+;;                 :bind ((evil-snipe-scope 'buffer)
+;;                        (evil-snipe-enable-highlight)
+;;                        (evil-snipe-enable-incremental-highlight))))
+;; https://github.com/hlissner/evil-snipe#conflicts-with-other-plugins
+;; It seems evil-snipe-override-mode causes problems in Magit buffers, to fix this:
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+
+;; evil-smartparens
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+
+;; evil-visualstar
+(global-evil-visualstar-mode)
+
+;; evil-indent-plus
+;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
+;; ii: A block of text with the same or higher indentation.
+;; ai: The same as ii, plus whitespace.
+;; iI: A block of text with the same or higher indentation, including the first line above with less indentation.
+;; aI: The same as iI, plus whitespace.
+;; iJ: A block of text with the same or higher indentation, including the first line above and below with less indentation.
+;; aJ: The same as iJ, plus whitespace.
+(define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
+(define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
+(define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
+(define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
+(define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
+(define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
 
 (provide 'init-packages)
