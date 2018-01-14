@@ -133,6 +133,8 @@
        "fe" 'end-of-defun
        "fm" 'mark-defun
        "sc" 'scratch
+       "jd" 'dumb-jump-go
+       "jb" 'dumb-jump-back
        "dj" 'dired-jump ;; open the dired from current file
        "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
        "rt" 'counsel-etags-recent-tag
@@ -325,8 +327,6 @@
        "ij" 'rimenu-jump
        ;; @see https://github.com/pidu/git-timemachine
        ;; p: previous; n: next; w:hash; W:complete hash; g:nth version; q:quit
-       ;; "tt" 'dumb-jump-go
-       ;; "tb" 'dumb-jump-back
        "tm" 'my-git-timemachine
        "tdb" 'tidy-buffer
        "tdl" 'tidy-current-line

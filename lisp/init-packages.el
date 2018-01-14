@@ -184,6 +184,8 @@
                          mode-icons
                          ;;
                          ergoemacs-status
+                         ;;
+                         dumb-jump
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -594,5 +596,8 @@
 (define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
 (define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
 (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
+
+;; dumb jump
+(dumb-jump-mode)
 
 (provide 'init-packages)
