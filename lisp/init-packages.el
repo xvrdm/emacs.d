@@ -186,6 +186,8 @@
                          ergoemacs-status
                          ;;
                          dumb-jump
+                         ;;
+                         nyan-mode
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -442,7 +444,8 @@
 ;; (powerline-vim-theme)
 ;; (powerline-evil-center-color-theme)
 ;; (powerline-evil-vim-theme)
-(powerline-evil-vim-color-theme)
+;; (powerline-evil-vim-color-theme)
+;; (powerline-nano-theme)
 
 ;; powerline-evil
 ;; (require 'powerline-evil)
@@ -450,7 +453,7 @@
 ;; airline-themes
 ;; (require 'airline-themes)
 ;; (load-theme 'airline-light)
-;; (load-theme 'airline-da rk)
+;; (load-theme 'airline-da dark)
 ;; (airline-themes-set-modeline)
 
 ;; spaceline
@@ -459,8 +462,8 @@
 ;; (spaceline-emacs-theme)
 
 ;; telephone-line
-;; (require 'telephone-line-config)
-;; (telephone-line-evil-config)
+(require 'telephone-line-config)
+(telephone-line-evil-config)
 
 ;; dashboard
 (require 'dashboard)
@@ -599,5 +602,15 @@
 
 ;; dumb jump
 (dumb-jump-mode)
+
+;; nyan-mode
+;; (require 'nyan-mode)
+
+;; (setq mode-line-format
+;;       (list
+;;        '(:eval (list (nyan-create)))
+;;        ))
+;; (nyan-mode t)
+;; (nyan-start-animation)
 
 (provide 'init-packages)
