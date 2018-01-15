@@ -62,4 +62,11 @@
 ;; https://github.com/emacs-evil/evil
 (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
+;; 花括号自动换行的问题
+;; http://tieba.baidu.com/p/3572057629
+(when (fboundp 'electric-pair-mode)
+  (electric-pair-mode))
+(when (eval-when-compile (version< "24.4" emacs-version))
+  (electric-indent-mode 1))
+
 (provide 'init-better-default)

@@ -331,6 +331,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
 (require 'counsel-etags)
+(eval-after-load 'counsel-etags
+  '(progn
+     ;; counsel-etags-ignore-directories does NOT support wildcast
+     (add-to-list 'counsel-etags-ignore-directories "build_clang")
+     (add-to-list 'counsel-etags-ignore-directories "build_clang")
+     ;; counsel-etags-ignore-filenames supports wildcast
+     (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+     (add-to-list 'counsel-etags-ignore-filenames "*.json")))
 ;;; auto update tags--->https://github.com/redguardtoo/counsel-etags
 ;; Don't ask before rereading the TAGS files if they have changed
 (setq tags-revert-without-query t)
