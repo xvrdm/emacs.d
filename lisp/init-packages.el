@@ -190,6 +190,10 @@
                          ;; dumb-jump
                          ;;
                          ;; nyan-mode
+                         ;;
+                         highlight-parentheses
+                         ;;
+                         dired-imenu
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -369,9 +373,10 @@
 ;; smart-mode-line
 ;; (setq sml/theme 'dark)
 ;; (setq sml/theme 'light)
+(setq sml/theme 'powerline)
 ;; (setq sml/theme 'respectful)
-;; (sml/setup)
-;; (setq sml/no-confirm-load-theme t)
+(sml/setup)
+(setq sml/no-confirm-load-theme t)
 
 ;; doom-themes ;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'doom-themes)
@@ -461,10 +466,10 @@
 ;; (require 'powerline-evil)
 
 ;; airline-themes
-(require 'airline-themes)
+;; (require 'airline-themes)
 ;; (load-theme 'airline-light)
 ;; (load-theme 'airline-da dark)
-(airline-themes-set-modeline)
+;; (airline-themes-set-modeline)
 
 ;; spaceline
 ;; (require 'spaceline-config)
@@ -622,5 +627,17 @@
 ;;        ))
 ;; (nyan-mode t)
 ;; (nyan-start-animation)
+
+;; highlight-parentheses
+(require 'highlight-parentheses)
+;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+(define-globalized-minor-mode global-highlight-parentheses-mode
+  highlight-parentheses-mode
+  (lambda ()
+    (highlight-parentheses-mode t)))
+(global-highlight-parentheses-mode t)  
+
+;; dired-imenu
+(require 'dired-imenu)
 
 (provide 'init-packages)
