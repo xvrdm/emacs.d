@@ -43,9 +43,9 @@
                          ;;
                          smartparens
                          ;;
-                         js2-mode
+                         ;; js2-mode
                          ;;
-                         nodejs-repl
+                         ;; nodejs-repl
                          ;;
                          add-node-modules-path
                          ;; Diminished modes are minor modes with no modeline display 
@@ -252,17 +252,17 @@
   (save-match-data (sp-delete-pair (ad-get-arg 0))))
 
 ;; js2-mode setting
-(setq auto-mode-alist
-      (append
-        '(("\\.js\\'" . js2-mode))
-        auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (append
+;;         '(("\\.js\\'" . js2-mode))
+;;         auto-mode-alist))
 
 ;; nodejs-repl setting
-(require 'nodejs-repl)
+;; (require 'nodejs-repl)
 
 ;; setting add-node-modules-path
-(eval-after-load 'js2-mode
-                 '(add-hook 'js2-mode-hook #'add-node-modules-path))
+;; (eval-after-load 'js2-mode
+;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 ;; popwin setting
 (require 'popwin)
@@ -451,10 +451,10 @@
 ;; (require 'powerline-evil)
 
 ;; airline-themes
-;; (require 'airline-themes)
+(require 'airline-themes)
 ;; (load-theme 'airline-light)
 ;; (load-theme 'airline-da dark)
-;; (airline-themes-set-modeline)
+(airline-themes-set-modeline)
 
 ;; spaceline
 ;; (require 'spaceline-config)
@@ -462,8 +462,8 @@
 ;; (spaceline-emacs-theme)
 
 ;; telephone-line
-(require 'telephone-line-config)
-(telephone-line-evil-config)
+;; (require 'telephone-line-config)
+;; (telephone-line-evil-config)
 
 ;; dashboard
 (require 'dashboard)
