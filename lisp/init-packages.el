@@ -61,9 +61,11 @@
                          ;;
                          helm-ag
                          ;;
-                         auto-yasnippet
+                         ;; auto-yasnippet
                          ;;
                          yasnippet
+                         ;;
+                         yasnippet-snippets
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
                          evil
                          ;;
@@ -185,9 +187,9 @@
                          ;;
                          ergoemacs-status
                          ;;
-                         dumb-jump
+                         ;; dumb-jump
                          ;;
-                         nyan-mode
+                         ;; nyan-mode
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -601,7 +603,7 @@
 (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
 
 ;; dumb jump
-(dumb-jump-mode)
+;; (dumb-jump-mode)
 
 ;; nyan-mode
 ;; (require 'nyan-mode)
