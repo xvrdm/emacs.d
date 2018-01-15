@@ -114,6 +114,8 @@
                          ;;
                          smart-mode-line
                          ;;
+                         smart-mode-line-powerline-theme
+                         ;;
                          doom-themes
                          ;;
                          function-args
@@ -194,6 +196,8 @@
                          highlight-parentheses
                          ;;
                          dired-imenu
+                         ;;
+                         imenu-anywhere
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -371,7 +375,7 @@
 ;; (add-to-list 'company-backends 'company-gtags)
 
 ;; smart-mode-line
-;; (setq sml/theme 'dark)
+(setq sml/theme 'dark)
 ;; (setq sml/theme 'light)
 (setq sml/theme 'powerline)
 ;; (setq sml/theme 'respectful)

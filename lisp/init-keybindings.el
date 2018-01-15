@@ -94,4 +94,6 @@
 ;; function-args
 ;; (global-set-key (kbd "M-g") 'fa-abort)
 
+(global-set-key (kbd "C-.") #'imenu-anywhere)
+
 (provide 'init-keybindings)
