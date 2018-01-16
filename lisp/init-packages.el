@@ -53,6 +53,8 @@
                          ;;
                          popwin
                          ;;
+                         smex
+                         ;;
                          expand-region
                          ;;
                          iedit
@@ -348,6 +350,7 @@
      (add-to-list 'counsel-etags-ignore-directories "build_clang")
      ;; counsel-etags-ignore-filenames supports wildcast
      (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+     (add-to-list 'counsel-etags-ignore-filenames "*.html")
      (add-to-list 'counsel-etags-ignore-filenames "*.json")))
 ;;; auto update tags--->https://github.com/redguardtoo/counsel-etags
 ;; Don't ask before rereading the TAGS files if they have changed
@@ -653,5 +656,8 @@
               (mapconcat #'identity
                          '(".*" "Projectile.*" "PgLn")
                          "\\|")))
+
+;; smex
+(require 'smex)
 
 (provide 'init-packages)
