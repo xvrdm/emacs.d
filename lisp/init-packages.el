@@ -328,9 +328,12 @@
 (require 'popwin)
 (popwin-mode t)
 
-;; which-key
+;; {{ which-key-mode
 (require 'which-key)
-(which-key-mode)
+(setq which-key-allow-imprecise-window-fit t) ; performance
+(setq which-key-separator ":")
+(which-key-mode 1)
+;; }}
 
 ;; gtags(global)
 (load "/usr/local/share/gtags/gtags.el")
@@ -489,9 +492,20 @@
 ;; (require 'telephone-line-config)
 ;; (telephone-line-evil-config)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
 (require 'dashboard)
 (dashboard-setup-startup-hook)
+;; Set the title
+(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+;; Set the banner
+(setq dashboard-startup-banner nil)
+;; Value can be
+;; 'official which displays the official emacs logo
+;; 'logo which displays an alternative emacs logo
+;; 1, 2 or 3 which displays one of the text banners
+;; "path/to/your/image.png which displays whatever image you would prefer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; highlight-symbol
 (require 'highlight-symbol)

@@ -16,6 +16,7 @@
 (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
 (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
 
+(define-key evil-visual-state-map "gg" 'evil-change-to-previous-state)
 
 ;; evil setting
 (evil-mode)
@@ -130,6 +131,8 @@
        "gu" 'counsel-gtags-update-tags
        "qq" 'counsel-etags-grep
        "dd" 'counsel-etags-grep-symbol-at-point
+       "fa" 'counsel-ag
+       "ha" 'helm-ag
        "fe" 'end-of-defun
        "fm" 'mark-defun
        "sc" 'scratch
