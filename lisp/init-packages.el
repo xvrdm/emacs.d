@@ -336,15 +336,16 @@
 ;; }}
 
 ;; gtags(global)
-(if (not (equal 'windows-nt system-type))
-(progn 
- (load "/usr/local/share/gtags/gtags.el")
- (autoload 'gtags-mode "gtags" "" t)
- 
- ;; emacs-counsel-gtags
- (add-hook 'c-mode-hook 'counsel-gtags-mode)
- (add-hook 'c++-mode-hook 'counsel-gtags-mode))
-)
+(progn
+  (if (not (equal 'windows-nt system-type))
+    (load "/usr/local/share/gtags/gtags.el")
+    (load "gtags.el"))
+  (autoload 'gtags-mode "gtags" "" t)
+  )
+
+;; emacs-counsel-gtags
+(add-hook 'c-mode-hook 'counsel-gtags-mode)
+(add-hook 'c++-mode-hook 'counsel-gtags-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
@@ -374,7 +375,7 @@
 
 ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
 (if (not (equal 'windows-nt system-type))
-  (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+    (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
   )
 
 
