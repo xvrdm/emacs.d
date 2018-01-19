@@ -12,22 +12,20 @@
 
 (package-initialize)
 
-;; add feauther to load-path                                                                                      
-(add-to-list 'load-path "~/.emacs.d/lisp")                                                                        
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp")                                                                                                                  
-(require 'init-minefunc)                                                                                          
-(require 'init-packages)                                                                                          
-(require 'init-ui)                                                                                                
-(require 'init-org)                                                                                               
-(require 'init-better-default)                                                                                    
-(require 'init-keybindings)                                                                                       
+;; add feauther to load-path
+(add-to-list 'load-path "~/.emacs.d/lisp")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp")
+(require 'init-minefunc)
+(require 'init-packages)
+(require 'init-ui)
+(require 'init-org)
+(require 'init-better-default)
+(require 'init-keybindings)
 (require 'init-evil)
 ;; (require 'init-modeline)
-                                                                                                                  
-;; cl - Common List Extension                                                                                     
-(require 'cl)                                                                                                     
-                                                                                                                  
-(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))                                       
-                                                                                                                  
-(load-file custom-file)
+                          
+;; cl - Common List Extension
+(require 'cl)
+(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 
+(load-file custom-file)
