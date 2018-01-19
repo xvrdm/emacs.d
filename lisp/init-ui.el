@@ -8,8 +8,9 @@
 ;; 关闭工具栏
 (tool-bar-mode -1)
 
-;; 关闭滚动条
-;; (scroll-bar-mode -1)
+;; no scroll bar
+(if (fboundp 'set-scroll-bar-mode)
+   (set-scroll-bar-mode nil))
 
 ;; 更改光标样式
 (set-default 'cursor-type 'hbar)
