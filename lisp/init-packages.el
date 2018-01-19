@@ -336,12 +336,15 @@
 ;; }}
 
 ;; gtags(global)
-(load "/usr/local/share/gtags/gtags.el")
-(autoload 'gtags-mode "gtags" "" t)
-
-;; emacs-counsel-gtags
-(add-hook 'c-mode-hook 'counsel-gtags-mode)
-(add-hook 'c++-mode-hook 'counsel-gtags-mode)
+(if (not (equal 'windows-nt system-type))
+(progn 
+ (load "/usr/local/share/gtags/gtags.el")
+ (autoload 'gtags-mode "gtags" "" t)
+ 
+ ;; emacs-counsel-gtags
+ (add-hook 'c-mode-hook 'counsel-gtags-mode)
+ (add-hook 'c++-mode-hook 'counsel-gtags-mode))
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
@@ -370,7 +373,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-(add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+(if (not (equal 'windows-nt system-type))
+  (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+  )
+
 
 ;; note `file-truename' must be used!
 ;; (setenv "GTAGSLIBPATH" (concat "/usr/include"
@@ -383,14 +389,6 @@
 ;; (setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
 ;; (setq company-backends '((company-dabbrev-code company-gtags)))
 ;; (add-to-list 'company-backends 'company-gtags)
-
-;; smart-mode-line
-;; (setq sml/theme 'dark)
-;; (setq sml/theme 'light)
-(setq sml/theme 'powerline)
-;; (setq sml/theme 'respectful)
-(sml/setup)
-(setq sml/no-confirm-load-theme t)
 
 ;; doom-themes ;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'doom-themes)
@@ -467,6 +465,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline
 (require 'powerline)
+
+;;(if (not (equal 'windows-nt system-type))
+ ;;(progn 
+  ;; smart-mode-line
+  ;; (setq sml/theme 'dark)
+  ;; (setq sml/theme 'light)
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/theme 'powerline)
+  ;; (setq sml/theme 'respectful)
+  (sml/setup)
+ ;;)
+ 
+ ;;(progn
 ;; (powerline-default-theme)
 ;; (powerline-center-theme)
 ;; (powerline-center-evil-theme)
@@ -493,6 +504,10 @@
 ;; telephone-line
 ;; (require 'telephone-line-config)
 ;; (telephone-line-evil-config)
+ ;;)
+;;)
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard

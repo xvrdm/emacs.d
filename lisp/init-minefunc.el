@@ -36,7 +36,7 @@
       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
 	 "* TODO [#B] %?\n  %i\n"
 	 :empty-lines 1)))
-
+	 
 ;; gnu-global
 (defun gtags-update-single(filename)
   "Update Gtags database for changes in a single file"
