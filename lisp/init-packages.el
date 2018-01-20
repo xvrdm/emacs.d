@@ -25,6 +25,7 @@
 
 ;; packages list
 (defvar liang/packages '(
+                         use-package
                          company
                          ;; themes
                          monokai-theme
@@ -50,6 +51,8 @@
                          add-node-modules-path
                          ;; Diminished modes are minor modes with no modeline display 
                          diminish
+                         ;;
+                         delight
                          ;;
                          popwin
                          ;;
@@ -217,6 +220,8 @@
   (dolist (pkg liang/packages)
     (when (not (package-installed-p pkg))
       (package-install pkg))))
+	  
+(require 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;windows envirment variable;;;;;;;;;;;;;
 ;; (setenv "PATH" "C:/emacs24.5_win32")
@@ -248,24 +253,34 @@
 ;; (load-theme 'atom-one-dark t)
 
 ;; hungry-delete seting
-(global-hungry-delete-mode)
-(require 'hungry-delete)
+(use-package hungry-delete
+  :delight hungry-delete-mode
+  :config
+  (global-hungry-delete-mode)
+  ;; https://emacs-china.org/t/smartparens/2778/7
+  ;; fix hungry-delete & smartparents conflict
+  (defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
+    (save-match-data (sp-delete-pair (ad-get-arg 0))))
+  )
 
-;; swiper setting
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
+(use-package swiper
+  :delight ivy-mode
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  ;; swiper setting
+  (setq enable-recursive-minibuffers t)
+  )
 
 ;; smartparens setting
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(require 'smartparens-config)
-(smartparens-global-mode t)
-(sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-(sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
-;; https://emacs-china.org/t/smartparens/2778/7
-;; fix hungry-delete & smartparents conflict
-(defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
-  (save-match-data (sp-delete-pair (ad-get-arg 0))))
+(use-package smartparens-config
+  :delight smartparens-global-mode
+  :config
+  (smartparens-global-mode t)
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+  )
 
 ;; js2-mode setting
 ;; (setq auto-mode-alist
@@ -281,101 +296,134 @@
 ;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 ;; popwin setting
-(require 'popwin)
-(popwin-mode t)
+(use-package popwin
+  :delight popwin-mode
+  :config
+  (popwin-mode t)
+  )
 
 ;; 开启全局company
-(global-company-mode 1)
+(use-package company
+  :delight global-company-mode
+  :config
+  (global-company-mode 1)
+  )
 
 ;; org-pomodoro setting
-(require 'org-pomodoro)
+(use-package org-pomodoro
+  :delight org-pomodoro)
 
 ;; yasnippet setting
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :delight yas-global-mode
+  :config
+  (yas-global-mode 1)
+  )
 ;; (yas-reload-all)
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-(window-numbering-mode t)
+(use-package window-numbering
+  :delight window-numbering-mode
+  :config
+  (window-numbering-mode t)
+  )
 
 ;; emacs-ycmd
-(require 'ycmd)
-;; (add-hook 'after-init-hook 'global-ycmd-mode)
-(add-hook 'c++-mode-hook 'ycmd-mode)
-(set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-(require 'company-ycmd)
-(company-ycmd-setup)
-;;;; Set always complete immediately
-(setq company-idle-delay 0.1)
-;;(add-to-list 'company-backends 'company-ycmd)
+(use-package ycmd
+  :delight ycmd-mode
+  :config
+  ;; (add-hook 'after-init-hook 'global-ycmd-mode)
+  (add-hook 'c++-mode-hook 'ycmd-mode)
+  (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+  ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+  )
+
+(use-package company-ycmd
+  :delight company-ycmd
+  :config
+  (company-ycmd-setup)
+  ;; Set always complete immediately
+  (setq company-idle-delay 0.1)
+  ;;(add-to-list 'company-backends 'company-ycmd)
+  )
+
 
 ;; (require 'ycmd-test)
 ;; (ert-run-tests-interactively "ycmd-test")
 
 ;; youdao-dictionary
-;; Enable Cache
-(setq url-automatic-caching t)
-;; Integrate with popwin-el (https://github.com/m2ym/popwin-el)
-(push "*Youdao Dictionary*" popwin:special-display-config)
-
-;; Set file path for saving search history
-;; (setq youdao-dictionary-search-history-file "~/.emacs.d/.youdao")
-
-;; Enable Chinese word segmentation support (支持中文分词)
-;; (setq youdao-dictionary-use-chinese-word-segmentation t)
-
-;; popwin
-(require 'popwin)
-(popwin-mode t)
+(use-package youdao-dictionary
+  :config
+  ;; Enable Cache
+  (setq url-automatic-caching t)
+  ;; Integrate with popwin-el (https://github.com/m2ym/popwin-el)
+  (push "*Youdao Dictionary*" popwin:special-display-config)
+  ;; Set file path for saving search history
+  ;; (setq youdao-dictionary-search-history-file "~/.emacs.d/.youdao")
+  ;; Enable Chinese word segmentation support (支持中文分词)
+  ;; (setq youdao-dictionary-use-chinese-word-segmentation t)
+  )
 
 ;; {{ which-key-mode
-(require 'which-key)
-(setq which-key-allow-imprecise-window-fit t) ; performance
-(setq which-key-separator ":")
-(which-key-mode 1)
+(use-package which-key
+  :delight which-key-mode
+  :init
+  (setq which-key-allow-imprecise-window-fit t) ; performance
+  (setq which-key-separator ":")
+  :config
+  (which-key-mode 1)
+  )
 ;; }}
 
 ;; gtags(global)
-(progn
+(use-package gtags
+  :delight gtags-mode
+  :init
   (if (not (equal 'windows-nt system-type))
-    (load "/usr/local/share/gtags/gtags.el")
+      (load "/usr/local/share/gtags/gtags.el")
     (load "gtags.el"))
+  :config
   (autoload 'gtags-mode "gtags" "" t)
+  ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
+  (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
   )
 
 ;; emacs-counsel-gtags
-(add-hook 'c-mode-hook 'counsel-gtags-mode)
-(add-hook 'c++-mode-hook 'counsel-gtags-mode)
+(use-package counsel-gtags
+  :delight counsel-gtags-mode
+  :config
+  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
-(require 'counsel-etags)
-(eval-after-load 'counsel-etags
-  '(progn
-     ;; counsel-etags-ignore-directories does NOT support wildcast
-     (add-to-list 'counsel-etags-ignore-directories "build_clang")
-     (add-to-list 'counsel-etags-ignore-directories "build_clang")
-     ;; counsel-etags-ignore-filenames supports wildcast
-     (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-     ;; (add-to-list 'counsel-etags-ignore-filenames "*.html")
-     ;; (add-to-list 'counsel-etags-ignore-filenames "*.map")
-     ;; (add-to-list 'counsel-etags-ignore-filenames "*.json")
-     ))
-;;; auto update tags--->https://github.com/redguardtoo/counsel-etags
-;; Don't ask before rereading the TAGS files if they have changed
-(setq tags-revert-without-query t)
-;; Don't warn when TAGS files are large
-(setq large-file-warning-threshold nil)
-;; Setup auto update now
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (add-hook 'after-save-hook
-                      'counsel-etags-virtual-update-tags 'append 'local)))
+(use-package counsel-etags
+  :delight
+  :config
+  (eval-after-load 'counsel-etags
+    '(progn
+       ;; counsel-etags-ignore-directories does NOT support wildcast
+       (add-to-list 'counsel-etags-ignore-directories "build_clang")
+       (add-to-list 'counsel-etags-ignore-directories "build_clang")
+       ;; counsel-etags-ignore-filenames supports wildcast
+       (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "*.html")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "*.map")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "*.json")
+       )) 
+  ;; auto update tags--->https://github.com/redguardtoo/counsel-etags
+  ;; Don't ask before rereading the TAGS files if they have changed
+  (setq tags-revert-without-query t)
+  ;; Don't warn when TAGS files are large
+  (setq large-file-warning-threshold nil)
+  ;; Setup auto update now
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook
+                        'counsel-etags-virtual-update-tags 'append 'local)))
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-(add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
 
 ;; note `file-truename' must be used!
 ;; (setenv "GTAGSLIBPATH" (concat "/usr/include"
@@ -409,45 +457,91 @@
 ;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
 
 ;; function-args
-(require 'function-args)
-(fa-config-default)
+(use-package function-args
+  :delight function-args-mode
+  :config
+  (fa-config-default)
+  )
 
 ;; neotree
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
+(use-package neotree
+  :delight neotree-mode
+  :config
+  (global-set-key [f8] 'neotree-toggle)
+  )
 
 ;; projectile-speedbar
-(require 'projectile-speedbar)
+(use-package projectile-speedbar
+  :delight)
 
 ;; linum-relative
-(require 'linum-relative)
-;; (linum-relative-toggle)
+(use-package linum-relative
+  :delight linum-relative-mode
+  :config
+  ;; (linum-relative-toggle)
+  )
 
 ;; rainbow-delimiters
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(use-package rainbow-delimiters
+  :delight rainbow-delimiters-mode
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
 
 ;; beacon
-(beacon-mode 1)
+(use-package beacon
+  :delight beacon-mode
+  :config
+  (beacon-mode 1)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; evil
 ;; https://github.com/jojojames/evil-collection
-(setq evil-want-integration nil)
-(require 'evil)
-(when (require 'evil-collection nil t)
-  (evil-collection-init))
+(use-package evil
+  :delight evil-mode
+  :init
+  (setq evil-want-integration nil)
+  :config
+  )
+
+(use-package evil-collection
+  :delight
+  :config
+  (evil-collection-init)
+  )
+
 ;; end https://github.com/jojojames/evil-collection
 ;; (require 'evil-leader)
-(require 'evil-escape)
-(require 'evil-surround)
-(require 'evil-nerd-commenter)
-(require 'evil-easymotion)
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
-(require 'evil-exchange)
-;; change default key bindings (if you want) HERE
-;; (setq evil-exchange-key (kbd "zx"))
-(evil-exchange-install)
+(use-package evil-escape
+  :delight evil-escape-mode
+  )
+
+(use-package evil-surround
+  :delight evil-surround-mode
+  )
+
+(use-package evil-nerd-commenter
+  :delight
+  )
+
+(use-package evil-easymotion
+  :delight
+  )
+(use-package evil-matchit
+  :delight evil-matchit-mode
+  :config
+  (global-evil-matchit-mode 1)
+  )
+
+(use-package evil-exchange
+  :delight
+  :config
+  ;; change default key bindings (if you want) HERE
+  ;; (setq evil-exchange-key (kbd "zx"))
+  (evil-exchange-install)
+  )
+
 ;; {{ @see https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#replacing-text-with-iedit
 ;; same keybindgs as spacemacs:
 ;;  - "SPC s e" to start `iedit-mode'
@@ -455,119 +549,169 @@
 ;;  - "n" next, "N" previous (obviously we use "p" for yank)
 ;;  - "gg" the first occurence, "G" the last occurence
 ;;  - Please note ";;" or `avy-goto-char-timer' is also useful
-(require 'evil-iedit-state)
-(require 'general)
-(general-evil-setup t)
+(use-package evil-iedit-state
+  :delight)
+
+(use-package general
+  :delight
+  :config
+  (general-evil-setup t)
+  )
 ;; }}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'main-line)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline
-(require 'powerline)
+(use-package powerline
+  :delight
+  :config
+  ;; (powerline-default-theme)
+  ;; (powerline-center-theme)
+  ;; (powerline-center-evil-theme)
+  ;; (powerline-vim-theme)
+  ;; (powerline-evil-center-color-theme)
+  ;; (powerline-evil-vim-theme)
+  ;; (powerline-evil-vim-color-theme)
+  ;; (powerline-nano-theme)
+  )
 
-;;(if (not (equal 'windows-nt system-type))
- ;;(progn 
-  ;; smart-mode-line
+;; smart-mode-line
+(use-package smart-mode-line
+  :delight
+  :init
   ;; (setq sml/theme 'dark)
   ;; (setq sml/theme 'light)
   (setq sml/no-confirm-load-theme t)
   (setq sml/theme 'powerline)
   ;; (setq sml/theme 'respectful)
+  :config
   (sml/setup)
- ;;)
+  )
  
- ;;(progn
-;; (powerline-default-theme)
-;; (powerline-center-theme)
-;; (powerline-center-evil-theme)
-;; (powerline-vim-theme)
-;; (powerline-evil-center-color-theme)
-;; (powerline-evil-vim-theme)
-;; (powerline-evil-vim-color-theme)
-;; (powerline-nano-theme)
 
 ;; powerline-evil
-;; (require 'powerline-evil)
+;; (use-package poweline-evil
+;;   :delight
+;;   )
 
 ;; airline-themes
-;; (require 'airline-themes)
-;; (load-theme 'airline-light)
-;; (load-theme 'airline-da dark)
-;; (airline-themes-set-modeline)
+(use-package airline-themes
+  :config
+  ;; (load-theme 'airline-light)
+  ;; (load-theme 'airline-da dark)
+  ;; (airline-themes-set-modeline)
+  )
 
 ;; spaceline
-;; (require 'spaceline-config)
-;; (spaceline-spacemacs-theme)
-;; (spaceline-emacs-theme)
+(use-package spaceline-config
+  :config
+  ;; (require 'spaceline-config)
+  ;; (spaceline-spacemacs-theme)
+  ;; (spaceline-emacs-theme)
+  )
 
 ;; telephone-line
-;; (require 'telephone-line-config)
-;; (telephone-line-evil-config)
- ;;)
-;;)
-
-
+(use-package telephone-line-config
+  :delight telephone-line-mode
+  :config
+  ;; (telephone-line-evil-config)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
-(require 'dashboard)
-(dashboard-setup-startup-hook)
-;; Set the title
-(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
-;; Set the banner
-(setq dashboard-startup-banner nil)
-;; Value can be
-;; 'official which displays the official emacs logo
-;; 'logo which displays an alternative emacs logo
-;; 1, 2 or 3 which displays one of the text banners
-;; "path/to/your/image.png which displays whatever image you would prefer
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package dashboard
+  :delight dashboard-mode
+  :config
+  (dashboard-setup-startup-hook)
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+  ;; Set the banner
+  (setq dashboard-startup-banner nil)
+  ;; Value can be
+  ;; 'official which displays the official emacs logo
+  ;; 'logo which displays an alternative emacs logo
+  ;; 1, 2 or 3 which displays one of the text banners
+  ;; "path/to/your/image.png which displays whatever image you would prefer
+  )
 
 ;; highlight-symbol
 (require 'highlight-symbol)
+(use-package highlight-symbol
+  :delight highlight-symbol-mode
+  :config
+  )
 
 ;; rainbow-mode
-(require 'rainbow-mode)
-(rainbow-mode 1)
+(use-package rainbow-mode
+  :delight rainbow-mode
+  :config
+  (rainbow-mode 1)
+  )
 
 ;; multifiles
-(require 'multifiles)
+(use-package multifiles
+  :delight multifiles-minor-mode
+  )
 
 ;; fix-word
-(require 'fix-word)
+(use-package fix-word
+  :delight)
 
 ;; browse-kill-ring
-(require 'browse-kill-ring)
+(use-package browse-kill-ring
+  :delight browse-kill-ring-mode
+  )
 
 ;; indent-guide
-(require 'indent-guide)
-(indent-guide-global-mode)
+(use-package indent-guide
+  :delight indent-guide-mode
+  :config
+  (indent-guide-global-mode)
+  )
 
 ;; irony
-;; (add-hook 'c++-mode-hook 'irony-mode)
-;; (add-hook 'c-mode-hook 'irony-mode)
-;; (add-hook 'objc-mode-hook 'irony-mode)
-;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;; (use-package irony
+  ;; :delight irony-mode
+  ;; :config
+  ;; (add-hook 'c++-mode-hook 'irony-mode)
+  ;; (add-hook 'c-mode-hook 'irony-mode)
+  ;; (add-hook 'objc-mode-hook 'irony-mode)
+  ;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  ;; )
 
 ;; company-irony
-;; (eval-after-load 'company
-  ;;  '(add-to-list 'company-backends 'company-irony))
+;; (use-package company-irony
+;;   :delight
+;;   :config
+;;   (eval-after-load 'company
+;;     '(add-to-list 'company-backends 'company-irony))
+;;   )
 
 ;; ggtags
-(require 'ggtags)
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-              (ggtags-mode 1))))
+(use-package ggtags
+  :delight ggtags-mode
+  :config
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                (ggtags-mode 1))))
+  )
+
 
 ;; symon
-(require 'symon)
+(use-package symon
+  :delight symon-mode
+  )
 
 ;; ace-window
-(require 'ace-window)
+(use-package ace-window
+  :delight
+  )
 
 ;; hydra
-(require 'hydra)
+(use-package hydra
+  :delight
+  )
 
 ;; color-identifiers-mode--->too slow to parse files
 ;; (require 'color-identifiers-mode)
@@ -575,17 +719,32 @@
 ;; (run-with-idle-timer 1 t 'color-identifiers:refresh)
 
 ;; rainbow-identifiers
-;;(require rainbow-identifiers-mode)
-(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+(use-package rainbow-identifiers
+  :delight rainbow-identifiers-mode
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+  )
 
 ;; highlight-numbers
-(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+(use-package highlight-numbers
+  :delight highlight-numbers-mode
+  :config
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+  )
 
 ;; highlight-quoted
-(add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
+(use-package highlight-quoted
+  :delight highlight-quoted-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
+  )
 
 ;; highlight-defined
-(add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+(use-package highlight-defined
+  :delight highlight-defined-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+  )
 
 ;; major-mode-icons
 ;; (require major-mode-icons)
@@ -599,60 +758,76 @@
 ;; (require 'ergoemacs-status)
 ;; (ergoemacs-status-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; diminish
-;; (require 'diminish)
-;; Hide jiggle-mode lighter from mode line
-;; (diminish 'CounselGtags)
-;; (diminish 'Global-Semantic-Idle-Scheduler)
-;; (diminish 'Abbrev)
-;; (diminish 'Global-Evil-Matchit)
-;; (diminish 'Global-Undo-Tree)
-;; (diminish 'Global-Hungry-Delete)
-;; (diminish 'Global-Evil-Surround)
-;; (diminish 'ycmd)
-;; Replace abbrev-mode lighter with "Abv"
-;; (diminish 'abbrev-mode "Abv")
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package diminish
+;;   :delight diminished-mode
+;;   :config
+;;   Hide jiggle-mode lighter from mode line
+;;   (diminish 'CounselGtags)
+;;   (diminish 'Global-Semantic-Idle-Scheduler)
+;;   (diminish 'Abbrev)
+;;   (diminish 'Global-Evil-Matchit)
+;;   (diminish 'Global-Undo-Tree)
+;;   (diminish 'Global-Hungry-Delete)
+;;   (diminish 'Global-Evil-Surround)
+;;   (diminish 'ycmd)
+;;   Replace abbrev-mode lighter with "Abv"
+;;   (diminish 'abbrev-mode "Abv")
+;;   )
 
 ;;
-(require 'evil-snipe)
-(evil-snipe-mode +1)
-(evil-snipe-override-mode +1)
-;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
-;; https://github.com/hlissner/evil-snipe
-(evil-snipe-override-mode 1)
-;; https://github.com/hlissner/evil-snipe#integration-into-avy/evil-easymotion
-;; (define-key evil-snipe-parent-transient-map (kbd "C-;")
-;;  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
-;;  (evilem-create 'evil-snipe-repeat
-;;                 :bind ((evil-snipe-scope 'buffer)
-;;                        (evil-snipe-enable-highlight)
-;;                        (evil-snipe-enable-incremental-highlight))))
-;; https://github.com/hlissner/evil-snipe#conflicts-with-other-plugins
-;; It seems evil-snipe-override-mode causes problems in Magit buffers, to fix this:
-(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+(use-package evil-snipe
+  :delight evil-snipe-mode
+  :config
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1)
+  ;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
+  ;; https://github.com/hlissner/evil-snipe
+  (evil-snipe-override-mode 1)
+  ;; https://github.com/hlissner/evil-snipe#integration-into-avy/evil-easymotion
+  ;; (define-key evil-snipe-parent-transient-map (kbd "C-;")
+  ;;  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+  ;;  (evilem-create 'evil-snipe-repeat
+  ;;                 :bind ((evil-snipe-scope 'buffer)
+  ;;                        (evil-snipe-enable-highlight)
+  ;;                        (evil-snipe-enable-incremental-highlight))))
+  ;; https://github.com/hlissner/evil-snipe#conflicts-with-other-plugins
+  ;; It seems evil-snipe-override-mode causes problems in Magit buffers, to fix this:
+  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+  )
 
 ;; evil-smartparens
-(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+(use-package evil-smartparens
+  :delight evil-smartparens-mode
+  :config
+  (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  )
 
 ;; evil-visualstar
-(global-evil-visualstar-mode)
+(use-package evil-visualstar
+  :delight evil-visualstar-mode
+  :config
+  (global-evil-visualstar-mode)
+  )
 
 ;; evil-indent-plus
-;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
-;; ii: A block of text with the same or higher indentation.
-;; ai: The same as ii, plus whitespace.
-;; iI: A block of text with the same or higher indentation, including the first line above with less indentation.
-;; aI: The same as iI, plus whitespace.
-;; iJ: A block of text with the same or higher indentation, including the first line above and below with less indentation.
-;; aJ: The same as iJ, plus whitespace.
-(define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
-(define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
-(define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
-(define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
-(define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
-(define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
+(use-package evil-indent-plus
+  :delight
+  :config
+  ;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
+  ;; ii: A block of text with the same or higher indentation.
+  ;; ai: The same as ii, plus whitespace.
+  ;; iI: A block of text with the same or higher indentation, including the first line above with less indentation.
+  ;; aI: The same as iI, plus whitespace.
+  ;; iJ: A block of text with the same or higher indentation, including the first line above and below with less indentation.
+  ;; aJ: The same as iJ, plus whitespace.
+  (define-key evil-inner-text-objects-map "i" 'evil-indent-plus-i-indent)
+  (define-key evil-outer-text-objects-map "i" 'evil-indent-plus-a-indent)
+  (define-key evil-inner-text-objects-map "I" 'evil-indent-plus-i-indent-up)
+  (define-key evil-outer-text-objects-map "I" 'evil-indent-plus-a-indent-up)
+  (define-key evil-inner-text-objects-map "J" 'evil-indent-plus-i-indent-up-down)
+  (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
+  )
 
 ;; dumb jump
 ;; (dumb-jump-mode)
@@ -668,26 +843,41 @@
 ;; (nyan-start-animation)
 
 ;; highlight-parentheses
-(require 'highlight-parentheses)
-;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
-(global-highlight-parentheses-mode t)  
+(use-package highlight-parentheses
+  :delight highlight-parentheses-mode
+  :config
+  ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+  (define-globalized-minor-mode global-highlight-parentheses-mode
+    highlight-parentheses-mode
+    (lambda ()
+      (highlight-parentheses-mode t)))
+  (global-highlight-parentheses-mode t)  
+  )
 
 ;; dired-imenu
-(require 'dired-imenu)
+(use-package dired-imenu
+  :delight
+  )
 
 ;; rich-minority
-(rich-minority-mode 1)
-(setq rm-blacklist
-            (format "^ \\(%s\\)$"
-              (mapconcat #'identity
-                         '(".*" "Projectile.*" "PgLn")
-                         "\\|")))
+(use-package rich-minority
+  :delight rich-minority-mode
+  :config
+  (rich-minority-mode 1)
+  (setq rm-blacklist
+        (format "^ \\(%s\\)$"
+                (mapconcat #'identity
+                           '(".*" "Projectile.*" "PgLn")
+                           "\\|")))
+  )
 
 ;; smex
-(require 'smex)
+(use-package smex
+  :delight
+  )
+
+(use-package delight
+  :delight
+  )
 
 (provide 'init-packages)
