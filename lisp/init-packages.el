@@ -223,6 +223,7 @@
 	  
 (require 'use-package)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;windows envirment variable;;;;;;;;;;;;;
 ;; (setenv "PATH" "C:/emacs24.5_win32")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -252,6 +253,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (load-theme 'atom-one-dark t)
 
+
 ;; hungry-delete seting
 (use-package hungry-delete
   :delight hungry-delete-mode
@@ -276,6 +278,7 @@
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (use-package smartparens-config
   :delight smartparens-global-mode
+  :delight smartparens-mode
   :config
   (smartparens-global-mode t)
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
@@ -305,6 +308,7 @@
 ;; 开启全局company
 (use-package company
   :delight global-company-mode
+  :delight company-mode
   :config
   (global-company-mode 1)
   )
@@ -316,6 +320,7 @@
 ;; yasnippet setting
 (use-package yasnippet
   :delight yas-global-mode
+  :delight yas-minor-mode
   :config
   (yas-global-mode 1)
   )
@@ -576,17 +581,17 @@
   )
 
 ;; smart-mode-line
-(use-package smart-mode-line
-  :delight
-  :init
-  ;; (setq sml/theme 'dark)
-  ;; (setq sml/theme 'light)
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'powerline)
-  ;; (setq sml/theme 'respectful)
-  :config
-  (sml/setup)
-  )
+;; (use-package smart-mode-line
+;;   :delight
+;;   :init
+;;   ;; (setq sml/theme 'dark)
+;;   ;; (setq sml/theme 'light)
+;;   (setq sml/no-confirm-load-theme t)
+;;   (setq sml/theme 'powerline)
+;;   ;; (setq sml/theme 'respectful)
+;;   :config
+;;   (sml/setup)
+;;   )
  
 
 ;; powerline-evil
@@ -595,26 +600,26 @@
 ;;   )
 
 ;; airline-themes
-(use-package airline-themes
-  :config
-  ;; (load-theme 'airline-light)
-  ;; (load-theme 'airline-da dark)
-  ;; (airline-themes-set-modeline)
-  )
+;; (use-package airline-themes
+;;   :config
+;;   ;; (load-theme 'airline-light)
+;;   ;; (load-theme 'airline-da dark)
+;;   (airline-themes-set-modeline)
+;;   )
 
 ;; spaceline
-(use-package spaceline-config
-  :config
-  ;; (require 'spaceline-config)
-  ;; (spaceline-spacemacs-theme)
-  ;; (spaceline-emacs-theme)
-  )
+;; (use-package spaceline-config
+;;   :config
+;;   ;; (require 'spaceline-config)
+;;   (spaceline-spacemacs-theme)
+;;   ;; (spaceline-emacs-theme)
+;;   )
 
 ;; telephone-line
 (use-package telephone-line-config
   :delight telephone-line-mode
   :config
-  ;; (telephone-line-evil-config)
+  (telephone-line-evil-config)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -778,6 +783,7 @@
 ;;
 (use-package evil-snipe
   :delight evil-snipe-mode
+  :delight evil-snipe-local-mode
   :config
   (evil-snipe-mode +1)
   (evil-snipe-override-mode +1)
@@ -876,8 +882,12 @@
   :delight
   )
 
+;; put these at bottom of this file
+;; because i put some not to display modes in this
 (use-package delight
   :delight
+  :delight page-break-lines-mode
+  :delight undo-tree-mode
   )
 
 (provide 'init-packages)
