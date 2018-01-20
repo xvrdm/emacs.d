@@ -375,10 +375,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-(if (not (equal 'windows-nt system-type))
-    (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
-  )
-
+(add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
 
 ;; note `file-truename' must be used!
 ;; (setenv "GTAGSLIBPATH" (concat "/usr/include"
