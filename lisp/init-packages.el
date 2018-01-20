@@ -888,6 +888,7 @@
   :delight
   :delight page-break-lines-mode
   :delight undo-tree-mode
+  :delight abbrev-mode
   )
 
 (provide 'init-packages)
