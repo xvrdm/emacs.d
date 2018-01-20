@@ -1,8 +1,12 @@
 ;; encoding
 (set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
 
 ;; 禁用响铃
 (setq ring-bell-function 'ignore)
+
+;; ruler
+(ruler-mode t)
 
 ;; auto reload file
 (global-auto-revert-mode t)
@@ -50,13 +54,28 @@
 (setq dired-dwim-target t)
 
 ;; When you visit a file, point goes to the last place where it was when you previously visited the same file.
-(save-place-mode 1)
+;; remember cursor position. When file is opened, put cursor at last position
+(if (version< emacs-version "25.0")
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
 
 ;; tab settings
 (setq-default indent-tabs-mode nil) ; tab 改为插入空格
 (setq c-basic-offset 4) ; c c++ 缩进4个空格
 ;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
+
+;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
+(progn
+  ;; make tab key always call a indent command.
+  ;; (setq-default tab-always-indent t)
+  ;; make tab key call indent command or insert tab character, depending on cursor position
+  ;; (setq-default tab-always-indent nil)
+  ;; make tab key do indent first then completion.
+  ;; (setq-default tab-always-indent 'complete)
+  )
 
 ;; Underscore "_" is not a word character
 ;; https://github.com/emacs-evil/evil

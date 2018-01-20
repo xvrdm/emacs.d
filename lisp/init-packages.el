@@ -218,6 +218,8 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+;;;;;;;;;;;;;;;;;;;;;;windows envirment variable;;;;;;;;;;;;;
+;; (setenv "PATH" "C:/emacs24.5_win32")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 ;; (load-theme 'monokai t)
@@ -293,7 +295,6 @@
 (yas-global-mode 1)
 ;; (yas-reload-all)
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
-
 
 (window-numbering-mode t)
 
