@@ -205,6 +205,8 @@
                          imenu-anywhere
                          ;;
                          rich-minority
+                         ;;
+                         ;; tabbar
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -889,6 +891,11 @@
   :delight page-break-lines-mode
   :delight undo-tree-mode
   :delight abbrev-mode
+  )
+
+(use-package tabbar
+  :delight
+  :config
   )
 
 (provide 'init-packages)

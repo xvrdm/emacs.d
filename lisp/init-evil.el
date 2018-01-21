@@ -81,7 +81,7 @@
 (global-set-key (kbd "C-r") 'undo-tree-redo)
 
  ;; {{ Use `;` as one leader key
-(general-define-key :keymaps '(normal insert emacs)
+(general-define-key :keymaps '(normal insert visual emacs)
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
                     :non-normal-prefix "C-;"
@@ -210,7 +210,7 @@
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
-(general-define-key :keymaps '(normal insert emacs)
+(general-define-key :keymaps '(normal insert visual emacs)
                     ;; :states '(normal insert emacs)
                     :prefix "SPC"
                     :non-normal-prefix "M-SPC"
