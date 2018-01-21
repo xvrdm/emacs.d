@@ -6,7 +6,10 @@
 (setq ring-bell-function 'ignore)
 
 ;; ruler
-(ruler-mode t)
+;; (ruler-mode t)
+
+;; display time in modeline
+(display-time-mode 1)
 
 ;; auto reload file
 (global-auto-revert-mode t)

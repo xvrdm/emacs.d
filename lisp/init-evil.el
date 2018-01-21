@@ -108,9 +108,10 @@
                     "hp" 'highlight-symbol-prev
                     "hr" 'highlight-symbol-query-replace
                     ;;
-                    "pp" 'my-append
+                    "ia" 'my-append-semicolon
                     "do" 'delete-other-windows
                     "ff" 'find-file
+                    "fd" 'my-display-full-path-of-current-buffer
                     "fb" 'beginning-of-defun
                     "wf" 'popup-which-function
                     "ww" 'narrow-or-widen-dwim
@@ -154,13 +155,13 @@
                     "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
                     "cm" 'counsel-git-find-my-file
                     ";" 'evil-ex
-  ;;;;; buffer ;;;;;
+                    ;; buffer ;;;;;
                     "bk" 'kill-buffer
                     "bs" 'switch-to-buffer
                     "bp" 'switch-to-prev-buffer
                     "bb" 'evil-buffer
                     "zz" 'save-buffer
-  ;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;; ;;;;;;;;;;;;;;;;;;;;;;;
                     "fo" 'ff-find-other-file
                     "mm" 'evil-jump-item
                     "mf" 'mf/mirror-region-in-multifile

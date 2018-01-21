@@ -76,15 +76,31 @@
    (t
     (execute-extended-command))))
 
-(defun my-append ()
-  (move-end-of-line)
-  (evil-write ";"))
+(defun my-append-string (str)
+  "append a string to end of a line"
+  (interactive)
+  (end-of-line)
+  ;;(insert-char str)
+  (insert str)
+  )
+(defun my-append-semicolon ()
+  "append a ';' to end of current line"
+  (interactive)
+  ;; (my-append-string 59)
+  (my-append-string ";")
+  )
+
+(defun my-display-full-path-of-current-buffer ()
+  "display the full path of current file"
+  (interactive)
+  (message (buffer-file-name))
+  )
 
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist
   '((auto-complete-mode . "α")
     ;; Major modes
-    (lisp-interaction-mode . "λ")
+    (lisp-interaction-mode . "Λ")
     )
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you
