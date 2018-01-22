@@ -24,7 +24,7 @@
 (set-face-attribute 'default nil :height 120)
 
 ;;设置窗口位置为屏库左上角(0,0)
-(set-frame-position (selected-frame) 200 80)
+(set-frame-position (selected-frame) 200 50)
 ;;设置宽和高
 (set-frame-width (selected-frame) 100)
 (set-frame-height (selected-frame) 35)

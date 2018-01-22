@@ -677,22 +677,34 @@
   )
 
 ;; irony
-;; (use-package irony
-  ;; :delight irony-mode
-  ;; :config
-  ;; (add-hook 'c++-mode-hook 'irony-mode)
-  ;; (add-hook 'c-mode-hook 'irony-mode)
-  ;; (add-hook 'objc-mode-hook 'irony-mode)
-  ;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-  ;; )
+(when (equal system-type 'windows-nt)
+  (progn
+    (use-package irony
+      :delight irony-mode
+      :config
+      (add-hook 'c++-mode-hook 'irony-mode)
+      (add-hook 'c-mode-hook 'irony-mode)
+      (add-hook 'objc-mode-hook 'irony-mode)
+      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-;; company-irony
-;; (use-package company-irony
-;;   :delight
-;;   :config
-;;   (eval-after-load 'company
-;;     '(add-to-list 'company-backends 'company-irony))
-;;   )
+      ;; Windows performance tweaks
+      ;;
+      (when (boundp 'w32-pipe-read-delay)
+        (setq w32-pipe-read-delay 0))
+      ;; Set the buffer size to 64K on Windows (from the original 4K)
+      (when (boundp 'w32-pipe-buffer-size)
+        (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
+      )
+
+    ;; company-irony
+    (use-package company-irony
+      :delight
+      :config
+      (eval-after-load 'company
+        '(add-to-list 'company-backends 'company-irony))
+      )
+    )
+  )
 
 ;; ggtags
 (use-package ggtags
@@ -703,7 +715,6 @@
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                 (ggtags-mode 1))))
   )
-
 
 ;; symon
 (use-package symon
