@@ -27,6 +27,6 @@
 (set-frame-position (selected-frame) 200 80)
 ;;设置宽和高
 (set-frame-width (selected-frame) 100)
-(set-frame-height (selected-frame) 40)
+(set-frame-height (selected-frame) 35)
 
 (provide 'init-ui)
