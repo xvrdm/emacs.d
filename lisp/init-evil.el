@@ -126,7 +126,7 @@
                     "hd" 'describe-function
                     "hf" 'find-function
                     "hk" 'describe-key
-                    "sw" 'swiper
+                    "ss" 'swiper
                     "sa" 'swiper-all
                     "qq" 'quit-window
                     "hv" 'describe-variable
@@ -388,7 +388,7 @@
                     "ulr" 'uniquify-all-lines-region
                     "ulb" 'uniquify-all-lines-buffer
                     "fc" 'cp-ffip-ivy-last
-                    "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
+                    ;; "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
                     ;; liang.feng
                     ;; "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
                     "og" 'org-agenda
