@@ -84,7 +84,7 @@
 (general-define-key :keymaps '(normal insert visual emacs)
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
-                    :non-normal-prefix "C-;"
+                    :non-normal-prefix "M-;"
                     ;; switch window
                     "1" 'select-window-1
                     "2" 'select-window-2
