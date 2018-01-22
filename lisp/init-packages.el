@@ -893,9 +893,9 @@
   :delight abbrev-mode
   )
 
-(use-package tabbar
-  :delight
-  :config
-  )
+;; (use-package tabbar
+;;   :delight
+;;   :config
+;;   )
 
 (provide 'init-packages)
