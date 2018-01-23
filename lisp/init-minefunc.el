@@ -161,4 +161,20 @@ want to use in the modeline *in lieu of* the original.")
                                       ("\\(%%\\)" 
                                        1 font-lock-format-specifier-face t)) )))
 
+;; http://maskray.me/blog/2017-12-03-c++-language-server-cquery
+;; C/C++ mode hook在项目根目录有compile_commands.json时自动启用`lsp-cquery-enable
+(defun my//enable-cquery-if-compile-commands-json ()
+  (when
+      (and (not (and (boundp 'lsp-mode) lsp-mode))
+           (or
+            (cl-some (lambda (x) (string-match-p x buffer-file-name)) my-cquery-whitelist)
+            (cl-notany (lambda (x) (string-match-p x buffer-file-name)) my-cquery-blacklist))
+           (or (locate-dominating-file default-directory "compile_commands.json")
+               (locate-dominating-file default-directory ".cquery")))
+    (setq eldoc-idle-delay 0.2)
+    (lsp-cquery-enable)
+    (lsp-enable-imenu)
+    (when (>= emacs-major-version 26)
+      (lsp-ui-doc-mode 1))))
+
 (provide 'init-minefunc)
