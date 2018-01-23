@@ -718,6 +718,7 @@
 (use-package ggtags
   :delight ggtags-mode
   :config
+  (setq ggtags-highlight-tag nil)
   (add-hook 'c-mode-common-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
@@ -919,6 +920,7 @@
 
 (use-package lsp-mode
   :config
+  (setq lsp-highlight-symbol-at-point nil)
   ;; (lsp-define-stdio-client
   ;;  ;; This can be a symbol of your choosing. It will be used as a the
   ;;  ;; prefix for a dynamically generated function "-enable"; in this
