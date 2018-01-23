@@ -141,7 +141,9 @@
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
                     "sc" 'scratch
-                    "jd" 'dumb-jump-go
+                    ;; "jd" 'dumb-jump-go
+                    "jd" 'xref-find-definitions
+                    "jr" 'xref-find-references
                     "jb" 'dumb-jump-back
                     "dj" 'dired-jump ;; open the dired from current file
                     "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]

@@ -904,14 +904,6 @@
   :delight
   )
 
-;; put these at bottom of this file
-;; because i put some not to display modes in this
-(use-package delight
-  :delight
-  :delight page-break-lines-mode
-  :delight undo-tree-mode
-  :delight abbrev-mode
-  )
 
 ;; (use-package tabbar
 ;;   :delight
@@ -921,6 +913,8 @@
 (use-package lsp-mode
   :config
   (setq lsp-highlight-symbol-at-point nil)
+  (require 'lsp-imenu)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
   ;; (lsp-define-stdio-client
   ;;  ;; This can be a symbol of your choosing. It will be used as a the
   ;;  ;; prefix for a dynamically generated function "-enable"; in this
@@ -967,6 +961,18 @@
 (use-package ivy-xref
   :config
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; put these at bottom of this file
+;; because i put some not to display modes in this
+(use-package delight
+  :delight
+  :delight page-break-lines-mode
+  :delight undo-tree-mode
+  :delight abbrev-mode
+  :delight eldoc-mode
+  :delight lsp-mode
   )
 
 (provide 'init-packages)
