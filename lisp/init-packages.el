@@ -344,14 +344,14 @@
   )
 
 ;; emacs-ycmd
-(use-package ycmd
-  :delight ycmd-mode
-  :config
-  ;; (add-hook 'after-init-hook 'global-ycmd-mode)
-  (add-hook 'c++-mode-hook 'ycmd-mode)
-  (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-  ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-  )
+;; (use-package ycmd
+;;   :delight ycmd-mode
+;;   :config
+;;   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
+;;   (add-hook 'c++-mode-hook 'ycmd-mode)
+;;   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+;;   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+;;   )
 
 ;; (use-package company-ycmd
 ;;   :delight company-ycmd
