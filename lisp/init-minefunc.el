@@ -177,4 +177,27 @@ want to use in the modeline *in lieu of* the original.")
     (when (>= emacs-major-version 26)
       (lsp-ui-doc-mode 1))))
 
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; learn elisp test
+(defun my-insert-p-tag ()
+  "Insert <p></p> at cursor point."
+  (interactive)
+  (insert "<p></p>")
+  (backward-char 4)
+  )
+
+(defun my-wrap-mark-region (start end)
+  "Insert a markup <b></b> around a region."
+  (interactive "r")
+  (save-excursion
+    (goto-char end) (insert "</b>")
+    (goto-char start) (insert "<b>"))
+  )
+
+(defun my-insert-date ()
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
+
+
+
 (provide 'init-minefunc)

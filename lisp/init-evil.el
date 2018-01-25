@@ -130,6 +130,7 @@
                     "sa" 'swiper-all
                     "qq" 'quit-window
                     "hv" 'describe-variable
+                    "ge" 'goto-line
                     "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
                     "gr" 'counsel-gtags-find-symbol
                     "fr" 'counsel-gtags-find-reference
