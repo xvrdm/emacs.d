@@ -76,9 +76,21 @@
    (t
     (execute-extended-command))))
 
+(defun my-append-string-marker (str)
+  "Append a string to end of current line, then move cursion to origion position."
+  (let* ((cursion-position (point-marker)))
+    (end-of-line)
+    (insert str)
+    (goto-char (marker-position cursion-position)))
+  )
+(defun my-append-semicolon-marker ()
+  "Append a ';' to end of current line, then move cursion to origion position."
+  (interactive)
+  (my-append-string-marker ";")
+  )
+
 (defun my-append-string-excursion (str)
   "Append a string to end of a line, then move cursion to origion position"
-  (interactive)
   (save-excursion
     (end-of-line)
     (insert str)
@@ -92,7 +104,6 @@
 
 (defun my-append-string (str)
   "Append a string to end of a line"
-  (interactive)
   (end-of-line)
   ;;(insert-char str)
   (insert str)
@@ -287,7 +298,7 @@ want to use in the modeline *in lieu of* the original.")
   )
 (my-test-or)
 (my-test-or "elisp")
-(my-test-or 'eslip)
+(my-test-or 'elisp)
 
 ;; test and, 'and' often to use check arguments
 (defun my-test-and (arg)
@@ -299,5 +310,13 @@ want to use in the modeline *in lieu of* the original.")
 
 ;; test functions of buffers
 (current-buffer)
+
+;; test make-marker
+(setq foo (make-marker))
+(set-marker foo (point))
+(point-marker)
+(copy-marker 20)
+(copy-marker foo)
+(goto-char (marker-position foo))
 
 (provide 'init-minefunc)

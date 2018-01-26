@@ -1,18 +1,18 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-;;  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-;;                           ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
- (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+ (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
+;;  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+  ;;                       ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
 ;; (setq package-archives
    ;;   '(;; uncomment below line if you need use GNU ELPA
         ;; ("gnu" . "https://elpa.gnu.org/packages/")
    ;;     ("localelpa" . "~/.emacs.d/localelpa/")
         ;; ("my-js2-mode" . "https://raw.githubusercontent.com/redguardtoo/js2-mode/release/") ; github has some issue
         ;; {{ backup repositories
-        ;; ("melpa" . "http://mirrors.163.com/elpa/melpa/")
-        ;; ("melpa-stable" . "http://mirrors.163.com/elpa/melpa-stable/")
+  ;;      '(("melpa" . "http://mirrors.163.com/elpa/melpa/")
+   ;;     ("melpa-stable" . "http://mirrors.163.com/elpa/melpa-stable/"))))
         ;; }}
    ;;     ("melpa" . "https://melpa.org/packages/")
    ;;     ("melpa-stable" . "https://stable.melpa.org/packages/")
@@ -138,7 +138,7 @@
                          beacon
                          ;; A fork of powerline.el (based on an old uncredited version of
                          ;; powerline.el - origin is unclear.) - this fork has multiple separator graphics. 
-                         main-line
+                         ;; main-line
                          ;;
                          powerline
                          ;; themes for powerline
@@ -919,7 +919,7 @@
 
   (use-package cquery
     :load-path
-    "/home/liang.feng/downloads/emacs-cquery/"
+    "~/downloads/emacs-cquery/"
     :config
     (setq cquery-enable-sem-highlight nil)
     ;; put your config here
