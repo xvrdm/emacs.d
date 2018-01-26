@@ -84,8 +84,8 @@
     (insert str)
     )
   )
-(defun my-appnd-semicolon-excursion ()
-  "Append a ';' to end of current line."
+(defun my-append-semicolon-excursion ()
+  "Append a ';' to end of current line, then move cursion to origion position"
   (interactive)
   (my-append-string-excursion ";")
   )
