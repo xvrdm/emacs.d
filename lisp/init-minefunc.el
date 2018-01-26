@@ -198,6 +198,8 @@ want to use in the modeline *in lieu of* the original.")
   (interactive)
   (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
 
-
+(setq my-test "test")
+(defvar my-test "slslsl"
+  "This is test for defvar.")
 
 (provide 'init-minefunc)

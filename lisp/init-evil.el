@@ -129,6 +129,8 @@
                     "ss" 'swiper
                     "sa" 'swiper-all
                     "qq" 'quit-window
+                    "pa" 'evil-paste-after
+                    "pb" 'evil-paste-before
                     "hv" 'describe-variable
                     "ge" 'goto-line
                     "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
