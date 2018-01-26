@@ -108,7 +108,7 @@
                     "hp" 'highlight-symbol-prev
                     "hr" 'highlight-symbol-query-replace
                     ;;
-                    "ia" 'my-append-semicolon
+                    "ia" 'my-append-semicolon-excursion
                     "do" 'delete-other-windows
                     "ff" 'find-file
                     "fd" 'my-display-full-path-of-current-buffer

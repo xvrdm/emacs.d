@@ -76,22 +76,36 @@
    (t
     (execute-extended-command))))
 
+(defun my-append-string-excursion (str)
+  "Append a string to end of a line, then move cursion to origion position"
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (insert str)
+    )
+  )
+(defun my-appnd-semicolon-excursion ()
+  "Append a ';' to end of current line."
+  (interactive)
+  (my-append-string-excursion ";")
+  )
+
 (defun my-append-string (str)
-  "append a string to end of a line"
+  "Append a string to end of a line"
   (interactive)
   (end-of-line)
   ;;(insert-char str)
   (insert str)
   )
 (defun my-append-semicolon ()
-  "append a ';' to end of current line"
+  "Append a ';' to end of current line."
   (interactive)
   ;; (my-append-string 59)
   (my-append-string ";")
   )
 
 (defun my-display-full-path-of-current-buffer ()
-  "display the full path of current file"
+  "Display the full path of current file"
   (interactive)
   (message (buffer-file-name))
   )
@@ -178,6 +192,7 @@ want to use in the modeline *in lieu of* the original.")
       (lsp-ui-doc-mode 1))))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; http://www.woola.net/detail/2016-08-22-elisp-basic.html
 ;; learn elisp test
 (defun my-insert-p-tag ()
   "Insert <p></p> at cursor point."
@@ -198,8 +213,91 @@ want to use in the modeline *in lieu of* the original.")
   (interactive)
   (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
 
+;; test defvar
 (setq my-test "test")
 (defvar my-test "slslsl"
   "This is test for defvar.")
+
+;; test let
+(defun my-circle-area (radix)
+  ;; "My calculate circle area."
+  ;; (interactive "r")
+  (let ((pi 3.1415926) area)
+    (setq area (* pi radix radix))
+    (message "radix=%.2f area=%.2f" radix area))
+  )
+(my-circle-area 3)
+
+;; test let*
+(defun my-circle-area2 (radix)
+  (let* ((pi 3.1415926) (area (* pi radix radix)))
+    (message "radix=%.2f area=%.2f" radix area))
+  )
+(my-circle-area2 3)
+
+;; (defun my-circle-area3 (radix)
+;;   (let* (setq pi 3.1415926)
+;;     (setq area (* pi radix radix))
+;;     (message "radix=%.2f area=%.2f" radix area)))
+;; (my-circle-area3 3)
+
+;; test lambda
+(setq test-lambda (lambda (name)
+                    (message "Hello %s" name))
+      )
+(funcall test-lambda "elisp")
+
+;; test if
+(defun my-max (a b)
+  (if (> a b) a b)
+  )
+(my-max 3 4)
+
+;; test cond
+(defun my-case (arg)
+  (cond ((= arg 3) 3)
+        ((= arg 4) 4)
+        (t 5))
+  )
+(my-case 4) ;; -->4
+(my-case 3) ;; -->3
+(my-case 111) ;; -->5
+
+;; test when
+(defun my-test-when (arg)
+  (when (> arg 3)
+    (message "%d" arg))
+  )
+(my-test-when 4) ;; -->4
+(my-test-when 3) ;; -->nil
+
+;; test unless, 'unless' and 'when' is opposite
+(defun my-test-unless (arg)
+  (unless (= arg 3)
+    (message "%d" arg))
+  )
+(my-test-unless 3) ;; -->nil
+(my-test-unless 4) ;; -->4
+
+;; test or, 'or' often to use set default arguments of functions
+;; 'or' is similar with 'unless'
+(defun my-test-or (&optional name)
+  (or name (setq name "Emacser"))
+  (message "Hello, %s" name)
+  )
+(my-test-or)
+(my-test-or "elisp")
+(my-test-or 'eslip)
+
+;; test and, 'and' often to use check arguments
+(defun my-test-and (arg)
+  (and (>= arg 0)
+       (= (/ arg (sqrt arg)) (sqrt arg)))
+  )
+(my-test-and -1) ;; -->nil
+(my-test-and 25) ;; -->t
+
+;; test functions of buffers
+(current-buffer)
 
 (provide 'init-minefunc)
