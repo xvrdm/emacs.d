@@ -952,6 +952,7 @@
   :delight abbrev-mode
   :delight eldoc-mode
   :delight lsp-mode
+  :delight lsp
   )
 
 (provide 'init-packages)
