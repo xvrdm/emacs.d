@@ -344,23 +344,23 @@
   )
 
 ;; emacs-ycmd
-;; (use-package ycmd
-;;   :delight ycmd-mode
-;;   :config
-;;   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
-;;   (add-hook 'c++-mode-hook 'ycmd-mode)
-;;   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;;   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-;;   )
+(use-package ycmd
+  :delight ycmd-mode
+  :config
+  ;; (add-hook 'after-init-hook 'global-ycmd-mode)
+  (add-hook 'c++-mode-hook 'ycmd-mode)
+  (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+  ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+  )
 
-;; (use-package company-ycmd
-;;   :delight company-ycmd
-;;   :config
-;;   (company-ycmd-setup)
-;;   ;; Set always complete immediately
-;;   (setq company-idle-delay 0.1)
-;;   ;;(add-to-list 'company-backends 'company-ycmd)
-;;   )
+(use-package company-ycmd
+  :delight company-ycmd
+  :config
+  (company-ycmd-setup)
+  ;; Set always complete immediately
+  (setq company-idle-delay 0.1)
+  ;;(add-to-list 'company-backends 'company-ycmd)
+  )
 
 
 ;; (require 'ycmd-test)
@@ -917,18 +917,18 @@
     (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
     )
 
-  (use-package cquery
-    :load-path
-    "~/downloads/emacs-cquery/"
-    :config
-    (setq cquery-enable-sem-highlight nil)
-    ;; put your config here
-    ;; (setq cquery-resource-dir (expand-file-name "/home/liang.feng/downloads/cquery/build/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-14.04/lib/clang/5.0.1"))
-    (setq cquery-executable "/usr/local/bin/cquery")
-    ;; (add-hook 'c++-mode-hook 'my//enable-cquery-if-compile-commands-json)
-    (add-hook 'c++-mode-hook 'lsp-cquery-enable)
-    (add-hook 'c-mode-hook 'lsp-cquery-enable)
-    )
+  ;; (use-package cquery
+  ;;   :load-path
+  ;;   "~/downloads/emacs-cquery/"
+  ;;   :config
+  ;;   (setq cquery-enable-sem-highlight nil)
+  ;;   ;; put your config here
+  ;;   ;; (setq cquery-resource-dir (expand-file-name "/home/liang.feng/downloads/cquery/build/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-14.04/lib/clang/5.0.1"))
+  ;;   (setq cquery-executable "/usr/local/bin/cquery")
+  ;;   ;; (add-hook 'c++-mode-hook 'my//enable-cquery-if-compile-commands-json)
+  ;;   (add-hook 'c++-mode-hook 'lsp-cquery-enable)
+  ;;   (add-hook 'c-mode-hook 'lsp-cquery-enable)
+  ;;   )
 
   (use-package company-lsp
     :config
