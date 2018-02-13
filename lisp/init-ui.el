@@ -1,6 +1,6 @@
 ;; set a default font
 (when (member "DejaVu Sans Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "DejaVu Sans Mono-9"))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-9" :slant 'Oblique))
 ;; (when (member "DejaVu Sans Mono" (font-family-list))
 ;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
 ;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
