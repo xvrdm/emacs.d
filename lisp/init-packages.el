@@ -394,9 +394,10 @@
 (use-package gtags
   :delight gtags-mode
   :init
-  (if (not (equal 'windows-nt system-type))
-      (load "/usr/local/share/gtags/gtags.el")
-    (load "gtags.el"))
+  ;; (if (not (equal 'windows-nt system-type))
+  ;;     (load "/usr/local/share/gtags/gtags.el")
+  ;;   (load "gtags.el"))
+  (load "/usr/local/share/gtags/gtags.el")
   :config
   (autoload 'gtags-mode "gtags" "" t)
   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
