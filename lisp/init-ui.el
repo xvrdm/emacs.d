@@ -1,3 +1,6 @@
+;; set a default font
+(when (member "DejaVu Sans Mono" (font-family-list))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-9"))
 
 ;; 高亮当前行
 ;; (global-hl-line-mode 1)
