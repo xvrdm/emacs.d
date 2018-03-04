@@ -1,6 +1,7 @@
 ;; set a default font
 (when (member "DejaVu Sans Mono" (font-family-list))
-  (set-face-attribute 'default nil :font "DejaVu Sans Mono-9" :slant 'Oblique))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-12" :slant 'Oblique))
+  ;; (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
 ;; (when (member "DejaVu Sans Mono" (font-family-list))
 ;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
 ;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
@@ -29,7 +30,7 @@
 
 ;; 更改字体大小
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
-(set-face-attribute 'default nil :height 120)
+;; (set-face-attribute 'default nil :height 120)
 
 ;;设置窗口位置为屏库左上角(0,0)
 (set-frame-position (selected-frame) 200 50)
