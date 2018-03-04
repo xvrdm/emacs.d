@@ -4,6 +4,8 @@
 ;; (when (member "DejaVu Sans Mono" (font-family-list))
 ;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
 ;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+;; (set-default-font "courier-12")
+;; (print (font-family-list))
 
 ;; 高亮当前行
 ;; (global-hl-line-mode 1)
