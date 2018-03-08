@@ -351,6 +351,7 @@
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+  (setq ycmd-extra-conf-handler 'load)
   )
 
 (use-package company-ycmd
