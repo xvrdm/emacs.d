@@ -175,7 +175,8 @@
                     "yy" 'youdao-dictionary-search-at-point
                     "yd" 'youdao-dictionary-search-from-input
                     ;; "er" 'er/expand-region
-                    "rf" 'recentf-open-files
+                    ;; "rf" 'recentf-open-files
+                    "rf" 'my-recent-file
                     "ps" 'projectile-speedbar-toggle
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp

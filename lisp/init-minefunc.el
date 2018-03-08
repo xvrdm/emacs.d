@@ -202,4 +202,11 @@ want to use in the modeline *in lieu of* the original.")
     (when (>= emacs-major-version 26)
       (lsp-ui-doc-mode 1))))
 
+(defun my-recent-file()
+  "open recent file, then set state normal"
+  (interactive)
+  (recentf-open-files)
+  (evil-normal-state)
+  )
+
 (provide 'init-minefunc)
