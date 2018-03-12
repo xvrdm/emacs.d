@@ -129,6 +129,7 @@
                     "hk" 'describe-key
                     "ss" 'swiper
                     "sa" 'swiper-all
+                    "fs" 'occur-dwim
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
                     "pb" 'evil-paste-before
