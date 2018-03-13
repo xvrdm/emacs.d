@@ -12,9 +12,11 @@
 ;; 而且解决了中文字体导致emacs卡的现象。
 ;; (when (equal system-type 'windows-nt)
   ;; (progn
+  (if window-system
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font) charset
                         (font-spec :family "微软雅黑" :size 16)))
+    )
     ;; )
   ;; )
 
