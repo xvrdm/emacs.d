@@ -210,6 +210,7 @@ want to use in the modeline *in lieu of* the original.")
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; http://blog.binchen.org/index-21.html, Use ivy to open recent directories
 (require 'ivy) ; swiper 7.0+ should be installed
 (defun counsel-goto-recent-directory ()
   "Open recent directory with dired"
