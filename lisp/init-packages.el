@@ -111,9 +111,9 @@
                          ;;
                          youdao-dictionary
                          ;;
-                         ycmd
+                         ;; ycmd
                          ;;
-                         company-ycmd
+                         ;; company-ycmd
                          ;;
                          counsel-gtags
                          ;;
@@ -208,11 +208,11 @@
                          ;;
                          ;; tabbar
                          ;;
-                         lsp-mode
+                         ;;lsp-mode
                          ;;
                          ;; cquery
                          ;;
-                         company-lsp
+                         ;;company-lsp
                          ;;
                          ivy-xref
                          ) "Default packages")
@@ -317,6 +317,9 @@
 
 ;; 开启全局company
 (use-package company
+  :init
+  ;; 显示候选项的数字号。根据数字号选择候选项
+  (setq company-show-numbers t)
   :delight global-company-mode
   :delight company-mode
   :config
@@ -344,24 +347,24 @@
   )
 
 ;; emacs-ycmd
-(use-package ycmd
-  :delight ycmd-mode
-  :config
-  ;; (add-hook 'after-init-hook 'global-ycmd-mode)
-  (add-hook 'c++-mode-hook 'ycmd-mode)
-  (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-  ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-  (setq ycmd-extra-conf-handler 'load)
-  )
+;; (use-package ycmd
+;;   :delight ycmd-mode
+;;   :config
+;;   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
+;;   (add-hook 'c++-mode-hook 'ycmd-mode)
+;;   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
+;;   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+;;   (setq ycmd-extra-conf-handler 'load)
+;;   )
 
-(use-package company-ycmd
-  :delight company-ycmd
-  :config
-  (company-ycmd-setup)
-  ;; Set always complete immediately
-  (setq company-idle-delay 0.1)
-  ;;(add-to-list 'company-backends 'company-ycmd)
-  )
+;; (use-package company-ycmd
+;;   :delight company-ycmd
+;;   :config
+;;   (company-ycmd-setup)
+;;   ;; Set always complete immediately
+;;   (setq company-idle-delay 0.1)
+;;   ;;(add-to-list 'company-backends 'company-ycmd)
+;;   )
 
 
 ;; (require 'ycmd-test)
@@ -401,6 +404,7 @@
   ;; (load "/usr/local/share/gtags/gtags.el")
   :config
   (autoload 'gtags-mode "gtags" "" t)
+  (add-hook 'after-init-hook 'global-company-mode)
   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
   (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
   )
@@ -725,6 +729,7 @@
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                 (ggtags-mode 1))))
+  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
 
 ;; symon
@@ -911,13 +916,13 @@
 ;;   :config
 ;;   )
 
-(when (not (equal 'windows-nt system-type))
-  (use-package lsp-mode
-    :config
-    (setq lsp-highlight-symbol-at-point nil)
-    (require 'lsp-imenu)
-    (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-    )
+;; (when (not (equal 'windows-nt system-type))
+;;   (use-package lsp-mode
+;;     :config
+;;     (setq lsp-highlight-symbol-at-point nil)
+;;     (require 'lsp-imenu)
+;;     (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+;;     )
 
   ;; (use-package cquery
   ;;   :load-path
@@ -932,11 +937,11 @@
   ;;   (add-hook 'c-mode-hook 'lsp-cquery-enable)
   ;;   )
 
-  (use-package company-lsp
-    :config
-    (push 'company-lsp company-backends)
-    )
-  )
+  ;; (use-package company-lsp
+  ;;   :config
+  ;;   (push 'company-lsp company-backends)
+  ;;   )
+  ;; )
 
 (use-package ivy-xref
   :config
