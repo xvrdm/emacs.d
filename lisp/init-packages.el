@@ -405,8 +405,15 @@
   :config
   (autoload 'gtags-mode "gtags" "" t)
   (add-hook 'after-init-hook 'global-company-mode)
+  (add-hook 'gtags-select-mode-hook
+            '(lambda ()
+               (setq hl-line-face 'underline)
+               (hl-line-mode 1)
+               )
+            )
   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-  (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+  ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+  (setq gtags-auto-update t)
   )
 
 ;; emacs-counsel-gtags
