@@ -129,7 +129,7 @@
                          ;;
                          projectile-speedbar
                          ;;
-                         linum-relative
+                         ;; linum-relative
                          ;;
                          rainbow-delimiters
                          ;;
@@ -220,9 +220,9 @@
 (setq package-selected-packages liang/packages)
 
 (defun liang/packages-installed-p()
-  (loop for pkg in liang/packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
+  (cl-loop for pkg in liang/packages
+        when (not (package-installed-p pkg)) do (cl-return nil)
+        finally (cl-return t)))
 
 (unless (liang/packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -496,11 +496,11 @@
   :delight)
 
 ;; linum-relative
-(use-package linum-relative
-  :delight linum-relative-mode
-  :config
-  ;; (linum-relative-toggle)
-  )
+;; (use-package linum-relative
+;;   :delight linum-relative-mode
+;;   :config
+;;   ;; (linum-relative-toggle)
+;;   )
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters

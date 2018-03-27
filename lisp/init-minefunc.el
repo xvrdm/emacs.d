@@ -134,7 +134,7 @@ want to use in the modeline *in lieu of* the original.")
 
 (defun clean-mode-line ()
   (interactive)
-  (loop for cleaner in mode-line-cleaner-alist
+  (cl-loop for cleaner in mode-line-cleaner-alist
         do (let* ((mode (car cleaner))
                   (mode-str (cdr cleaner))
                   (old-mode-str (cdr (assq mode minor-mode-alist))))
@@ -213,16 +213,16 @@ want to use in the modeline *in lieu of* the original.")
 ;; http://blog.binchen.org/index-21.html, Use ivy to open recent directories
 (require 'ivy) ; swiper 7.0+ should be installed
 (defun counsel-goto-recent-directory ()
-  "Open recent directory with dired"
-  (interactive)
-  (unless recentf-mode (recentf-mode 1))
-  (let ((collection
-         (delete-dups
-          (append (mapcar 'file-name-directory recentf-list)
-                  ;; fasd history
-                  (if (executable-find "fasd")
-                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-    (ivy-read "directories:" collection :action 'dired)))
+"Open recent directory with dired"
+(interactive)
+(unless recentf-mode (recentf-mode 1))
+(let ((collection
+      (delete-dups
+       (append (mapcar 'file-name-directory recentf-list)
+               ;; fasd history
+               (if (executable-find "fasd")
+                   (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+ (ivy-read "directories:" collection :action 'dired)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-minefunc)
