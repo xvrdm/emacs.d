@@ -216,6 +216,8 @@
                          ;;company-lsp
                          ;;
                          ivy-xref
+                         ;;
+                         ;; git-gutter
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -325,6 +327,12 @@
   :delight company-mode
   :config
   (global-company-mode 1)
+  ;; make previous/next selection in the popup cycles
+  (setq company-selection-wrap-around t) 
+  ;; Some languages use camel case naming convention,
+  ;; so company should be case sensitive.
+  (setq company-dabbrev-ignore-case nil)
+  (setq company-idle-delay 0.2)
   )
 
 ;; org-pomodoro setting
@@ -405,7 +413,7 @@
   ;; (load "/usr/local/share/gtags/gtags.el")
   :config
   (autoload 'gtags-mode "gtags" "" t)
-  (add-hook 'after-init-hook 'global-company-mode)
+  ;; (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'gtags-select-mode-hook
             '(lambda ()
                (setq hl-line-face 'underline)
@@ -955,6 +963,14 @@
   :config
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
+
+;; (use-package git-gutter
+;;   :config
+;;   ;; If you enable global minor mode
+;;   (global-git-gutter-mode t)
+;;   ;; If you would like to use git-gutter.el and linum-mode
+;;   ;; (git-gutter:linum-setup)
+;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
