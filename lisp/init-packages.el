@@ -40,7 +40,7 @@
                          ;;
                          counsel
                          ;; http://blog.binchen.org/#
-                         counsel-etags
+                         ;; counsel-etags
                          ;;
                          smartparens
                          ;;
@@ -48,7 +48,7 @@
                          ;;
                          ;; nodejs-repl
                          ;;
-                         add-node-modules-path
+                         ;; add-node-modules-path
                          ;; Diminished modes are minor modes with no modeline display 
                          diminish
                          ;;
@@ -64,7 +64,7 @@
                          ;;
                          org-pomodoro
                          ;;
-                         helm-ag
+                         ;; helm-ag
                          ;;
                          ;; auto-yasnippet
                          ;;
@@ -74,7 +74,7 @@
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
                          evil
                          ;;
-                         evil-collection
+                         ;; evil-collection
                          ;;
                          ;; replace by general
                          ;; evil-leader
@@ -123,7 +123,7 @@
                          ;;
                          doom-themes
                          ;;
-                         function-args
+                         ;; function-args
                          ;;
                          neotree
                          ;;
@@ -158,11 +158,12 @@
                          ;;
                          multifiles
                          ;;
-                         fix-word
+                         ;; fix-word
                          ;;
                          browse-kill-ring
                          ;;
-                         indent-guide
+                         ;; too slow.......
+                         ;; indent-guide
                          ;;
                          ;; irony
                          ;;
@@ -426,31 +427,31 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
-(use-package counsel-etags
-  :delight
-  :config
-  (eval-after-load 'counsel-etags
-    '(progn
-       ;; counsel-etags-ignore-directories does NOT support wildcast
-       (add-to-list 'counsel-etags-ignore-directories "build_clang")
-       (add-to-list 'counsel-etags-ignore-directories "build_clang")
-       ;; counsel-etags-ignore-filenames supports wildcast
-       (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "*.html")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "*.map")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "*.json")
-       )) 
-  ;; auto update tags--->https://github.com/redguardtoo/counsel-etags
-  ;; Don't ask before rereading the TAGS files if they have changed
-  (setq tags-revert-without-query t)
-  ;; Don't warn when TAGS files are large
-  (setq large-file-warning-threshold nil)
-  ;; Setup auto update now
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook
-                        'counsel-etags-virtual-update-tags 'append 'local)))
-  )
+;; (use-package counsel-etags
+;;   :delight
+;;   :config
+;;   (eval-after-load 'counsel-etags
+;;     '(progn
+;;        ;; counsel-etags-ignore-directories does NOT support wildcast
+;;        (add-to-list 'counsel-etags-ignore-directories "build_clang")
+;;        (add-to-list 'counsel-etags-ignore-directories "build_clang")
+;;        ;; counsel-etags-ignore-filenames supports wildcast
+;;        (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.html")
+;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.map")
+;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.json")
+;;        )) 
+;;   ;; auto update tags--->https://github.com/redguardtoo/counsel-etags
+;;   ;; Don't ask before rereading the TAGS files if they have changed
+;;   (setq tags-revert-without-query t)
+;;   ;; Don't warn when TAGS files are large
+;;   (setq large-file-warning-threshold nil)
+;;   ;; Setup auto update now
+;;   (add-hook 'prog-mode-hook
+;;             (lambda ()
+;;               (add-hook 'after-save-hook
+;;                         'counsel-etags-virtual-update-tags 'append 'local)))
+;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; note `file-truename' must be used!
@@ -485,11 +486,11 @@
 ;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
 
 ;; function-args
-(use-package function-args
-  :delight function-args-mode
-  :config
-  (fa-config-default)
-  )
+;; (use-package function-args
+;;   :delight function-args-mode
+;;   :config
+;;   (fa-config-default)
+;;   )
 
 ;; neotree
 (use-package neotree
@@ -526,18 +527,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; evil
 ;; https://github.com/jojojames/evil-collection
-(use-package evil
-  :delight evil-mode
-  :init
-  (setq evil-want-integration nil)
-  :config
-  )
+;; (use-package evil
+;;   :delight evil-mode
+;;   :init
+;;   (setq evil-want-integration nil)
+;;   :config
+;;   )
 
-(use-package evil-collection
-  :delight
-  :config
-  (evil-collection-init)
-  )
+;; (use-package evil-collection
+;;   :delight
+;;   :config
+;;   (evil-collection-init)
+;;   )
 
 ;; end https://github.com/jojojames/evil-collection
 ;; (require 'evil-leader)
@@ -682,8 +683,8 @@
   )
 
 ;; fix-word
-(use-package fix-word
-  :delight)
+;; (use-package fix-word
+;;   :delight)
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
@@ -691,11 +692,11 @@
   )
 
 ;; indent-guide
-(use-package indent-guide
-  :delight indent-guide-mode
-  :config
-  (indent-guide-global-mode)
-  )
+;; (use-package indent-guide
+;;   :delight indent-guide-mode
+;;   :config
+;;   (indent-guide-global-mode)
+;;   )
 
 ;; irony
 ;; (when (equal system-type 'windows-nt)
