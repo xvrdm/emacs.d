@@ -123,7 +123,7 @@
                          ;;
                          doom-themes
                          ;;
-                         ;; function-args
+                         function-args
                          ;;
                          neotree
                          ;;
@@ -486,11 +486,11 @@
 ;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
 
 ;; function-args
-;; (use-package function-args
-;;   :delight function-args-mode
-;;   :config
-;;   (fa-config-default)
-;;   )
+(use-package function-args
+  :delight function-args-mode
+  :config
+  (fa-config-default)
+  )
 
 ;; neotree
 (use-package neotree
