@@ -22,6 +22,7 @@
 (require 'init-better-default)
 (require 'init-keybindings)
 (require 'init-evil)
+(require 'init-company)
 ;; (require 'init-modeline)
                           
 ;; cl - Common List Extension

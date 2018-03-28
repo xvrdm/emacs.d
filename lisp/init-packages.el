@@ -27,6 +27,8 @@
 (defvar liang/packages '(
                          use-package
                          company
+                         company-statistics
+                         company-c-headers
                          ;; themes
                          monokai-theme
                          zenburn-theme
@@ -122,8 +124,8 @@
                          smart-mode-line-powerline-theme
                          ;;
                          doom-themes
-                         ;;
-                         function-args
+                         ;; complete too slow....
+                         ;; function-args
                          ;;
                          neotree
                          ;;
@@ -321,12 +323,13 @@
 ;; 开启全局company
 (use-package company
   :init
-  ;; 显示候选项的数字号。根据数字号选择候选项
-  (setq company-show-numbers t)
   :delight global-company-mode
   :delight company-mode
   :config
   (global-company-mode 1)
+  ;; (add-hook 'after-init-hook 'global-company-mode)
+  ;; 显示候选项的数字号。根据数字号选择候选项
+  (setq company-show-numbers t)
   ;; make previous/next selection in the popup cycles
   (setq company-selection-wrap-around t) 
   ;; Some languages use camel case naming convention,
@@ -413,7 +416,6 @@
   ;; (load "/usr/local/share/gtags/gtags.el")
   :config
   (autoload 'gtags-mode "gtags" "" t)
-  ;; (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'gtags-select-mode-hook
             '(lambda ()
                (setq hl-line-face 'underline)
@@ -494,11 +496,11 @@
 ;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
 
 ;; function-args
-(use-package function-args
-  :delight function-args-mode
-  :config
-  (fa-config-default)
-  )
+;; (use-package function-args
+;;   :delight function-args-mode
+;;   :config
+;;   (fa-config-default)
+;;   )
 
 ;; neotree
 (use-package neotree
@@ -970,6 +972,16 @@
 ;;   (global-git-gutter-mode t)
 ;;   ;; If you would like to use git-gutter.el and linum-mode
 ;;   ;; (git-gutter:linum-setup)
+;;   )
+
+;; (use-package company-statistics
+;;   :config
+;;   (add-hook 'after-init-hook 'company-statistics-mode)
+;;   )
+
+;; (use-package company-c-headers
+;;   :config
+;;   (add-to-list 'company-backends 'company-c-headers)
 ;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
