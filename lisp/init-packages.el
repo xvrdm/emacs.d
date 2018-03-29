@@ -220,6 +220,12 @@
                          ivy-xref
                          ;;
                          ;; git-gutter
+                         ;;
+                         ace-popup-menu
+                         ;;
+                         ;; dired-hacks-utils
+                         ;;
+                         dired-single
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -983,6 +989,27 @@
 ;;   :config
 ;;   (add-to-list 'company-backends 'company-c-headers)
 ;;   )
+
+(use-package ace-popup-menu
+  :config
+  (ace-popup-menu-mode 1)
+  )
+
+;; (use-package dired+
+;;   :init
+;;   (load "dired+.el")
+;;   :config
+;;   )
+
+(use-package dired-single
+  :config
+  ;; if dired's already loaded, then the keymap will be bound
+  (if (boundp 'dired-mode-map)
+      ;; we're good to go; just add our bindings
+      (my-dired-init)
+    ;; it's not loaded yet, so add our bindings to the load-hook
+    (add-hook 'dired-load-hook 'my-dired-init))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
