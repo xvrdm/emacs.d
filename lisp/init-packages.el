@@ -131,6 +131,8 @@
                          ;;
                          projectile-speedbar
                          ;;
+                         sr-speedbar
+                         ;;
                          ;; linum-relative
                          ;;
                          rainbow-delimiters
@@ -160,7 +162,7 @@
                          ;;
                          multifiles
                          ;;
-                         ;; fix-word
+                         fix-word
                          ;;
                          browse-kill-ring
                          ;;
@@ -226,6 +228,10 @@
                          ;; dired-hacks-utils
                          ;;
                          dired-single
+                         ;;
+                         dired-k
+                         ;;
+                         ;; company-quickhelp
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -699,8 +705,8 @@
   )
 
 ;; fix-word
-;; (use-package fix-word
-;;   :delight)
+(use-package fix-word
+  :delight)
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
@@ -1010,6 +1016,25 @@
     ;; it's not loaded yet, so add our bindings to the load-hook
     (add-hook 'dired-load-hook 'my-dired-init))
   )
+
+(use-package dired-k
+  :config
+  ;; always execute dired-k when dired buffer is opened
+  (add-hook 'dired-initial-position-hook 'dired-k)
+
+  (add-hook 'dired-after-readin-hook #'dired-k-no-revert)
+  (setq dired-k-style 'git)
+  (setq dired-k-padding 1)
+  )
+
+(use-package sr-speedbar
+  :config
+  )
+
+;; (use-package company-quickhelp
+;;   :config
+;;   (company-quickhelp-mode)
+;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
