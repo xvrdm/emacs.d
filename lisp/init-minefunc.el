@@ -236,5 +236,12 @@ want to use in the modeline *in lieu of* the original.")
       (function
        (lambda nil (interactive) (dired-single-buffer "..")))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; https://blog.csdn.net/loushuai/article/details/51648924
+;; (defun list-funcs (arg)
+;;   "List functions in buffer."
+;;   (interactive "p")
+;;   (message "functions")
+;;   ;;;  (list-matching-lines "^\\bstatic\\b*\\binline\\b*[ ]*[A-Za-z_<>]+[ ]+[A-Za-z0-9_:]+[\(]"))
+;;     (list-matching-lines "^[A-Za-z0-9_]+[ ]+[A-Za-z0-9_<>: ]*[\(]"))
 
 (provide 'init-minefunc)

@@ -205,6 +205,7 @@
                     "dt" 'sdcv-search-input+ ; in tip
                     "dd" 'my-lookup-dict-org
                     "lm" 'lookup-doc-in-man
+                    ;; "lf" 'list-funcs
                     "gs" 'w3m-google-search
                     "gf" 'w3m-google-by-filetype
                     "gd" 'w3m-search-financial-dictionary
