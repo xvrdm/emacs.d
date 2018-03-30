@@ -30,11 +30,11 @@
                          company-statistics
                          company-c-headers
                          ;; themes
-                         monokai-theme
-                         zenburn-theme
+                         ;; monokai-theme
+                         ;; zenburn-theme
                          ample-theme
-                         ample-zen-theme
-                         atom-one-dark-theme
+                         ;; ample-zen-theme
+                         ;; atom-one-dark-theme
                          ;; --- Better Editor ---
                          hungry-delete
                          ;;
@@ -119,11 +119,11 @@
                          ;;
                          counsel-gtags
                          ;;
-                         smart-mode-line
+                         ;; smart-mode-line
                          ;;
-                         smart-mode-line-powerline-theme
+                         ;; smart-mode-line-powerline-theme
                          ;;
-                         doom-themes
+                         ;; doom-themes
                          ;; complete too slow....
                          ;; function-args
                          ;;
@@ -144,11 +144,11 @@
                          ;; powerline.el - origin is unclear.) - this fork has multiple separator graphics. 
                          ;; main-line
                          ;;
-                         powerline
+                         ;; powerline
                          ;; themes for powerline
-                         powerline-evil
+                         ;; powerline-evil
                          ;; themes for powerline
-                         airline-themes
+                         ;; airline-themes
                          ;; themes for powerline
                          spaceline
                          ;; A new implementation of Powerline for Emacs 
@@ -232,6 +232,12 @@
                          dired-k
                          ;;
                          ;; company-quickhelp
+                         ;;
+                         ;; nimbus-theme
+                         ;;
+                         ;; monokai-theme
+                         ;; base16-theme
+                         ;;
                          ) "Default packages")
 
 (setq package-selected-packages liang/packages)
@@ -264,13 +270,13 @@
 ;;     ("zenburn-bg+3"  . "#4F4F4F")))
 ;; (load-theme 'zenburn t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(load-theme 'wombat t)
+;; (load-theme 'wombat t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; then in your init you can load all of the themes
 ;; without enabling theme (or just load one)
 (load-theme 'ample t t)
-(load-theme 'ample-flat t t)
-(load-theme 'ample-light t t)
+;; (load-theme 'ample-light t t)
+;; (load-theme 'ample-flat t t)
 ;; choose one to enable
 (enable-theme 'ample)
 ;; (enable-theme 'ample-flat)
@@ -498,6 +504,7 @@
 ;; (load-theme 'doom-nova t)
 ;; (load-theme 'doom-vibrant t)
 ;; (load-theme 'doom-one t)
+;; (load-theme 'doom-molokai t)
 ;; Enable flashing mode-line on errors
 ;; (doom-themes-visual-bell-config)
 ;; Enable custom neotree theme
@@ -1034,6 +1041,16 @@
 ;; (use-package company-quickhelp
 ;;   :config
 ;;   (company-quickhelp-mode)
+;;   )
+
+;; (use-package nimbus-theme)
+
+;; (use-package monokai-theme)
+
+;; (use-package base16-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'base16-default-dark t)
 ;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
