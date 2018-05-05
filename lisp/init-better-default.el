@@ -103,6 +103,7 @@
 (setq c-basic-offset 4) ; c c++ 缩进4个空格
 ;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
+;; (add-hook 'python-mode-hook #'(lambda () (setq python-indent-offset 4)))
 
 ;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
 (progn

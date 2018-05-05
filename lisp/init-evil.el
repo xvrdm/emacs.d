@@ -109,6 +109,7 @@
                     "hr" 'highlight-symbol-query-replace
                     ;;
                     "ia" 'my-append-semicolon-excursion
+                    "ic" 'my-insert-python
                     ;; "ia" 'my-append-semicolon-marker
                     "do" 'delete-other-windows
                     "ff" 'find-file

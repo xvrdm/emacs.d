@@ -244,4 +244,24 @@ want to use in the modeline *in lieu of* the original.")
 ;;   ;;;  (list-matching-lines "^\\bstatic\\b*\\binline\\b*[ ]*[A-Za-z_<>]+[ ]+[A-Za-z0-9_:]+[\(]"))
 ;;     (list-matching-lines "^[A-Za-z0-9_]+[ ]+[A-Za-z0-9_<>: ]*[\(]"))
 
+;; #!/usr/bin/env python3
+;; #-*- coding: utf-8 -*-
+ 
+;; # File Name: file_test1.py
+;; # Author: Feng
+;; # Created Time: Fri 24 Mar 2017 02:27:39 PM CST
+;; # Content: 使用pickle模块将数据对象保存到文件
+(defun my-insert-python()
+  "Insert file describe for python file"
+  (interactive)
+  (insert "#!/usr/bin/env python3\n")
+  (insert "#-*- coding: utf-8 -*-\n\n")
+  (insert "# File Name: ")
+  (insert (buffer-name))
+  (insert "\n# Author: Feng\n")
+  (insert "# Created Time: ")
+  (insert (current-time-string))
+  (insert "\n# Content: ")
+  )
+
 (provide 'init-minefunc)
