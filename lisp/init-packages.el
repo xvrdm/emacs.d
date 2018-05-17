@@ -30,6 +30,7 @@
                          company-statistics
                          company-c-headers
                          company-jedi
+                         exec-path-from-shell
                          ;; themes
                          ;; monokai-theme
                          ;; zenburn-theme
@@ -1060,6 +1061,13 @@
 ;;   :config
 ;;   (load-theme 'base16-default-dark t)
 ;;   )
+
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
