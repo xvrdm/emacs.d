@@ -29,6 +29,7 @@
                          company
                          company-statistics
                          company-c-headers
+                         company-jedi
                          ;; themes
                          ;; monokai-theme
                          ;; zenburn-theme
@@ -1036,6 +1037,13 @@
 
 (use-package sr-speedbar
   :config
+  )
+
+(use-package company-jedi
+  :config
+  (defun my/python-mode-hook ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'my/python-mode-hook)
   )
 
 ;; (use-package company-quickhelp
