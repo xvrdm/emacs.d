@@ -8,6 +8,7 @@
 ;; (require 'ob-tangle)
 ;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
 
+;; this is ycmd write
 
 (package-initialize)
 
