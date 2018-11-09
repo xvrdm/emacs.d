@@ -9,6 +9,7 @@
 ;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
 
 ;; this is master write
+;; master write 2
 
 (package-initialize)
 
