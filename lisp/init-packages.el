@@ -1,7 +1,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
- (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+ (setq package-archives '(("gnu" . "https://elpa.emacs-china.org/gnu/")
                          ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
 ;;  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
   ;;                       ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
@@ -115,9 +115,9 @@
                          ;;
                          youdao-dictionary
                          ;;
-                         ;; ycmd
+                         ycmd
                          ;;
-                         ;; company-ycmd
+                         company-ycmd
                          ;;
                          counsel-gtags
                          ;;
@@ -379,24 +379,24 @@
   )
 
 ;; emacs-ycmd
-;; (use-package ycmd
-;;   :delight ycmd-mode
-;;   :config
-;;   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
-;;   (add-hook 'c++-mode-hook 'ycmd-mode)
-;;   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;;   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-;;   (setq ycmd-extra-conf-handler 'load)
-;;   )
+(use-package ycmd
+  :delight ycmd-mode
+  :config
+  ;; (add-hook 'after-init-hook 'global-ycmd-mode)
+  (add-hook 'c++-mode-hook 'ycmd-mode)
+  (set-variable 'ycmd-server-command '("python" "~/mine/ycmd"))
+  ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
+  (setq ycmd-extra-conf-handler 'load)
+  )
 
-;; (use-package company-ycmd
-;;   :delight company-ycmd
-;;   :config
-;;   (company-ycmd-setup)
-;;   ;; Set always complete immediately
-;;   (setq company-idle-delay 0.1)
-;;   ;;(add-to-list 'company-backends 'company-ycmd)
-;;   )
+(use-package company-ycmd
+  :delight company-ycmd
+  :config
+  (company-ycmd-setup)
+  ;; Set always complete immediately
+  (setq company-idle-delay 0.1)
+  ;;(add-to-list 'company-backends 'company-ycmd)
+  )
 
 
 ;; (require 'ycmd-test)
