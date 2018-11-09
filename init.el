@@ -11,6 +11,8 @@
 
 (package-initialize)
 
+;; this is master write
+
 ;; add feauther to load-path
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp")
