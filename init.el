@@ -9,7 +9,6 @@
 ;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
 
 
-
 (package-initialize)
 
 ;; add feauther to load-path
