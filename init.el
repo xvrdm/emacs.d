@@ -8,9 +8,9 @@
 ;; (require 'ob-tangle)
 ;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
 
-;; this is ycmd write
 
 (package-initialize)
+;; this is ycmd write
 
 ;; add feauther to load-path
 (add-to-list 'load-path "~/.emacs.d/lisp")
