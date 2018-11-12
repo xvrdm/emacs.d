@@ -385,7 +385,7 @@
   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
   (add-hook 'c++-mode-hook 'ycmd-mode)
   (add-hook 'python-mode-hook 'ycmd-mode)
-  (set-variable 'ycmd-server-command '("python" "~/mine/ycmd"))
+  (set-variable 'ycmd-server-command `("python", (file-truename "~/mine/ycmd")))
   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
   (setq ycmd-extra-conf-handler 'load)
   )
