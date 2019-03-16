@@ -9,7 +9,6 @@
  '(package-selected-packages
    (quote
     (direx direx-grep xpm evil-nerd-commenter evil-surround window-numbering monokai-theme hungry-delete swiper counsel smartparens js2-mode nodejs-repl add-node-modules-path popwin expand-region iedit org-pomodoro helm-ag evil which-key evil-escape ggtags youdao-dictionary pos-tip names evil-easymotion chinese-word-at-point avy counsel-gtags smart-mode-line doom-themes sr-speedbar seq rainbow-delimiters projectile-speedbar projectile neotree linum-relative function-args focus color-theme beacon powerline-evil powerline airline-themes company-irony rainbow-mode page-break-lines multifiles indent-guide highlight-symbol god-mode fix-word dashboard browse-kill-ring telephone-line symon spaceline markdown-mode general evil-matchit evil-iedit-state evil-exchange counsel-etags ace-window rainbow-identifiers parent-mode mode-icons major-mode-icons main-line hydra highlight-quoted highlight-numbers highlight-defined evil-collection ergoemacs-status diminish atom-one-dark-theme ample-zen-theme ample-theme evil-visualstar evil-snipe evil-smartparens evil-org evil-indent-plus smart-mode-line-powerline-theme imenu-anywhere highlight-parentheses dired-imenu smex use-package delight bind-key lsp-mode ivy-xref flycheck zenburn-theme yasnippet-snippets yasnippet))))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

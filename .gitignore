@@ -1,0 +1,9 @@
+company-statistics-cache.el
+elpa/*
+auto-save-list/*
+places
+recentf
+smex-items
+url/*
+eshell/*
+.python-environments/*

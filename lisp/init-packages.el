@@ -177,6 +177,8 @@
                          ;;
                          ggtags
                          ;;
+                         ;; agtags
+                         ;;
                          symon
                          ;;
                          markdown-mode
@@ -770,6 +772,20 @@
                 (ggtags-mode 1))))
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
+
+;; agtags
+;; (use-package agtags
+;;   :delight agtags-mode
+;;   :config
+;;   (setq agtags-global-treat-text t)
+;;   (agtags-bind-keys)
+;;   (agtags-update-parser)
+;;   (add-hook 'text-mode-hook 'agtags-mode-on)
+;;   (add-hook 'prog-mode-hook 'agtags-mode-on)
+;;   (add-to-list 'xref-backend-functions 'agtags-xref-backend)  ;; drop it when you don't need xref
+
+;;   ;; Call agtags-update-root When you modify the Project directory.
+;;   )
 
 ;; symon
 (use-package symon

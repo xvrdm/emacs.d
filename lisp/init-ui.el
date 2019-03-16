@@ -21,7 +21,7 @@
   ;; )
 
 ;; 高亮当前行
-;; (global-hl-line-mode 1)
+(global-hl-line-mode 1)
 
 ;; menu bar
 (menu-bar-mode -1)

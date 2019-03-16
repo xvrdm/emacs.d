@@ -65,6 +65,9 @@
 
 ;; 行号
 (global-linum-mode 1)
+(if (not (equal 'windows-nt system-type))
+    (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
+)
 
 ;;
 (delete-selection-mode 1)

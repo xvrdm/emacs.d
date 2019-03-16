@@ -257,8 +257,9 @@
                     "af" 'ace-maximize-window
                     "mn" 'mc/mark-next-like-this
                     "ms" 'mc/skip-to-next-like-this
-                    "xc" 'save-buffers-kill-terminal
-                    "xz" 'suspend-frame
+                    ;; "xc" 'save-buffers-kill-terminal
+                    "qq" 'save-buffers-kill-terminal
+                    "xx" 'suspend-frame
                     "me" 'mc/edit-lines
                     "=" 'increase-default-font-height ; GUI emacs onl
                     "-" 'decrease-default-font-height ; GUI emacs only
