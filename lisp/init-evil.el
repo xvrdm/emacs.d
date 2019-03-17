@@ -213,10 +213,12 @@
                     "gj" 'w3m-search-js-api-mdn
                     "ga" 'w3m-java-search
                     "gh" 'w3mext-hacker-search ; code search in all engines with firefox
-                    "see" 'evil-emacs-state
+                    "se" 'open-init-file
+                    "ce" 'evil-emacs-state
                     "gq" 'w3m-stackoverflow-search
                     "mws" 'mpc-which-song
                     "ms" 'mpc-next-prev-song
+                    "tm" 'eshell
                     "mp" '(lambda () (interactive) (mpc-next-prev-song t)))
 ;; }}
 
