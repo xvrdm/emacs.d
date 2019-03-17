@@ -178,7 +178,7 @@
                     "yd" 'youdao-dictionary-search-from-input
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
-                    "rf" 'my-recent-file
+                    "rm" 'my-recent-file
                     "ps" 'projectile-speedbar-toggle
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
@@ -219,6 +219,7 @@
                     "mws" 'mpc-which-song
                     "ms" 'mpc-next-prev-song
                     "tm" 'eshell
+                    "rr" 'counsel-goto-recent-directory
                     "mp" '(lambda () (interactive) (mpc-next-prev-song t)))
 ;; }}
 
@@ -338,7 +339,7 @@
                     ;; "jsr" 'js-send-region
                     ;; liang.feng
                     ;; "jsb" 'js-clear-send-buffer
-                    "rmz" 'run-mozilla
+                    ;; "rmz" 'run-mozilla
                     "rpy" 'run-python
                     "rlu" 'run-lua
                     "tci" 'toggle-company-ispell
@@ -368,9 +369,8 @@
                     "cxi" 'org-clock-in ; `C-c C-x C-i'
                     "cxo" 'org-clock-out ; `C-c C-x C-o'
                     "cxr" 'org-clock-report ; `C-c C-x C-r'
-                    "rr" 'my-counsel-recentf
+                    ;; "rr" 'my-counsel-recentf
                     "rh" 'counsel-yank-bash-history ; bash history command => yank-ring
-                    "rf" 'counsel-goto-recent-directory
                     "da" 'diff-region-tag-selected-as-a
                     "db" 'diff-region-compare-with-b
                     "di" 'evilmi-delete-items

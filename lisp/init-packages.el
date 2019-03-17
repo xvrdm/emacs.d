@@ -429,25 +429,25 @@
 ;; }}
 
 ;; gtags(global)
-(use-package gtags
-  :delight gtags-mode
-  :init
-  (if (not (equal 'windows-nt system-type))
-      (load "/usr/local/share/gtags/gtags.el")
-    (load "gtags.el"))
-  ;; (load "/usr/local/share/gtags/gtags.el")
-  :config
-  (autoload 'gtags-mode "gtags" "" t)
-  (add-hook 'gtags-select-mode-hook
-            '(lambda ()
-               (setq hl-line-face 'underline)
-               (hl-line-mode 1)
-               )
-            )
-  ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-  ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
-  (setq gtags-auto-update t)
-  )
+;; (use-package gtags
+;;   :delight gtags-mode
+;;   :init
+;;   (if (not (equal 'windows-nt system-type))
+;;       (load "/usr/local/share/gtags/gtags.el")
+;;     (load "gtags.el"))
+;;   ;; (load "/usr/local/share/gtags/gtags.el")
+;;   :config
+;;   (autoload 'gtags-mode "gtags" "" t)
+;;   (add-hook 'gtags-select-mode-hook
+;;             '(lambda()
+;;                (setq hl-line-face 'underline)
+;;                (hl-line-mode 1)
+;;                )
+;;             )
+;;   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
+;;   ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+;;   (setq gtags-auto-update t)
+;;   )
 
 ;; emacs-counsel-gtags
 (use-package counsel-gtags
@@ -480,7 +480,7 @@
 ;;   (setq large-file-warning-threshold nil)
 ;;   ;; Setup auto update now
 ;;   (add-hook 'prog-mode-hook
-;;             (lambda ()
+;;             (lambda()
 ;;               (add-hook 'after-save-hook
 ;;                         'counsel-etags-virtual-update-tags 'append 'local)))
 ;;   )
@@ -767,8 +767,12 @@
   :config
   (setq ggtags-highlight-tag nil)
   (add-hook 'c-mode-common-hook
-            (lambda ()
+            (lambda()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                (ggtags-mode 1))))
+  (add-hook 'python-hook
+            (lambda()
+              (when (derived-mode-p 'python-mode)
                 (ggtags-mode 1))))
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
@@ -939,7 +943,7 @@
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   (define-globalized-minor-mode global-highlight-parentheses-mode
     highlight-parentheses-mode
-    (lambda ()
+    (lambda()
       (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)  
   )
@@ -1083,7 +1087,6 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
   )
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
