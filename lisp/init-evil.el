@@ -120,6 +120,7 @@
                     "kk" 'scroll-other-window
                     "jj" 'scroll-other-window-up
                     "ii" 'counsel-imenu
+                    "tb" 'imenu-list-smart-toggle
                     "xm" 'my-M-x
                     "bk" 'buf-move-up
                     "bj" 'buf-move-down

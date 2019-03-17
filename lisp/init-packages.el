@@ -70,6 +70,10 @@
                          ;;
                          ;; helm-ag
                          ;;
+                         magit
+                         ;;
+                         evil-magit
+                         ;;
                          ;; auto-yasnippet
                          ;;
                          yasnippet
@@ -212,6 +216,8 @@
                          dired-imenu
                          ;;
                          imenu-anywhere
+                         ;;
+                         imenu-list
                          ;;
                          rich-minority
                          ;;
@@ -363,6 +369,19 @@
 ;; org-pomodoro setting
 (use-package org-pomodoro
   :delight org-pomodoro)
+
+;; magit setting
+(use-package magit
+  :delight magit-mode
+  :config
+  )
+
+;; evil-magit setting
+(require 'evil-magit)
+(use-package evil-magit
+  :delight
+  :config
+  )
 
 ;; yasnippet setting
 (use-package yasnippet
@@ -951,6 +970,12 @@
 ;; dired-imenu
 (use-package dired-imenu
   :delight
+  )
+
+;; imenu-list
+(use-package imenu-list
+  :delight
+  :config
   )
 
 ;; rich-minority

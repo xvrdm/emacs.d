@@ -7,3 +7,4 @@ smex-items
 url/*
 eshell/*
 .python-environments/*
+transient/*
