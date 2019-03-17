@@ -36,7 +36,8 @@
    (set-scroll-bar-mode nil))
 
 ;; 更改光标样式
-(set-default 'cursor-type 'hbar)
+;; (set-default 'cursor-type 'hbar)
+(set-default 'cursor-type 'bar)
 ;; (setq cursor-type 'bar)
 
 ;; 关闭启动画面

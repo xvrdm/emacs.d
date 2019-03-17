@@ -3,7 +3,7 @@
 (set-default-coding-systems 'utf-8)
 
 ;; 编码设置 begin
-(set-language-environment 'Chinese-GB)
+;; (set-language-environment 'Chinese-GB)
 ;; default-buffer-file-coding-system变量在emacs23.2之后已被废弃，使用buffer-file-coding-system代替
 (set-default buffer-file-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
@@ -23,7 +23,7 @@
 ;; 如果不写下面两句，只写
 ;; (prefer-coding-system 'utf-8)
 ;; 这一句的话，新建文件以utf-8编码，行末结束符平台相关
-(prefer-coding-system 'utf-8-dos)
+;; (prefer-coding-system 'utf-8-dos)
 (prefer-coding-system 'utf-8-unix)
 ;; 编码设置 end
 
