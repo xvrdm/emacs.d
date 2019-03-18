@@ -377,7 +377,7 @@
   )
 
 ;; evil-magit setting
-(require 'evil-magit)
+;; (require 'evil-magit)
 (use-package evil-magit
   :delight
   :config
@@ -718,7 +718,7 @@
   )
 
 ;; highlight-symbol
-(require 'highlight-symbol)
+;; (require 'highlight-symbol)
 (use-package highlight-symbol
   :delight highlight-symbol-mode
   :config
@@ -966,7 +966,7 @@
     highlight-parentheses-mode
     (lambda()
       (highlight-parentheses-mode t)))
-  (global-highlight-parentheses-mode t)  
+  (global-highlight-parentheses-mode t)
   )
 
 ;; dired-imenu

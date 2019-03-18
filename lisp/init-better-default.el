@@ -61,7 +61,7 @@
 	     (funcall fn)))))
 
 ;; 括号匹配高亮
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 ;; 行号
 (global-linum-mode 1)
