@@ -115,18 +115,18 @@
                     "ff" 'find-file
                     "fd" 'my-display-full-path-of-current-buffer
                     "fb" 'beginning-of-defun
-                    "wf" 'popup-which-function
-                    "ww" 'narrow-or-widen-dwim
+                    ;; "wf" 'popup-which-function
+                    ;; "ww" 'narrow-or-widen-dwim
                     "kk" 'scroll-other-window
                     "jj" 'scroll-other-window-up
                     "ii" 'counsel-imenu
                     "tb" 'imenu-list-smart-toggle
                     "xm" 'my-M-x
-                    "bk" 'buf-move-up
-                    "bj" 'buf-move-down
-                    "bh" 'buf-move-left
-                    "bl" 'buf-move-right
-                    "hd" 'describe-function
+                    ;; "bk" 'buf-move-up
+                    ;; "bj" 'buf-move-down
+                    ;; "bh" 'buf-move-left
+                    ;; "bl" 'buf-move-right
+                    ;; "hd" 'describe-function
                     "hf" 'find-function
                     "hk" 'describe-key
                     "ss" 'swiper
@@ -135,7 +135,7 @@
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
                     "pb" 'evil-paste-before
-                    "hv" 'describe-variable
+                    ;; "hv" 'describe-variable
                     "ge" 'goto-line
                     "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
                     "gr" 'counsel-gtags-find-symbol
@@ -144,14 +144,14 @@
                     "qg" 'counsel-etags-grep
                     "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
-                    "ha" 'helm-ag
+                    ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
-                    "sc" 'scratch
+                    ;; "sc" 'scratch
                     ;; "jd" 'dumb-jump-go
                     "jd" 'xref-find-definitions
                     "jr" 'xref-find-references
-                    "jb" 'dumb-jump-back
+                    ;; "jb" 'dumb-jump-back
                     "dj" 'dired-jump ;; open the dired from current file
                     "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
                     "rt" 'counsel-etags-recent-tag
@@ -161,8 +161,8 @@
                     "kr" 'browse-kill-ring
                     "cf" 'counsel-grep ; grep current buffer
                     "cg" 'counsel-git ; find file
-                    "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
-                    "cm" 'counsel-git-find-my-file
+                    ;; "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
+                    ;; "cm" 'counsel-git-find-my-file
                     ;; buffer ;;;;;
                     "bk" 'kill-buffer
                     "bs" 'switch-to-buffer
@@ -185,7 +185,7 @@
                     "sr" 'replace-regexp
                     "ci" 'evilnc-comment-or-uncomment-lines
                     "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-                    "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+                    ;; "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
                     "cc" 'evilnc-copy-and-comment-lines
                     "cp" 'evilnc-comment-or-uncomment-paragraphs
                     "cr" 'comment-or-uncomment-region
@@ -202,25 +202,24 @@
                     ;; ";" 'avy-goto-char-2
                     ;; "w" 'avy-goto-word-or-subword-1
                     ;; "a" 'avy-goto-char-timer
-                    "db" 'sdcv-search-pointer ; in buffer
-                    "dt" 'sdcv-search-input+ ; in tip
-                    "dd" 'my-lookup-dict-org
-                    "lm" 'lookup-doc-in-man
+                    ;; "db" 'sdcv-search-pointer ; in buffer
+                    ;; "dt" 'sdcv-search-input+ ; in tip
+                    ;; "dd" 'my-lookup-dict-org
+                    ;; "lm" 'lookup-doc-in-man
                     ;; "lf" 'list-funcs
-                    "gs" 'w3m-google-search
-                    "gf" 'w3m-google-by-filetype
-                    "gd" 'w3m-search-financial-dictionary
-                    "gj" 'w3m-search-js-api-mdn
-                    "ga" 'w3m-java-search
-                    "gh" 'w3mext-hacker-search ; code search in all engines with firefox
+                    ;; "gs" 'w3m-google-search
+                    ;; "gf" 'w3m-google-by-filetype
+                    ;; "gd" 'w3m-search-financial-dictionary
+                    ;; "gj" 'w3m-search-js-api-mdn
+                    ;; "ga" 'w3m-java-search
+                    ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
                     "se" 'open-init-file
                     "ce" 'evil-emacs-state
-                    "gq" 'w3m-stackoverflow-search
-                    "mws" 'mpc-which-song
-                    "ms" 'mpc-next-prev-song
+                    ;; "gq" 'w3m-stackoverflow-search
+                    ;; "mws" 'mpc-which-song
+                    ;; "ms" 'mpc-next-prev-song
                     "tm" 'eshell
-                    "rr" 'counsel-goto-recent-directory
-                    "mp" '(lambda () (interactive) (mpc-next-prev-song t)))
+                    "rr" 'counsel-goto-recent-directory)
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
@@ -229,42 +228,42 @@
                     :prefix "SPC"
                     :non-normal-prefix "M-SPC"
                     "SPC" 'evil-ex
-                    "ss" 'wg-create-workgroup ; save windows layout
+                    ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
-                    "ll" 'my-wg-switch-workgroup ; load windows layout
-                    "yy" 'hydra-launcher/body
-                    "hh" 'multiple-cursors-hydra/body
-                    "gi" 'gist-region ; only workable on my computer
-                    "tt" 'my-toggle-indentation
-                    "gs" 'git-gutter:set-start-revision
-                    "gh" 'git-gutter-reset-to-head-parent
-                    "gr" 'git-gutter-reset-to-default
+                    ;; "ll" 'my-wg-switch-workgroup ; load windows layout
+                    ;; "yy" 'hydra-launcher/body
+                    ;; "hh" 'multiple-cursors-hydra/body
+                    ;; "gi" 'gist-region ; only workable on my computer
+                    ;; "tt" 'my-toggle-indentation
+                    ;; "gs" 'git-gutter:set-start-revision
+                    ;; "gh" 'git-gutter-reset-to-head-parent
+                    ;; "gr" 'git-gutter-reset-to-default
                     "ps" 'profiler-start
                     "pr" 'profiler-report
                     "ud" 'my-gud-gdb
-                    "uk" 'gud-kill-yes
-                    "ur" 'gud-remove
-                    "ub" 'gud-break
-                    "uu" 'gud-run
-                    "up" 'gud-print
-                    "ue" 'gud-cls
-                    "un" 'gud-next
-                    "us" 'gud-step
-                    "ui" 'gud-stepi
-                    "uc" 'gud-cont
-                    "uf" 'gud-finish
-                    "ma" 'mc/mark-all-like-this-dwim
-                    "md" 'mc/mark-all-like-this-in-defun
-                    "am" 'ace-mc-add-multiple-cursors
-                    "aw" 'ace-swap-window
-                    "af" 'ace-maximize-window
-                    "mn" 'mc/mark-next-like-this
-                    "ms" 'mc/skip-to-next-like-this
+                    ;; "uk" 'gud-kill-yes
+                    ;; "ur" 'gud-remove
+                    ;; "ub" 'gud-break
+                    ;; "uu" 'gud-run
+                    ;; "up" 'gud-print
+                    ;; "ue" 'gud-cls
+                    ;; "un" 'gud-next
+                    ;; "us" 'gud-step
+                    ;; "ui" 'gud-stepi
+                    ;; "uc" 'gud-cont
+                    ;; "uf" 'gud-finish
+                    ;; "ma" 'mc/mark-all-like-this-dwim
+                    ;; "md" 'mc/mark-all-like-this-in-defun
+                    ;; "am" 'ace-mc-add-multiple-cursors
+                    ;; "aw" 'ace-swap-window
+                    ;; "af" 'ace-maximize-window
+                    ;; "mn" 'mc/mark-next-like-this
+                    ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
                     "qq" 'save-buffers-kill-terminal
                     "xx" 'suspend-frame
-                    "me" 'mc/edit-lines
+                    ;; "me" 'mc/edit-lines
                     "=" 'increase-default-font-height ; GUI emacs onl
                     "-" 'decrease-default-font-height ; GUI emacs only
                     ;; liang.feng
@@ -275,67 +274,67 @@
                     ;; "em" 'erase-message-buffer
                     ;; liang.feng
                     ;; "eb" 'eval-buffer
-                    "sd" 'sudo-edit
+                    ;; "sd" 'sudo-edit
                     ;; liang.feng
                     ;; "ee" 'eval-expression
-                    "aa" 'copy-to-x-clipboard ; used frequently
-                    "ac" 'aya-create
-                    "ae" 'aya-expand
-                    "zz" 'paste-from-x-clipboard ; used frequently
+                    ;; "aa" 'copy-to-x-clipboard ; used frequently
+                    ;; "ac" 'aya-create
+                    ;; "ae" 'aya-expand
+                    ;; "zz" 'paste-from-x-clipboard ; used frequently
                     ;; "cy" 'strip-convert-lines-into-one-big-string
                     "cy" 'clipboard-yank
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
                     ;; liang.feng
                     ;; "es" 'goto-edge-by-comparing-font-face
-                    "vj" 'my-validate-json-or-js-expression
+                    ;; "vj" 'my-validate-json-or-js-expression
                     ;; liang.feng
                     ;; "kc" 'kill-ring-to-clipboard
-                    "mcr" 'my-create-regex-from-kill-ring
-                    "ntt" 'neotree-toggle
-                    "ntf" 'neotree-find ; open file in current buffer in neotree
-                    "ntd" 'neotree-project-dir
-                    "nth" 'neotree-hide
+                    ;; "mcr" 'my-create-regex-from-kill-ring
+                    ;; "ntt" 'neotree-toggle
+                    ;; "ntf" 'neotree-find ; open file in current buffer in neotree
+                    ;; "ntd" 'neotree-project-dir
+                    ;; "nth" 'neotree-hide
 
-                    "fn" 'cp-filename-of-current-buffer
-                    "fp" 'cp-fullpath-of-current-buffer
-                    "ff" 'toggle-full-window ;; I use WIN+F in i3
-                    "ip" 'find-file-in-project
+                    ;; "fn" 'cp-filename-of-current-buffer
+                    ;; "fp" 'cp-fullpath-of-current-buffer
+                    ;; "ff" 'toggle-full-window ;; I use WIN+F in i3
+                    ;; "ip" 'find-file-in-project
                     ;; liang.feng
                     ;; "kk" 'find-file-in-project-by-selected
                     ;; liang.feng
                     ;; "kn" 'find-file-with-similar-name ; ffip v5.3.1
-                    "fd" 'find-directory-in-project-by-selected
-                    "trm" 'get-term
+                    ;; "fd" 'find-directory-in-project-by-selected
+                    ;; "trm" 'get-term
                     "tff" 'toggle-frame-fullscreen
                     "tfm" 'toggle-frame-maximized
-                    "ti" 'fastdef-insert
-                    "th" 'fastdef-insert-from-history
+                    ;; "ti" 'fastdef-insert
+                    ;; "th" 'fastdef-insert-from-history
                     ;; liang.feng
                     ;; "epy" 'emmet-expand-yas
                     ;; liang.feng
                     ;; "epl" 'emmet-expand-line
-                    "rd" 'evilmr-replace-in-defun
-                    "rb" 'evilmr-replace-in-buffer
-                    "ts" 'evilmr-tag-selected-region ;; recommended
-                    "tua" 'artbollocks-mode
-                    "cby" 'cb-switch-between-controller-and-view
-                    "cbu" 'cb-get-url-from-controller
+                    ;; "rd" 'evilmr-replace-in-defun
+                    ;; "rb" 'evilmr-replace-in-buffer
+                    ;; "ts" 'evilmr-tag-selected-region ;; recommended
+                    ;; "tua" 'artbollocks-mode
+                    ;; "cby" 'cb-switch-between-controller-and-view
+                    ;; "cbu" 'cb-get-url-from-controller
                     "mk" 'bookmark-set
-                    "gs" (lambda ()
-                           (interactive)
-                           (let* ((ffip-diff-backends
-                                   '(("Show git commit" . (let* ((git-cmd "git --no-pager log --date=short --pretty=format:'%h|%ad|%s|%an'")
-                                                                 (collection (split-string (shell-command-to-string git-cmd) "\n" t))
-                                                                 (item (ffip-completing-read "git log:" collection)))
-                                                            (when item
-                                                              (shell-command-to-string (format "git show %s" (car (split-string item "|" t))))))))))
-                             (ffip-show-diff 0)))
-                    "gd" 'ffip-show-diff-by-description ;find-file-in-project 5.3.0+
-                    "sf" 'counsel-git-show-file
-                    "sh" 'my-select-from-search-text-history
-                    "df" 'counsel-git-diff-file
-                    "rjs" 'run-js
+                    ;; "gs" (lambda ()
+                           ;; (interactive)
+                           ;; (let* ((ffip-diff-backends
+                                   ;; '(("Show git commit" . (let* ((git-cmd "git --no-pager log --date=short --pretty=format:'%h|%ad|%s|%an'")
+                                                                 ;; (collection (split-string (shell-command-to-string git-cmd) "\n" t))
+                                                                 ;; (item (ffip-completing-read "git log:" collection)))
+                                                            ;; (when item
+                                                              ;; (shell-command-to-string (format "git show %s" (car (split-string item "|" t))))))))))
+                             ;; (ffip-show-diff 0)))
+                    ;; "gd" 'ffip-show-diff-by-description ;find-file-in-project 5.3.0+
+                    ;; "sf" 'counsel-git-show-file
+                    ;; "sh" 'my-select-from-search-text-history
+                    ;; "df" 'counsel-git-diff-file
+                    ;; "rjs" 'run-js
                     ;; liang.feng
                     ;; "jsr" 'js-send-region
                     ;; liang.feng
@@ -346,21 +345,21 @@
                     "tci" 'toggle-company-ispell
                     ;; liang.feng
                     ;; "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
-                    "it" 'issue-tracker-increment-issue-id-under-cursor
+                    ;; "it" 'issue-tracker-increment-issue-id-under-cursor
                     "ls" 'highlight-symbol
                     "lq" 'highlight-symbol-query-replace
                     "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
                     ;;liang.feng
                     ;; "bm" 'pomodoro-start ;; beat myself
-                    "ij" 'rimenu-jump
+                    ;; "ij" 'rimenu-jump
                     ;; @see https://github.com/pidu/git-timemachine
                     ;; p: previous; n: next; w:hash; W:complete hash; g:nth version; q:quit
-                    "tm" 'my-git-timemachine
-                    "tdb" 'tidy-buffer
-                    "tdl" 'tidy-current-line
+                    ;; "tm" 'my-git-timemachine
+                    ;; "tdb" 'tidy-buffer
+                    ;; "tdl" 'tidy-current-line
                     ;; toggle overview,  @see http://emacs.wordpress.com/2007/01/16/quick-and-dirty-code-folding/
-                    "ov" 'my-overview-of-current-buffer
-                    "or" 'open-readme-in-git-root-directory
+                    ;; "ov" 'my-overview-of-current-buffer
+                    ;; "or" 'open-readme-in-git-root-directory
                     "oo" 'compile
                     "c$" 'org-archive-subtree ; `C-c $'
                     ;; org-do-demote/org-do-premote support selected region
@@ -371,35 +370,35 @@
                     "cxo" 'org-clock-out ; `C-c C-x C-o'
                     "cxr" 'org-clock-report ; `C-c C-x C-r'
                     ;; "rr" 'my-counsel-recentf
-                    "rh" 'counsel-yank-bash-history ; bash history command => yank-ring
-                    "da" 'diff-region-tag-selected-as-a
-                    "db" 'diff-region-compare-with-b
+                    ;; "rh" 'counsel-yank-bash-history ; bash history command => yank-ring
+                    ;; "da" 'diff-region-tag-selected-as-a
+                    ;; "db" 'diff-region-compare-with-b
                     "di" 'evilmi-delete-items
                     "si" 'evilmi-select-items
                     ;; liang.feng
                     ;; "jb" 'js-beautify
                     ;; liang.feng
                     ;; "jp" 'my-print-json-path
-                    "sep" 'string-edit-at-point
-                    "sec" 'string-edit-conclude
-                    "sea" 'string-edit-abort
+                    ;; "sep" 'string-edit-at-point
+                    ;; "sec" 'string-edit-conclude
+                    ;; "sea" 'string-edit-abort
                     "xe" 'eval-last-sexp
-                    "x0" 'delete-window
-                    "x1" 'delete-other-windows
-                    "x2" 'my-split-window-vertically
-                    "x3" 'my-split-window-horizontally
-                    "s2" 'ffip-split-window-vertically
-                    "s3" 'ffip-split-window-horizontally
-                    "rw" 'rotate-windows
+                    ;; "x0" 'delete-window
+                    ;; "x1" 'delete-other-windows
+                    ;; "x2" 'my-split-window-vertically
+                    ;; "x3" 'my-split-window-horizontally
+                    ;; "s2" 'ffip-split-window-vertically
+                    ;; "s3" 'ffip-split-window-horizontally
+                    ;; "rw" 'rotate-windows
                     "ru" 'undo-tree-save-state-to-register ; C-x r u
                     "rU" 'undo-tree-restore-state-from-register ; C-x r U
-                    "xt" 'toggle-window-split
-                    "uu" 'winner-undo
-                    "UU" 'winner-redo
-                    "to" 'toggle-web-js-offset
+                    ;; "xt" 'toggle-window-split
+                    ;; "uu" 'winner-undo
+                    ;; "UU" 'winner-redo
+                    ;; "to" 'toggle-web-js-offset
                     ;; liang.feng
                     ;; "sl" 'sort-lines
-                    "ulr" 'uniquify-all-lines-region
+                    ;; "ulr" 'uniquify-all-lines-region
                     "ulb" 'uniquify-all-lines-buffer
                     "fc" 'cp-ffip-ivy-last
                     ;; "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
@@ -416,18 +415,18 @@
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
                     "xf" 'ido-find-file
-                    "xb" 'ivy-switch-buffer-by-pinyin
+                    ;; "xb" 'ivy-switch-buffer-by-pinyin
                     "xh" 'mark-whole-buffer
                     "xk" 'ido-kill-buffer
                     "xs" 'save-buffer
-                    "vm" 'vc-rename-file-and-buffer
-                    "vc" 'vc-copy-file-and-rename-buffer
+                    ;; "vm" 'vc-rename-file-and-buffer
+                    ;; "vc" 'vc-copy-file-and-rename-buffer
                     "xvv" 'vc-next-action ; 'C-x v v' in original
                     "vg" 'vc-annotate ; 'C-x v g' in original
                     "vl" 'vc-print-log
-                    "vv" 'vc-msg-show
-                    "hh" 'cliphist-paste-item
-                    "yu" 'cliphist-select-item
+                    ;; "vv" 'vc-msg-show
+                    ;; "hh" 'cliphist-paste-item
+                    ;; "yu" 'cliphist-select-item
                     "ih" 'my-goto-git-gutter ; use ivy-mode
                     "ir" 'ivy-resume
                     "xnw" 'widen

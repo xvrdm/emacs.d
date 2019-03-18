@@ -11,3 +11,5 @@ transient/*
 semanticdb/*
 recentf~
 server/*
+bookmarks
+lisp/*.*archive
