@@ -163,7 +163,6 @@
                     "cg" 'counsel-git ; find file
                     "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
                     "cm" 'counsel-git-find-my-file
-                    ";" 'evil-ex
                     ;; buffer ;;;;;
                     "bk" 'kill-buffer
                     "bs" 'switch-to-buffer
@@ -229,6 +228,7 @@
                     ;; :states '(normal insert emacs)
                     :prefix "SPC"
                     :non-normal-prefix "M-SPC"
+                    "SPC" 'evil-ex
                     "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
