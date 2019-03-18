@@ -2,7 +2,8 @@
 (cond
  ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
  ;; ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
- ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12"))
+ ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12"))
+ ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
  ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12"))
  ) 
 
