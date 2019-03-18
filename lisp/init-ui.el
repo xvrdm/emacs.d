@@ -1,14 +1,10 @@
 ;; set a default font
-;; (when (member "DejaVu Sans Mono" (font-family-list))
-;;   (set-face-attribute 'default nil :font "DejaVu Sans Mono-12" :slant 'Oblique))
-(when (member "Hack" (font-family-list))
-  (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
-  ;; (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
-;; (when (member "DejaVu Sans Mono" (font-family-list))
-;;     (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
-;;     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
-;; (set-default-font "courier-12")
-;; (print (font-family-list))
+(cond
+ ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
+ ;; ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
+ ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12"))
+ ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12"))
+ ) 
 
 ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
 ;; 而且解决了中文字体导致emacs卡的现象。
