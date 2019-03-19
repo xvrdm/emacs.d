@@ -420,9 +420,9 @@
                     "xs" 'save-buffer
                     ;; "vm" 'vc-rename-file-and-buffer
                     ;; "vc" 'vc-copy-file-and-rename-buffer
-                    "xvv" 'vc-next-action ; 'C-x v v' in original
-                    "vg" 'vc-annotate ; 'C-x v g' in original
-                    "vl" 'vc-print-log
+                    ;; "xvv" 'vc-next-action ; 'C-x v v' in original
+                    ;; "vg" 'vc-anntate ; 'C-x v g' in original
+                    ;; "vl" 'vc-print-log
                     ;; "vv" 'vc-msg-show
                     ;; "hh" 'cliphist-paste-item
                     ;; "yu" 'cliphist-select-item
