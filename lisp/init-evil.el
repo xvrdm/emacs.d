@@ -307,8 +307,8 @@
                     ;; "kn" 'find-file-with-similar-name ; ffip v5.3.1
                     ;; "fd" 'find-directory-in-project-by-selected
                     ;; "trm" 'get-term
-                    "tff" 'toggle-frame-fullscreen
-                    "tfm" 'toggle-frame-maximized
+                    "wf" 'toggle-frame-fullscreen
+                    "wm" 'toggle-frame-maximized
                     ;; "ti" 'fastdef-insert
                     ;; "th" 'fastdef-insert-from-history
                     ;; liang.feng
@@ -426,9 +426,9 @@
                     ;; "vv" 'vc-msg-show
                     ;; "hh" 'cliphist-paste-item
                     ;; "yu" 'cliphist-select-item
-                    "ih" 'my-goto-git-gutter ; use ivy-mode
+                    ;; "ih" 'my-goto-git-gutter ; use ivy-mode
                     "ir" 'ivy-resume
-                    "xnw" 'widen
+                    "wi" 'widen
                     "xnd" 'narrow-to-defun
                     ;; "ycr" 'my-yas-reload-all
                     "xnr" 'narrow-to-region)
