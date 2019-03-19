@@ -265,8 +265,8 @@
                     "qq" 'save-buffers-kill-terminal
                     "xx" 'suspend-frame
                     ;; "me" 'mc/edit-lines
-                    "=" 'increase-default-font-height ; GUI emacs onl
-                    "-" 'decrease-default-font-height ; GUI emacs only
+                    ;; "=" 'increase-default-font-height ; GUI emacs onl
+                    ;; "-" 'decrease-default-font-height ; GUI emacs only
                     ;; liang.feng
                     ;; "bu" 'backward-up-list
                     ;; liang.feng
