@@ -117,8 +117,6 @@
                     "fb" 'beginning-of-defun
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
-                    "kk" 'scroll-other-window
-                    "jj" 'scroll-other-window-up
                     "ii" 'counsel-imenu
                     "tb" 'imenu-list-smart-toggle
                     "xm" 'my-M-x
@@ -284,6 +282,8 @@
                     ;; "zz" 'paste-from-x-clipboard ; used frequently
                     ;; "cy" 'strip-convert-lines-into-one-big-string
                     "cy" 'clipboard-yank
+                    "kk" 'scroll-other-window
+                    "jj" 'scroll-other-window-up
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
                     ;; liang.feng
