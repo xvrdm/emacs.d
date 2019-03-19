@@ -9,15 +9,16 @@
 
 ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
 ;; 而且解决了中文字体导致emacs卡的现象。
-;; (when (equal system-type 'windows-nt)
-  ;; (progn
-  (if window-system
+(when (equal system-type 'windows-nt)
+  (progn
     (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "微软雅黑" :size 16)))
-    )
-    ;; )
-  ;; )
+      ;; 台式电脑
+      (if (equal system-name "DESKTOP-LL8PBC8")
+          (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
+        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 16)))))
+  )
+
+;; (add-hook 'after-init-hook '(set-face-attribute 'default (selected-frame) :height 100))
 
 ;; 高亮当前行
 (global-hl-line-mode 1)

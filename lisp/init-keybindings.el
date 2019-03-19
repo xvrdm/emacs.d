@@ -28,6 +28,8 @@
 ;; counsel-imenu bind
 (global-set-key (kbd "M-s i") 'counsel-imenu)
 
+;; (global-set-key (kbd "M-i i") 'eval-last-sexp)
+
 ;; expand bind
 (require 'expand-region)
 (global-set-key (kbd "M-s =") 'er/expand-region)

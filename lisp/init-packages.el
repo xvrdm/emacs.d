@@ -611,7 +611,10 @@
 
 (use-package evil-easymotion
   :delight
+  :config
+  (evilem-default-keybindings "C-c e")
   )
+
 (use-package evil-matchit
   :delight evil-matchit-mode
   :config
