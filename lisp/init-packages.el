@@ -125,9 +125,9 @@
                          ;;
                          counsel-gtags
                          ;;
-                         ;; smart-mode-line
+                         smart-mode-line
                          ;;
-                         ;; smart-mode-line-powerline-theme
+                         smart-mode-line-powerline-theme
                          ;;
                          ;; doom-themes
                          ;; complete too slow....
@@ -139,7 +139,7 @@
                          ;;
                          sr-speedbar
                          ;;
-                         ;; linum-relative
+                         linum-relative
                          ;;
                          rainbow-delimiters
                          ;;
@@ -154,7 +154,7 @@
                          ;; themes for powerline
                          powerline-evil
                          ;; themes for powerline
-                         ;; airline-themes
+                         airline-themes
                          ;; themes for powerline
                          spaceline
                          ;; A new implementation of Powerline for Emacs 
@@ -414,11 +414,6 @@
 ;; (yas-reload-all)
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-(use-package window-numbering
-  :delight window-numbering-mode
-  :config
-  (window-numbering-mode t)
-  )
 
 ;; emacs-ycmd
 ;; (use-package ycmd
@@ -692,20 +687,26 @@
 ;;   )
 
 ;; spaceline
-(use-package spaceline-config
-  :config
-  ;; (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
-  ;; (spaceline-emacs-theme)
-  )
-
-;; telephone-line
-;; (use-package telephone-line-config
-;;   :delight telephone-line-mode
+;; (use-package spaceline-config
 ;;   :config
-;;   (telephone-line-evil-config)
+;;   ;; (require 'spaceline-config)
+;;   ;; (spaceline-spacemacs-theme)
+;;   (spaceline-emacs-theme)
 ;;   )
 
+;; telephone-line
+(use-package telephone-line-config
+  :delight telephone-line-mode
+  :config
+  (telephone-line-evil-config)
+  )
+
+;; mast put after status line theme
+(use-package window-numbering
+  :delight window-numbering-mode
+  :config
+  (window-numbering-mode t)
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
 (use-package dashboard
