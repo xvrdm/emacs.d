@@ -137,9 +137,9 @@
                     "pb" 'evil-paste-before
                     ;; "hv" 'describe-variable
                     "ge" 'goto-line
-                    "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-                    "gr" 'counsel-gtags-find-symbol
-                    "fr" 'counsel-gtags-find-reference
+                    "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+                    "gs" 'counsel-gtags-find-symbol
+                    "gr" 'counsel-gtags-find-reference
                     "ud" 'undo-tree-visualize
                     "gu" 'counsel-gtags-update-tags
                     ;; "qg" 'counsel-etags-grep
