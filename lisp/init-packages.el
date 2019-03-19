@@ -37,6 +37,8 @@
                          ample-theme
                          ;; ample-zen-theme
                          ;; atom-one-dark-theme
+                         ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                         evil
                          ;; --- Better Editor ---
                          hungry-delete
                          ;;
@@ -79,10 +81,8 @@
                          yasnippet
                          ;;
                          yasnippet-snippets
-                         ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                         evil
                          ;;
-                         ;; evil-collection
+                         evil-collection
                          ;;
                          ;; replace by general
                          ;; evil-leader
@@ -150,9 +150,9 @@
                          ;; powerline.el - origin is unclear.) - this fork has multiple separator graphics. 
                          ;; main-line
                          ;;
-                         ;; powerline
+                         powerline
                          ;; themes for powerline
-                         ;; powerline-evil
+                         powerline-evil
                          ;; themes for powerline
                          ;; airline-themes
                          ;; themes for powerline
@@ -296,6 +296,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (load-theme 'atom-one-dark t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; https://github.com/emacs-evil/evil-collection
+;; evil
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  )
+
+;; evil-collection
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init)
+  )
 
 ;; hungry-delete seting
 (use-package hungry-delete
@@ -578,21 +597,6 @@
   (beacon-mode 1)
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; evil
-;; https://github.com/jojojames/evil-collection
-;; (use-package evil
-;;   :delight evil-mode
-;;   :init
-;;   (setq evil-want-integration nil)
-;;   :config
-;;   )
-
-;; (use-package evil-collection
-;;   :delight
-;;   :config
-;;   (evil-collection-init)
-;;   )
 
 ;; end https://github.com/jojojames/evil-collection
 ;; (require 'evil-leader)
@@ -673,8 +677,10 @@
  
 
 ;; powerline-evil
+(require 'powerline-evil)
 ;; (use-package poweline-evil
 ;;   :delight
+;;   :config
 ;;   )
 
 ;; airline-themes
@@ -686,19 +692,19 @@
 ;;   )
 
 ;; spaceline
-;; (use-package spaceline-config
-;;   :config
-;;   ;; (require 'spaceline-config)
-;;   (spaceline-spacemacs-theme)
-;;   ;; (spaceline-emacs-theme)
-;;   )
+(use-package spaceline-config
+  :config
+  ;; (require 'spaceline-config)
+  (spaceline-spacemacs-theme)
+  ;; (spaceline-emacs-theme)
+  )
 
 ;; telephone-line
-(use-package telephone-line-config
-  :delight telephone-line-mode
-  :config
-  (telephone-line-evil-config)
-  )
+;; (use-package telephone-line-config
+;;   :delight telephone-line-mode
+;;   :config
+;;   (telephone-line-evil-config)
+;;   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
