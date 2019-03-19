@@ -241,6 +241,8 @@
                          ;;
                          dired-k
                          ;;
+                         dired-rainbow
+                         ;;
                          ;; company-quickhelp
                          ;;
                          ;; nimbus-theme
@@ -672,7 +674,7 @@
  
 
 ;; powerline-evil
-(require 'powerline-evil)
+;; (require 'powerline-evil)
 ;; (use-package poweline-evil
 ;;   :delight
 ;;   :config
@@ -695,10 +697,27 @@
 ;;   )
 
 ;; telephone-line
-(use-package telephone-line-config
-  :delight telephone-line-mode
+;; (use-package telephone-line-config
+;;   :delight telephone-line-mode
+;;   :config
+;;   (telephone-line-evil-config)
+;;   )
+(use-package telephone-line
+  :delight
   :config
-  (telephone-line-evil-config)
+  ;; (setq telephone-line-lhs
+  ;;       '((evil   . (telephone-line-evil-tag-segment))
+  ;;         (accent . (telephone-line-vc-segment
+  ;;                    telephone-line-erc-modified-channels-segment
+  ;;                    telephone-line-process-segment))
+  ;;         (nil    . (telephone-line-minor-mode-segment
+  ;;                    telephone-line-buffer-segment))))
+  ;; (setq telephone-line-rhs
+  ;;       '((nil    . (telephone-line-misc-info-segment))
+  ;;         (accent . (telephone-line-major-mode-segment))
+  ;;         (evil   . (telephone-line-airline-position-segment))))
+
+  (telephone-line-mode t)
   )
 
 ;; mast put after status line theme
@@ -1088,6 +1107,44 @@
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert)
   (setq dired-k-style 'git)
   (setq dired-k-padding 1)
+  )
+
+(use-package dired-rainbow
+  :commands dired-rainbow-define dired-rainbow-define-chmod
+  :init
+  (dired-rainbow-define dotfiles "gray" "\\..*")
+
+  ;; (dired-rainbow-define web "#4e9a06" ("htm" "html" "xhtml" "xml" "xaml" "css" "js"
+  ;;                                      "json" "asp" "aspx" "haml" "php" "jsp" "ts"
+  ;;                                      "coffee" "scss" "less" "phtml"))
+  ;; (dired-rainbow-define prog "green yellow3" (".*\\.el" "l" "ml" "py" "rb" "pl" "pm" "c"
+  ;;                                       "cpp" "cxx" "c++" "h" "hpp" "hxx" "h++"
+  ;;                                       "m" "cs" "mk" "make" "swift" "go" "java"
+  ;;                                       "asm" "robot" "yml" "yaml" "rake" "lua"))
+  ;; (dired-rainbow-define sh "yellow" ("sh" "bash" "zsh" "fish" "csh" "ksh"
+  ;;                                          "awk" "ps1" "psm1" "psd1" "bat" "cmd"))
+  ;; (dired-rainbow-define text "yellow green" ("txt" "md" "org" "ini" "conf" "rc"
+  ;;                                            "vim" "vimrc" "exrc"))
+  ;; (dired-rainbow-define doc "spring green" ("doc" "docx" "ppt" "pptx" "xls" "xlsx"
+  ;;                                           "csv" "rtf" "wps" "pdf" "texi" "tex"
+  ;;                                           "odt" "ott" "odp" "otp" "ods" "ots"
+  ;;                                           "odg" "otg"))
+  ;; (dired-rainbow-define misc "gray50" ("DS_Store" "projectile" "cache" "elc"
+  ;;                                      "dat" "meta"))
+  ;; (dired-rainbow-define media "#ce5c00" ("mp3" "mp4" "MP3" "MP4" "wav" "wma"
+  ;;                                        "wmv" "mov" "3gp" "avi" "mpg" "mkv"
+  ;;                                        "flv" "ogg" "rm" "rmvb"))
+  ;; (dired-rainbow-define picture "purple3" ("bmp" "jpg" "jpeg" "gif" "png" "tiff"
+  ;;                                          "ico" "svg" "psd" "pcd" "raw" "exif"
+  ;;                                          "BMP" "JPG" "PNG"))
+  ;; (dired-rainbow-define archive "saddle brown" ("zip" "tar" "gz" "tgz" "7z" "rar"
+  ;;                                               "gzip" "xz" "001" "ace" "bz2" "lz"
+  ;;                                               "lzma" "bzip2" "cab" "jar" "iso"))
+  ;; boring regexp due to lack of imagination
+  (dired-rainbow-define log (:inherit default :italic t) ".*\\.log")
+
+  ;; highlight executable files, but not directories
+  (dired-rainbow-define-chmod executable-unix "green" "-[rw-]+x.*")
   )
 
 (use-package sr-speedbar
