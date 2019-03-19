@@ -64,8 +64,7 @@
 ;; (define-key evil-normal-state-map (kbd "RET") 'ivy-switch-buffer-by-pinyin) ; RET key is preserved for occur buffer
 (define-key evil-normal-state-map "go" 'goto-char)
 (define-key evil-normal-state-map (kbd "M-y") 'counsel-browse-kill-ring)
-(define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
-(define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
+;; (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
 (define-key evil-insert-state-map (kbd "C-x C-n") 'evil-complete-next-line)
 (define-key evil-insert-state-map (kbd "C-x C-p") 'evil-complete-previous-line)
 
@@ -94,7 +93,7 @@
                     "6" 'select-window-6
                     "7" 'select-window-7
                     "x0" 'delete-window
-                    "x1" 'delete-other-windows
+                    ;; "x1" 'delete-other-windows
                     "x2" 'split-window-below
                     "x3" 'split-window-right
                     ;;
@@ -107,6 +106,7 @@
                     "hn" 'highlight-symbol-next
                     "hp" 'highlight-symbol-prev
                     "hr" 'highlight-symbol-query-replace
+                    "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
                     ;;
                     "ia" 'my-append-semicolon-excursion
                     "ic" 'my-insert-python
@@ -128,7 +128,7 @@
                     ;; "bl" 'buf-move-right
                     ;; "hd" 'describe-function
                     "hf" 'find-function
-                    "hk" 'describe-key
+                    ;; "hk" 'describe-key
                     "ss" 'swiper
                     "sa" 'swiper-all
                     "fs" 'occur-dwim
@@ -141,8 +141,8 @@
                     "gr" 'counsel-gtags-find-symbol
                     "fr" 'counsel-gtags-find-reference
                     "gu" 'counsel-gtags-update-tags
-                    "qg" 'counsel-etags-grep
-                    "dd" 'counsel-etags-grep-symbol-at-point
+                    ;; "qg" 'counsel-etags-grep
+                    ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
@@ -153,11 +153,11 @@
                     "jr" 'xref-find-references
                     ;; "jb" 'dumb-jump-back
                     "dj" 'dired-jump ;; open the dired from current file
-                    "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
-                    "rt" 'counsel-etags-recent-tag
-                    "ft" 'counsel-etags-find-tag
-                    "bm" 'counsel-bookmark-goto
-                    "br" 'counsel-browse-kill-ring
+                    ;; "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
+                    ;; "rt" 'counsel-etags-recent-tag
+                    ;; "ft" 'counsel-etags-find-tag
+                    ;; "bm" 'counsel-bookmark-goto
+                    ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
                     "cf" 'counsel-grep ; grep current buffer
                     "cg" 'counsel-git ; find file
@@ -346,9 +346,8 @@
                     ;; liang.feng
                     ;; "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
                     ;; "it" 'issue-tracker-increment-issue-id-under-cursor
-                    "ls" 'highlight-symbol
-                    "lq" 'highlight-symbol-query-replace
-                    "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
+                    ;; "ls" 'highlight-symbol
+                    ;; "lq" 'highlight-symbol-query-replace
                     ;;liang.feng
                     ;; "bm" 'pomodoro-start ;; beat myself
                     ;; "ij" 'rimenu-jump
