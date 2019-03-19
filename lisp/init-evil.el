@@ -92,7 +92,7 @@
                     "5" 'select-window-5
                     "6" 'select-window-6
                     "7" 'select-window-7
-                    "x0" 'delete-window
+                    "xx" 'delete-window
                     ;; "x1" 'delete-other-windows
                     "x2" 'split-window-below
                     "x3" 'split-window-right
@@ -140,6 +140,7 @@
                     "gt" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
                     "gr" 'counsel-gtags-find-symbol
                     "fr" 'counsel-gtags-find-reference
+                    "ud" 'undo-tree-visualize
                     "gu" 'counsel-gtags-update-tags
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
@@ -398,8 +399,8 @@
                     ;; liang.feng
                     ;; "sl" 'sort-lines
                     ;; "ulr" 'uniquify-all-lines-region
-                    "ulb" 'uniquify-all-lines-buffer
-                    "fc" 'cp-ffip-ivy-last
+                    ;; "ulb" 'uniquify-all-lines-buffer
+                    ;; "fc" 'cp-ffip-ivy-last
                     ;; "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
                     ;; liang.feng
                     ;; "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
@@ -409,8 +410,7 @@
                             (interactive)
                             (unless (featurep 'org) (require 'org))
                             (counsel-org-agenda-headlines))
-                    "om" 'toggle-org-or-message-mode
-                    "ut" 'undo-tree-visualize
+                    ;; "om" 'toggle-org-or-message-mode
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
                     "xf" 'ido-find-file
