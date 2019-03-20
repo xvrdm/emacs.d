@@ -1089,6 +1089,10 @@
   (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode)))
   ;; Hide gutter when there are no changes if git-gutter:hide-gutter is non-nil. (Default is nil)
   (custom-set-variables '(git-gutter:hide-gutter t))
+  ;; diff information is updated at hooks in git-gutter:update-hooks.
+  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
+  ;; diff information is updated after command in git-gutter:update-commands executed.
+  (add-to-list 'git-gutter:update-commands 'other-window)
   ;; (custom-set-variables
   ;;  '(git-gutter:modified-sign "~") ;; two space
   ;;  '(git-gutter:added-sign "++")    ;; multiple character is OK
