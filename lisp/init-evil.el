@@ -15,8 +15,10 @@
 (define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
 (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
 ;; (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
+;; (define-key evil-normal-state-map (kbd "[rc") 'clipboard-yank)
 
 (define-key evil-visual-state-map "gg" 'evil-change-to-previous-state)
+;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
 
 ;; evil setting
 (evil-mode)
@@ -118,6 +120,8 @@
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
                     "ii" 'counsel-imenu
+                    "kk" 'scroll-other-window
+                    "jj" 'scroll-other-window-up
                     "tb" 'imenu-list-smart-toggle
                     "xm" 'my-M-x
                     ;; "bk" 'buf-move-up
@@ -282,8 +286,14 @@
                     ;; "zz" 'paste-from-x-clipboard ; used frequently
                     ;; "cy" 'strip-convert-lines-into-one-big-string
                     "cy" 'clipboard-yank
-                    "kk" 'scroll-other-window
-                    "jj" 'scroll-other-window-up
+                    ;; (define-key evil-normal-state-map (kbd "[ cp") 'git-gutter+-previous-hunk)
+                    ;; (define-key evil-normal-state-map (kbd "[ cn") 'git-gutter+-next-hunk)
+                    ;; (define-key evil-normal-state-map (kbd "[ st") 'git-gutter+-stage-hunk)
+                    ;; "cn" 'git-gutter+-next-hunk
+                    ;; "cp" 'git-gutter+-previous-hunk
+                    "cn" 'git-gutter:next-hunk
+                    "cp" 'git-gutter:previous-hunk
+                    "c=" 'vc-diff
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
                     ;; liang.feng
@@ -437,7 +447,7 @@
 
 ;; must put after "nvmap :prefix \"SPC\""
 ;;evil-easymotion
-(evilem-default-keybindings "SPC")
+;; (evilem-default-keybindings "SPC")
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

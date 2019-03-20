@@ -1,6 +1,7 @@
 ;; swiper setting
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c i") 'clipboard-yank)
+(global-set-key (kbd "C-c u") 'eval-last-sexp)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -27,8 +28,6 @@
 
 ;; counsel-imenu bind
 (global-set-key (kbd "M-s i") 'counsel-imenu)
-
-;; (global-set-key (kbd "M-i i") 'eval-last-sexp)
 
 ;; expand bind
 (require 'expand-region)

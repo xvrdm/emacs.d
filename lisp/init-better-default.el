@@ -63,11 +63,15 @@
 ;; 括号匹配高亮
 ;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
+;; (if (not (equal 'windows-nt system-type))
+;;     (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
+;; )
+
 ;; 行号
 (global-linum-mode 1)
-(if (not (equal 'windows-nt system-type))
-    (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
-)
+(when (not (display-graphic-p))
+  (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
+  )
 
 ;;
 (delete-selection-mode 1)

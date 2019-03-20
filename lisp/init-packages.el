@@ -231,7 +231,14 @@
                          ;;
                          ivy-xref
                          ;;
-                         ;; git-gutter
+                         fringe-helper
+                         ;;
+                         git-gutter
+                         git-gutter-fringe
+                         ;; git-gutter+
+                         ;; git-gutter-fringe+
+                         ;;
+                         ;; diff-hl
                          ;;
                          ace-popup-menu
                          ;;
@@ -612,7 +619,7 @@
 (use-package evil-easymotion
   :delight
   :config
-  (evilem-default-keybindings "C-c e")
+  (evilem-default-keybindings "M-m")
   )
 
 (use-package evil-matchit
@@ -1063,12 +1070,86 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
-;; (use-package git-gutter
+(use-package fringe-helper
+  :init
+  :delight
+  :config
+  )
+
+(use-package git-gutter
+  :config
+  ;; If you enable global minor mode
+  (global-git-gutter-mode t)
+  ;; If you would like to use git-gutter.el and linum-mode
+  ;; (git-gutter:linum-setup)
+  ;; Use for 'Git'(`git`), 'Mercurial'(`hg`), 'Bazaar'(`bzr`), and 'Subversion'(`svn`) projects
+  ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
+  (custom-set-variables '(git-gutter:handled-backends '(git svn)))
+  ;; inactivate git-gutter-mode in asm-mode and image-mode
+  (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode)))
+  ;; Hide gutter when there are no changes if git-gutter:hide-gutter is non-nil. (Default is nil)
+  (custom-set-variables '(git-gutter:hide-gutter t))
+  ;; (custom-set-variables
+  ;;  '(git-gutter:modified-sign "~") ;; two space
+  ;;  '(git-gutter:added-sign "++")    ;; multiple character is OK
+  ;;  '(git-gutter:deleted-sign "--"))
+  ;; (set-face-background 'git-gutter:modified "purple") ;; background color
+  ;; (set-face-foreground 'git-gutter:added "green")
+  ;; (set-face-foreground 'git-gutter:deleted "red")
+  ;; (set-face-background 'git-gutter:modified "purple") ;; background color
+  ;; (set-face-background 'git-gutter:added "green")
+  ;; (set-face-background 'git-gutter:deleted "red")
+  ;; Jump to next/previous hunk
+  ;; (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
+  ;; (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
+  ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
+  )
+
+(use-package git-gutter-fringe
+  :config
+  (set-face-foreground 'git-gutter-fr:modified "purple")
+  (set-face-foreground 'git-gutter-fr:added    "green")
+  (set-face-foreground 'git-gutter-fr:deleted  "red")
+  )
+
+
+;; (use-package diff-hl
+;;   :init
+;;   :delight
 ;;   :config
-;;   ;; If you enable global minor mode
-;;   (global-git-gutter-mode t)
+;;   (global-diff-hl-mode)
+;;   ;; (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
+;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+;;   (define-key evil-normal-state-map (kbd "[ c") 'diff-hl-next-hunk)
+;;   (define-key evil-normal-state-map (kbd "] c") 'diff-hl-previous-hunk)
+;;   )
+
+;; git-gutter+
+;; (use-package git-gutter+
+;;   :init
+;;   :delight
+;;   :config
 ;;   ;; If you would like to use git-gutter.el and linum-mode
-;;   ;; (git-gutter:linum-setup)
+;;   (global-git-gutter+-mode)
+;;   ;; (set-face-foreground 'git-gutter+-modified "purple")
+;;   ;; (set-face-foreground 'git-gutter+-added    "green")
+;;   ;; (set-face-foreground 'git-gutter+-deleted  "red")
+;;   ;; (define-key evil-normal-state-map (kbd "[ cp") 'git-gutter+-previous-hunk)
+;;   ;; (define-key evil-normal-state-map (kbd "[ cn") 'git-gutter+-next-hunk)
+;;   ;; (define-key evil-normal-state-map (kbd "[ st") 'git-gutter+-stage-hunk)
+;;   )
+
+
+;; git-gutter-fringe+
+;; (require 'git-gutter-fringe+)
+;; (use-package git-gutter-fringe+
+;;   :init
+;;   :delight
+;;   :config
+;;   (git-gutter-fr+-minimal)
+;;   (set-face-foreground 'git-gutter-fr+-modified "purple")
+;;   (set-face-foreground 'git-gutter-fr+-added    "green")
+;;   (set-face-foreground 'git-gutter-fr+-deleted  "red")
 ;;   )
 
 ;; (use-package company-statistics
@@ -1108,8 +1189,12 @@
   (add-hook 'dired-initial-position-hook 'dired-k)
 
   (add-hook 'dired-after-readin-hook #'dired-k-no-revert)
-  (setq dired-k-style 'git)
+  ;; (setq dired-k-style 'git)
+  (setq dired-k-style 'k.zsh)
   (setq dired-k-padding 1)
+  ;; (define-key dired-mode-map (kbd "K") 'dired-k)
+  ;; ;; You can use dired-k alternative to revert-buffer
+  ;; (define-key dired-mode-map (kbd "g") 'dired-k)
   )
 
 (use-package dired-rainbow
