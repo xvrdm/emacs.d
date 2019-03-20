@@ -126,9 +126,6 @@
                     ;; "bj" 'buf-move-down
                     ;; "bh" 'buf-move-left
                     ;; "bl" 'buf-move-right
-                    ;; "hd" 'describe-function
-                    "hf" 'find-function
-                    ;; "hk" 'describe-key
                     "ss" 'swiper
                     "sa" 'swiper-all
                     "fs" 'occur-dwim
@@ -310,6 +307,13 @@
                     ;; "fn" 'cp-filename-of-current-buffer
                     ;; "fp" 'cp-fullpath-of-current-buffer
                     ;; "ff" 'toggle-full-window ;; I use WIN+F in i3
+                    ;; "hd" 'describe-function
+                    "hf" 'find-function
+                    "hv" 'find-variable
+                    "hk" 'find-function-on-key
+                    "df" 'counsel-describe-function
+                    "dv" 'counsel-describe-variable
+                    "dk" 'describe-key
                     ;; "ip" 'find-file-in-project
                     ;; liang.feng
                     ;; "kk" 'find-file-in-project-by-selected
