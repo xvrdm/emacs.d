@@ -42,6 +42,8 @@
                          ;; --- Better Editor ---
                          hungry-delete
                          ;;
+                         ivy
+                         ;;
                          swiper
                          ;;
                          counsel
@@ -213,6 +215,8 @@
                          ;;
                          highlight-parentheses
                          ;;
+                         direx
+                         ;;
                          dired-imenu
                          ;;
                          imenu-anywhere
@@ -334,6 +338,10 @@
   ;; fix hungry-delete & smartparents conflict
   (defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
     (save-match-data (sp-delete-pair (ad-get-arg 0))))
+  )
+
+(use-package ivy
+  :config
   )
 
 (use-package swiper
@@ -1003,6 +1011,11 @@
     (lambda()
       (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)
+  )
+
+;; direx
+(use-package direx
+  :config
   )
 
 ;; dired-imenu
