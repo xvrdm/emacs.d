@@ -264,4 +264,9 @@ want to use in the modeline *in lieu of* the original.")
   (insert "\n# Content: ")
   )
 
+;; 重新载入emacs配置
+(defun mage-reload-config()
+  (interactive)
+  (load user-init-file nil t))
+
 (provide 'init-minefunc)

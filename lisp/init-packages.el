@@ -341,7 +341,14 @@
   )
 
 (use-package ivy
+  :defer
   :config
+  (setq ivy-initial-inputs-alist nil
+        ivy-wrap t
+        ivy-height 15
+        ivy-fixed-height-minibuffer t
+        ivy-format-function #'ivy-format-function-line
+        ) (ivy-mode +1) :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
   )
 
 (use-package swiper
