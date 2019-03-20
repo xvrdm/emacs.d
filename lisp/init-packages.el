@@ -1081,7 +1081,7 @@
   ;; If you enable global minor mode
   (global-git-gutter-mode t)
   ;; If you would like to use git-gutter.el and linum-mode
-  ;; (git-gutter:linum-setup)
+  (when (not (display-graphic-p)) (git-gutter:linum-setup))
   ;; Use for 'Git'(`git`), 'Mercurial'(`hg`), 'Bazaar'(`bzr`), and 'Subversion'(`svn`) projects
   ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
   (custom-set-variables '(git-gutter:handled-backends '(git svn)))
@@ -1109,13 +1109,13 @@
   ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
   )
 
-(use-package git-gutter-fringe
-  :config
-  (set-face-foreground 'git-gutter-fr:modified "purple")
-  (set-face-foreground 'git-gutter-fr:added    "green")
-  (set-face-foreground 'git-gutter-fr:deleted  "red")
+(when (display-graphic-p)
+  (use-package git-gutter-fringe
+    :config
+    (set-face-foreground 'git-gutter-fr:modified "purple")
+    (set-face-foreground 'git-gutter-fr:added    "green")
+    (set-face-foreground 'git-gutter-fr:deleted  "red"))
   )
-
 
 ;; (use-package diff-hl
 ;;   :init

@@ -120,8 +120,6 @@
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
                     "ii" 'counsel-imenu
-                    "kk" 'scroll-other-window
-                    "jj" 'scroll-other-window-up
                     "tb" 'imenu-list-smart-toggle
                     "xm" 'my-M-x
                     ;; "bk" 'buf-move-up
@@ -266,6 +264,8 @@
                     ;; "xc" 'save-buffers-kill-terminal
                     "qq" 'save-buffers-kill-terminal
                     "xx" 'suspend-frame
+                    "kk" 'scroll-other-window
+                    "jj" 'scroll-other-window-up
                     ;; "me" 'mc/edit-lines
                     ;; "=" 'increase-default-font-height ; GUI emacs onl
                     ;; "-" 'decrease-default-font-height ; GUI emacs only
