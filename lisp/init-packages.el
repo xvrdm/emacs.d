@@ -189,7 +189,7 @@
                          ;;
                          ace-window
                          ;;
-                         hydra
+                         ;; hydra
                          ;; too slow
                          ;; color-identifiers-mode
                          ;;
@@ -859,9 +859,9 @@
   )
 
 ;; hydra
-(use-package hydra
-  :delight
-  )
+;; (use-package hydra
+;;   :delight
+;;   )
 
 ;; color-identifiers-mode--->too slow to parse files
 ;; (require 'color-identifiers-mode)
