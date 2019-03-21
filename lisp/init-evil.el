@@ -177,7 +177,7 @@
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
                     ;; "rm" 'my-recent-file
-                    "rm" 'ivy-recentf
+                    "rm" 'counsel-recentf
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
                     "sr" 'replace-regexp
