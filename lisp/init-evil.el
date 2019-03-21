@@ -177,8 +177,6 @@
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
                     "rm" 'my-recent-file
-                    "pf" 'projectile-find-file-dwim
-                    "ps" 'projectile-speedbar-toggle
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
                     "sr" 'replace-regexp
@@ -428,6 +426,8 @@
                             (unless (featurep 'org) (require 'org))
                             (counsel-org-agenda-headlines))
                     ;; "om" 'toggle-org-or-message-mode
+                    "pf" 'projectile-find-file-dwim
+                    "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
                     "xf" 'ido-find-file
