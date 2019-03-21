@@ -177,6 +177,7 @@
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
                     "rm" 'my-recent-file
+                    "pf" 'projectile-find-file-dwim
                     "ps" 'projectile-speedbar-toggle
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
@@ -211,6 +212,8 @@
                     ;; "gj" 'w3m-search-js-api-mdn
                     ;; "ga" 'w3m-java-search
                     ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
+                    "sm" 'smex
+                    "sj" 'smex-major-mode-commands
                     "se" 'open-init-file
                     "ce" 'evil-emacs-state
                     ;; "gq" 'w3m-stackoverflow-search

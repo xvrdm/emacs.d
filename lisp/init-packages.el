@@ -39,8 +39,9 @@
                          ;; atom-one-dark-theme
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
                          evil
-                         ;; --- Better Editor ---
-                         hungry-delete
+                         ;;
+                         ;; helm
+                         ;; helm-ag
                          ;;
                          ivy
                          ;;
@@ -49,6 +50,8 @@
                          counsel
                          ;; http://blog.binchen.org/#
                          ;; counsel-etags
+                         ;;
+                         hungry-delete
                          ;;
                          smartparens
                          ;;
@@ -72,7 +75,6 @@
                          ;;
                          org-pomodoro
                          ;;
-                         ;; helm-ag
                          ;;
                          magit
                          ;;
@@ -136,6 +138,8 @@
                          ;; function-args
                          ;;
                          neotree
+                         ;;
+                         projectile
                          ;;
                          projectile-speedbar
                          ;;
@@ -331,6 +335,7 @@
 
 ;; hungry-delete seting
 (use-package hungry-delete
+  :defer
   :delight hungry-delete-mode
   :config
   (global-hungry-delete-mode)
@@ -340,6 +345,14 @@
     (save-match-data (sp-delete-pair (ad-get-arg 0))))
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (use-package helm
+;;   :defer
+;;   :init
+;;   :delight
+;;   :config
+;;   )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package ivy
   :defer
   :config
@@ -589,6 +602,12 @@
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
+  )
+
+(use-package projectile
+  :defer
+  :config
+  (projectile-mode +1)
   )
 
 ;; projectile-speedbar
@@ -1050,7 +1069,10 @@
 
 ;; smex
 (use-package smex
+  :defer
   :delight
+  :config
+  (smex-initialize)
   )
 
 ;; (use-package tabbar

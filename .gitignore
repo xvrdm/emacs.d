@@ -18,3 +18,5 @@ lisp/GPATH
 lisp/GRTAGS
 lisp/GTAGS
 lisp/custom.el
+*.eld
+*.cache
