@@ -176,7 +176,8 @@
                     "yd" 'youdao-dictionary-search-from-input
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
-                    "rm" 'my-recent-file
+                    ;; "rm" 'my-recent-file
+                    "rm" 'ivy-recentf
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
                     "sr" 'replace-regexp
