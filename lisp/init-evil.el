@@ -210,6 +210,7 @@
                     ;; "gj" 'w3m-search-js-api-mdn
                     ;; "ga" 'w3m-java-search
                     ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
+                    "ma" 'magit
                     "sm" 'smex
                     "sj" 'smex-major-mode-commands
                     "se" 'open-init-file
