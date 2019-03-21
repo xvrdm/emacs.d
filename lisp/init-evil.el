@@ -240,8 +240,8 @@
                     ;; "gs" 'git-gutter:set-start-revision
                     ;; "gh" 'git-gutter-reset-to-head-parent
                     ;; "gr" 'git-gutter-reset-to-default
-                    "ps" 'profiler-start
-                    "pr" 'profiler-report
+                    ;; "ps" 'profiler-start
+                    ;; "pr" 'profiler-report
                     "ud" 'my-gud-gdb
                     ;; "uk" 'gud-kill-yes
                     ;; "ur" 'gud-remove
@@ -319,7 +319,7 @@
                     "dk" 'describe-key
                     ;; "ip" 'find-file-in-project
                     ;; liang.feng
-                    ;; "kk" 'find-file-in-project-by-selected
+                    ;; "kk" 'find-filem-in-project-by-selected
                     ;; liang.feng
                     ;; "kn" 'find-file-with-similar-name ; ffip v5.3.1
                     ;; "fd" 'find-directory-in-project-by-selected
@@ -432,11 +432,11 @@
                     "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
-                    "xf" 'ido-find-file
+                    ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin
                     "xh" 'mark-whole-buffer
-                    "xk" 'ido-kill-buffer
-                    "xs" 'save-buffer
+                    ;; "xk" 'ido-kill-buffer
+                    ;; "xs" 'save-buffer
                     ;; "vm" 'vc-rename-file-and-buffer
                     ;; "vc" 'vc-copy-file-and-rename-buffer
                     ;; "xvv" 'vc-next-action ; 'C-x v v' in original
