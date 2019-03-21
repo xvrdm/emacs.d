@@ -166,7 +166,7 @@
                          ;; A new implementation of Powerline for Emacs 
                          telephone-line
                          ;;
-                         dashboard
+                         ;; dashboard
                          ;;
                          highlight-symbol
                          ;;
@@ -772,20 +772,20 @@
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
-(use-package dashboard
-  :delight dashboard-mode
-  :config
-  (dashboard-setup-startup-hook)
-  ;; Set the title
-  (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
-  ;; Set the banner
-  (setq dashboard-startup-banner nil)
-  ;; Value can be
-  ;; 'official which displays the official emacs logo
-  ;; 'logo which displays an alternative emacs logo
-  ;; 1, 2 or 3 which displays one of the text banners
-  ;; "path/to/your/image.png which displays whatever image you would prefer
-  )
+;; (use-package dashboard
+;;   :delight dashboard-mode
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;   ;; Set the title
+;;   (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+;;   ;; Set the banner
+;;   (setq dashboard-startup-banner nil)
+;;   ;; Value can be
+;;   ;; 'official which displays the official emacs logo
+;;   ;; 'logo which displays an alternative emacs logo
+;;   ;; 1, 2 or 3 which displays one of the text banners
+;;   ;; "path/to/your/image.png which displays whatever image you would prefer
+;;   )
 
 ;; highlight-symbol
 ;; (require 'highlight-symbol)
