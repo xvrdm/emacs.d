@@ -80,6 +80,8 @@
                          ;;
                          evil-magit
                          ;;
+                         xpm
+                         ;;
                          ;; auto-yasnippet
                          ;;
                          yasnippet
