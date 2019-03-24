@@ -17,7 +17,7 @@
   #+TBLFM: $4=$2-$3
   
   [[https://orgmode.org/orgguide.pdf]]
-    [[C:\Users\feng\vimfiles\gitconfig]]
+  [[C:\Users\feng\vimfiles\gitconfig]]
 
 * test2.2 :2.2header:
 
