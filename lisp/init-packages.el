@@ -1,10 +1,10 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
- (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
-;;  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-  ;;                       ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+ ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+ ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
+ (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
 ;; (setq package-archives
    ;;   '(;; uncomment below line if you need use GNU ELPA
         ;; ("gnu" . "https://elpa.gnu.org/packages/")
