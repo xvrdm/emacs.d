@@ -20,6 +20,9 @@
 
 ;; (add-hook 'after-init-hook '(set-face-attribute 'default (selected-frame) :height 100))
 
+;; highlight source code in org mode
+(setq org-src-fontify-natively t)
+
 ;; 高亮当前行
 (global-hl-line-mode 1)
 

@@ -1,0 +1,48 @@
+* learn function
+#+BEGIN_SRC emacs-lisp 
+(defun double(x) (* x 2))
+(double 1)
+(equal #'double (car (list #'double)))
+((lambda(x) (* x 2)) 3)
+(setq double 2)
+(symbol-value 'double)
+(symbol-function 'double)
+(setq fun1 #'double)
+(setq x #'append)
+(equal (symbol-value 'x) (symbol-function 'append))
+(setf (symbol-function #'double)
+      #'(lambda(x) (* x 3)))
+(double 3)
+
+;; blow 5 same
+(+ 1 2)
+(apply #'+ '(1 2))
+(apply (symbol-function '+) '(1 2))
+(apply #'(lambda(x y) (+ x y)) '(1 2))
+(apply #'+ 1 '(2))
+(funcall #'* 1 2)
+;;;;;;;;;;;
+(mapcar #'(lambda(x) (+ x 10)) '(1 2 3))
+(mapcar #'+
+        '(1 2 3)
+        '(10 100 1000))
+
+(sort '(1 4 2 5 7 3) #'<)
+(apply #'< (sort '(1 5 2 3 7) #'<))
+
+;;;;;;;;;;;
+(remove-if #'evenp '(1 2 3 4 5 6 7))
+
+(defun our-remove-if(fn lst)
+  (if (null lst)
+      nil
+    (if (funcall fn (car lst))
+        (our-remove-if fn (cdr lst))
+      (cons (car lst) (our-remove-if fn (cdr lst))))))
+(our-remove-if #'evenp '(1 3 4 5 2))
+#+END_SRC 
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-fontify-natively t)
+(w32-version)
+#+END_SRC
