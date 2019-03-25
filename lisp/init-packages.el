@@ -57,6 +57,10 @@
                          ;;
                          ;; js2-mode
                          ;;
+                         ;; cnfonts
+                         ;;
+                         ;;
+                         ;; default-text-scale
                          ;; nodejs-repl
                          ;;
                          ;; add-node-modules-path
@@ -987,6 +991,18 @@
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
   )
+
+;; (use-package cnfonts
+;;   :config
+;;   ;; 让 cnfonts 随着 Emacs 自动生效。
+;;   (cnfonts-enable)
+;;   ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;;   ;; (cnfonts-set-spacemacs-fallback-fonts)
+;;   )
+
+;; (use-package default-text-scale
+;;  :config
+;;  )
 
 ;; evil-visualstar
 (use-package evil-visualstar
