@@ -1,10 +1,10 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
- (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
-;;  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-  ;;                       ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+ ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+ ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
+ (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
 ;; (setq package-archives
    ;;   '(;; uncomment below line if you need use GNU ELPA
         ;; ("gnu" . "https://elpa.gnu.org/packages/")
@@ -38,6 +38,11 @@
                          ;; ample-zen-theme
                          ;; atom-one-dark-theme
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                         ;;
+                         pyim-basedict
+                         pyim
+                         posframe
+                         ;;
                          evil
                          ;;
                          ;; helm
@@ -83,6 +88,8 @@
                          magit
                          ;;
                          evil-magit
+                         ;;
+                         xpm
                          ;;
                          ;; auto-yasnippet
                          ;;
@@ -142,6 +149,8 @@
                          ;; function-args
                          ;;
                          neotree
+                         ;;
+                         all-the-icons
                          ;;
                          projectile
                          ;;
@@ -318,6 +327,57 @@
 ;; (load-theme 'atom-one-dark t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package posframe)
+(use-package pyim
+  :ensure nil
+  :demand t
+  :config
+  ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
+  (use-package pyim-basedict
+    :ensure nil
+    :config (pyim-basedict-enable))
+
+  (setq default-input-method "pyim")
+
+  ;; 我使用全拼
+  (setq pyim-default-scheme 'quanpin)
+  ;; (setq pyim-default-scheme 'pyim-shuangpin)
+  ;; (setq pyim-default-scheme 'xiaohe-shuangpin)
+  ;; (setq pyim-schemes 'xiaohe-shuangpin)
+
+  ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+  ;; 我自己使用的中英文动态切换规则是：
+  ;; 1. 光标只有在注释里面时，才可以输入中文。
+  ;; 2. 光标前是汉字字符时，才能输入中文。
+  ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+  ;; (setq-default pyim-english-input-switch-functions
+  ;;               '(pyim-probe-dynamic-english
+  ;;                 pyim-probe-isearch-mode
+  ;;                 pyim-probe-program-mode
+  ;;                 pyim-probe-org-structure-template))
+
+  ;; (setq-default pyim-punctuation-half-width-functions
+  ;;               '(pyim-probe-punctuation-line-beginning
+  ;;                 pyim-probe-punctuation-after-punctuation))
+
+  ;; 开启拼音搜索功能
+  ;; (pyim-isearch-mode 1)
+
+  ;; 使用 pupup-el 来绘制选词框, 如果用 emacs26, 建议设置
+  ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
+  ;; 手动安装 posframe 包。
+  ;; (setq pyim-page-tooltip 'popup)
+  (setq pyim-page-tooltip 'posframe)
+
+  ;; 选词框显示5个候选词
+  (setq pyim-page-length 5)
+
+  :bind
+  (("M-j" . pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
+   ;; ("C-;" . pyim-delete-word-from-personal-buffer))
+   )
+  )
+
 ;; https://github.com/emacs-evil/evil-collection
 ;; evil
 (use-package evil
@@ -602,16 +662,55 @@
 ;;   )
 
 ;; neotree
+;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
+  ;; Note: For users who want to use the icons theme. Pls make sure you have installed the all-the-icons package and its fonts.
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  ;; Every time when the neotree window is opened, let it find current file and jump to node.
+  (setq neo-smart-open t)
+  ;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  ;; Similar to find-file-in-project, NeoTree can be opened (toggled) at projectile project root as follows:
+  (defun neotree-project-dir ()
+    "Open NeoTree using the git root."
+    (interactive)
+    (let ((project-dir (projectile-project-root))
+          (file-name (buffer-file-name)))
+      (neotree-toggle)
+      (if project-dir
+          (if (neo-global--window-exists-p)
+              (progn
+                (neotree-dir project-dir)
+                (neotree-find file-name)))
+        (message "Could not find git project root."))))
+  ;; If you use evil-mode, by default some of evil key bindings conflict with neotree-mode keys. For example,
+  ;; you cannot use q to hide NeoTree. To make NeoTree key bindings in effect, you can bind those keys
+  ;; in evil-normal-state-local-map in neotree-mode-hook, as shown in below code:
+  (add-hook 'neotree-mode-hook
+            (lambda ()
+              (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+              (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+              (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+              (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+              (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+              (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+              (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+              (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+  )
+
+(when (display-graphic-p)
+  (use-package all-the-icons)
   )
 
 (use-package projectile
   :defer
   :config
   (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   )
 
 ;; projectile-speedbar

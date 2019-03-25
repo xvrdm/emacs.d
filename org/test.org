@@ -1,0 +1,28 @@
+# -*- org -*- 
+#+TITLE: org-mode 备忘录 
+#+AUTHOR: ZGUANG@LZU 
+#+STARTUP: content 
+#+STARTUP: indent 
+#+TODO: TODO STARTED | DONE 
+<<目录位置>> 
+* 列表 
+  + 选项1 
+  + 选项2 
+* 表格 
+#+TBLNAME: 简单表格 
+| Name | Value |   SD |
+|------+-------+------|
+| T1   |   1.2 | 0.14 |
+| T2   |   2.3 | 0.11 |
+
+* STARTED [80%] 超链接 
+** 网址链接 [[www.gnu.org/software/emacs/][Download and install Emacs]] 
+** 文件链接 [[file:c:/windows/desktop.ini][桌面配置文件]] 
+** 内部链接 [[目录位置][返回目录]] 
+** TODO 其他链接 
+* 代码块                                                              :@待续: 
+#+BEGIN_SRC Emacs-lisp 
+(setq-default tab-width 4) ;设置TAB宽度为4字符 
+#+END_SRC 
+* TODO COMMENT 其他内容 
+被注释的标题所包含的所有内容在文件导出时不会被显示

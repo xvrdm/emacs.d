@@ -1,0 +1,25 @@
+* test2                                                 :header:subofheader1:
++ treeroot
+  + branch1
+  + branch2
+  + branch3
++ [X] task1 [100%]
+  1) [] subtask1
+  2) [X] subtask2
+  3) [] subtask3
+  4) subtask4
++ [ ] 
+
+  | Name | sub1 | sub2 | total |
+  |------+------+------+-------|
+  | feng |   33 |   44 |   -11 |
+  | jing |   33 |   22 |    11 |
+  #+TBLFM: $4=$2-$3
+  
+  [[https://orgmode.org/orgguide.pdf]]
+  [[C:\Users\feng\vimfiles\gitconfig]]
+
+* test2.2 :2.2header:
+
+
+[fn:1]本文参考自http://orgmode.org/orgguide.pdf 
