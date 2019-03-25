@@ -337,7 +337,7 @@
     ;; :ensure nil
     :config (pyim-basedict-enable))
 
-  (setq-default default-input-method "pyim")
+  (setq default-input-method "pyim")
 
   ;; 我使用全拼
   ;; (setq pyim-default-scheme 'quanpin)
@@ -360,7 +360,7 @@
                   pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
-  (pyim-isearch-mode 1)
+  ;; (pyim-isearch-mode 1)
 
   ;; 使用 pupup-el 来绘制选词框, 如果用 emacs26, 建议设置
   ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
@@ -376,11 +376,9 @@
   ;;           #'(lambda() (pyim-restart-1 t)))
 
   :bind
-  (("M-o o" . pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
-   ;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
-   )
+  (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
+   ("M-o o" . pyim-convert-string-at-point)) ;与 pyim-probe-dynamic-english 配合
   )
-
 
 ;; https://github.com/emacs-evil/evil-collection
 ;; evil
