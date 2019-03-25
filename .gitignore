@@ -20,3 +20,4 @@ lisp/GTAGS
 lisp/custom.el
 *.eld
 *.cache
+pyim/*
