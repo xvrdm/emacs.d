@@ -595,6 +595,7 @@
 (use-package counsel-gtags
   :delight counsel-gtags-mode
   :config
+  (setq counsel-gtags-auto-update t)
   (add-hook 'c-mode-hook 'counsel-gtags-mode)
   (add-hook 'c++-mode-hook 'counsel-gtags-mode)
   )
