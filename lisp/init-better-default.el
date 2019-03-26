@@ -48,6 +48,9 @@
 ;; auto reload file
 (global-auto-revert-mode t)
 
+;; 在使用emacs时，一行文字如果不按回车键，那么它就会一直往右延伸，不会自动换行。这是很不方便的。
+(setq work-wrap 'off)
+
 ;; 禁用备份文件
 (setq make-backup-files nil)
 (setq auto-save-default nil)
