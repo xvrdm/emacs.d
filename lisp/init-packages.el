@@ -508,7 +508,7 @@
   :delight
   :config
   ;; https://www.helplib.com/GitHub/article_131559
-  (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
+  ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
   )
 
 ;; yasnippet setting
