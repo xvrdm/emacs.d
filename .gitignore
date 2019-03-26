@@ -21,3 +21,4 @@ lisp/custom.el
 *.eld
 *.cache
 pyim/*
+org/*.html

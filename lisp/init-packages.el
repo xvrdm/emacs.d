@@ -82,6 +82,10 @@
                          ;;
                          iedit
                          ;;
+                         org
+                         ;;
+                         htmlize
+                         ;;
                          org-pomodoro
                          ;;
                          ;;
@@ -784,6 +788,9 @@
 ;;  - Please note ";;" or `avy-goto-char-timer' is also useful
 (use-package evil-iedit-state
   :delight)
+
+(use-package org)
+(use-package htmlize)
 
 (use-package general
   :delight

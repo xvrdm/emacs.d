@@ -1,6 +1,6 @@
 # -*- org -*- 
 #+TITLE: org-mode 备忘录 
-#+AUTHOR: ZGUANG@LZU 
+#+AUTHOR: 
 #+STARTUP: content 
 #+STARTUP: indent 
 #+TODO: TODO STARTED | DONE 
@@ -16,7 +16,7 @@
 | T2   |   2.3 | 0.11 |
 
 * STARTED [80%] 超链接 
-** 网址链接 [[www.gnu.org/software/emacs/][Download and install Emacs]] 
+# ** 网址链接 [[www.gnu.org/software/emacs/][Download and install Emacs]] 
 ** 文件链接 [[file:c:/windows/desktop.ini][桌面配置文件]] 
 ** 内部链接 [[目录位置][返回目录]] 
 ** TODO 其他链接 
@@ -41,10 +41,10 @@ _下划线_
 
 * 列表
 ** Org 能够识别有序列表、无序列表和描述列表。
-1.无序列表项以‘-’、‘+’或者‘*‘开头。
-2.有序列表项以‘1.’或者‘1)’开头。
-3.描述列表用‘::’将项和描述分开。
-4.有序列表和无序列表都以缩进表示层级。只要对齐缩进，不管是换行还是分块都认为是处于当前列表项。
+1. 无序列表项以‘-’、‘+’或者‘*‘开头。
+2. 有序列表项以‘1.’或者‘1)’开头。
+3. 描述列表用‘::’将项和描述分开。
+4. 有序列表和无序列表都以缩进表示层级。只要对齐缩进，不管是换行还是分块都认为是处于当前列表项。
 
 同一列表中的项的第一行必须缩进相同程度。当下一行的缩进与列表项的的开头的符号或者数字相同或者更小时，这一项就结束了。当所有的项都关上时，或者后面有两个空行 时，列表就结束了。例如：
 My favorite scenes are (in this order)
