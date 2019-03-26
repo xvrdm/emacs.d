@@ -229,6 +229,8 @@
                     :prefix "SPC"
                     :non-normal-prefix "M-SPC"
                     "SPC" 'evil-ex
+                    "ef" 'with-editor-finish
+                    "ec" 'with-editor-cancel
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
