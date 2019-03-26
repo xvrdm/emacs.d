@@ -1,90 +1,90 @@
 #+STARTUP: indent 
 * learn function
 ** symbol #' and symbol-value symbol-function
-   #+BEGIN_SRC emacs-lisp 
-   (defun double(x) (* x 2))
-   (double 1)
-   (equal #'double (car (list #'double)))
-   ((lambda(x) (* x 2)) 3)
-   (setq double 2)
-   (symbol-value 'double)
-   (symbol-function 'double)
-   (setq fun1 #'double)
-   (setq x #'append)
-   (equal (symbol-value 'x) (symbol-function 'append))
-   (setf (symbol-function #'double) #'(lambda(x) (* x 3)))
-   (double 3)
-   #+END_SRC
+#+BEGIN_SRC emacs-lisp 
+(defun double(x) (* x 2))
+(double 1)
+(equal #'double (car (list #'double)))
+((lambda(x) (* x 2)) 3)
+(setq double 2)
+(symbol-value 'double)
+(symbol-function 'double)
+(setq fun1 #'double)
+(setq x #'append)
+(equal (symbol-value 'x) (symbol-function 'append))
+(setf (symbol-function #'double) #'(lambda(x) (* x 3)))
+(double 3)
+#+END_SRC
 ** function call
-   下面几个函数调用都是相同的作用，调用了函数+
-   #+BEGIN_SRC emacs-lisp
-   (+ 1 2)
-   (apply #'+ '(1 2))
-   (apply (symbol-function '+) '(1 2))
-   (apply #'(lambda(x y) (+ x y)) '(1 2))
-   (apply #'+ 1 '(2))
-   (funcall #'* 1 2)
-   #+END_SRC
+下面几个函数调用都是相同的作用，调用了函数+
+#+BEGIN_SRC emacs-lisp
+(+ 1 2)
+(apply #'+ '(1 2))
+(apply (symbol-function '+) '(1 2))
+(apply #'(lambda(x y) (+ x y)) '(1 2))
+(apply #'+ 1 '(2))
+(funcall #'* 1 2)
+#+END_SRC
 ** #' mapcar
-   #+BEGIN_SRC emacs-lisp
-   (mapcar #'(lambda(x) (+ x 10)) '(1 2 3))
-   (mapcar #'+
-           '(1 2 3)
-           '(10 100 1000))
+#+BEGIN_SRC emacs-lisp
+(mapcar #'(lambda(x) (+ x 10)) '(1 2 3))
+(mapcar #'+
+        '(1 2 3)
+        '(10 100 1000))
 
-   (sort '(1 4 2 5 7 3) #'<)
-   (apply #'< (sort '(1 5 2 3 7) #'<))
+(sort '(1 4 2 5 7 3) #'<)
+(apply #'< (sort '(1 5 2 3 7) #'<))
 
-   (remove-if #'evenp '(1 2 3 4 5 6 7))
+(remove-if #'evenp '(1 2 3 4 5 6 7))
 
-   (defun our-remove-if(fn lst)
-   (if (null lst)
-       nil
-       (if (funcall fn (car lst))
-           (our-remove-if fn (cdr lst))
-       (cons (car lst) (our-remove-if fn (cdr lst))))))
-   (our-remove-if #'evenp '(1 3 4 5 2))
-   #+END_SRC 
+(defun our-remove-if(fn lst)
+(if (null lst)
+    nil
+    (if (funcall fn (car lst))
+        (our-remove-if fn (cdr lst))
+    (cons (car lst) (our-remove-if fn (cdr lst))))))
+(our-remove-if #'evenp '(1 3 4 5 2))
+#+END_SRC 
 
-   #+BEGIN_EXAMPLE emacs-lisp
-   (setq org-src-fontify-natively t)
-   (w32-version)
-   #+END_EXAMPLE
+#+BEGIN_EXAMPLE emacs-lisp
+(setq org-src-fontify-natively t)
+(w32-version)
+#+END_EXAMPLE
 ** lambda
-   用funcall调用lambda表达式，还可以把lambda赋给一个变量然后在用funcall调用
-   #+BEGIN_EXAMPLE emacs-lisp
-   (funcall (lambda(name) (message "Hello %s!" name)) "Emacs")
-   (funcall #'(lambda(name) (message "Hello %s!" name)) "Emacs")
-   (setq foo (lambda(name) (message "Hello %s!" name)))
-   (setq foo #'(lambda(name) (message "Hello %s!" name)))
-   (funcall foo "Emacs")
-   #+END_EXAMPLE
+用funcall调用lambda表达式，还可以把lambda赋给一个变量然后在用funcall调用
+#+BEGIN_EXAMPLE emacs-lisp
+(funcall (lambda(name) (message "Hello %s!" name)) "Emacs")
+(funcall #'(lambda(name) (message "Hello %s!" name)) "Emacs")
+(setq foo (lambda(name) (message "Hello %s!" name)))
+(setq foo #'(lambda(name) (message "Hello %s!" name)))
+(funcall foo "Emacs")
+#+END_EXAMPLE
 * learn variable
 ** setq and defvar
-   defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已经有一个值的话， 用 defvar 
-   声明的变量值不会改变成声明的那个值。另一个区别是 defvar 可以为变量提供文档字符串， 
-   当变量是在文件中定义的话，C-h v 后能给出变量定义的位置。
-   #+BEGIN_SRC emacs-lisp
+defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已经有一个值的话， 用 defvar 
+声明的变量值不会改变成声明的那个值。另一个区别是 defvar 可以为变量提供文档字符串， 
+当变量是在文件中定义的话，C-h v 后能给出变量定义的位置。
+#+BEGIN_SRC emacs-lisp
    (setq foo "I am foo")
    (defvar foo "Did I have a value?"
     "A demo variable")
-   #+END_SRC
+#+END_SRC
   
 ** let and let*
-   如果没有局部作用域的变量，都使用全局变量，函数会相当难写。elisp 里可以用 let 和 let* 进行局部变量的绑定。let 使用的形式是：
-   (let (bindings) body) bingdings 可以是 (var value) 这样对 var 赋初始值的形式，或者用 var 声明一个初始值为 nil 的变量
-   #+BEGIN_SRC emacs-lisp
-   (defun circle-area(radix)
-     (let ((pi 3.1415926) area)
-       (setq area (* pi radix radix))
-       (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
-   (circle-area 3)
-   ;; let* 和 let 的使用形式完全相同，唯一的区别是在 let* 声明中就能使用前面声明的变量
-   (defun circle-area2(radix)
-     (let* ((pi 3.1415926) (area (* pi radix radix)))
-     (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
-   (circle-area2 3)
-   #+END_SRC
+如果没有局部作用域的变量，都使用全局变量，函数会相当难写。elisp 里可以用 let 和 let* 进行局部变量的绑定。let 使用的形式是：
+(let (bindings) body) bingdings 可以是 (var value) 这样对 var 赋初始值的形式，或者用 var 声明一个初始值为 nil 的变量
+#+BEGIN_SRC emacs-lisp
+(defun circle-area(radix)
+  (let ((pi 3.1415926) area)
+    (setq area (* pi radix radix))
+    (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
+(circle-area 3)
+;; let* 和 let 的使用形式完全相同，唯一的区别是在 let* 声明中就能使用前面声明的变量
+(defun circle-area2(radix)
+  (let* ((pi 3.1415926) (area (* pi radix radix)))
+  (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
+(circle-area2 3)
+#+END_SRC
 * 控制结构
 ** progn
 #+BEGIN_SRC emacs-lisp
@@ -101,24 +101,24 @@
 ...
 (t do-when-none-meet))
 #+END_SRC
-   还有两个宏 when 和 unless，从它们的名字也就能知道它们是作什么用的。
-   使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
+还有两个宏 when 和 unless，从它们的名字也就能知道它们是作什么用的。
+使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
 ** while
 #+BEGIN_SRC emacs-lisp
 (while condition
   body)
 #+END_SRC
 * 逻辑运算
-  条件的逻辑运算和其它语言都是很类似的， 使用 and、or、not。and 和 or 也同样具有短路性质。
-  很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。 
-  当然这时一般不关心它们的返回值，而是在于表达式其它子句的副作用。 比如 or 经常用于设置函数的缺省值，而 and 常用于参数检查：
-  #+BEGIN_SRC emacs-lisp
-  (defun hello-world(&optional name)
-    (or name (setq name "Emacs"))
-    (message "Hello %s!" name))
-  (hello-world)
-  (hello-world "Elisp")
-  #+END_SRC
+条件的逻辑运算和其它语言都是很类似的， 使用 and、or、not。and 和 or 也同样具有短路性质。
+很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。 
+当然这时一般不关心它们的返回值，而是在于表达式其它子句的副作用。 比如 or 经常用于设置函数的缺省值，而 and 常用于参数检查：
+#+BEGIN_SRC emacs-lisp
+(defun hello-world(&optional name)
+  (or name (setq name "Emacs"))
+  (message "Hello %s!" name))
+(hello-world)
+(hello-world "Elisp")
+#+END_SRC
 * 函数列表
 #+BEGIN_SRC emacs-lisp
 (defun NAME ARGLIST [DOCSTRING] BODY...)
@@ -197,8 +197,8 @@ http://www.woola.net/detail/2016-08-23-elisp-string.html
 nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型。
 比较头疼的是 emacs 没有测试字符串是否为空的函数。这是我用的这个测试函数，使用前要测试字符串是否为 nil：
 #+BEGIN_SRC emacs-lisp
-   (defun string-emptyp(str)
-     (not (string< "" str)))
+(defun string-emptyp(str)
+  (not (string< "" str)))
 #+END_SRC
 ** 函数列表
 [[http://www.woola.net/detail/2016-08-23-elisp-string.html]]
