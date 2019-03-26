@@ -1,3 +1,4 @@
+#+STARTUP: indent 
 * learn function
 ** symbol #' and symbol-value symbol-function
    #+BEGIN_SRC emacs-lisp 
@@ -91,18 +92,18 @@
    #+END_SRC
 ** if 和 cond
    (if condition
-       then
-     else)
+   then
+   else)
 
    (cond (case1 do-when-case1)
-         (case2 do-when-case2)
-         ...
-         (t do-when-none-meet))
+   (case2 do-when-case2)
+   ...
+   (t do-when-none-meet))
    还有两个宏 when 和 unless，从它们的名字也就能知道它们是作什么用的。
    使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
 ** while
    (while condition
-     body)
+   body)
 * 逻辑运算
   条件的逻辑运算和其它语言都是很类似的， 使用 and、or、not。and 和 or 也同样具有短路性质。
   很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。 
@@ -130,3 +131,63 @@
   (or CONDITIONS ...)
   (and CONDITIONS ...)
   (not OBJECT)
+* 基本数据类型 
+** 函数列表
+   ;; 测试函数
+   (integerp OBJECT)
+   (floatp OBJECT)
+   (numberp OBJECT)
+   (zerop NUMBER)
+   (wholenump OBJECT)
+   ;; 比较函数
+   (> NUM1 NUM2)
+   (< NUM1 NUM2)
+   (>= NUM1 NUM2)
+   (<= NUM1 NUM2)
+   (= NUM1 NUM2)
+   (eql OBJ1 OBJ2)
+   (/= NUM1 NUM2)
+   ;; 转换函数
+   (float ARG)
+   (truncate ARG &optional DIVISOR)
+   (floor ARG &optional DIVISOR)
+   (ceiling ARG &optional DIVISOR)
+   (round ARG &optional DIVISOR)
+   ;; 运算
+   (+ &rest NUMBERS-OR-MARKERS)
+   (- &optional NUMBER-OR-MARKER &rest MORE-NUMBERS-OR-MARKERS)
+   (* &rest NUMBERS-OR-MARKERS)
+   (/ DIVIDEND DIVISOR &rest DIVISORS)
+   (1+ NUMBER)
+   (1- NUMBER)
+   (abs ARG)
+   (% X Y)
+   (mod X Y)
+   (sin ARG)
+   (cos ARG)
+   (tan ARG)
+   (asin ARG)
+   (acos ARG)
+   (atan Y &optional X)
+   (sqrt ARG)
+   (exp ARG)
+   (expt ARG1 ARG2)
+   (log ARG &optional BASE)
+   (log10 ARG)
+   (logb ARG)
+   ;; 随机数
+   (random &optional N)
+** 变量列表
+   most-positive-fixnum
+   most-negative-fixnum
+* 字符和字符串
+  http://www.woola.net/detail/2016-08-23-elisp-string.html
+** 测试函数
+   字符串测试使用 stringp，没有 charp，因为字符就是整数。 string-or-null-p 当对象是一个字符或 
+   nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型。
+   比较头疼的是 emacs 没有测试字符串是否为空的函数。这是我用的这个测试函数，使用前要测试字符串是否为 nil：
+   #+BEGIN_SRC emacs-lisp
+   (defun string-emptyp(str)
+     (not (string< "" str)))
+   #+END_SRC
+

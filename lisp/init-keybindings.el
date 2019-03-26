@@ -6,15 +6,14 @@
 (global-set-key (kbd "M-m") 'M-m-map)
 ;; swiper setting
 (global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "M-m i") 'clipboard-yank)
+(global-set-key (kbd "M-m p") 'clipboard-yank)
 (global-set-key (kbd "M-m u") 'eval-last-sexp)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "M-m M-m") 'counsel-find-file)
 
 ;; iedit bind
-(global-set-key (kbd "M-m e") 'iedit-mode)
-
+(global-set-key (kbd "M-m oe") 'iedit-mode)
 ;; org bind
 (global-set-key (kbd "M-m oa") 'org-agenda)
 ;; minefunc org template
@@ -39,7 +38,6 @@
 
 ;; set C-w delte a word backward
 (global-set-key (kbd "C-w") 'backward-kill-word)
-
 ;; browse-kill-ring
 (global-set-key (kbd "M-m y") 'browse-kill-ring)
 
