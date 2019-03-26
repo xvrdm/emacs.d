@@ -15,7 +15,7 @@
       ;; 台式电脑
       (if (equal system-name "DESKTOP-LL8PBC8")
           (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 13)))))
+        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 14)))))
   )
 
 ;; (add-hook 'after-init-hook '(set-face-attribute 'default (selected-frame) :height 100))
