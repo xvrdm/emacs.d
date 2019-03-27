@@ -579,25 +579,23 @@
 ;; }}
 
 ;; gtags(global)
-;; (use-package gtags
-;;   :delight gtags-mode
-;;   :init
-;;   (if (not (equal 'windows-nt system-type))
-;;       (load "/usr/local/share/gtags/gtags.el")
-;;     (load "gtags.el"))
-;;   ;; (load "/usr/local/share/gtags/gtags.el")
-;;   :config
-;;   (autoload 'gtags-mode "gtags" "" t)
-;;   (add-hook 'gtags-select-mode-hook
-;;             '(lambda()
-;;                (setq hl-line-face 'underline)
-;;                (hl-line-mode 1)
-;;                )
-;;             )
-;;   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-;;   ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
-;;   (setq gtags-auto-update t)
-;;   )
+(use-package gtags
+  :delight gtags-mode
+  :init
+  (if (not (equal 'windows-nt system-type))
+      (load "/usr/local/share/gtags/gtags.el")
+    (load "gtags.el"))
+  ;; (load "/usr/local/share/gtags/gtags.el")
+  :config
+  (autoload 'gtags-mode "gtags" "" t)
+  (add-hook 'gtags-select-mode-hook
+            '(lambda()
+               (setq hl-line-face 'underline)
+               (hl-line-mode 1)))
+  ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
+  ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+  (setq gtags-auto-update t)
+  )
 
 ;; emacs-counsel-gtags
 (use-package counsel-gtags
