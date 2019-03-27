@@ -41,7 +41,7 @@
                          ;;
                          pyim-basedict
                          pyim
-                         ;; posframe
+                         ;;  posframe
                          ;;
                          evil
                          ;;
@@ -283,6 +283,9 @@
                          ;; base16-theme
                          ;;
                          ) "Default packages")
+
+(when (display-graphic-p)
+  (push 'posframe liang/packages))
 
 (setq package-selected-packages liang/packages)
 
