@@ -19,9 +19,16 @@
 ;; minefunc org template
 (global-set-key (kbd "M-m oc") 'org-capture)
 
+;; http://ergoemacs.org/emacs/emacs_dired_tips.html
+(require 'dired )
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
+
 ;; dired重用buffer
-(with-eval-after-load 'dired
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+;; (put 'dired-find-alternate-file 'disabled nil)
+;; (with-eval-after-load 'dired
+;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
 
 ;; 使用 c-n/c-p 来选择 company 的候选补全项
 (with-eval-after-load 'company
