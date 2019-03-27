@@ -134,11 +134,11 @@
                     "pb" 'evil-paste-before
                     ;; "hv" 'describe-variable
                     "ge" 'goto-line
-                    "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-                    "gs" 'counsel-gtags-find-symbol
-                    "gr" 'counsel-gtags-find-reference
+                    ;; "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+                    ;; "gs" 'counsel-gtags-find-symbol
+                    ;; "gr" 'counsel-gtags-find-reference
+                    ;; "gu" 'counsel-gtags-update-tags
                     "ud" 'undo-tree-visualize
-                    "gu" 'counsel-gtags-update-tags
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
@@ -319,6 +319,9 @@
                     "df" 'counsel-describe-function
                     "dv" 'counsel-describe-variable
                     "dk" 'describe-key
+                    "gg" 'ggtags-find-tag-dwim
+                    "gs" 'ggtags-find-other-symbol
+                    "gr" 'ggtags-find-reference
                     ;; "ip" 'find-file-in-project
                     ;; liang.feng
                     ;; "kk" 'find-filem-in-project-by-selected

@@ -142,8 +142,6 @@
                          ;;
                          ;; company-ycmd
                          ;;
-                         counsel-gtags
-                         ;;
                          smart-mode-line
                          ;;
                          smart-mode-line-powerline-theme
@@ -203,6 +201,8 @@
                          ;; company-irony
                          ;;
                          ggtags
+                         ;;
+                         ;; counsel-gtags
                          ;;
                          ;; agtags
                          ;;
@@ -579,42 +579,24 @@
 ;; }}
 
 ;; gtags(global)
-(use-package gtags
-  :delight gtags-mode
-  :init
-  (if (not (equal 'windows-nt system-type))
-      (load "/usr/local/share/gtags/gtags.el")
-    (load "gtags.el"))
-  ;; (load "/usr/local/share/gtags/gtags.el")
-  :config
-  (autoload 'gtags-mode "gtags" "" t)
-  (add-hook 'gtags-select-mode-hook
-            '(lambda()
-               (setq hl-line-face 'underline)
-               (hl-line-mode 1)))
-  ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-  ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
-  (setq gtags-auto-update t)
-  )
+;; (use-package gtags
+;;   :delight gtags-mode
+;;   :init
+;;   (if (not (equal 'windows-nt system-type))
+;;       (load "/usr/local/share/gtags/gtags.el")
+;;     (load "gtags.el"))
+;;   ;; (load "/usr/local/share/gtags/gtags.el")
+;;   :config
+;;   (autoload 'gtags-mode "gtags" "" t)
+;;   (add-hook 'gtags-select-mode-hook
+;;             '(lambda()
+;;                (setq hl-line-face 'underline)
+;;                (hl-line-mode 1)))
+;;   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
+;;   ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
+;;   (setq gtags-auto-update t)
+;;   )
 
-;; emacs-counsel-gtags
-(use-package counsel-gtags
-  :init
-  (when (executable-find "pygmentize")
-    (setenv "GTAGSLABEL" "pygments")
-    (if (eq system-type 'windows-nt)
-        ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
-        (setenv "GTAGSCONF"
-                (let ((str (executable-find "gtags")))
-                  (string-match "global.*" str)
-                  (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
-      (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
-  :delight counsel-gtags-mode
-  :config
-  (setq counsel-gtags-auto-update t)
-  (add-hook 'c-mode-hook 'counsel-gtags-mode)
-  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; counsel-etags
@@ -981,21 +963,49 @@
 ;;     )
 ;;   )
 
+(defun my-gtags-init()
+  (when (executable-find "pygmentize")
+    (setenv "GTAGSLABEL" "pygments")
+    (if (eq system-type 'windows-nt)
+        ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
+        (setenv "GTAGSCONF"
+                (let ((str (executable-find "gtags")))
+                  (string-match "global.*" str)
+                  (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
+      (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
+  )
+
 ;; ggtags
 (use-package ggtags
+  :init
+  (my-gtags-init)
   :delight ggtags-mode
   :config
   (setq ggtags-highlight-tag nil)
-  (add-hook 'c-mode-common-hook
-            (lambda()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                (ggtags-mode 1))))
-  (add-hook 'python-hook
-            (lambda()
-              (when (derived-mode-p 'python-mode)
-                (ggtags-mode 1))))
+  ;; (add-hook 'c-mode-common-hook
+  ;;           (lambda()
+  ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+  ;;               (ggtags-mode 1))))
+  ;; (add-hook 'python-hook
+  ;;           (lambda()
+  ;;             (when (derived-mode-p 'python-mode)
+  ;;               (ggtags-mode 1))))
+  (ggtags-mode 1)
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
+
+;; emacs-counsel-gtags
+;; (use-package counsel-gtags
+;;   :init
+;;   (my-gtags-init)
+;;   :delight counsel-gtags-mode
+;;   :config
+;;   (setq counsel-gtags-auto-update t)
+;;   (add-hook 'c-mode-hook 'counsel-gtags-mode)
+;;   (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+;;   (add-hook 'python-mode-hook 'counsel-gtags-mode)
+;;   ;; (counsel-gtags-mode t)
+;;   )
 
 ;; agtags
 ;; (use-package agtags
