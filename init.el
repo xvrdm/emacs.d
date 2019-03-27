@@ -16,8 +16,8 @@
 ;; add feauther to load-path
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp")
-(require 'init-minefunc)
 (require 'init-packages)
+(require 'init-minefunc)
 (require 'init-ui)
 (require 'init-org)
 (require 'init-better-default)
