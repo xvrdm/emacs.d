@@ -604,9 +604,10 @@
     (setenv "GTAGSLABEL" "pygments")
     (if (eq system-type 'windows-nt)
         ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
-        (setenv "GTAGSCONF" (let ((str (executable-find "gtags")))
-          (string-match "global.*" str)
-          (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
+        (setenv "GTAGSCONF"
+                (let ((str (executable-find "gtags")))
+                  (string-match "global.*" str)
+                  (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
       (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
   :delight counsel-gtags-mode
   :config
