@@ -269,7 +269,7 @@
                          ;;
                          ;; dired-hacks-utils
                          ;;
-                         dired-single
+                         ;; dired-single
                          ;;
                          dired-k
                          ;;
@@ -510,6 +510,8 @@
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
   )
+
+(use-package xpm)
 
 ;; yasnippet setting
 (use-package yasnippet
@@ -1344,15 +1346,15 @@
 ;;   :config
 ;;   )
 
-(use-package dired-single
-  :config
-  ;; if dired's already loaded, then the keymap will be bound
-  (if (boundp 'dired-mode-map)
-      ;; we're good to go; just add our bindings
-      (my-dired-init)
-    ;; it's not loaded yet, so add our bindings to the load-hook
-    (add-hook 'dired-load-hook 'my-dired-init))
-  )
+;; (use-package dired-single
+;;   :config
+;;   ;; if dired's already loaded, then the keymap will be bound
+;;   (if (boundp 'dired-mode-map)
+;;       ;; we're good to go; just add our bindings
+;;       (my-dired-init)
+;;     ;; it's not loaded yet, so add our bindings to the load-hook
+;;     (add-hook 'dired-load-hook 'my-dired-init))
+;;   )
 
 (use-package dired-k
   :config
