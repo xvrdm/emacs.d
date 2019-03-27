@@ -24,3 +24,6 @@ pyim/*
 org/*.html
 org/*.md
 org/*.pdf
+GPATH
+GTAGS
+GRTAGS

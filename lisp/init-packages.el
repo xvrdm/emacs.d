@@ -601,6 +601,12 @@
 
 ;; emacs-counsel-gtags
 (use-package counsel-gtags
+  :init
+  (when (executable-find "pygmentize")
+    (setenv "GTAGSLABEL" "pygments")
+    (if (eq system-type 'windows-nt)
+        (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
+      (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
   :delight counsel-gtags-mode
   :config
   (setq counsel-gtags-auto-update t)
