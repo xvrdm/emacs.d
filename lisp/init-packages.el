@@ -41,7 +41,7 @@
                          ;;
                          pyim-basedict
                          pyim
-                         posframe
+                         ;; posframe
                          ;;
                          evil
                          ;;
@@ -331,7 +331,9 @@
 ;; (load-theme 'atom-one-dark t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package posframe)
+(when (display-graphic-p)
+  (use-package posframe)
+  )
 (use-package pyim
   ;; :ensure nil
   :demand t
@@ -369,8 +371,9 @@
   ;; 使用 pupup-el 来绘制选词框, 如果用 emacs26, 建议设置
   ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
   ;; 手动安装 posframe 包。
-  ;; (setq pyim-page-tooltip 'popup)
-  (setq pyim-page-tooltip 'posframe)
+  (if (display-graphic-p)
+    (setq pyim-page-tooltip 'posframe)
+   (setq pyim-page-tooltip 'popup))
 
   ;; 选词框显示5个候选词
   (setq pyim-page-length 5)
