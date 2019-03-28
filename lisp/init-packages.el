@@ -316,8 +316,8 @@
 (defun my-monokai-init()
   ;; If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
   ;; (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t)))
-  ;; (when (and (eq system-type 'windows-nt) (> emacs-major-version 24))
-  ;;   (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t))))
+  (when (and (eq system-type 'windows-nt) (> emacs-major-version 24))
+    (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t))))
   ;; (setq ;; foreground and background
   ;;       monokai-foreground     "#ABB2BF"
   ;;       monokai-background     "#282C34"
@@ -339,11 +339,18 @@
   ;;       monokai-yellow         "#E5C07B")
 
   ;; If you would like to change the font size of your org-mode headers you can do so with:
+  ;; (setq monokai-height-minus-1 0.8
+  ;;       monokai-height-plus-1 1.1
+  ;;       monokai-height-plus-2 1.15
+  ;;       monokai-height-plus-3 1.2
+  ;;       monokai-height-plus-4 1.3)
   (setq monokai-height-minus-1 0.8
-        monokai-height-plus-1 1.1
-        monokai-height-plus-2 1.15
-        monokai-height-plus-3 1.2
-        monokai-height-plus-4 1.3)
+        monokai-height-plus-1 1.0
+        monokai-height-plus-2 1.0
+        monokai-height-plus-3 1.0
+        monokai-height-plus-4 1.0)
+  ;; If you would like to use variable-pitch-mode you can enable it with:
+  (setq monokai-user-variable-pitch t)
   )
 (my-monokai-init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -916,11 +923,16 @@
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (face-remap-add-relative
-             'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
+             ;; 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
+             'mode-line '((:foreground "ivory" :background "darkgray") mode-line))))
 (add-hook 'help-mode-hook
           (lambda ()
             (face-remap-add-relative
-             'mode-line '((:foreground "ivory" :background "DarkOrange") mode-line))))
+             'mode-line '((:foreground "ivory" :background "purple") mode-line))))
+;; (add-hook 'package-menu-mode-hook
+;;           (lambda ()
+;;             (face-remap-add-relative
+;;              'mode-line '((:foreground "ivory" :background "DarkOrange") mode-line))))
 ;; (custom-set-faces
 ;;  '(highlight ((t (:background "grey20" :foreground nil :bold t)))) ;; highlight current line
 ;;  )
