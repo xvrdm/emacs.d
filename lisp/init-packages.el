@@ -286,7 +286,7 @@
                          ;;
                          ) "Default packages")
 
-(when (display-graphic-p)
+(when (and (display-graphic-p) (>= emacs-major-version 26))
   (push 'posframe liang/packages))
 
 (setq package-selected-packages liang/packages)
