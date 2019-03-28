@@ -32,7 +32,7 @@
                          company-jedi
                          exec-path-from-shell
                          ;; themes
-                         ;; monokai-theme
+                         monokai-theme
                          ;; zenburn-theme
                          ample-theme
                          ;; ample-zen-theme
@@ -313,6 +313,39 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 ;; (load-theme 'monokai t)
+(defun my-monokai-init()
+  ;; If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
+  ;; (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t)))
+  ;; (when (and (eq system-type 'windows-nt) (> emacs-major-version 24))
+  ;;   (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t))))
+  ;; (setq ;; foreground and background
+  ;;       monokai-foreground     "#ABB2BF"
+  ;;       monokai-background     "#282C34"
+  ;;       ;; highlights and comments
+  ;;       monokai-comments       "#F8F8F0"
+  ;;       monokai-emphasis       "#282C34"
+  ;;       monokai-highlight      "#FFB269"
+  ;;       monokai-highlight-alt  "#66D9EF"
+  ;;       monokai-highlight-line "#1B1D1E"
+  ;;       monokai-line-number    "#F8F8F0"
+  ;;       ;; colours
+  ;;       monokai-blue           "#61AFEF"
+  ;;       monokai-cyan           "#56B6C2"
+  ;;       monokai-green          "#98C379"
+  ;;       monokai-gray           "#3E4451"
+  ;;       monokai-violet         "#C678DD"
+  ;;       monokai-red            "#E06C75"
+  ;;       monokai-orange         "#D19A66"
+  ;;       monokai-yellow         "#E5C07B")
+
+  ;; If you would like to change the font size of your org-mode headers you can do so with:
+  (setq monokai-height-minus-1 0.8
+        monokai-height-plus-1 1.1
+        monokai-height-plus-2 1.15
+        monokai-height-plus-3 1.2
+        monokai-height-plus-4 1.3)
+  )
+(my-monokai-init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defvar zenburn-override-colors-alist
 ;;   '(("zenburn-bg+05" . "#282828")
@@ -325,11 +358,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; then in your init you can load all of the themes
 ;; without enabling theme (or just load one)
-(load-theme 'ample t t)
+;; (load-theme 'ample t t)
 ;; (load-theme 'ample-light t t)
 ;; (load-theme 'ample-flat t t)
 ;; choose one to enable
-(enable-theme 'ample)
+;; (enable-theme 'ample)
 ;; (enable-theme 'ample-flat)
 ;; (enable-theme 'ample-light)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -880,61 +913,73 @@
 
 ;;   (telephone-line-mode t)
 ;;   )
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (face-remap-add-relative
+             'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
+(add-hook 'help-mode-hook
+          (lambda ()
+            (face-remap-add-relative
+             'mode-line '((:foreground "ivory" :background "DarkOrange") mode-line))))
+;; (custom-set-faces
+;;  '(highlight ((t (:background "grey20" :foreground nil :bold t)))) ;; highlight current line
+;;  )
+(set-cursor-color "green")
 
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :hook (after-init . doom-modeline-mode)
-;;   :config
-;;   ;; How tall the mode-line should be (only respected in GUI Emacs).
-;;   (setq doom-modeline-height 15)
-;;   ;; How wide the mode-line bar should be (only respected in GUI Emacs).
-;;   (setq doom-modeline-bar-width 3)
-;;   ;; Determines the style used by `doom-modeline-buffer-file-name'.
-;;   ;;
-;;   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
-;;   ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
-;;   ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
-;;   ;;   truncate-with-project => emacs/l/comint.el
-;;   ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
-;;   ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
-;;   ;;   truncate-all => ~/P/F/e/l/comint.el
-;;   ;;   relative-from-project => emacs/lisp/comint.el
-;;   ;;   relative-to-project => lisp/comint.el
-;;   ;;   file-name => comint.el
-;;   ;;   buffer-name => comint.el<2> (uniquify buffer name)
-;;   ;;
-;;   ;; If you are expereicing the laggy issue, especially while editing remote files
-;;   ;; with tramp, please try `file-name' style.
-;;   ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
-;;   ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-
-;;   ;; Whether show `all-the-icons' or not (if nil nothing will be showed).
-;;   (setq doom-modeline-icon nil)
-;;   ;; Whether show the icon for major mode. It respects `doom-modeline-icon'.
-;;   ;; (setq doom-modeline-major-mode-icon t)
-;;   ;; Display color icons for `major-mode'. It respects `all-the-icons-color-icons'.
-;;   ;; (setq doom-modeline-major-mode-color-icon nil)
-;;   ;; Whether display minor modes or not. Non-nil to display in mode-line.
-;;   ;; (setq doom-modeline-minor-modes nil)
-;;   ;; Whether display environment version or not
-;;   ;; (setq doom-modeline-env-version t)
-;;   )
-
-(use-package maple-modeline
-  :init
-  (load "maple-modeline-window.el")
-  :hook (after-init . maple-modeline-init)
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
   :config
-  ;; standard or minimal
-  (setq maple-modeline-style 'standard)
-  ;; standard or reset or some number
-  (setq maple-modeline-width 'standard)
-  ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-  (use-package maple-xpm
-    :ensure nil
-    :config
-    (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
+  ;; How tall the mode-line should be (only respected in GUI Emacs).
+  (setq doom-modeline-height 15)
+  ;; How wide the mode-line bar should be (only respected in GUI Emacs).
+  (setq doom-modeline-bar-width 3)
+  ;; Determines the style used by `doom-modeline-buffer-file-name'.
+  ;;
+  ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
+  ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
+  ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
+  ;;   truncate-with-project => emacs/l/comint.el
+  ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
+  ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
+  ;;   truncate-all => ~/P/F/e/l/comint.el
+  ;;   relative-from-project => emacs/lisp/comint.el
+  ;;   relative-to-project => lisp/comint.el
+  ;;   file-name => comint.el
+  ;;   buffer-name => comint.el<2> (uniquify buffer name)
+  ;;
+  ;; If you are expereicing the laggy issue, especially while editing remote files
+  ;; with tramp, please try `file-name' style.
+  ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
+  ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+
+  ;; Whether show `all-the-icons' or not (if nil nothing will be showed).
+  ;; (setq doom-modeline-icon t)
+  ;; Whether show the icon for major mode. It respects `doom-modeline-icon'.
+  ;; (setq doom-modeline-major-mode-icon t)
+  ;; Display color icons for `major-mode'. It respects `all-the-icons-color-icons'.
+  ;; (setq doom-modeline-major-mode-color-icon nil)
+  ;; Whether display minor modes or not. Non-nil to display in mode-line.
+  ;; (setq doom-modeline-minor-modes nil)
+  ;; Whether display environment version or not
+  ;; (setq doom-modeline-env-version t)
   )
+
+;; (use-package maple-modeline
+;;   :init
+;;   (load "maple-modeline-window.el")
+;;   :hook (after-init . maple-modeline-init)
+;;   :config
+;;   ;; standard or minimal
+;;   (setq maple-modeline-style 'standard)
+;;   ;; standard or reset or some number
+;;   (setq maple-modeline-width 'standard)
+;;   ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
+;;   (use-package maple-xpm
+;;     :ensure nil
+;;     :config
+;;     (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
+;;   )
 
 ;; mast put after status line theme
 (use-package window-numbering
