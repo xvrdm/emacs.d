@@ -117,6 +117,7 @@
                     "ff" 'find-file
                     "fd" 'my-display-full-path-of-current-buffer
                     "fb" 'beginning-of-defun
+                    "fz" 'counsel-fzf
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
                     "ii" 'counsel-imenu
@@ -277,6 +278,11 @@
                     ;; "bb" 'back-to-previous-buffer
                     ;; liang.feng
                     ;; "em" 'erase-message-buffer
+                    "fz" 'fzf
+                    "ft" 'fzf-git
+                    "ff" 'fzf-git-files
+                    "fg" 'fzf-git-grep
+                    "fd" 'fzf-directory
                     ;; liang.feng
                     ;; "eb" 'eval-buffer
                     ;; "sd" 'sudo-edit

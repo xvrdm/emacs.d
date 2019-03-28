@@ -82,6 +82,8 @@
                          ;;
                          iedit
                          ;;
+                         fzf
+                         ;;
                          org
                          ;;
                          htmlize
@@ -497,6 +499,8 @@
   (setq company-dabbrev-ignore-case nil)
   (setq company-idle-delay 0.2)
   )
+
+(use-package fzf)
 
 ;; org-pomodoro setting
 (use-package org-pomodoro
