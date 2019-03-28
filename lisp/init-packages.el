@@ -336,7 +336,7 @@
 ;; (load-theme 'atom-one-dark t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (display-graphic-p)
+(when (and (display-graphic-p) (>= emacs-major-version 26))
   (use-package posframe)
   )
 (use-package pyim
