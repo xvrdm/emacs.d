@@ -315,9 +315,10 @@
 ;; (load-theme 'monokai t)
 (defun my-monokai-init()
   ;; If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
-  ;; (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t)))
-  (when (and (eq system-type 'windows-nt) (> emacs-major-version 24))
-    (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t))))
+  
+  (if (and (eq system-type 'windows-nt) (> emacs-major-version 24))
+      (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t)))
+    (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t))))
   ;; (setq ;; foreground and background
   ;;       monokai-foreground     "#ABB2BF"
   ;;       monokai-background     "#282C34"
