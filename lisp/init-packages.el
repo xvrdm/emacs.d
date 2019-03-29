@@ -938,60 +938,60 @@
 ;;  )
 (set-cursor-color "green")
 
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode)
-  :config
-  ;; How tall the mode-line should be (only respected in GUI Emacs).
-  (setq doom-modeline-height 15)
-  ;; How wide the mode-line bar should be (only respected in GUI Emacs).
-  (setq doom-modeline-bar-width 3)
-  ;; Determines the style used by `doom-modeline-buffer-file-name'.
-  ;;
-  ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
-  ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
-  ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
-  ;;   truncate-with-project => emacs/l/comint.el
-  ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
-  ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
-  ;;   truncate-all => ~/P/F/e/l/comint.el
-  ;;   relative-from-project => emacs/lisp/comint.el
-  ;;   relative-to-project => lisp/comint.el
-  ;;   file-name => comint.el
-  ;;   buffer-name => comint.el<2> (uniquify buffer name)
-  ;;
-  ;; If you are expereicing the laggy issue, especially while editing remote files
-  ;; with tramp, please try `file-name' style.
-  ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
-  ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-
-  ;; Whether show `all-the-icons' or not (if nil nothing will be showed).
-  ;; (setq doom-modeline-icon t)
-  ;; Whether show the icon for major mode. It respects `doom-modeline-icon'.
-  ;; (setq doom-modeline-major-mode-icon t)
-  ;; Display color icons for `major-mode'. It respects `all-the-icons-color-icons'.
-  ;; (setq doom-modeline-major-mode-color-icon nil)
-  ;; Whether display minor modes or not. Non-nil to display in mode-line.
-  ;; (setq doom-modeline-minor-modes nil)
-  ;; Whether display environment version or not
-  ;; (setq doom-modeline-env-version t)
-  )
-
-;; (use-package maple-modeline
-;;   :init
-;;   (load "maple-modeline-window.el")
-;;   :hook (after-init . maple-modeline-init)
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :hook (after-init . doom-modeline-mode)
 ;;   :config
-;;   ;; standard or minimal
-;;   (setq maple-modeline-style 'standard)
-;;   ;; standard or reset or some number
-;;   (setq maple-modeline-width 'standard)
-;;   ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-;;   (use-package maple-xpm
-;;     :ensure nil
-;;     :config
-;;     (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
+;;   ;; How tall the mode-line should be (only respected in GUI Emacs).
+;;   (setq doom-modeline-height 15)
+;;   ;; How wide the mode-line bar should be (only respected in GUI Emacs).
+;;   (setq doom-modeline-bar-width 3)
+;;   ;; Determines the style used by `doom-modeline-buffer-file-name'.
+;;   ;;
+;;   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
+;;   ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
+;;   ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
+;;   ;;   truncate-with-project => emacs/l/comint.el
+;;   ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
+;;   ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
+;;   ;;   truncate-all => ~/P/F/e/l/comint.el
+;;   ;;   relative-from-project => emacs/lisp/comint.el
+;;   ;;   relative-to-project => lisp/comint.el
+;;   ;;   file-name => comint.el
+;;   ;;   buffer-name => comint.el<2> (uniquify buffer name)
+;;   ;;
+;;   ;; If you are expereicing the laggy issue, especially while editing remote files
+;;   ;; with tramp, please try `file-name' style.
+;;   ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
+;;   ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+
+;;   ;; Whether show `all-the-icons' or not (if nil nothing will be showed).
+;;   ;; (setq doom-modeline-icon t)
+;;   ;; Whether show the icon for major mode. It respects `doom-modeline-icon'.
+;;   ;; (setq doom-modeline-major-mode-icon t)
+;;   ;; Display color icons for `major-mode'. It respects `all-the-icons-color-icons'.
+;;   ;; (setq doom-modeline-major-mode-color-icon nil)
+;;   ;; Whether display minor modes or not. Non-nil to display in mode-line.
+;;   ;; (setq doom-modeline-minor-modes nil)
+;;   ;; Whether display environment version or not
+;;   ;; (setq doom-modeline-env-version t)
 ;;   )
+
+(use-package maple-modeline
+  :init
+  (load "maple-modeline-window.el")
+  :hook (after-init . maple-modeline-init)
+  :config
+  ;; standard or minimal
+  (setq maple-modeline-style 'standard)
+  ;; standard or reset or some number
+  (setq maple-modeline-width 'standard)
+  ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
+  (use-package maple-xpm
+    :ensure nil
+    :config
+    (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
+  )
 
 ;; mast put after status line theme
 (use-package window-numbering
