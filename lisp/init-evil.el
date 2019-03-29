@@ -302,6 +302,8 @@
                     "cn" 'git-gutter:next-hunk
                     "cp" 'git-gutter:previous-hunk
                     "c=" 'vc-diff
+                    "cl" 'vc-pull
+                    "cu" 'vc-push
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
                     ;; liang.feng
