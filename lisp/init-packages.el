@@ -984,21 +984,15 @@
   :hook (after-init . maple-modeline-init)
   :config
   ;; standard or minimal
-  ;; (setq maple-modeline-style 'standard)
-  (setq maple-modeline-style 'minimal)
+  (setq maple-modeline-style 'standard)
+  ;; (setq maple-modeline-style 'minimal)
   ;; standard or reset or some number
   (setq maple-modeline-width 'standard)
   ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-  (use-package maple-xpm
-    :ensure nil
-    :config
-    (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
-
-  (maple-modeline-set style-name
-    :left '(window-number)
-    :right '(count)
-    :sep "=")
-  (setq maple-modeline-style 'style-name)
+  ;; (use-package maple-xpm
+  ;;   :ensure nil
+  ;;   :config
+  ;;   (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
   )
 
 ;; mast put after status line theme
