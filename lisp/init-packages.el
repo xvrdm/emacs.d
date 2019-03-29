@@ -920,15 +920,15 @@
 
 ;;   (telephone-line-mode t)
 ;;   )
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (face-remap-add-relative
-             ;; 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
-             'mode-line '((:foreground "ivory" :background "darkgray") mode-line))))
-(add-hook 'help-mode-hook
-          (lambda ()
-            (face-remap-add-relative
-             'mode-line '((:foreground "ivory" :background "purple") mode-line))))
+;; (add-hook 'emacs-lisp-mode-hook
+;;           (lambda ()
+;;             (face-remap-add-relative
+;;              'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
+             ;; 'mode-line '((:foreground "ivory" :background "darkgray") mode-line))))
+;; (add-hook 'help-mode-hook
+;;           (lambda ()
+;;             (face-remap-add-relative
+;;              'mode-line '((:foreground "ivory" :background "purple") mode-line))))
 ;; (add-hook 'package-menu-mode-hook
 ;;           (lambda ()
 ;;             (face-remap-add-relative
