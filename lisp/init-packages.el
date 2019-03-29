@@ -989,10 +989,18 @@
   ;; standard or reset or some number
   (setq maple-modeline-width 'standard)
   ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-  ;; (use-package maple-xpm
-  ;;   :ensure nil
-  ;;   :config
-  ;;   (setq maple-xpm-style (if (display-graphic-p) 'wave 'default)))
+  (use-package maple-xpm
+    :ensure nil
+    :config
+    ;; :type '(choice (const default)
+    ;;                (const wave)
+    ;;                (const bar)
+    ;;                (const slant)
+    ;;                (const contour)
+    ;;                (const box)
+    ;;                (const butt)
+    ;;                (const curve)))
+    (setq maple-xpm-style (if (display-graphic-p) 'curve 'default)))
   )
 
 ;; mast put after status line theme
