@@ -1002,7 +1002,7 @@
       ;;                (const box)
       ;;                (const butt)
       ;;                (const curve)))
-      (setq maple-xpm-style (if (display-graphic-p) 'curve 'default))))
+      (setq maple-xpm-style (if (display-graphic-p) 'butt 'default))))
   )
 
 ;; mast put after status line theme
