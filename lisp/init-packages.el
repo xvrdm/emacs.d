@@ -898,29 +898,6 @@
 ;;   (spaceline-emacs-theme)
 ;;   )
 
-;; telephone-line
-;; (use-package telephone-line-config
-;;   :delight telephone-line-mode
-;;   :config
-;;   (telephone-line-evil-config)
-;;   )
-;; (use-package telephone-line
-;;   :delight
-;;   :config
-;;   ;; (setq telephone-line-lhs
-;;   ;;       '((evil   . (telephone-line-evil-tag-segment))
-;;   ;;         (accent . (telephone-line-vc-segment
-;;   ;;                    telephone-line-erc-modified-channels-segment
-;;   ;;                    telephone-line-process-segment))
-;;   ;;         (nil    . (telephone-line-minor-mode-segment
-;;   ;;                    telephone-line-buffer-segment))))
-;;   ;; (setq telephone-line-rhs
-;;   ;;       '((nil    . (telephone-line-misc-info-segment))
-;;   ;;         (accent . (telephone-line-major-mode-segment))
-;;   ;;         (evil   . (telephone-line-airline-position-segment))))
-
-;;   (telephone-line-mode t)
-;;   )
 ;; (add-hook 'emacs-lisp-mode-hook
 ;;           (lambda ()
 ;;             (face-remap-add-relative
@@ -978,29 +955,54 @@
 ;;   ;; (setq doom-modeline-env-version t)
 ;;   )
 
-(use-package maple-modeline
-  :init
-  (load "maple-modeline-window.el")
-  :hook (after-init . maple-modeline-init)
-  :config
-  ;; standard or minimal
-  (setq maple-modeline-style 'standard)
-  ;; (setq maple-modeline-style 'minimal)
-  ;; standard or reset or some number
-  (setq maple-modeline-width 'standard)
-  ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-  (use-package maple-xpm
-    :ensure nil
+(when (not (display-graphic-p))
+  ;; telephone-line
+  ;; (use-package telephone-line-config
+  ;;   :delight telephone-line-mode
+  ;;   :config
+  ;;   (telephone-line-evil-config)
+  ;;   )
+  (use-package telephone-line
+    :delight
     :config
-    ;; :type '(choice (const default)
-    ;;                (const wave)
-    ;;                (const bar)
-    ;;                (const slant)
-    ;;                (const contour)
-    ;;                (const box)
-    ;;                (const butt)
-    ;;                (const curve)))
-    (setq maple-xpm-style (if (display-graphic-p) 'curve 'default)))
+    ;; (setq telephone-line-lhs
+    ;;       '((evil   . (telephone-line-evil-tag-segment))
+    ;;         (accent . (telephone-line-vc-segment
+    ;;                    telephone-line-erc-modified-channels-segment
+    ;;                    telephone-line-process-segment))
+    ;;         (nil    . (telephone-line-minor-mode-segment
+    ;;                    telephone-line-buffer-segment))))
+    ;; (setq telephone-line-rhs
+    ;;       '((nil    . (telephone-line-misc-info-segment))
+    ;;         (accent . (telephone-line-major-mode-segment))
+    ;;         (evil   . (telephone-line-airline-position-segment))))
+    (telephone-line-mode t))
+  )
+
+(when (display-graphic-p)
+  (use-package maple-modeline
+    :init
+    (load "maple-modeline-window.el")
+    :hook (after-init . maple-modeline-init)
+    :config
+    ;; standard or minimal
+    (setq maple-modeline-style 'standard)
+    ;; (setq maple-modeline-style 'minimal)
+    ;; standard or reset or some number
+    (setq maple-modeline-width 'standard)
+    ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
+    (use-package maple-xpm
+      :ensure nil
+      :config
+      ;; :type '(choice (const default)
+      ;;                (const wave)
+      ;;                (const bar)
+      ;;                (const slant)
+      ;;                (const contour)
+      ;;                (const box)
+      ;;                (const butt)
+      ;;                (const curve)))
+      (setq maple-xpm-style (if (display-graphic-p) 'curve 'default))))
   )
 
 ;; mast put after status line theme
