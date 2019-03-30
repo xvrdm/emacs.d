@@ -951,11 +951,11 @@
 
 (when (not (display-graphic-p))
   ;; telephone-line
-  ;; (use-package telephone-line-config
-  ;;   :delight telephone-line-mode
-  ;;   :config
-  ;;   (telephone-line-evil-config)
-  ;;   )
+  (use-package telephone-line-config
+    :delight telephone-line-mode
+    :config
+    (telephone-line-evil-config)
+    )
   (use-package telephone-line
     :delight
     :config
@@ -971,6 +971,13 @@
     ;;         (accent . (telephone-line-major-mode-segment))
     ;;         (evil   . (telephone-line-airline-position-segment))))
     (telephone-line-mode t))
+  ;; (use-package spaceline-config
+  ;;   :config
+  ;;   ;; When nil, winum-mode will not display window numbers in the mode-line.
+  ;;   ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
+  ;;   (setq winum-auto-setup-mode-line nil)
+  ;;   (spaceline-spacemacs-theme))
+    ;; (spaceline-emacs-theme))
   )
 
 ;; (when (display-graphic-p)
