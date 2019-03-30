@@ -136,7 +136,8 @@
                          ;;;;;;;;;;;;;;;;;;;;;;;;;
                          which-key
                          ;;
-                         window-numbering
+                         ;; window-numbering
+                         winum
                          ;;
                          youdao-dictionary
                          ;;
@@ -890,13 +891,6 @@
 ;;   (airline-themes-set-modeline)
 ;;   )
 
-;; spaceline
-;; (use-package spaceline-config
-;;   :config
-;;   ;; (require 'spaceline-config)
-;;   ;; (spaceline-spacemacs-theme)
-;;   (spaceline-emacs-theme)
-;;   )
 
 ;; (add-hook 'emacs-lisp-mode-hook
 ;;           (lambda ()
@@ -979,38 +973,54 @@
     (telephone-line-mode t))
   )
 
+;; (when (display-graphic-p)
+;;   (use-package maple-modeline
+;;     :init
+;;     (load "maple-modeline-window.el")
+;;     :hook (after-init . maple-modeline-init)
+;;     :config
+;;     ;; standard or minimal
+;;     (setq maple-modeline-style 'standard)
+;;     ;; (setq maple-modeline-style 'minimal)
+;;     ;; standard or reset or some number
+;;     (setq maple-modeline-width 'standard)
+;;     ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
+;;     (use-package maple-xpm
+;;       :ensure nil
+;;       :config
+;;       ;; :type '(choice (const default)
+;;       ;;                (const wave)
+;;       ;;                (const bar)
+;;       ;;                (const slant)
+;;       ;;                (const contour)
+;;       ;;                (const box)
+;;       ;;                (const butt)
+;;       ;;                (const curve)))
+;;       (setq maple-xpm-style (if (display-graphic-p) 'butt 'default))))
+;;   )
+
 (when (display-graphic-p)
-  (use-package maple-modeline
-    :init
-    (load "maple-modeline-window.el")
-    :hook (after-init . maple-modeline-init)
+  ;; spaceline
+  (use-package spaceline-config
     :config
-    ;; standard or minimal
-    (setq maple-modeline-style 'standard)
-    ;; (setq maple-modeline-style 'minimal)
-    ;; standard or reset or some number
-    (setq maple-modeline-width 'standard)
-    ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-    (use-package maple-xpm
-      :ensure nil
-      :config
-      ;; :type '(choice (const default)
-      ;;                (const wave)
-      ;;                (const bar)
-      ;;                (const slant)
-      ;;                (const contour)
-      ;;                (const box)
-      ;;                (const butt)
-      ;;                (const curve)))
-      (setq maple-xpm-style (if (display-graphic-p) 'butt 'default))))
+    ;; When nil, winum-mode will not display window numbers in the mode-line.
+    ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
+    (setq winum-auto-setup-mode-line nil)
+    ;; (spaceline-spacemacs-theme))
+    (spaceline-emacs-theme))
   )
 
-;; mast put after status line theme
-(use-package window-numbering
-  :delight window-numbering-mode
+(use-package winum
+  :init
   :config
-  (window-numbering-mode t)
+  (winum-mode)
   )
+;; mast put after status line theme
+;; (use-package window-numbering
+;;   :delight window-numbering-mode
+;;   :config
+;;   (window-numbering-mode t)
+;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dashboard
 ;; (use-package dashboard
