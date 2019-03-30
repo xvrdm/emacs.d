@@ -3,19 +3,21 @@
  ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
  ;; ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
  ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12"))
- ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
+ ((member "Hack" (font-family-list))
+  (if (equal (system-name) "feng-desktop")
+      (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
+    (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique)))
  ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12"))
- ) 
+ )
 
 ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
 ;; 而且解决了中文字体导致emacs卡的现象。
 (when (equal system-type 'windows-nt)
-  (progn
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      ;; 台式电脑
-      (if (equal system-name "DESKTOP-LL8PBC8")
-          (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 15)))))
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    ;; 台式电脑
+    (if (equal (system-name) "DESKTOP-LL8PBC8")
+        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
+      (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 15))))
   )
 
 ;; (add-hook 'after-init-hook '(set-face-attribute 'default (selected-frame) :height 100))
