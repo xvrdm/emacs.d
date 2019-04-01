@@ -161,7 +161,7 @@
                          ;;
                          ;; projectile-speedbar
                          ;;
-                         sr-speedbar
+                         ;; sr-speedbar
                          ;;
                          linum-relative
                          ;;
@@ -723,7 +723,8 @@
   :config
   (global-set-key [f8] 'neotree-toggle)
   ;; Note: For users who want to use the icons theme. Pls make sure you have installed the all-the-icons package and its fonts.
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-theme (when (display-graphic-p) 'icons))
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
   (setq neo-smart-open t)
   ;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
@@ -1592,9 +1593,9 @@
   (dired-rainbow-define-chmod executable-unix "green" "-[rw-]+x.*")
   )
 
-(use-package sr-speedbar
-  :config
-  )
+;; (use-package sr-speedbar
+;;   :config
+;;   )
 
 (use-package company-jedi
   :config

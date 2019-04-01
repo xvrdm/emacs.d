@@ -242,7 +242,7 @@
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
-                    "ss" 'sr-speedbar-toggle
+                    ;; "ss" 'sr-speedbar-toggle
                     ;; "ll" 'my-wg-switch-workgroup ; load windows layout
                     ;; "yy" 'hydra-launcher/body
                     ;; "hh" 'multiple-cursors-hydra/body
