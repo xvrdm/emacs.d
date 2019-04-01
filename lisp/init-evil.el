@@ -242,6 +242,7 @@
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
+                    "ss" 'sr-speedbar-toggle
                     ;; "ll" 'my-wg-switch-workgroup ; load windows layout
                     ;; "yy" 'hydra-launcher/body
                     ;; "hh" 'multiple-cursors-hydra/body
@@ -450,7 +451,7 @@
                             (counsel-org-agenda-headlines))
                     ;; "om" 'toggle-org-or-message-mode
                     "pf" 'projectile-find-file-dwim
-                    "ps" 'projectile-speedbar-toggle
+                    ;; "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file

@@ -159,7 +159,7 @@
                          ;;
                          projectile
                          ;;
-                         projectile-speedbar
+                         ;; projectile-speedbar
                          ;;
                          sr-speedbar
                          ;;
@@ -768,9 +768,9 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   )
 
-;; projectile-speedbar
-(use-package projectile-speedbar
-  :delight)
+;; ;; projectile-speedbar
+;; (use-package projectile-speedbar
+;;   :delight)
 
 ;; linum-relative
 ;; (use-package linum-relative
