@@ -358,7 +358,8 @@
                     ;; "tua" 'artbollocks-mode
                     ;; "cby" 'cb-switch-between-controller-and-view
                     ;; "cbu" 'cb-get-url-from-controller
-                    "mk" 'bookmark-set
+                    "bm" 'bookmark-set
+                    "bj" 'bookmark-jump
                     ;; "gs" (lambda ()
                            ;; (interactive)
                            ;; (let* ((ffip-diff-backends
