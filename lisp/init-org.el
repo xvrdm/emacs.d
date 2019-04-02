@@ -24,7 +24,7 @@
                '("n" "Notes" entry (file "~/.emacs.d/cap/notes.org")
                  "* %^{heading} %t %^g\n  %?\n"))
   (add-to-list 'org-capture-templates
-               '("w" "Web collections" entry (file "~/.emacs.d/cap/web.org" "Web")
+               '("w" "Web collections" entry (file+headline "~/.emacs.d/cap/web.org" "Web")
                  "* %U %:annotation\n\n%:initial\n\n%?"))
   (add-to-list 'org-capture-templates
                `("b" "Blog" plain (file ,(concat "~/.emacs.d/cap/blog/"
