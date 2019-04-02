@@ -1,11 +1,45 @@
 ;; org-mode
+;; reference from http://ju.outofmemory.cn/entry/348743
 (with-eval-after-load 'org
   (setq org-agenda-files '("~/.emacs.d"))
-
-  (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
-	   "* TODO [#B] %?\n  %i\n"
-	   :empty-lines 1)))
+  (setq org-default-notes-file "~/.emacs.d/org/inbox.org")
+  ;; clear org-capture-templates
+  (setq org-capture-templates nil)
+  ;; add a group
+  (add-to-list 'org-capture-templates '("t" "Tasks"))
+  (add-to-list 'org-capture-templates
+               '("td" "Todo" entry (file+headline "~/.emacs.d/cap/gtd.org" "工作安排")
+                 "* TODO [#B] %?\n  %i\n"
+                 :empty-lines 1))
+  (add-to-list 'org-capture-templates
+               '("tw" "Work Task" entry (file+headline "~/.emacs.d/cap/work.org" "工作内容")
+                 "* TODO %^{任务名}\n%U\n%a\n" :clock-in t :clock-resume t))
+  (add-to-list 'org-capture-templates
+               '("j" "Journal" entry (file+datetree "~/.emacs.d/cap/journal.org" "我的记录")
+                 "* 我的记录\n%U"))
+  (add-to-list 'org-capture-templates
+               '("i" "Inbox" entry (file "~/.emacs.d/cap/inbox.org")
+                 "* %U - %^{heading} %^g\n %?\n"))
+  (add-to-list 'org-capture-templates
+               '("n" "Notes" entry (file "~/.emacs.d/cap/notes.org")
+                 "* %^{heading} %t %^g\n  %?\n"))
+  (add-to-list 'org-capture-templates
+               '("w" "Web collections" entry (file "~/.emacs.d/cap/web.org" "Web")
+                 "* %U %:annotation\n\n%:initial\n\n%?"))
+  (add-to-list 'org-capture-templates
+               `("b" "Blog" plain (file ,(concat "~/.emacs.d/cap/blog/"
+                                                 (format-time-string "%Y-%m-%d.org")))
+                 ,(concat "#+startup: showall\n"
+                          "#+options: toc:nil\n"
+                          "#+begin_export html\n"
+                          "---\n"
+                          "layout     : post\n"
+                          "title      : %^{标题}\n"
+                          "categories : %^{类别}\n"
+                          "tags       : %^{标签}\n"
+                          "---\n"
+                          "#+end_export\n"
+                          "#+TOC: headlines 2\n")))
   
   (setq org-src-fontify-natively t))
 
