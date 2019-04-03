@@ -44,6 +44,7 @@
                          ;;  posframe
                          ;;
                          evil
+                         goto-chg
                          ;;
                          ;; helm
                          ;; helm-ag
@@ -448,6 +449,8 @@
   :config
   (evil-mode 1)
   )
+
+(use-package goto-chg)
 
 ;; evil-collection
 (use-package evil-collection

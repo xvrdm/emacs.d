@@ -1,0 +1,7 @@
+# -*- org -*- 
+#+TITLE: My emacs settings
+#+AUTHOR: 
+#+STARTUP: content 
+#+STARTUP: indent 
+#+TODO: TODO STARTED | DONE 
+* 我的Emacs配置
