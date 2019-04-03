@@ -1,10 +1,143 @@
 # -*- org -*- 
 #+TITLE: org-mode 备忘录 
 #+AUTHOR: 
-#+STARTUP: content 
+#+STARTUP: content https://www.cnblogs.com/qlwy/archive/2012/06/15/2551034.html
 #+STARTUP: indent 
 #+TODO: TODO STARTED | DONE 
 <<目录>>
+
+* 标题
+文章中的标题可以通过 #+TITLE: 来设置标题
+#+BEGIN_EXAMPLE
+#+TITLE: 神器中的神器org-mode之入门篇
+#+END_EXAMPLE
+
+* 段落
+这里与我们想象的很不一样，再win下只要你Enter，就换行成为新的一段了。但是这里要开始新的段落需要回车两次，\\
+当你回车一次，当你发布时，只相当于中间有个空格而已。还有一种方法就是在需要空格的地方输入\\。 
+
+#+BEGIN_EXAMPLE
+段落一
+
+段落二\\
+段落三
+#+END_EXAMPLE
+
+* 字体
+#+BEGIN_EXAMPLE
+*粗体*
+/斜体/
++删除线+
+_下划线_
+下标： H_2 O(这里必须留一个空格要不然2和O都成为小标，目前还不知道怎么去掉空格)
+上标： E=mc^2
+等宽字：  =git=
+#+END_EXAMPLE
+效果：\\
+*粗体*\\
+/斜体/\\
++删除线+\\
+_下划线_\\
+下标： H_2 O(这里必须留一个空格要不然2和O都成为小标，目前还不知道怎么去掉空格)\\
+上标： E=mc^2\\
+等宽字：  =git=
+
+* 嵌入元数据
+** 内容元数据
+org-mode中有以下几种 
+#+BEGIN_EXAMPLE
+s    #+begin_src ... #+end_src 
+e    #+begin_example ... #+end_example  : 单行的例子以冒号开头
+q    #+begin_quote ... #+end_quote      通常用于引用，与默认格式相比左右都会留出缩进
+v    #+begin_verse ... #+end_verse      默认内容不换行，需要留出空行才能换行
+c    #+begin_center ... #+end_center 
+l    #+begin_latex ... #+end_latex 
+L    #+latex: 
+h    #+begin_html ... #+end_html 
+H    #+html: 
+a    #+begin_ascii ... #+end_ascii 
+A    #+ascii: 
+i    #+index: line 
+I    #+include: line
+#+END_EXAMPLE
+
++ 代码
+上面的单字母为快捷键字母，如输入一个<s 然后TAB后就变为：
+#+BEGIN_EXAMPLE
+#+begin_src 
+
+#+end_src
+#+END_EXAMPLE
+怎么样，这样是不是就很方便了。 上面的代码我们还可以加入一些参数，如 
+#+BEGIN_EXAMPLE
+#+begin_src c -n -t -h 7 -w 40
+
+#+end_src
+其中：
+c为所添加的语言
+-n 显示行号
+-t 清除格式
+-h 7 设置高度为7 -w 40设置宽度为40
+#+END_EXAMPLE
+
++ 注释
+以‘#‘开头的行被看作注释，不会被导出区块注释采用如下写法： 
+#+BEGIN_EXAMPLE
+#+BEGIN_COMMENT
+  块注释
+  ...
+ #+END_COMMENT
+#+END_EXAMPLE
+
++ 表格与图片
+对于表格和图片，可以在前面增加标题和标签的说明，以方便交叉引用。比如在表格的前面添加： 
+#+BEGIN_EXAMPLE
+#+CAPTION: This is the caption for the next table (or link)
+#+END_EXAMPLE
+则在需要的地方可以通过 
+#+BEGIN_EXAMPLE
+\ref{table1}
+#+END_EXAMPLE
+来引用表格
+
++ 嵌入html
+对于导出html以及发布，嵌入html代码就很有用。比如下面的例子适用于格式化为cnblogs的代码块： 
+#+BEGIN_EXAMPLE
+#+BEGIN_HTML
+  <div class="cnblogs_Highlighter">
+  <pre class="brush:cpp">
+  int main()
+  {
+    return 0;
+  }
+  </pre>
+  </div>
+#+END_EXAMPLE
+相当于在cnblogs的网页编辑器中插入"c++"代码。 
+
++ 包含文件
+当导出文档时，你可以包含其他文件中的内容。比如，想包含你的“.emacs”文件，你可以用： 
+#+BEGIN_EXAMPLE
+#+INCLUDE: "~/.emacs" src emacs-lisp
+#+END_EXAMPLE
+可选的第二个第三个参数是组织方式（例如，“quote”，“example”，或者“src”），如果是 “src”，语言用来格式化内容。\\
+组织方式是可选的，如果不给出，文本会被当作 Org 模式的正常处理。用 C-c ,可以访问包含的文件。 
+
+** 文档元数据
+具体的内容可以到文档中查看：Export options 我们除了手动添加上面的元数据外，还可以用快捷键 C-c C-e t 插入选项，其中可能有些选项我们需要经常用到：
+H: 	标题层数
+num: 	章节(标题)是否自动编号
+toc: 	是否生成索引
+creator: 	是否生成 "creat by emacs…"
+LINKUP: 	UP: 链接
+LINKHOME: 	HEME: 链接
+
+
+ 
+
+
+
+
 * 列表 
   + 选项1 
   + 选项2 
