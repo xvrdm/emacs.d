@@ -254,7 +254,7 @@ want to use in the modeline *in lieu of* the original.")
 (defun my-insert-python()
   "Insert file describe for python file"
   (interactive)
-  (when (unless system-type 'windows-nt)
+  (unless (equal system-type 'windows-nt)
     (insert "#!/usr/bin/env python3\n"))
   (insert "#-*- coding: utf-8 -*-\n\n")
   (insert "# File Name: ")

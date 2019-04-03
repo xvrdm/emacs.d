@@ -35,7 +35,7 @@
                          monokai-theme
                          ;; zenburn-theme
                          ample-theme
-                         ;;
+                         ;; Emacs Python Development Environment 
                          elpy
                          ;; ample-zen-theme
                          ;; atom-one-dark-theme
