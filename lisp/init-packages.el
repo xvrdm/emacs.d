@@ -29,12 +29,14 @@
                          company
                          company-statistics
                          company-c-headers
-                         company-jedi
+                         ;; company-jedi
                          exec-path-from-shell
                          ;; themes
                          monokai-theme
                          ;; zenburn-theme
                          ample-theme
+                         ;;
+                         elpy
                          ;; ample-zen-theme
                          ;; atom-one-dark-theme
                          ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -381,6 +383,11 @@
 ;; (load-theme 'ample-zen t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (load-theme 'atom-one-dark t)
+
+(use-package elpy
+  :config
+  (elpy-enable)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (and (display-graphic-p) (>= emacs-major-version 26))
@@ -1609,12 +1616,12 @@
 ;;   :config
 ;;   )
 
-(use-package company-jedi
-  :config
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook)
-  )
+;; (use-package company-jedi
+;;   :config
+;;   (defun my/python-mode-hook ()
+;;     (add-to-list 'company-backends 'company-jedi))
+;;   (add-hook 'python-mode-hook 'my/python-mode-hook)
+;;   )
 
 ;; (use-package company-quickhelp
 ;;   :config
