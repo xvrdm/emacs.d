@@ -63,7 +63,10 @@
                          ;;
                          smartparens
                          ;;
-                         ;; js2-mode
+                         js2-mode
+                         ;;
+                         web-mode
+                         emmet-mode
                          ;;
                          ;; cnfonts
                          ;;
@@ -519,10 +522,11 @@
   )
 
 ;; js2-mode setting
-;; (setq auto-mode-alist
-;;       (append
-;;         '(("\\.js\\'" . js2-mode))
-;;         auto-mode-alist))
+(use-package js2-mode
+  :config
+  (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
+  )
+
 
 ;; nodejs-repl setting
 ;; (require 'nodejs-repl)
@@ -530,6 +534,28 @@
 ;; setting add-node-modules-path
 ;; (eval-after-load 'js2-mode
 ;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
+
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+  (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
+  )
+
+(use-package emmet-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode)
+  )
 
 ;; popwin setting
 (use-package popwin
