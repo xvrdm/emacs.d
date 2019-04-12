@@ -1,0 +1,173 @@
+# -*- org -*- 
+#+TITLE: libtm代码学习
+#+STARTUP: indent 
+# 你可以通过添加以下行来禁用组织文件中的超级/下标：
+#+OPTIONS: ^:nil
+
+* 线程对象
+** IOThread
++ 线程对象里面包含了如下的几个变量
+#+BEGIN_SRC c++
+class IOThread : public Object, public EventHandler
+{
+private:
+    Schedule schedule_;
+    Thread worker_;/**<The worker thread object */
+    Reactor reactor_;/**<This must be the first member */
+    SignalBox sigbox_;/**<The signal box used to communicate between Objects */
+    tm_handle_t signal_handle_;
+    RequestConnQueue request_queue_;
+    tm_timer_t check_timerid_;
+    // Indicate the number of sessions bound to this thread
+    uint32_t load_;
+    bool is_check_heartbeat_;
+};
+#+END_SRC
++ 在IOThread的线程函数thr_svc中将signalbox的可读事件注册到reactor中，同时注册了定时器，开始了事件循环，如下
+#+BEGIN_SRC c++
+void IOThread::thr_svc(void *args)
+{
+    TRANS_LOG_INFO("Enter the tm thread(%p)", args);
+    IOThread *iothr = (IOThread*)args;
+    Reactor *r = iothr->reactor();
+    iothr->signal_handle_ = r->AddHandler(iothr->sigbox_.signal_fd(), iothr);
+    r->RegisterEvent(iothr->signal_handle_, EventHandler::EM_READ);
+
+    // Register check timer
+    iothr->register_check_timer();
+    r->HandleEvents();
+    TRANS_LOG_INFO("Leave the tm thread(%p)", args);
+}
+#+END_SRC
++ 当这个线程上面的对象发送了signal到这个线程的signalbox中后，IOThread的HandleInput被触发，开始处理signalbox中的signal，如下
+#+BEGIN_SRC c++
+void IOThread::HandleInput()
+{
+    int rc = 0;
+    Signal s;
+
+    rc = sigbox_.recv(s);
+    while(rc == 0){
+        s.receiver->process_signal(s);
+        rc = sigbox_.recv(s);
+    }
+}
+#+END_SRC
+* tm_tp_listen逻辑
+** TPListenSession的逻辑
++ 创建一个 TPListenSession 对象，调用这个对象的 Listen 函数(在 Listen 函数中会启动udp，tcp，http等的监听逻辑, 同时给 TPListenSession 对象绑定线程)\\
+  在 Listen 函数执行完成后会调用 TPListenSession 的 send_plug 函数，然后在 TPListenSession 绑定的线程触发了 TPListenSession 的 process_plug\\
+  函数， 在 process_plug 函数中会调用 udp、tcp、http 和 https 所对应的 TPListenerAdapter 对象的 send_plug 函数。最终这些函数的 process_plug \\
+  在各自绑定的线程上执行，如下
+#+BEGIN_SRC c++
+void TPListenSession::process_plug()
+{
+    if (udp_adps_){
+        for(uint32_t i = 0; i < udp_adp_num_; ++i){
+            if (udp_adps_[i]){
+                udp_adps_[i]->send_plug();
+            }
+        }
+    }
+    if (tcp_adp_){
+        tcp_adp_->send_plug();
+    }
+    if (http_adp_){
+        http_adp_->send_plug();
+    }
+    if (https_adp_){
+        https_adp_->send_plug();
+    }
+}
+#+END_SRC
++ 在 udp、tcp、http 和 https 各自的 TPListenerAdapter 对象的 process_plug 函数中 执行 IOHandler(UdpListener、TcpListener) 对象的 Plug \\
+  函数， 在 Plug 函数中将各自的 Handler(UdpListener、TcpListener) 的可读事件注册到线程的 Reactor 中去，如下
+#+BEGIN_SRC c++
+void IOHandler::Plug(IOThread *iothr)
+{
+    // If the iothread is changed, switch to new thread
+    if (iothr){
+        io_thr_ = iothr;
+    }
+    add_handler();
+    register_event(EventHandler::EM_READ);
+}
+#+END_SRC
+
+** udp监听
++ 如果 udp 监听端口不为0则创建线程个数的 TPListenerAdapter 对象，给每个对象绑定一个不同的线程，如下
+#+BEGIN_SRC c++
+// listen udp
+if (tp->udp_port != 0){
+    uint32_t thr_num = EventLoopManager::TpInstance()->thread_num();
+    udp_adps_ = new TPListenerAdapter*[thr_num];
+    for(uint32_t i=0; i < thr_num; ++i){
+        // Add new udp adapter
+        udp_adp_num_++;
+        udp_adps_[i] = new TPListenerAdapter(this);
+        iothr = EventLoopManager::TpInstance()->GetIOThread(i);
+        udp_adps_[i]->set_io_thread(iothr);
+        rc = udp_adps_[i]->create_udp_send_sock(tp->listen_ip, tp->udp_port);
+        if (rc != TM_SUCCESS)
+            goto err;
+    }
+    for(uint32_t i=0; i < thr_num; ++i){
+        tm_handle_t udp_lfd = INVALID_HANDLE;
+        if (i > 0){
+            udp_lfd = udp_adps_[0]->udp_listen_fd();
+        }
+        rc = udp_adps_[i]->listen_udp(tp->listen_ip, tp->udp_port, udp_lfd);
+        if (rc != TM_SUCCESS)
+            goto err;
+    }
+}
+#+END_SRC
++ 在每个 TPListenerAdapter 对象的 listen_udp 函数中创建一个 UdpListener，同时绑定到 TPListenerAdapter 对象的线程去
+  
+*** TODO TPListenerAdapter对象的可读事件哪里注册的？ [0/2][0%]
+1) [ ] TPListenerAdapter对象的可读事件是否注册
+2) [ ] TPListenerAdapter对象的send_plug什么时候调用
+** tcp监听
++ 如果 tcp 的监听端口不为0，则创建一个 TPListenerAdapter 对象，同时绑定到一个线程去，如下
+#+BEGIN_SRC c++
+if (tp->tcp_port != 0) {
+    iothr = EventLoopManager::TpInstance()->GetListenIOThread(NULL);
+    tcp_adp_ = new TPListenerAdapter(this);
+    tcp_adp_->set_io_thread(iothr);
+    rc = tcp_adp_->listen_tcp(tp->listen_ip, tp->tcp_port, TT_TCP);
+    if (rc != TM_SUCCESS)
+        goto err;
+}
+#+END_SRC
++ 在 TPListenerAdapter 对象的 listen_tcp 函数中创建一个 TcpListener，同时绑定到 TPListenerAdapter 对象的线程去
+** http监听
++ 如果 http 的监听端口不为0，同时 http 的监听端口不等于 tcp 的监听端口，则创建一个 TPListenerAdapter 对象，同时绑定到一个线程去，如下
+#+BEGIN_SRC c++
+// listen http
+if (tp->http_port != 0 && tp->http_port != tp->tcp_port) {
+    iothr = EventLoopManager::TpInstance()->GetListenIOThread(iothr);
+    http_adp_ = new TPListenerAdapter(this);
+    http_adp_->set_io_thread(iothr);
+    rc = http_adp_->listen_tcp(tp->listen_ip, tp->http_port, TT_TCP);
+    if (rc != TM_SUCCESS)
+        goto err;
+}
+#+END_SRC
++ 在 TPListenerAdapter 对象的 listen_tcp 函数中创建一个 TcpListener，同时绑定到 TPListenerAdapter 对象的线程去
+** https监听
++ 如果 https 的监听端口不为0，同时 https 的监听端口不等于 http 的监听端口，同时 https 的监听端口不等于 tcp 的监听端口，\\
+  则创建一个 TPListenerAdapter 对象，同时绑定到一个线程去，如下
+#+BEGIN_SRC c++
+// listen https
+if (tp->https_port != 0 &&tp->https_port != tp->tcp_port && tp->https_port != tp->http_port) {
+    iothr = EventLoopManager::TpInstance()->GetListenIOThread(iothr);
+    https_adp_ = new TPListenerAdapter(this);
+    https_adp_->set_io_thread(iothr);
+    rc = https_adp_->listen_tcp(tp->listen_ip, tp->https_port, TT_SSL);
+    if (rc != TM_SUCCESS)
+        goto err;
+}
+#+END_SRC
++ 在 TPListenerAdapter 对象的 listen_tcp 函数中创建一个 TcpListener，同时绑定到 TPListenerAdapter 对象的线程去
+* UdpListener::HandleInput逻辑
+* TcpListener::HandleInput逻辑
