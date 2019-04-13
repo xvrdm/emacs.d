@@ -147,6 +147,8 @@
                          ;;
                          youdao-dictionary
                          ;;
+                         go-mode
+                         ;;
                          ;; ycmd
                          ;;
                          ;; company-ycmd
@@ -651,6 +653,12 @@
   ;; (setq youdao-dictionary-search-history-file "~/.emacs.d/.youdao")
   ;; Enable Chinese word segmentation support (支持中文分词)
   ;; (setq youdao-dictionary-use-chinese-word-segmentation t)
+  )
+
+(use-package go-mode
+  :config
+  (autoload 'go-mode "go-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   )
 
 ;; {{ which-key-mode
