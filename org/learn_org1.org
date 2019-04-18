@@ -150,8 +150,8 @@ LINKHOME: 	HEME: 链接
 
 * STARTED [80%] 超链接 
 # ** 网址链接 [[www.baidu.com][baidu]]
-** 文件链接 [[file:c:/windows/desktop.ini][桌面配置文件]] 
-** 内部链接 [[目录][返回目录]] 
+# ** 文件链接 [[file:c:/windows/desktop.ini][桌面配置文件]] 
+# ** 内部链接 [[目录][返回目录]] 
 ** TODO 其他链接 
 * 代码块                                                              :@待续: 
 #+BEGIN_SRC Emacs-lisp 

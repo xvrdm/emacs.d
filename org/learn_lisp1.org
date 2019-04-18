@@ -52,13 +52,13 @@
 #+END_EXAMPLE
 ** lambda
 用funcall调用lambda表达式，还可以把lambda赋给一个变量然后在用funcall调用
-#+BEGIN_EXAMPLE emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (funcall (lambda(name) (message "Hello %s!" name)) "Emacs")
 (funcall #'(lambda(name) (message "Hello %s!" name)) "Emacs")
 (setq foo (lambda(name) (message "Hello %s!" name)))
 (setq foo #'(lambda(name) (message "Hello %s!" name)))
 (funcall foo "Emacs")
-#+END_EXAMPLE
+#+END_SRC
 * learn variable
 ** setq and defvar
 defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已经有一个值的话， 用 defvar 
