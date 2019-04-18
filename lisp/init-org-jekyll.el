@@ -19,8 +19,7 @@
 ;; (setq org-export-with-sub-superscripts nil)
 
 (setq org-publish-project-alist
-      '(
-        ("fwar34" ;; settings for cute-jumper.github.io
+      '(("fwar34" ;; settings for cute-jumper.github.io
          :base-directory "~/mine/fwar34.github.io/_org/"
          :base-extension "org"
          :publishing-directory "~/mine/fwar34.github.io/"
@@ -43,8 +42,8 @@
           :recursive t
           :publishing-function org-publish-attachment)
 
-        ("fwar34-github-io" :components ("fwar34" "org-static-fwar34"))
-        ))
+        ("fwar34-github-io" :components ("fwar34" "org-static-fwar34")))
+      )
 
 (defvar jekyll-directory (expand-file-name "~/mine/fwar34.github.io/_org/")
   "Path to Jekyll blog.")
