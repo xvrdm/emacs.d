@@ -22,7 +22,6 @@ lisp/custom.el
 *.cache
 pyim/*
 org/*.html
-org/*.pdf
 GPATH
 GTAGS
 GRTAGS
