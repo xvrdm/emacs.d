@@ -594,11 +594,14 @@
 
 (use-package org2jekyll
   :config
-  (custom-set-variables '(org2jekyll-blog-author       "feng")
-                        '(org2jekyll-source-directory  (expand-file-name "~/test/org"))
-                        '(org2jekyll-jekyll-directory  (expand-file-name "~/test/public_html"))
+  (custom-set-variables '(org2jekyll-blog-author "feng")
+                        ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
+                        ;; '(org2jekyll-jekyll-directory (expand-file-name "~/test/public_html"))
+                        '(org2jekyll-source-directory  "")
+                        '(org2jekyll-jekyll-directory  "")
                         '(org2jekyll-jekyll-drafts-dir "")
-                        '(org2jekyll-jekyll-posts-dir  "_posts/")
+                        ;; '(org2jekyll-jekyll-posts-dir  "_posts/")
+                        '(org2jekyll-jekyll-posts-dir "")
                         '(org-publish-project-alist
                           `(("default"
                              :base-directory ,(org2jekyll-input-directory)
@@ -650,9 +653,10 @@
                              :base-extension "css\\|el"
                              :publishing-directory ,(org2jekyll-output-directory "css")
                              :publishing-function org-publish-attachment
-			     :recursive t)
+                             :recursive t)
 
-                            ("web" :components ("images" "js" "css")))))
+                            ;; ("web" :components ("images" "js" "css"))
+                            )))
   )
 
 ;; magit setting

@@ -1,8 +1,15 @@
-# -*- org -*- 
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: feng
+#+DATE: 2019-04-19 Fri 12:22
 #+TITLE: libtm代码学习
-#+STARTUP: indent 
-# 你可以通过添加以下行来禁用组织文件中的超级/下标：
+#+DESCRIPTION: libtm代码的学习记录
+#+TAGS: libtm c++
+#+CATEGORIES: work
 #+OPTIONS: ^:nil
+#+STARTUP: indent 
 
 * 线程对象
 ** IOThread

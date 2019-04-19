@@ -1,5 +1,14 @@
-#+TITLE: learn lisp
-#+STARTUP: indent 
+#+STARTUP: indent
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: feng
+#+DATE: 2019-04-19 Fri 11:24
+#+TITLE: learn lisp org2jekyll
+#+DESCRIPTION: Test
+#+TAGS: org
+#+CATEGORIES: org
 * learn function
 ** symbol #' and symbol-value symbol-function
 #+BEGIN_SRC emacs-lisp 
