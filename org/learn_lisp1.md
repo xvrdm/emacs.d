@@ -1,39 +1,39 @@
 
 # Table of Contents
 
-1.  [learn function](#org6fb923c)
-    1.  [symbol #' and symbol-value symbol-function](#orgff946c1)
-    2.  [function call](#orge0ad07e)
-    3.  [#' mapcar](#org42c5396)
-    4.  [lambda](#org883353d)
-2.  [learn variable](#orga3111e6)
-    1.  [setq and defvar](#org52ec03f)
-    2.  [let and let\*](#orgf636a5b)
-3.  [控制结构](#orga76a298)
-    1.  [progn](#org089ce32)
-    2.  [if 和 cond](#org135a3b8)
-    3.  [while](#orgb9c33de)
-4.  [逻辑运算](#org29f765c)
-5.  [函数列表](#org132f2f3)
-6.  [基本数据类型](#org8cd33ba)
-    1.  [函数列表](#org311a364)
-    2.  [变量列表](#orgdcd6801)
-7.  [字符和字符串](#org2cdba58)
-    1.  [测试函数](#org409a318)
-    2.  [函数列表](#org02dbba2)
-8.  [cons cell 和列表](#orgfbaf88f)
-    1.  [测试函数](#org96aea9c)
-    2.  [构造函数](#orgc49d7a1)
-    3.  [属性列表（property list，plist）](#orge0e029a)
+1.  [learn function](#orge39a6af)
+    1.  [symbol #' and symbol-value symbol-function](#org81e7ebf)
+    2.  [function call](#org50e864d)
+    3.  [#' mapcar](#org551c35a)
+    4.  [lambda](#org9304e7a)
+2.  [learn variable](#orga34425a)
+    1.  [setq and defvar](#orgb4730b2)
+    2.  [let and let\*](#org76fb24c)
+3.  [控制结构](#orgf02ea48)
+    1.  [progn](#orge507899)
+    2.  [if 和 cond](#org4ea363e)
+    3.  [while](#orgfa19bc6)
+4.  [逻辑运算](#orgd7b608f)
+5.  [函数列表](#org6a15ac5)
+6.  [基本数据类型](#org1490662)
+    1.  [函数列表](#orgef16453)
+    2.  [变量列表](#org99c6300)
+7.  [字符和字符串](#org45c2fa8)
+    1.  [测试函数](#orgcc1151d)
+    2.  [函数列表](#orgdcee5d7)
+8.  [cons cell 和列表](#orgf3dab47)
+    1.  [测试函数](#org64d2b84)
+    2.  [构造函数](#org0e56691)
+    3.  [属性列表（property list，plist）](#org58b0127)
 
 
 
-<a id="org6fb923c"></a>
+<a id="orge39a6af"></a>
 
 # learn function
 
 
-<a id="orgff946c1"></a>
+<a id="org81e7ebf"></a>
 
 ## symbol #' and symbol-value symbol-function
 
@@ -51,7 +51,7 @@
     (double 3)
 
 
-<a id="orge0ad07e"></a>
+<a id="org50e864d"></a>
 
 ## function call
 
@@ -65,7 +65,7 @@
     (funcall #'* 1 2)
 
 
-<a id="org42c5396"></a>
+<a id="org551c35a"></a>
 
 ## #' mapcar
 
@@ -91,7 +91,7 @@
     (w32-version)
 
 
-<a id="org883353d"></a>
+<a id="org9304e7a"></a>
 
 ## lambda
 
@@ -104,12 +104,12 @@
     (funcall foo "Emacs")
 
 
-<a id="orga3111e6"></a>
+<a id="orga34425a"></a>
 
 # learn variable
 
 
-<a id="org52ec03f"></a>
+<a id="orgb4730b2"></a>
 
 ## setq and defvar
 
@@ -122,7 +122,7 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
      "A demo variable")
 
 
-<a id="orgf636a5b"></a>
+<a id="org76fb24c"></a>
 
 ## let and let\*
 
@@ -141,19 +141,19 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (circle-area2 3)
 
 
-<a id="orga76a298"></a>
+<a id="orgf02ea48"></a>
 
 # 控制结构
 
 
-<a id="org089ce32"></a>
+<a id="orge507899"></a>
 
 ## progn
 
     (progn (setq foo 3) (message "foo set to 3"))
 
 
-<a id="org135a3b8"></a>
+<a id="org4ea363e"></a>
 
 ## if 和 cond
 
@@ -170,7 +170,7 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
 使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
 
 
-<a id="orgb9c33de"></a>
+<a id="orgfa19bc6"></a>
 
 ## while
 
@@ -178,7 +178,7 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
       body)
 
 
-<a id="org29f765c"></a>
+<a id="orgd7b608f"></a>
 
 # 逻辑运算
 
@@ -193,7 +193,7 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (hello-world "Elisp")
 
 
-<a id="org132f2f3"></a>
+<a id="org6a15ac5"></a>
 
 # 函数列表
 
@@ -214,12 +214,12 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (not OBJECT)
 
 
-<a id="org8cd33ba"></a>
+<a id="org1490662"></a>
 
 # 基本数据类型
 
 
-<a id="org311a364"></a>
+<a id="orgef16453"></a>
 
 ## 函数列表
 
@@ -269,7 +269,7 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (random &optional N)
 
 
-<a id="orgdcd6801"></a>
+<a id="org99c6300"></a>
 
 ## 变量列表
 
@@ -277,14 +277,14 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     most-negative-fixnum
 
 
-<a id="org2cdba58"></a>
+<a id="org45c2fa8"></a>
 
 # 字符和字符串
 
 <http://www.woola.net/detail/2016-08-23-elisp-string.html>
 
 
-<a id="org409a318"></a>
+<a id="orgcc1151d"></a>
 
 ## 测试函数
 
@@ -296,7 +296,7 @@ nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型�
       (not (string< "" str)))
 
 
-<a id="org02dbba2"></a>
+<a id="orgdcee5d7"></a>
 
 ## 函数列表
 
@@ -333,7 +333,7 @@ nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型�
     (subst-char-in-string FROMCHAR TOCHAR STRING &optional INPLACE)
 
 
-<a id="orgfbaf88f"></a>
+<a id="orgf3dab47"></a>
 
 # cons cell 和列表
 
@@ -392,7 +392,7 @@ invalid-function。之所以前面没有遇到这个问题，那是因为前面�
 cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列表。
 
 
-<a id="org96aea9c"></a>
+<a id="org64d2b84"></a>
 
 ## 测试函数
 
@@ -409,7 +409,7 @@ cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列�
 测试一个对象是否是 nil 用 null 函数。只有当对象是空表时，null 才返回空值。
 
 
-<a id="orgc49d7a1"></a>
+<a id="org0e56691"></a>
 
 ## 构造函数
 
@@ -443,7 +443,7 @@ cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列�
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-26 周二&gt;</span></span>
 
 
-<a id="orge0e029a"></a>
+<a id="org58b0127"></a>
 
 ## 属性列表（property list，plist）
 

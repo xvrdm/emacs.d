@@ -1,3 +1,4 @@
+#+TITLE: learn lisp
 #+STARTUP: indent 
 * learn function
 ** symbol #' and symbol-value symbol-function
