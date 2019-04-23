@@ -1,8 +1,6 @@
 # -*- org -*- 
-#+TITLE: My emacs settings
+#+TITLE: 我的Emacs配置
 #+AUTHOR: 
 #+STARTUP: content 
 #+STARTUP: indent 
-#+TODO: TODO STARTED | DONE 
-** 我的Emacs配置
 主要使用evil
