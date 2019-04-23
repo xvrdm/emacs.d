@@ -151,6 +151,8 @@
                          ;;
                          go-mode
                          ;;
+                         rust-mode
+                         ;;
                          ;; ycmd
                          ;;
                          ;; company-ycmd
@@ -728,6 +730,15 @@
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+  )
+
+(use-package rust-mode
+  :config
+  (autoload 'rust-mode "rust-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+  ;; The rust-format-buffer function will format your code with rustfmt if installed. By default, this is bound to C-c C-f.
+  ;; Placing (setq rust-format-on-save t) in your ~/.emacs will enable automatic running of rust-format-buffer when you save a buffer.
+  (setq rust-format-on-save t)
   )
 
 ;; {{ which-key-mode
