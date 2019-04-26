@@ -33,6 +33,8 @@
                          exec-path-from-shell
                          ;; themes
                          monokai-theme
+                         ;;
+                         darkokai-theme
                          ;; zenburn-theme
                          ample-theme
                          ;; Emacs Python Development Environment 
@@ -298,7 +300,6 @@
                          ;;
                          ;; nimbus-theme
                          ;;
-                         ;; monokai-theme
                          ;; base16-theme
                          ;;
                          ) "Default packages")
@@ -327,7 +328,6 @@
 ;; (setenv "PATH" "C:/emacs24.5_win32")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-;; (load-theme 'monokai t)
 (defun my-monokai-init()
   ;; If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
   
@@ -369,6 +369,19 @@
   (setq monokai-user-variable-pitch t)
   )
 (my-monokai-init)
+
+;; (use-package darkokai-theme
+;;   :ensure t
+;;   :config
+;;   (setq darkokai-height-minus-1 0.8
+;;         darkokai-height-plus-1 1.0
+;;         darkokai-height-plus-2 1.0
+;;         darkokai-height-plus-3 1.0
+;;         darkokai-height-plus-4 1.0)
+;;   (setq darkokai-mode-line-padding 1) ;; Default mode-line box width
+;;   (load-theme 'darkokai t)
+;;   )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defvar zenburn-override-colors-alist
 ;;   '(("zenburn-bg+05" . "#282828")
@@ -1743,8 +1756,6 @@
 ;;   )
 
 ;; (use-package nimbus-theme)
-
-;; (use-package monokai-theme)
 
 ;; (use-package base16-theme
 ;;   :ensure t
