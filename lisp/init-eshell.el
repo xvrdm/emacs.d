@@ -146,4 +146,45 @@
                 eshell-prompt-function 'epe-theme-lambda)
           ))
 
+;;-------------------------------------------------------------
+;; https://blog.csdn.net/argansos/article/details/6867575
+;;-------------------------------------------------------------
+(defun pcmpl-package-cache(name)
+  "return a list of packages in cache"
+  (unless (equal name "")
+    (split-string (shell-command-to-string (concat "apt-cache pkgnames " name " 2> /dev/null")))))
+(defun pcomplete/sai()
+  "completion for `sai'"
+  (while
+      (pcomplete-here (pcmpl-package-cache (pcomplete-arg 'last)))))
+
+;;-------------------------------------------------------------
+;; https://blog.csdn.net/argansos/article/details/6867575
+;;-------------------------------------------------------------
+(defvar eshell-path-alist
+  `(("e" . ,user-emacs-directory)
+    ("t" . "/tmp")
+    ("down" . "~/downloads/")
+    ("rust" . "~/mine/Rust/")
+    ("py" . "~/mine/Python/")
+    ("nvim" . "~/.config/nvim/")
+    ))
+(defun shell/d (arg)
+  (let ((path (cdr (assoc arg eshell-path-alist))))
+    (eshell/cd path)))
+(defun pcomplete/d ()
+  (pcomplete-here (mapcar #'car eshell-path-alist)))
+
+
+;;-------------------------------------------------------------
+;; https://www.emacswiki.org/emacs/EshellCompletion
+;;-------------------------------------------------------------
+;; sudo
+(defun pcomplete/sudo ()
+  "Completion rules for the `sudo' command."
+  (let ((pcomplete-ignore-case t))
+    (pcomplete-here (funcall pcomplete-command-completion-function))
+    (while (pcomplete-here (pcomplete-entries)))
+    ))
+
 (provide 'init-eshell)

@@ -265,6 +265,14 @@ want to use in the modeline *in lieu of* the original.")
   (insert "\n# Content: ")
   )
 
+(defun fwar34/insert-lisp-commit ()
+  "Insert lisp commit"
+  (interactive)
+  (insert ";;-------------------------------------------------------------\n")
+  (insert ";; \n")
+  (insert ";;-------------------------------------------------------------")
+  )
+
 ;; 重新载入emacs配置
 (defun mage-reload-config()
   (interactive)
