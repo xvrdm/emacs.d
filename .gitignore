@@ -5,7 +5,8 @@ places
 recentf
 smex-items
 url/*
-eshell/(?!alias)
+eshell/history
+eshell/lastdir
 .python-environments/*
 transient/*
 semanticdb/*
