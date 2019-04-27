@@ -7,17 +7,17 @@
   (require 'em-hist)
   (save-excursion
     (let* ((start-pos (eshell-bol))
-	   (end-pos (point-at-eol))
-	   (input (buffer-substring-no-properties start-pos end-pos)))
+           (end-pos (point-at-eol))
+           (input (buffer-substring-no-properties start-pos end-pos)))
       (let* ((command (ivy-read "Command: "
-				(delete-dups
-				 (when (> (ring-size eshell-history-ring) 0)
-				   (ring-elements eshell-history-ring)))
-				:preselect input
-				:action #'ivy-completion-in-region-action))
-	     (cursor-move (length command)))
-	(kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
-	)))
+                                (delete-dups
+                                 (when (> (ring-size eshell-history-ring) 0)
+                                   (ring-elements eshell-history-ring)))
+                                :preselect input
+                                :action #'ivy-completion-in-region-action))
+             (cursor-move (length command)))
+        (kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
+        )))
   ;; move cursor to eol
   (end-of-line)
   )
@@ -73,28 +73,28 @@
     ))
 
 
-(defun samray/kill-word-backward ()
-  "Let Eshell kill word acting like zsh."
-  (interactive)
-  (set-mark-command nil)
-  (backward-word)
-  (call-interactively 'kill-region))
+;; (defun samray/kill-word-backward ()
+;;   "Let Eshell kill word acting like zsh."
+;;   (interactive)
+;;   (set-mark-command nil)
+;;   (backward-word)
+;;   (call-interactively 'kill-region))
 
 (defun samray/eshell-sudo-toggle ()
   "Add/Remove sudo in the begining of command line."
   (interactive)
   (save-excursion
     (let ((commands (buffer-substring-no-properties
-		     (eshell-bol) (point-max))))
+                     (eshell-bol) (point-max))))
       (if (string-match-p "^sudo " commands)
-	  (progn
-	    (eshell-bol)
-	    (while (re-search-forward "sudo " nil t)
-	      (replace-match "" t nil)))
-	(progn
-	  (eshell-bol)
-	  (insert "sudo ")
-	  )))))
+          (progn
+            (eshell-bol)
+            (while (re-search-forward "sudo " nil t)
+              (replace-match "" t nil)))
+        (progn
+          (eshell-bol)
+          (insert "sudo ")
+          )))))
 ;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
 (defun samray/parse-bash-history ()
   "Parse the bash history."
@@ -132,20 +132,20 @@
   (require 'em-hist)
   (save-excursion
     (let* ((start-pos (eshell-beginning-of-input))
-	   (input (eshell-get-old-input))
-	   (esh-history (when (> (ring-size eshell-history-ring) 0)
-			  (ring-elements eshell-history-ring)))
-	   (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
-	   )
+           (input (eshell-get-old-input))
+           (esh-history (when (> (ring-size eshell-history-ring) 0)
+                          (ring-elements eshell-history-ring)))
+           (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+           )
       (let* ((command (ivy-read "Command: "
-				(delete-dups all-shell-history)
-				:initial-input input
-				:require-match t
-				:action #'ivy-completion-in-region-action))
-	     )
-	(eshell-kill-input)
-	(insert command)
-	)))
+                                (delete-dups all-shell-history)
+                                :initial-input input
+                                :require-match t
+                                :action #'ivy-completion-in-region-action))
+             )
+        (eshell-kill-input)
+        (insert command)
+        )))
   ;; move cursor to eol
   (end-of-line))
 
@@ -171,48 +171,49 @@
 (use-package eshell
   :commands eshell
   :init (progn
-	  (setq
-	   eshell-highlight-prompt nil
-	   eshell-buffer-shorthand t
-	   eshell-history-size 5000
-	   ;;  ;; auto truncate after 12k lines
-	   eshell-buffer-maximum-lines 12000
-	   eshell-hist-ignoredups t
-	   eshell-error-if-no-glob t
-	   eshell-glob-case-insensitive t
-	   eshell-scroll-to-bottom-on-input 'all
-	   eshell-list-files-after-cd t
-	   eshell-aliases-file (concat user-emacs-directory "eshell/alias")
-	   eshell-banner-message ""
-	   ;;  ;; eshell-banner-message "What would you like to do?\n\n"
-	   )
-	  ;; Visual commands
-	  (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
-					 "ncftp" "pine" "tin" "trn" "elm" "vim"
-					 "nmtui" "alsamixer" "htop" "el" "elinks"
-					 ))
-	  (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
+          (setq
+           eshell-highlight-prompt nil
+           eshell-buffer-shorthand t
+           eshell-history-size 5000
+           ;;  ;; auto truncate after 12k lines
+           eshell-buffer-maximum-lines 12000
+           eshell-hist-ignoredups t
+           eshell-error-if-no-glob t
+           eshell-glob-case-insensitive t
+           eshell-scroll-to-bottom-on-input 'all
+           eshell-list-files-after-cd t
+           eshell-aliases-file (concat user-emacs-directory "eshell/alias")
+           eshell-banner-message ""
+           ;;  ;; eshell-banner-message "What would you like to do?\n\n"
+           )
+          ;; Visual commands
+          (setq eshell-visual-commands '("vi" "screen" "top" "less" "more" "lynx"
+                                         "ncftp" "pine" "tin" "trn" "elm" "vim"
+                                         "nmtui" "alsamixer" "htop" "el" "elinks"
+                                         ))
+          (setq eshell-visual-subcommands '(("git" "log" "diff" "show")))
 
-	  )
-  :config (progn
-	    (when (not (functionp 'eshell/rgrep))
-	      (defun eshell/rgrep (&rest args)
-		"Use Emacs grep facility instead of calling external grep."
-		(eshell-grep "rgrep" args t)))
-	    (add-hook 'eshell-mode-hook
-		      (lambda ()(eshell-cmpl-initialize)))
-	    (add-hook 'eshell-mode-hook (lambda ()
-					  (setq-local global-hl-line-mode nil)))
-	    )
+          )
+  :config
+  (progn
+    (when (not (functionp 'eshell/rgrep))
+      (defun eshell/rgrep (&rest args)
+        "Use Emacs grep facility instead of calling external grep."
+        (eshell-grep "rgrep" args t)))
+    (add-hook 'eshell-mode-hook
+              (lambda ()(eshell-cmpl-initialize)))
+    (add-hook 'eshell-mode-hook (lambda ()
+                                  (setq-local global-hl-line-mode nil)))
+    )
   :bind (([remap samray/smarter-move-beginning-of-line] . eshell-bol)
-	 ("C-a" . eshell-bol)
-	 ([remap kill-region] . samray/kill-word-backward)
-	 ("C-w" . samray/kill-word-backward)
-	 ([remap evil-insert-digraph] . paredit-kill)
-	 ("C-k" . paredit-kill)
-	 ([remap evil-paste-from-register] . samray/esh-history)
-	 ("C-r" . samray/esh-history)
-	 ("C-l" . samray/eshell-clear-buffer))
+         ("C-a" . eshell-bol)
+         ([remap kill-region] . samray/kill-word-backward)
+         ("C-w" . samray/kill-word-backward)
+         ([remap evil-insert-digraph] . paredit-kill)
+         ("C-k" . paredit-kill)
+         ([remap evil-paste-from-register] . samray/esh-history)
+         ("C-r" . samray/esh-history)
+         ("C-l" . samray/eshell-clear-buffer))
   )
 
 ;;; Replace shell-pop package with customized function
@@ -220,47 +221,47 @@
   "Pop and hide eshell with this function."
   (interactive)
   (let* ((eshell-buffer-name "*eshell*")
-	 (eshell-window (get-buffer-window eshell-buffer-name 'visible))
-	 (cwd default-directory)
-	 (change-cwd (lambda ()
-		       (progn
-			 (goto-char (point-max))
-			 (evil-insert-state)
-			 (eshell-kill-input)
-			 ;; There is somethings wrong with eshell/cd
-			 ;; So replace with `insert`
-			 (insert " cd " cwd)
-			 (eshell-send-input)
-			 ))))
+         (eshell-window (get-buffer-window eshell-buffer-name 'visible))
+         (cwd default-directory)
+         (change-cwd (lambda ()
+                       (progn
+                         (goto-char (point-max))
+                         (evil-insert-state)
+                         (eshell-kill-input)
+                         ;; There is somethings wrong with eshell/cd
+                         ;; So replace with `insert`
+                         (insert " cd " cwd)
+                         (eshell-send-input)
+                         ))))
     ;; Eshell buffer exists?
     (if (get-buffer eshell-buffer-name)
-	;; Eshell buffer is visible?
-	(if eshell-window
-	    ;; Buffer in current window is eshell buffer?
-	    (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
-		(if (not (one-window-p))
-		    (progn (bury-buffer)
-			   (delete-window)))
-	      ;; If not, select window which points to eshell bufffer.
-	      (select-window eshell-window)
-	      (funcall change-cwd)
-	      )
-	  ;; If eshell buffer is not visible, split a window and switch to it.
-	  (progn
-	    ;; Use `split-window-sensibly` to split window with policy
-	    ;; If window cannot be split, force to split split window horizontally
-	    (when (not (split-window-sensibly))
-	      (samray/split-window-below-and-move))
-	    (switch-to-buffer eshell-buffer-name)
-	    (funcall change-cwd)
-	    ))
+        ;; Eshell buffer is visible?
+        (if eshell-window
+            ;; Buffer in current window is eshell buffer?
+            (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
+                (if (not (one-window-p))
+                    (progn (bury-buffer)
+                           (delete-window)))
+              ;; If not, select window which points to eshell bufffer.
+              (select-window eshell-window)
+              (funcall change-cwd)
+              )
+          ;; If eshell buffer is not visible, split a window and switch to it.
+          (progn
+            ;; Use `split-window-sensibly` to split window with policy
+            ;; If window cannot be split, force to split split window horizontally
+            (when (not (split-window-sensibly))
+              (samray/split-window-below-and-move))
+            (switch-to-buffer eshell-buffer-name)
+            (funcall change-cwd)
+            ))
       ;; If eshell buffer doesn't exist, create one
       (progn
-	(when (not (split-window-sensibly))
-	  (samray/split-window-below-and-move))
-	(eshell)
-	(funcall change-cwd)
-	)))
+        (when (not (split-window-sensibly))
+          (samray/split-window-below-and-move))
+        (eshell)
+        (funcall change-cwd)
+        )))
   )
 
 ;;; Steal from
@@ -271,9 +272,9 @@
 (defun samray/company-eshell-autosuggest-candidates (prefix)
   "Select the first eshell history candidate with prefix PREFIX."
   (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
-			(ring-elements eshell-history-ring)))
-	 (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
-	 (history
+                        (ring-elements eshell-history-ring)))
+         (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
+         (history
           (delete-dups
            (mapcar (lambda (str)
                      (string-trim (substring-no-properties str)))
@@ -317,8 +318,8 @@
   :ensure t
   :after eshell
   :init (progn
-	  (setq eshell-highlight-prompt nil
-		eshell-prompt-function 'epe-theme-lambda)
-))
+          (setq eshell-highlight-prompt nil
+                eshell-prompt-function 'epe-theme-lambda)
+          ))
 
 (provide 'init-eshell)
