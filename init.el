@@ -27,7 +27,7 @@
 ;; (require 'init-modeline)
                           
 ;; cl - Common List Extension
-(require 'cl)
+(require 'cl-lib)
 
 ;; (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 ;; (load-file custom-file)

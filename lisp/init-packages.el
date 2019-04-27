@@ -94,6 +94,9 @@
                          ;;
                          org
                          ;;
+                         ob-go
+                         ob-rust
+                         ;;
                          htmlize
                          ;;
                          org-pomodoro
@@ -978,6 +981,9 @@
 
 (use-package org)
 (use-package htmlize)
+
+(use-package ob-go)
+(use-package ob-rust)
 
 (use-package general
   :delight

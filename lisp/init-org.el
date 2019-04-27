@@ -59,4 +59,15 @@
 (add-hook 'org-mode-hook 
 	  (lambda () (setq truncate-lines nil)))
 
+;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
+;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+    (emacs-lisp . t)
+    (shell . t)
+    (C . t)))
+(setq org-confirm-babel-evaluate nil)
+(setq org-src-fontify-natively t)
+
 (provide 'init-org)
