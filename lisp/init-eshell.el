@@ -103,6 +103,10 @@
 
 (use-package eshell
   :commands eshell
+  :init
+  (progn
+    (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
+    )
   :hook
   (eshell-mode . company-mode)
   :config
@@ -130,7 +134,10 @@
    ))
 
 (use-package esh-autosuggest
+  :ensure t
+  :after eshell
   :hook
+  ;; eshell-banner-message "What would you like to do?\n\n"
   (eshell-mode . esh-autosuggest-mode)
   ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
   ;; line below instead:
@@ -141,10 +148,91 @@
 (use-package eshell-prompt-extras
   :ensure t
   :after eshell
-  :init (progn
-          (setq eshell-highlight-prompt nil
-                eshell-prompt-function 'epe-theme-lambda)
-          ))
+  :init
+  (progn
+    (setq eshell-highlight-prompt nil
+          eshell-prompt-function 'epe-theme-lambda))
+  )
+
+(use-package eshell-autojump
+  :ensure t
+  :after eshell
+  :config
+  )
+;;-------------------------------------------------------------
+;; samrayleung
+;;-------------------------------------------------------------
+;; must install fasd
+(defun fwar34/eshell-fasd-z (&rest args)
+  "Use fasd to change direct more effectively by passing ARGS."
+  (setq args (eshell-flatten-list args))
+  (let* ((fasd (concat "fasd " (car args)))
+         (fasd-result (shell-command-to-string fasd))
+         (path (replace-regexp-in-string "\n$" "" fasd-result))
+         )
+    (eshell/cd path)
+    (eshell/echo path)
+    ))
+
+;; Replace shell-pop package with customized function
+(defun samray/split-window-right-and-move ()
+  "Split window vertically and move to the other window."
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  )
+(defun samray/split-window-below-and-move ()
+  "Split window horizontally and move to the other window!"
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  )
+(defun fwar34/eshell-pop ()
+  "Pop and hide eshell with this function."
+  (interactive)
+  (let* ((eshell-buffer-name "*eshell*")
+	 (eshell-window (get-buffer-window eshell-buffer-name 'visible))
+	 (cwd default-directory)
+	 (change-cwd (lambda ()
+		       (progn
+			 (goto-char (point-max))
+			 (evil-insert-state)
+			 (eshell-kill-input)
+			 ;; There is somethings wrong with eshell/cd
+			 ;; So replace with `insert`
+			 (insert " cd " cwd)
+			 (eshell-send-input)
+			 ))))
+    ;; Eshell buffer exists?
+    (if (get-buffer eshell-buffer-name)
+	;; Eshell buffer is visible?
+	(if eshell-window
+	    ;; Buffer in current window is eshell buffer?
+	    (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
+		(if (not (one-window-p))
+		    (progn (bury-buffer)
+			   (delete-window)))
+	      ;; If not, select window which points to eshell bufffer.
+	      (select-window eshell-window)
+	      (funcall change-cwd)
+	      )
+	  ;; If eshell buffer is not visible, split a window and switch to it.
+	  (progn
+	    ;; Use `split-window-sensibly` to split window with policy
+	    ;; If window cannot be split, force to split split window horizontally
+	    (when (not (split-window-sensibly))
+	      (samray/split-window-below-and-move))
+	    (switch-to-buffer eshell-buffer-name)
+	    (funcall change-cwd)
+	    ))
+      ;; If eshell buffer doesn't exist, create one
+      (progn
+	(when (not (split-window-sensibly))
+	  (samray/split-window-below-and-move))
+	(eshell)
+	(funcall change-cwd)
+	)))
+  )
 
 ;;-------------------------------------------------------------
 ;; https://blog.csdn.net/argansos/article/details/6867575

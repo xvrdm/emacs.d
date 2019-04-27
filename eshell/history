@@ -1,0 +1,128 @@
+git pull
+exit
+pip3 install flasl
+pip3 install flask
+exit
+git stauts
+git status
+exit
+exit
+ls
+mv form.html home.html
+exit
+zsh
+exit
+exit
+exit
+exit
+exit
+gl
+git pull
+git pull
+exit
+ls
+go run goroutine_test5.go 
+go run goroutine_test4.go 
+exit
+exit
+git pull
+exit
+python3 orm.py 
+exit
+pip3 install aiomysql
+exit
+python3 orm.py 
+exit
+date
+exit
+ls
+..
+d e
+exit
+apt search fasd
+sudo apt install fasd
+exit
+exit
+fasd -a
+fasd --help
+fasd -s
+fasd -l
+cd ~
+cd -
+fasd -l
+j
+autojump 
+exit
+z
+fwar34/eshell-fasd-z 
+fwar34/eshell-fasd-z mine
+fwar34/eshell-fasd-z python
+find-file-other-window eshell
+j
+cd ~
+cd ~/.emacs.d/
+cd ~/downloads/
+j em
+find-file-other-window init.el
+exit
+j sam
+cd ~/downloads/samrayleung/lisp/
+ls
+ff init-eshell.el 
+exit
+z mine
+z python
+cd -
+gcl https://github.com/fwar34/Rust.git
+alias
+gcl https://github.com/fwar34/Rust.git
+z py
+gst
+gl
+j .em
+gst
+gd
+git diff
+exit
+cd /home/feng/.emacs.d/lisp/
+ls
+exit
+cd /home/feng/.emacs.d/lisp/
+exit
+..
+gst
+ga .
+ga
+alias
+exit
+..
+gst
+j mine
+..
+gcl https://github.com/fwar34/Rust.git
+git clone https://github.com/fwar34/Rust.git
+exit
+j mine/
+..
+z mine
+z mp
+gcl https://github.com/fwar34/Rust.git
+exit
+ll
+ll ..
+exit
+ll
+exit
+j mine
+gcl https://github.com/fwar34/Rust.git
+ll
+ll ..
+ll
+exit
+j mine
+gst
+j .em
+gst
+gd
+git diff
+exit

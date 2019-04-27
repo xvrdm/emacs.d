@@ -182,6 +182,8 @@
                          ;;
                          eshell-prompt-extras
                          ;;
+                         eshell-autojump
+                         ;;
                          ;; sr-speedbar
                          ;;
                          linum-relative
