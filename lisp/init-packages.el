@@ -918,13 +918,15 @@
   )
 
 ;; https://github.com/zwild/eshell-prompt-extras
-(use-package eshell-prompt-extras
-  :config
-  (with-eval-after-load "esh-opt"
-    (autoload 'epe-theme-lambda "eshell-prompt-extras")
-    (setq eshell-highlight-prompt nil
-          eshell-prompt-function 'epe-theme-lambda))
-  )
+;; (use-package eshell-prompt-extras
+;;   :config
+;;   (with-eval-after-load "esh-opt"
+;;     (autoload 'epe-theme-lambda "eshell-prompt-extras")
+;;     (setq eshell-highlight-prompt nil
+;;           eshell-prompt-function 'epe-theme-lambda))
+;;   )
+
+
 
 ;; ;; projectile-speedbar
 ;; (use-package projectile-speedbar
