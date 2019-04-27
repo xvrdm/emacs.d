@@ -180,6 +180,8 @@
                          ;;
                          ;; projectile-speedbar
                          ;;
+                         eshell-prompt-extras
+                         ;;
                          ;; sr-speedbar
                          ;;
                          linum-relative
@@ -913,6 +915,15 @@
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  )
+
+;; https://github.com/zwild/eshell-prompt-extras
+(use-package eshell-prompt-extras
+  :config
+  (with-eval-after-load "esh-opt"
+    (autoload 'epe-theme-lambda "eshell-prompt-extras")
+    (setq eshell-highlight-prompt nil
+          eshell-prompt-function 'epe-theme-lambda))
   )
 
 ;; ;; projectile-speedbar

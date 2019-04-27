@@ -24,6 +24,7 @@
 (require 'init-keybindings)
 (require 'init-evil)
 (require 'init-company)
+(require 'init-eshell)
 ;; (require 'init-modeline)
                           
 ;; cl - Common List Extension

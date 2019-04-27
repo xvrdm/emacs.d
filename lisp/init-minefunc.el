@@ -202,7 +202,7 @@ want to use in the modeline *in lieu of* the original.")
     (when (>= emacs-major-version 26)
       (lsp-ui-doc-mode 1))))
 
-(defun my-recent-file()
+(defun fwar34/recent-file()
   "open recent file, then set state normal"
   (interactive)
   (recentf-open-files)
@@ -212,17 +212,17 @@ want to use in the modeline *in lieu of* the original.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://blog.binchen.org/index-21.html, Use ivy to open recent directories
 (require 'ivy) ; swiper 7.0+ should be installed
-(defun counsel-goto-recent-directory ()
-"Open recent directory with dired"
-(interactive)
-(unless recentf-mode (recentf-mode 1))
-(let ((collection
-      (delete-dups
-       (append (mapcar 'file-name-directory recentf-list)
-               ;; fasd history
-               (if (executable-find "fasd")
-                   (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
- (ivy-read "directories:" collection :action 'dired)))
+(defun fwar34/counsel-goto-recent-directory ()
+  "Open recent directory with dired"
+  (interactive)
+  (unless recentf-mode (recentf-mode 1))
+  (let ((collection
+         (delete-dups
+          (append (mapcar 'file-name-directory recentf-list)
+                  ;; fasd history
+                  (if (executable-find "fasd")
+                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+    (ivy-read "directories:" collection :action 'dired)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://github.com/crocket/dired-single
 ;; dired-single
@@ -251,7 +251,7 @@ want to use in the modeline *in lieu of* the original.")
 ;; # Author: Feng
 ;; # Created Time: Fri 24 Mar 2017 02:27:39 PM CST
 ;; # Content: 使用pickle模块将数据对象保存到文件
-(defun my-insert-python()
+(defun fwar34/insert-python()
   "Insert file describe for python file"
   (interactive)
   (unless (equal system-type 'windows-nt)

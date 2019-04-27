@@ -118,7 +118,7 @@
                     "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
                     ;;
                     "ia" 'my-append-semicolon-excursion
-                    "ic" 'my-insert-python
+                    "ic" 'fwar34/insert-python
                     ;; "ia" 'my-append-semicolon-marker
                     "do" 'delete-other-windows
                     "ff" 'find-file
@@ -228,7 +228,7 @@
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
                     "tm" 'eshell
-                    "rr" 'counsel-goto-recent-directory)
+                    "rr" 'fwar34/counsel-goto-recent-directory)
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
