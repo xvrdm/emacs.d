@@ -50,6 +50,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; https://github.com/samrayleung/emacs.d/blob/master/lisp/init-eshell.el
 (defun eshell/unpack (file &rest args)
   "Unpack FILE with ARGS using default command."
   (let ((command (some (lambda (x)
