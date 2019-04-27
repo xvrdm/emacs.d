@@ -84,6 +84,8 @@
                          ;;
                          popwin
                          ;;
+                         powershell
+                         ;;
                          smex
                          ;;
                          expand-region
@@ -584,6 +586,10 @@
   :delight popwin-mode
   :config
   (popwin-mode t)
+  )
+
+(use-package powershell
+  :if (eq system-type 'windows-nt)
   )
 
 ;; 开启全局company
