@@ -7,6 +7,7 @@ smex-items
 url/*
 eshell/history
 eshell/lastdir
+eshell/autojump
 .python-environments/*
 transient/*
 semanticdb/*
