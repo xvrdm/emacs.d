@@ -480,13 +480,16 @@
    ("M-o o" . pyim-convert-string-at-point)) ;与 pyim-probe-dynamic-english 配合
   )
 
+;; (setq evil-want-keybinding nil) must put before load evil
+;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
+(setq evil-want-keybinding nil)
+
 ;; https://github.com/emacs-evil/evil-collection
 ;; evil
 (use-package evil
   :ensure t
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
   )
