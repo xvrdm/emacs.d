@@ -184,6 +184,9 @@
                          ;;
                          eshell-autojump
                          ;;
+                         ;;
+                         lispy
+                         lispyville
                          ;; sr-speedbar
                          ;;
                          linum-relative
@@ -928,7 +931,15 @@
 ;;           eshell-prompt-function 'epe-theme-lambda))
 ;;   )
 
+(use-package lispy
+  :config
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  )
 
+(use-package lispyville
+  :config
+  (add-hook 'lispy-mode-hook #'lispyville-mode)
+  )
 
 ;; ;; projectile-speedbar
 ;; (use-package projectile-speedbar
