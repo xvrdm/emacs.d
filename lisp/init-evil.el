@@ -121,7 +121,7 @@
                     "ic" 'fwar34/insert-python
                     ;; "ia" 'my-append-semicolon-marker
                     "do" 'delete-other-windows
-                    "ff" 'find-file
+                    "ff" 'counsel-find-file
                     "fd" 'my-display-full-path-of-current-buffer
                     "fb" 'beginning-of-defun
                     "fz" 'counsel-fzf

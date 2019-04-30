@@ -1,4 +1,5 @@
 company-statistics-cache.el
+custom.el
 elpa/*
 auto-save-list/*
 places

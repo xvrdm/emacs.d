@@ -1,11 +1,11 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
- ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
- ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
- (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
- )
+  ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+  ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
+  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+  )
 
 (defun require-package (package)
   "refresh package archives, check package presence and install if it's not installed"
@@ -17,7 +17,7 @@
                     (AVAIL (assoc package ARCHIVES)))
                (if AVAIL
                    (package-install package)))
-(require package))))
+             (require package))))
 
 ;; use-package
 (require-package 'use-package)
@@ -34,29 +34,31 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;(use-package el-get
- ;:ensure t
- ;:load-path  "~/.emacs.d/el-get/el-get"
- ;:config
- ;(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
- ;(el-get 'sync)
- ;)
+;; (use-package el-get
+;; :ensure t
+;; :load-path  "~/.emacs.d/el-get/el-get"
+;; :config
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (el-get 'sync)
+;; )
 
 ;; :el-get keyword for use-package
 (use-package use-package-el-get
-             :ensure t
-             :config 
-             (use-package-el-get-setup)
-             )
+  :ensure t
+  :config 
+  (use-package-el-get-setup)
+  )
 
 ;; chords
-(use-package use-package-chords)
+(use-package use-package-chords
+  :ensure t
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
- :ensure t
- :config
+  :ensure t
+  :config
   (if (and (eq system-type 'windows-nt) (> emacs-major-version 24))
       (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t)))
     (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t))))
@@ -67,12 +69,12 @@
         monokai-height-plus-4 1.0)
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
- )
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package posframe
- :if (and (display-graphic-p) (>= emacs-major-version 26))
- :ensure t
- )
+  :if (and (display-graphic-p) (>= emacs-major-version 26))
+  :ensure t
+  )
 
 (use-package pyim
   :ensure t
@@ -112,8 +114,8 @@
   ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
   ;; 手动安装 posframe 包。
   (if (and (display-graphic-p) (>= emacs-major-version 26))
-    (setq pyim-page-tooltip 'posframe)
-   (setq pyim-page-tooltip 'popup))
+      (setq pyim-page-tooltip 'posframe)
+    (setq pyim-page-tooltip 'popup))
 
   ;; 选词框显示5个候选词
   (setq pyim-page-length 5)
@@ -142,8 +144,8 @@
   )
 
 (use-package goto-chg
- :ensure t
- )
+  :ensure t
+  )
 
 ;; evil-collection
 (use-package evil-collection
@@ -153,9 +155,8 @@
   (evil-collection-init)
   )
 
-;; hungry-delete seting
 (use-package hungry-delete
- :ensure t
+  :ensure t
   :defer
   :delight hungry-delete-mode
   :config
@@ -166,32 +167,32 @@
     (save-match-data (sp-delete-pair (ad-get-arg 0))))
   )
 
-(use-package ivy
- :ensure t
-  :defer
+(use-package expand-region
+  :ensure t
+  )
+
+(use-package counsel
+  ;; counsel repository contains:
+  ;; Ivy, a generic completion mechanism for Emacs.
+  ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+  ;; Swiper, an Ivy-enhanced alternative to isearch.
+  :ensure t
+  ;; :defer
+  :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
         ivy-height 15
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
-        ) (ivy-mode +1) :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
-  )
-
-(use-package swiper
- :ensure t
-  :delight ivy-mode
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  ;; swiper setting
+        ivy-use-virtual-buffers t)
+  (ivy-mode +1) 
   (setq enable-recursive-minibuffers t)
   )
 
 ;; smartparens setting
-;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (use-package smartparens
- :ensure t
+  :ensure t
   :delight smartparens-global-mode
   :delight smartparens-mode
   :config
@@ -202,7 +203,7 @@
 
 ;; js2-mode setting
 (use-package js2-mode
- :ensure t
+  :ensure t
   :config
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
@@ -216,7 +217,7 @@
 ;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 (use-package web-mode
- :ensure t
+  :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -231,7 +232,7 @@
   )
 
 (use-package emmet-mode
- :ensure t
+  :ensure t
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
@@ -241,20 +242,20 @@
 
 ;; popwin setting
 (use-package popwin
- :ensure t
+  :ensure t
   :delight popwin-mode
   :config
   (popwin-mode t)
   )
 
 (use-package powershell
- :ensure t
+  :ensure t
   :if (eq system-type 'windows-nt)
   )
 
 ;; 开启全局company
 (use-package company
- :ensure t
+  :ensure t
   :init
   :delight global-company-mode
   :delight company-mode
@@ -272,16 +273,16 @@
   )
 
 (use-package fzf
- :ensure t
- )
+  :ensure t
+  )
 
 ;; org-pomodoro setting
 (use-package org-pomodoro
- :ensure t
+  :ensure t
   :delight org-pomodoro)
 
 (use-package org2jekyll
- :ensure t
+  :ensure t
   :config
   (custom-set-variables '(org2jekyll-blog-author "feng")
                         ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
@@ -350,7 +351,7 @@
 
 ;; magit setting
 (use-package magit
- :ensure t
+  :ensure t
   :delight magit-mode
   :config
   )
@@ -358,7 +359,7 @@
 ;; evil-magit setting
 ;; (require 'evil-magit)
 (use-package evil-magit
- :ensure t
+  :ensure t
   :delight
   :config
   ;; https://www.helplib.com/GitHub/article_131559
@@ -366,12 +367,12 @@
   )
 
 (use-package xpm
- :ensure t
- )
+  :ensure t
+  )
 
 ;; yasnippet setting
 (use-package yasnippet
- :ensure t
+  :ensure t
   :delight yas-global-mode
   :delight yas-minor-mode
   :config
@@ -380,34 +381,9 @@
 ;; (yas-reload-all)
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
-
-;; emacs-ycmd
-;; (use-package ycmd
-;;   :delight ycmd-mode
-;;   :config
-;;   ;; (add-hook 'after-init-hook 'global-ycmd-mode)
-;;   (add-hook 'c++-mode-hook 'ycmd-mode)
-;;   (set-variable 'ycmd-server-command '("python" "/home/liang.feng/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd"))
-;;   ;; (set-variable 'ycmd-global-config "/home/liang.feng/dbus2.0/hatmserver2/.ycm_extra_conf.py")
-;;   (setq ycmd-extra-conf-handler 'load)
-;;   )
-
-;; (use-package company-ycmd
-;;   :delight company-ycmd
-;;   :config
-;;   (company-ycmd-setup)
-;;   ;; Set always complete immediately
-;;   (setq company-idle-delay 0.1)
-;;   ;;(add-to-list 'company-backends 'company-ycmd)
-;;   )
-
-
-;; (require 'ycmd-test)
-;; (ert-run-tests-interactively "ycmd-test")
-
 ;; youdao-dictionary
 (use-package youdao-dictionary
- :ensure t
+  :ensure t
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -420,25 +396,26 @@
   )
 
 (use-package go-mode
- :ensure t
+  :ensure t
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   )
 
 (use-package rust-mode
- :ensure t
+  :ensure t
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-  ;; The rust-format-buffer function will format your code with rustfmt if installed. By default, this is bound to C-c C-f.
-  ;; Placing (setq rust-format-on-save t) in your ~/.emacs will enable automatic running of rust-format-buffer when you save a buffer.
+  ;; The rust-format-buffer function will format your code with rustfmt if installed.
+  ;; By default, this is bound to C-c C-f.
+  ;; Placing (setq rust-format-on-save t) in your ~/.emacs will enable automatic
+  ;; running of rust-format-buffer when you save a buffer.
   (setq rust-format-on-save t)
   )
 
-;; {{ which-key-mode
 (use-package which-key
- :ensure t
+  :ensure t
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
@@ -446,104 +423,15 @@
   :config
   (which-key-mode 1)
   )
-;; }}
 
-;; gtags(global)
-;; (use-package gtags
-;;   :delight gtags-mode
-;;   :init
-;;   (if (not (equal 'windows-nt system-type))
-;;       (load "/usr/local/share/gtags/gtags.el")
-;;     (load "gtags.el"))
-;;   ;; (load "/usr/local/share/gtags/gtags.el")
-;;   :config
-;;   (autoload 'gtags-mode "gtags" "" t)
-;;   (add-hook 'gtags-select-mode-hook
-;;             '(lambda()
-;;                (setq hl-line-face 'underline)
-;;                (hl-line-mode 1)))
-;;   ;; update tags file https://www.emacswiki.org/emacs/GnuGlobal
-;;   ;; (add-hook 'after-save-hook 'gtags-update-hook) ;; gtags-update-hook --> minefunc
-;;   (setq gtags-auto-update t)
-;;   )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; counsel-etags
-;; (use-package counsel-etags
-;;   :delight
-;;   :config
-;;   (eval-after-load 'counsel-etags
-;;     '(progn
-;;        ;; counsel-etags-ignore-directories does NOT support wildcast
-;;        (add-to-list 'counsel-etags-ignore-directories "build_clang")
-;;        (add-to-list 'counsel-etags-ignore-directories "build_clang")
-;;        ;; counsel-etags-ignore-filenames supports wildcast
-;;        (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.html")
-;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.map")
-;;        ;; (add-to-list 'counsel-etags-ignore-filenames "*.json")
-;;        )) 
-;;   ;; auto update tags--->https://github.com/redguardtoo/counsel-etags
-;;   ;; Don't ask before rereading the TAGS files if they have changed
-;;   (setq tags-revert-without-query t)
-;;   ;; Don't warn when TAGS files are large
-;;   (setq large-file-warning-threshold nil)
-;;   ;; Setup auto update now
-;;   (add-hook 'prog-mode-hook
-;;             (lambda()
-;;               (add-hook 'after-save-hook
-;;                         'counsel-etags-virtual-update-tags 'append 'local)))
-;;   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; note `file-truename' must be used!
-;; (setenv "GTAGSLIBPATH" (concat "/usr/include"
-;;                                ":"
-;;                                "/usr/local/include"
-;;                                ":"
-;;                                (file-truename "~/proj2")
-;;                                ":"
-;;                                (file-truename "~/proj1")))
-;; (setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
-;; (setq company-backends '((company-dabbrev-code company-gtags)))
-;; (add-to-list 'company-backends 'company-gtags)
-
-;; doom-themes ;;;;;;;;;;;;;;;;;;;;;
-;; (require 'doom-themes)
-;; Global settings (defaults)
-;; (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
-  ;;    doom-themes-enable-italic nil) ; if nil, italics is universally disabled
-;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each theme
-;; may have their own settings.
-;; (load-theme 'doom-nova t)
-;; (load-theme 'doom-vibrant t)
-;; (load-theme 'doom-one t)
-;; (load-theme 'doom-molokai t)
-;; Enable flashing mode-line on errors
-;; (doom-themes-visual-bell-config)
-;; Enable custom neotree theme
-;;
-;;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
-;; Corrects (and improves) org-mode's native fontification.
-;; (doom-themes-org-config)
-;; end doom-themes ;;;;;;;;;;;;;;;;;;;;;
-
-;; function-args
-;; (use-package function-args
-;;   :delight function-args-mode
-;;   :config
-;;   (fa-config-default)
-;;   )
-
-;; neotree
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
- :ensure t
+  :ensure t
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
-  ;; Note: For users who want to use the icons theme. Pls make sure you have installed the all-the-icons package and its fonts.
+  ;; Note: For users who want to use the icons theme. Pls make sure you have
+  ;; installed the all-the-icons package and its fonts.
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-theme (when (display-graphic-p) 'icons))
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
@@ -579,10 +467,10 @@
               (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
   )
 
-    (use-package all-the-icons
-                 :ensure t
-                 :if (display-graphic-p)
-                 )
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p)
+  )
 
 (use-package projectile
   :ensure t
@@ -591,15 +479,6 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
-
-;; https://github.com/zwild/eshell-prompt-extras
-;; (use-package eshell-prompt-extras
-;;   :config
-;;   (with-eval-after-load "esh-opt"
-;;     (autoload 'epe-theme-lambda "eshell-prompt-extras")
-;;     (setq eshell-highlight-prompt nil
-;;           eshell-prompt-function 'epe-theme-lambda))
-;;   )
 
 (use-package lispy
   :ensure t
@@ -613,10 +492,6 @@
   (add-hook 'lispy-mode-hook #'lispyville-mode)
   )
 
-;; ;; projectile-speedbar
-;; (use-package projectile-speedbar
-;;   :delight)
-
 ;; linum-relative
 ;; (use-package linum-relative
 ;;   :delight linum-relative-mode
@@ -624,7 +499,6 @@
 ;;   ;; (linum-relative-toggle)
 ;;   )
 
-;; rainbow-delimiters
 (use-package rainbow-delimiters
   :ensure t
   :delight rainbow-delimiters-mode
@@ -694,17 +568,17 @@
 
 (use-package org
   :ensure t
- )
+  )
 (use-package htmlize
   :ensure t
- )
+  )
 
 (use-package ob-go
   :ensure t
- )
+  )
 (use-package ob-rust
   :ensure t
- )
+  )
 
 (use-package general
   :ensure t
@@ -712,11 +586,7 @@
   :config
   (general-evil-setup t)
   )
-;; }}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (require 'main-line)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; powerline
+
 (use-package powerline
   :ensure t
   :delight
@@ -731,152 +601,44 @@
   ;; (powerline-nano-theme)
   )
 
-;; smart-mode-line
-;; (use-package smart-mode-line
-;;   :delight
-;;   :init
-;;   ;; (setq sml/theme 'dark)
-;;   ;; (setq sml/theme 'light)
-;;   (setq sml/no-confirm-load-theme t)
-;;   (setq sml/theme 'powerline)
-;;   ;; (setq sml/theme 'respectful)
-;;   :config
-;;   (sml/setup)
-;;   )
- 
-
-;; powerline-evil
-;; (require 'powerline-evil)
-;; (use-package poweline-evil
-;;   :delight
-;;   :config
-;;   )
-
-;; airline-themes
-;; (use-package airline-themes
-;;   :config
-;;   ;; (load-theme 'airline-light)
-;;   ;; (load-theme 'airline-da dark)
-;;   (airline-themes-set-modeline)
-;;   )
-
-
-;; (add-hook 'emacs-lisp-mode-hook
-;;           (lambda ()
-;;             (face-remap-add-relative
-;;              'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
-             ;; 'mode-line '((:foreground "ivory" :background "darkgray") mode-line))))
-;; (add-hook 'help-mode-hook
-;;           (lambda ()
-;;             (face-remap-add-relative
-;;              'mode-line '((:foreground "ivory" :background "purple") mode-line))))
-;; (add-hook 'package-menu-mode-hook
-;;           (lambda ()
-;;             (face-remap-add-relative
-;;              'mode-line '((:foreground "ivory" :background "DarkOrange") mode-line))))
-;; (custom-set-faces
-;;  '(highlight ((t (:background "grey20" :foreground nil :bold t)))) ;; highlight current line
-;;  )
 (set-cursor-color "green")
 
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :hook (after-init . doom-modeline-mode)
-;;   :config
-;;   ;; How tall the mode-line should be (only respected in GUI Emacs).
-;;   (setq doom-modeline-height 15)
-;;   ;; How wide the mode-line bar should be (only respected in GUI Emacs).
-;;   (setq doom-modeline-bar-width 3)
-;;   ;; Determines the style used by `doom-modeline-buffer-file-name'.
-;;   ;;
-;;   ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
-;;   ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
-;;   ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
-;;   ;;   truncate-with-project => emacs/l/comint.el
-;;   ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
-;;   ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
-;;   ;;   truncate-all => ~/P/F/e/l/comint.el
-;;   ;;   relative-from-project => emacs/lisp/comint.el
-;;   ;;   relative-to-project => lisp/comint.el
-;;   ;;   file-name => comint.el
-;;   ;;   buffer-name => comint.el<2> (uniquify buffer name)
-;;   ;;
-;;   ;; If you are expereicing the laggy issue, especially while editing remote files
-;;   ;; with tramp, please try `file-name' style.
-;;   ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
-;;   ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+(use-package telephone-line
+  :unless window-system
+  :ensure t
+  :delight
+  :config
+  (telephone-line-mode t)
+  )
 
-;;   ;; Whether show `all-the-icons' or not (if nil nothing will be showed).
-;;   ;; (setq doom-modeline-icon t)
-;;   ;; Whether show the icon for major mode. It respects `doom-modeline-icon'.
-;;   ;; (setq doom-modeline-major-mode-icon t)
-;;   ;; Display color icons for `major-mode'. It respects `all-the-icons-color-icons'.
-;;   ;; (setq doom-modeline-major-mode-color-icon nil)
-;;   ;; Whether display minor modes or not. Non-nil to display in mode-line.
-;;   ;; (setq doom-modeline-minor-modes nil)
-;;   ;; Whether display environment version or not
-;;   ;; (setq doom-modeline-env-version t)
-;;   )
-
-  ;; telephone-line
-  (use-package telephone-line
-               :unless window-system
-   :ensure t
-    :delight
-    :config
-    (telephone-line-mode t))
-
-  ;; spaceline
-  (use-package spaceline
-   :ensure t
-   :if window-system
-    :config
-    ;; When nil, winum-mode will not display window numbers in the mode-line.
-    ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
-    (setq winum-auto-setup-mode-line nil)
-    (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-    ;; (spaceline-spacemacs-theme))
-    (spaceline-emacs-theme))
+;; spaceline
+(use-package spaceline
+  :ensure t
+  :if window-system
+  :config
+  ;; When nil, winum-mode will not display window numbers in the mode-line.
+  ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
+  (setq winum-auto-setup-mode-line nil)
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  ;; (spaceline-spacemacs-theme))
+  (spaceline-emacs-theme))
 
 (use-package winum
-:ensure t
+  :ensure t
   :config
   (winum-mode)
+  (setq winum-mode-line-position -1)
   )
-;; mast put after status line theme
-;; (use-package window-numbering
-;;   :delight window-numbering-mode
-;;   :config
-;;   (window-numbering-mode t)
-;;   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; dashboard
-;; (use-package dashboard
-;;   :delight dashboard-mode
-;;   :config
-;;   (dashboard-setup-startup-hook)
-;;   ;; Set the title
-;;   (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
-;;   ;; Set the banner
-;;   (setq dashboard-startup-banner nil)
-;;   ;; Value can be
-;;   ;; 'official which displays the official emacs logo
-;;   ;; 'logo which displays an alternative emacs logo
-;;   ;; 1, 2 or 3 which displays one of the text banners
-;;   ;; "path/to/your/image.png which displays whatever image you would prefer
-;;   )
 
-;; highlight-symbol
-;; (require 'highlight-symbol)
 (use-package highlight-symbol
-:ensure t
+  :ensure t
   :delight highlight-symbol-mode
   :config
   )
 
 ;; rainbow-mode
 (use-package rainbow-mode
-:ensure t
+  :ensure t
   :delight rainbow-mode
   :config
   (rainbow-mode 1)
@@ -884,57 +646,20 @@
 
 ;; multifiles
 (use-package multifiles
-:ensure t
+  :ensure t
   :delight multifiles-minor-mode
   )
 
 ;; fix-word
 (use-package fix-word
-:ensure t
+  :ensure t
   :delight)
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
-:ensure t
+  :ensure t
   :delight browse-kill-ring-mode
   )
-
-;; indent-guide
-;; (use-package indent-guide
-;;   :delight indent-guide-mode
-;;   :config
-;;   (indent-guide-global-mode)
-;;   )
-
-;; irony
-;; (when (equal system-type 'windows-nt)
-;;   (progn
-;;     (use-package irony
-;;       :delight irony-mode
-;;       :config
-;;       (add-hook 'c++-mode-hook 'irony-mode)
-;;       (add-hook 'c-mode-hook 'irony-mode)
-;;       (add-hook 'objc-mode-hook 'irony-mode)
-;;       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-;;       ;; Windows performance tweaks
-;;       ;;
-;;       (when (boundp 'w32-pipe-read-delay)
-;;         (setq w32-pipe-read-delay 0))
-;;       ;; Set the buffer size to 64K on Windows (from the original 4K)
-;;       (when (boundp 'w32-pipe-buffer-size)
-;;         (setq irony-server-w32-pipe-buffer-size (* 64 1024)))
-;;       )
-
-;;     ;; company-irony
-;;     (use-package company-irony
-;;       :delight
-;;       :config
-;;       (eval-after-load 'company
-;;         '(add-to-list 'company-backends 'company-irony))
-;;       )
-;;     )
-;;   )
 
 (defun my-gtags-init()
   (when (executable-find "pygmentize")
@@ -950,7 +675,7 @@
 
 ;; ggtags
 (use-package ggtags
-:ensure t
+  :ensure t
   :init
   (my-gtags-init)
   :delight ggtags-mode
@@ -968,36 +693,8 @@
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
 
-;; emacs-counsel-gtags
-;; (use-package counsel-gtags
-;;   :init
-;;   (my-gtags-init)
-;;   :delight counsel-gtags-mode
-;;   :config
-;;   (setq counsel-gtags-auto-update t)
-;;   (add-hook 'c-mode-hook 'counsel-gtags-mode)
-;;   (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-;;   (add-hook 'python-mode-hook 'counsel-gtags-mode)
-;;   ;; (counsel-gtags-mode t)
-;;   )
-
-;; agtags
-;; (use-package agtags
-;;   :delight agtags-mode
-;;   :config
-;;   (setq agtags-global-treat-text t)
-;;   (agtags-bind-keys)
-;;   (agtags-update-parser)
-;;   (add-hook 'text-mode-hook 'agtags-mode-on)
-;;   (add-hook 'prog-mode-hook 'agtags-mode-on)
-;;   (add-to-list 'xref-backend-functions 'agtags-xref-backend)  ;; drop it when you don't need xref
-
-;;   ;; Call agtags-update-root When you modify the Project directory.
-;;   )
-
-;; symon
 (use-package symon
-:ensure t
+  :ensure t
   :delight symon-mode
   )
 
@@ -1011,7 +708,7 @@
 
 ;; ace-window
 (use-package ace-window
-:ensure t
+  :ensure t
   :delight
   )
 
@@ -1020,14 +717,8 @@
 ;;   :delight
 ;;   )
 
-;; color-identifiers-mode--->too slow to parse files
-;; (require 'color-identifiers-mode)
-;; (add-hook 'after-init-hook 'global-color-identifiers-mode)
-;; (run-with-idle-timer 1 t 'color-identifiers:refresh)
-
-;; rainbow-identifiers
 (use-package rainbow-identifiers
-:ensure t
+  :ensure t
   :delight rainbow-identifiers-mode
   :config
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
@@ -1035,7 +726,7 @@
 
 ;; highlight-numbers
 (use-package highlight-numbers
-:ensure t
+  :ensure t
   :delight highlight-numbers-mode
   :config
   (add-hook 'prog-mode-hook 'highlight-numbers-mode)
@@ -1043,7 +734,7 @@
 
 ;; highlight-quoted
 (use-package highlight-quoted
-:ensure t
+  :ensure t
   :delight highlight-quoted-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
@@ -1051,44 +742,14 @@
 
 ;; highlight-defined
 (use-package highlight-defined
-:ensure t
+  :ensure t
   :delight highlight-defined-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
   )
 
-;; major-mode-icons
-;; (require major-mode-icons)
-;; (major-mode-icons-mode 1)
-
-;; mode-icons
-;; (require mode-icons)
-;; (mode-icons-mode)
-
-;; ergoemacs-status
-;; (require 'ergoemacs-status)
-;; (ergoemacs-status-mode)
-
-;; diminish
-;; (use-package diminish
-;;   :delight diminished-mode
-;;   :config
-;;   Hide jiggle-mode lighter from mode line
-;;   (diminish 'CounselGtags)
-;;   (diminish 'Global-Semantic-Idle-Scheduler)
-;;   (diminish 'Abbrev)
-;;   (diminish 'Global-Evil-Matchit)
-;;   (diminish 'Global-Undo-Tree)
-;;   (diminish 'Global-Hungry-Delete)
-;;   (diminish 'Global-Evil-Surround)
-;;   (diminish 'ycmd)
-;;   Replace abbrev-mode lighter with "Abv"
-;;   (diminish 'abbrev-mode "Abv")
-;;   )
-
-;;
 (use-package evil-snipe
-:ensure t
+  :ensure t
   :delight evil-snipe-mode
   :delight evil-snipe-local-mode
   :config
@@ -1111,27 +772,15 @@
 
 ;; evil-smartparens
 (use-package evil-smartparens
-:ensure t
+  :ensure t
   :delight evil-smartparens-mode
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
   )
 
-;; (use-package cnfonts
-;;   :config
-;;   ;; 让 cnfonts 随着 Emacs 自动生效。
-;;   (cnfonts-enable)
-;;   ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-;;   ;; (cnfonts-set-spacemacs-fallback-fonts)
-;;   )
-
-;; (use-package default-text-scale
-;;  :config
-;;  )
-
 ;; evil-visualstar
 (use-package evil-visualstar
-:ensure t
+  :ensure t
   :delight evil-visualstar-mode
   :config
   (global-evil-visualstar-mode)
@@ -1139,7 +788,7 @@
 
 ;; evil-indent-plus
 (use-package evil-indent-plus
-:ensure t
+  :ensure t
   :delight
   :config
   ;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
@@ -1157,22 +806,8 @@
   (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
   )
 
-;; dumb jump
-;; (dumb-jump-mode)
-
-;; nyan-mode
-;; (require 'nyan-mode)
-
-;; (setq mode-line-format
-;;       (list
-;;        '(:eval (list (nyan-create)))
-;;        ))
-;; (nyan-mode t)
-;; (nyan-start-animation)
-
-;; highlight-parentheses
 (use-package highlight-parentheses
-:ensure t
+  :ensure t
   :delight highlight-parentheses-mode
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
@@ -1185,26 +820,26 @@
 
 ;; direx
 (use-package direx
-:ensure t
+  :ensure t
   :config
   )
 
 ;; dired-imenu
 (use-package dired-imenu
-:ensure t
+  :ensure t
   :delight
   )
 
 ;; imenu-list
 (use-package imenu-list
-:ensure t
+  :ensure t
   :delight
   :config
   )
 
 ;; rich-minority
 (use-package rich-minority
-:ensure t
+  :ensure t
   :delight rich-minority-mode
   :config
   (rich-minority-mode 1)
@@ -1217,60 +852,28 @@
 
 ;; smex
 (use-package smex
-:ensure t
+  :ensure t
   :defer
   :delight
   :config
   (smex-initialize)
   )
 
-;; (use-package tabbar
-;;   :delight
-;;   :config
-;;   )
-
-;; (when (not (equal 'windows-nt system-type))
-;;   (use-package lsp-mode
-;;     :config
-;;     (setq lsp-highlight-symbol-at-point nil)
-;;     (require 'lsp-imenu)
-;;     (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
-;;     )
-
-  ;; (use-package cquery
-  ;;   :load-path
-  ;;   "~/downloads/emacs-cquery/"
-  ;;   :config
-  ;;   (setq cquery-enable-sem-highlight nil)
-  ;;   ;; put your config here
-  ;;   ;; (setq cquery-resource-dir (expand-file-name "/home/liang.feng/downloads/cquery/build/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-14.04/lib/clang/5.0.1"))
-  ;;   (setq cquery-executable "/usr/local/bin/cquery")
-  ;;   ;; (add-hook 'c++-mode-hook 'my//enable-cquery-if-compile-commands-json)
-  ;;   (add-hook 'c++-mode-hook 'lsp-cquery-enable)
-  ;;   (add-hook 'c-mode-hook 'lsp-cquery-enable)
-  ;;   )
-
-  ;; (use-package company-lsp
-  ;;   :config
-  ;;   (push 'company-lsp company-backends)
-  ;;   )
-  ;; )
-
 (use-package ivy-xref
-:ensure t
+  :ensure t
   :config
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
 (use-package fringe-helper
-:ensure t
+  :ensure t
   :init
   :delight
   :config
   )
 
 (use-package git-gutter
-:ensure t
+  :ensure t
   :config
   ;; If you enable global minor mode
   (global-git-gutter-mode t)
@@ -1303,68 +906,29 @@
   ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
   )
 
-  (use-package git-gutter-fringe
-:ensure t
-:if (display-graphic-p)
-    :config
-    (set-face-foreground 'git-gutter-fr:modified "purple")
-    (set-face-foreground 'git-gutter-fr:added    "green")
-    (set-face-foreground 'git-gutter-fr:deleted  "red")
-    )
-
-;; (use-package diff-hl
-;;   :init
-;;   :delight
-;;   :config
-;;   (global-diff-hl-mode)
-;;   ;; (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
-;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-;;   (define-key evil-normal-state-map (kbd "[ c") 'diff-hl-next-hunk)
-;;   (define-key evil-normal-state-map (kbd "] c") 'diff-hl-previous-hunk)
-;;   )
-
-;; git-gutter+
-;; (use-package git-gutter+
-;;   :init
-;;   :delight
-;;   :config
-;;   ;; If you would like to use git-gutter.el and linum-mode
-;;   (global-git-gutter+-mode)
-;;   ;; (set-face-foreground 'git-gutter+-modified "purple")
-;;   ;; (set-face-foreground 'git-gutter+-added    "green")
-;;   ;; (set-face-foreground 'git-gutter+-deleted  "red")
-;;   ;; (define-key evil-normal-state-map (kbd "[ cp") 'git-gutter+-previous-hunk)
-;;   ;; (define-key evil-normal-state-map (kbd "[ cn") 'git-gutter+-next-hunk)
-;;   ;; (define-key evil-normal-state-map (kbd "[ st") 'git-gutter+-stage-hunk)
-;;   )
-
-
-;; git-gutter-fringe+
-;; (require 'git-gutter-fringe+)
-;; (use-package git-gutter-fringe+
-;;   :init
-;;   :delight
-;;   :config
-;;   (git-gutter-fr+-minimal)
-;;   (set-face-foreground 'git-gutter-fr+-modified "purple")
-;;   (set-face-foreground 'git-gutter-fr+-added    "green")
-;;   (set-face-foreground 'git-gutter-fr+-deleted  "red")
-;;   )
+(use-package git-gutter-fringe
+  :ensure t
+  :if (display-graphic-p)
+  :config
+  (set-face-foreground 'git-gutter-fr:modified "purple")
+  (set-face-foreground 'git-gutter-fr:added    "green")
+  (set-face-foreground 'git-gutter-fr:deleted  "red")
+  )
 
 (use-package company-statistics
- :ensure t
+  :ensure t
   :config
   (add-hook 'after-init-hook 'company-statistics-mode)
   )
 
- (use-package company-c-headers
+(use-package company-c-headers
   :ensure t
-   :config
-   (add-to-list 'company-backends 'company-c-headers)
-   )
+  :config
+  (add-to-list 'company-backends 'company-c-headers)
+  )
 
 (use-package ace-popup-menu
-:ensure t
+  :ensure t
   :config
   (ace-popup-menu-mode 1)
   )
@@ -1375,18 +939,18 @@
 ;;   :config
 ;;   )
 
-;; (use-package dired-single
-;;   :config
-;;   ;; if dired's already loaded, then the keymap will be bound
-;;   (if (boundp 'dired-mode-map)
-;;       ;; we're good to go; just add our bindings
-;;       (my-dired-init)
-;;     ;; it's not loaded yet, so add our bindings to the load-hook
-;;     (add-hook 'dired-load-hook 'my-dired-init))
-;;   )
+(use-package dired-single
+  :config
+  ;; if dired's already loaded, then the keymap will be bound
+  (if (boundp 'dired-mode-map)
+      ;; we're good to go; just add our bindings
+      (my-dired-init)
+    ;; it's not loaded yet, so add our bindings to the load-hook
+    (add-hook 'dired-load-hook 'my-dired-init))
+  )
 
 (use-package dired-k
-:ensure t
+  :ensure t
   :config
   ;; always execute dired-k when dired buffer is opened
   (add-hook 'dired-initial-position-hook 'dired-k)
@@ -1401,7 +965,7 @@
   )
 
 (use-package dired-rainbow
-:ensure t
+  :ensure t
   :commands dired-rainbow-define dired-rainbow-define-chmod
   :init
   (dired-rainbow-define dotfiles "gray" "\\..*")
@@ -1439,36 +1003,19 @@
   (dired-rainbow-define-chmod executable-unix "green" "-[rw-]+x.*")
   )
 
-;; (use-package sr-speedbar
-;;   :config
-;;   )
-
 (use-package company-jedi
-:ensure t
+  :ensure t
   :config
   (defun my/python-mode-hook ()
     (add-to-list 'company-backends 'company-jedi))
   (add-hook 'python-mode-hook 'my/python-mode-hook)
   )
 
-;; (use-package company-quickhelp
-;;   :config
-;;   (company-quickhelp-mode)
-;;   )
-
-;; (use-package nimbus-theme)
-
-;; (use-package base16-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'base16-default-dark t)
-;;   )
-
 (use-package exec-path-from-shell
-:ensure t
+  :if (memq window-system '(mac ns))
+  :ensure t
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1476,7 +1023,7 @@
 ;; because i put some modes in this use-package code
 ;; block which not want to display in modeline
 (use-package delight
-:ensure t
+  :ensure t
   :delight
   :delight page-break-lines-mode
   :delight undo-tree-mode
