@@ -71,10 +71,8 @@
   (setq monokai-user-variable-pitch t)
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package posframe
-  :if (and (display-graphic-p) (>= emacs-major-version 26))
-  :ensure t
-  )
+(when (and (display-graphic-p) (>= emacs-major-version))
+  (use-package posframe :ensure t))
 
 (use-package pyim
   :ensure t
