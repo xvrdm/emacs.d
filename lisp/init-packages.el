@@ -21,7 +21,7 @@
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
 ;; cl - Common List Extension
-(require 'cl)
+(require 'cl-lib)
 
 ;; packages list
 (defvar liang/packages '(
@@ -919,10 +919,11 @@
   )
 
 (use-package projectile
-  :defer
+  :ensure t
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 ;; https://github.com/zwild/eshell-prompt-extras
