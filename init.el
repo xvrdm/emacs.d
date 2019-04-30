@@ -15,7 +15,6 @@
 
 ;; add feauther to load-path
 (add-to-list 'load-path "~/.emacs.d/lisp")
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp")
 (require 'init-packages)
 (require 'init-minefunc)
 (require 'init-ui)
@@ -25,6 +24,7 @@
 (require 'init-evil)
 (require 'init-company)
 (require 'init-eshell)
+(require 'init-dired)
 ;; (require 'init-modeline)
                           
 ;; cl - Common List Extension
