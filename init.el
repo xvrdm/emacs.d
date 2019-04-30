@@ -31,6 +31,7 @@
 (require 'cl-lib)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load-file custom-file)
+(if (file-exists-p (expand-file-name "custom.el"))
+    (load-file custom-file))
 
 ;; ycmd write 2
