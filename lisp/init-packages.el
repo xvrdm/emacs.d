@@ -4,374 +4,62 @@
  ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
  ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
-;; (setq package-archives
-   ;;   '(;; uncomment below line if you need use GNU ELPA
-        ;; ("gnu" . "https://elpa.gnu.org/packages/")
-   ;;     ("localelpa" . "~/.emacs.d/localelpa/")
-        ;; ("my-js2-mode" . "https://raw.githubusercontent.com/redguardtoo/js2-mode/release/") ; github has some issue
-        ;; {{ backup repositories
-  ;;      '(("melpa" . "http://mirrors.163.com/elpa/melpa/")
-   ;;     ("melpa-stable" . "http://mirrors.163.com/elpa/melpa-stable/"))))
-        ;; }}
-   ;;     ("melpa" . "https://melpa.org/packages/")
-   ;;     ("melpa-stable" . "https://stable.melpa.org/packages/")
-   ;;     )))
+                        ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+ )
 
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+(defun require-package (package)
+  "refresh package archives, check package presence and install if it's not installed"
+  (if (null (require package nil t))
+      (progn (let* ((ARCHIVES (if (null package-archive-contents)
+                                  (progn (package-refresh-contents)
+                                         package-archive-contents)
+                                package-archive-contents))
+                    (AVAIL (assoc package ARCHIVES)))
+               (if AVAIL
+                   (package-install package)))
+(require package))))
 
-;; cl - Common List Extension
-(require 'cl-lib)
-
-;; packages list
-(defvar liang/packages '(
-                         use-package
-                         company
-                         company-statistics
-                         company-c-headers
-                         company-jedi
-                         exec-path-from-shell
-                         ;; themes
-                         monokai-theme
-                         ;;
-                         darkokai-theme
-                         ;; zenburn-theme
-                         ample-theme
-                         ;; Emacs Python Development Environment 
-                         ;; elpy
-                         ;; ample-zen-theme
-                         ;; atom-one-dark-theme
-                         ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                         ;;
-                         pyim-basedict
-                         pyim
-                         ;;  posframe
-                         ;;
-                         evil
-                         goto-chg
-                         ;;
-                         ;; helm
-                         ;; helm-ag
-                         ;;
-                         ivy
-                         ;;
-                         swiper
-                         ;;
-                         counsel
-                         ;; http://blog.binchen.org/#
-                         ;; counsel-etags
-                         ;;
-                         hungry-delete
-                         ;;
-                         smartparens
-                         ;;
-                         js2-mode
-                         ;;
-                         web-mode
-                         emmet-mode
-                         ;;
-                         ;; cnfonts
-                         ;;
-                         ;;
-                         ;; default-text-scale
-                         ;; nodejs-repl
-                         ;;
-                         ;; add-node-modules-path
-                         ;; Diminished modes are minor modes with no modeline display 
-                         diminish
-                         ;;
-                         delight
-                         ;;
-                         popwin
-                         ;;
-                         powershell
-                         ;;
-                         smex
-                         ;;
-                         expand-region
-                         ;;
-                         iedit
-                         ;;
-                         fzf
-                         ;;
-                         org
-                         ;;
-                         ob-go
-                         ob-rust
-                         ;;
-                         htmlize
-                         ;;
-                         org-pomodoro
-                         ;;
-                         ;;
-                         org2jekyll
-                         ;;
-                         magit
-                         ;;
-                         evil-magit
-                         ;;
-                         xpm
-                         ;;
-                         ;; auto-yasnippet
-                         ;;
-                         yasnippet
-                         ;;
-                         yasnippet-snippets
-                         ;;
-                         evil-collection
-                         ;;
-                         ;; replace by general
-                         ;; evil-leader
-                         ;;
-                         evil-org
-                         ;;
-                         evil-smartparens
-                         ;;
-                         evil-visualstar
-                         ;;
-                         evil-escape
-                         ;;
-                         evil-surround
-                         ;;
-                         evil-nerd-commenter
-                         ;;
-                         evil-easymotion
-                         ;; easy motion pulgin
-                         evil-snipe
-                         ;;
-                         evil-matchit
-                         ;;
-                         evil-exchange
-                         ;;
-                         evil-iedit-state
-                         ;;
-                         evil-indent-plus
-                         ;;
-                         general
-                         ;;;;;;;;;;;;;;;;;;;;;;;;;
-                         which-key
-                         ;;
-                         ;; window-numbering
-                         winum
-                         ;;
-                         youdao-dictionary
-                         ;;
-                         go-mode
-                         ;;
-                         rust-mode
-                         ;;
-                         ;; ycmd
-                         ;;
-                         ;; company-ycmd
-                         ;;
-                         smart-mode-line
-                         ;;
-                         smart-mode-line-powerline-theme
-                         ;;
-                         ;; doom-themes
-                         ;; complete too slow....
-                         ;; function-args
-                         ;;
-                         neotree
-                         ;;
-                         all-the-icons
-                         ;;
-                         projectile
-                         ;;
-                         ;; projectile-speedbar
-                         ;;
-                         eshell-prompt-extras
-                         ;;
-                         eshell-autojump
-                         ;;
-                         ;;
-                         lispy
-                         lispyville
-                         ;; sr-speedbar
-                         ;;
-                         linum-relative
-                         ;;
-                         rainbow-delimiters
-                         ;;
-                         focus   
-                         ;;
-                         beacon
-                         ;; A fork of powerline.el (based on an old uncredited version of
-                         ;; powerline.el - origin is unclear.) - this fork has multiple separator graphics. 
-                         ;; main-line
-                         ;;
-                         powerline
-                         ;; themes for powerline
-                         powerline-evil
-                         ;; themes for powerline
-                         airline-themes
-                         ;; themes for powerline
-                         spaceline
-                         ;;
-                         spaceline-all-the-icons
-                         ;; A new implementation of Powerline for Emacs 
-                         telephone-line
-                         ;;
-                         doom-modeline
-                         ;;
-                         ;; dashboard
-                         ;;
-                         highlight-symbol
-                         ;;
-                         rainbow-mode
-                         ;;
-                         multifiles
-                         ;;
-                         fix-word
-                         ;;
-                         browse-kill-ring
-                         ;;
-                         ;; too slow.......
-                         ;; indent-guide
-                         ;;
-                         ;; irony
-                         ;;
-                         ;; company-irony
-                         ;;
-                         ggtags
-                         ;;
-                         ;; counsel-gtags
-                         ;;
-                         ;; agtags
-                         ;;
-                         symon
-                         ;;
-                         markdown-mode
-                         ;;
-                         ace-window
-                         ;;
-                         ;; hydra
-                         ;; too slow
-                         ;; color-identifiers-mode
-                         ;;
-                         rainbow-identifiers
-                         ;;
-                         highlight-numbers
-                         ;; only for elisp
-                         highlight-quoted
-                         ;; only for elisp
-                         highlight-defined
-                         ;;
-                         major-mode-icons
-                         ;;
-                         mode-icons
-                         ;;
-                         ergoemacs-status
-                         ;;
-                         ;; dumb-jump
-                         ;;
-                         ;; nyan-mode
-                         ;;
-                         highlight-parentheses
-                         ;;
-                         direx
-                         ;;
-                         dired-imenu
-                         ;;
-                         imenu-anywhere
-                         ;;
-                         imenu-list
-                         ;;
-                         rich-minority
-                         ;;
-                         ;; tabbar
-                         ;;
-                         ;;lsp-mode
-                         ;;
-                         ;; cquery
-                         ;;
-                         ;;company-lsp
-                         ;;
-                         ivy-xref
-                         ;;
-                         fringe-helper
-                         ;;
-                         git-gutter
-                         git-gutter-fringe
-                         ;; git-gutter+
-                         ;; git-gutter-fringe+
-                         ;;
-                         ;; diff-hl
-                         ;;
-                         ace-popup-menu
-                         ;;
-                         ;; dired-hacks-utils
-                         ;;
-                         ;; dired-single
-                         ;;
-                         dired-k
-                         ;;
-                         dired-rainbow
-                         ;;
-                         ;; company-quickhelp
-                         ;;
-                         ;; nimbus-theme
-                         ;;
-                         ;; base16-theme
-                         ;;
-                         ) "Default packages")
-
-(when (and (display-graphic-p) (>= emacs-major-version 26))
-  (push 'posframe liang/packages))
-
-(setq package-selected-packages liang/packages)
-
-(defun liang/packages-installed-p()
-  (cl-loop for pkg in liang/packages
-        when (not (package-installed-p pkg)) do (cl-return nil)
-        finally (cl-return t)))
-
-(unless (liang/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg liang/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-	  
+;; use-package
+(require-package 'use-package)
 (require 'use-package)
+;; (setq use-package-always-ensure t)
 
+;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(unless (require 'el-get nil 'noerror)
+  (require 'package)
+  (package-refresh-contents)
+  (package-install 'el-get)
+  (require 'el-get))
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
-;;;;;;;;;;;;;;;;;;;;;;windows envirment variable;;;;;;;;;;;;;
-;; (setenv "PATH" "C:/emacs24.5_win32")
+;(use-package el-get
+ ;:ensure t
+ ;:load-path  "~/.emacs.d/el-get/el-get"
+ ;:config
+ ;(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+ ;(el-get 'sync)
+ ;)
+
+;; :el-get keyword for use-package
+(use-package use-package-el-get
+             :ensure t
+             :config 
+             (use-package-el-get-setup)
+             )
+
+;; chords
+(use-package use-package-chords)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
-(defun my-monokai-init()
-  ;; If your're experiencing font issues using org-mode on Windows with emacs 25 try add this to your init.el or equivalent file:
-  
+(use-package monokai-theme
+ :ensure t
+ :config
   (if (and (eq system-type 'windows-nt) (> emacs-major-version 24))
       (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t)))
     (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t))))
-  ;; (setq ;; foreground and background
-  ;;       monokai-foreground     "#ABB2BF"
-  ;;       monokai-background     "#282C34"
-  ;;       ;; highlights and comments
-  ;;       monokai-comments       "#F8F8F0"
-  ;;       monokai-emphasis       "#282C34"
-  ;;       monokai-highlight      "#FFB269"
-  ;;       monokai-highlight-alt  "#66D9EF"
-  ;;       monokai-highlight-line "#1B1D1E"
-  ;;       monokai-line-number    "#F8F8F0"
-  ;;       ;; colours
-  ;;       monokai-blue           "#61AFEF"
-  ;;       monokai-cyan           "#56B6C2"
-  ;;       monokai-green          "#98C379"
-  ;;       monokai-gray           "#3E4451"
-  ;;       monokai-violet         "#C678DD"
-  ;;       monokai-red            "#E06C75"
-  ;;       monokai-orange         "#D19A66"
-  ;;       monokai-yellow         "#E5C07B")
-
-  ;; If you would like to change the font size of your org-mode headers you can do so with:
-  ;; (setq monokai-height-minus-1 0.8
-  ;;       monokai-height-plus-1 1.1
-  ;;       monokai-height-plus-2 1.15
-  ;;       monokai-height-plus-3 1.2
-  ;;       monokai-height-plus-4 1.3)
   (setq monokai-height-minus-1 0.8
         monokai-height-plus-1 1.0
         monokai-height-plus-2 1.0
@@ -379,61 +67,20 @@
         monokai-height-plus-4 1.0)
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
-  )
-(my-monokai-init)
-
-;; (use-package darkokai-theme
-;;   :ensure t
-;;   :config
-;;   (setq darkokai-height-minus-1 0.8
-;;         darkokai-height-plus-1 1.0
-;;         darkokai-height-plus-2 1.0
-;;         darkokai-height-plus-3 1.0
-;;         darkokai-height-plus-4 1.0)
-;;   (setq darkokai-mode-line-padding 1) ;; Default mode-line box width
-;;   (load-theme 'darkokai t)
-;;   )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (defvar zenburn-override-colors-alist
-;;   '(("zenburn-bg+05" . "#282828")
-;;     ("zenburn-bg+1"  . "#2F2F2F")
-;;     ("zenburn-bg+2"  . "#3F3F3F")
-;;     ("zenburn-bg+3"  . "#4F4F4F")))
-;; (load-theme 'zenburn t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (load-theme 'wombat t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; then in your init you can load all of the themes
-;; without enabling theme (or just load one)
-;; (load-theme 'ample t t)
-;; (load-theme 'ample-light t t)
-;; (load-theme 'ample-flat t t)
-;; choose one to enable
-;; (enable-theme 'ample)
-;; (enable-theme 'ample-flat)
-;; (enable-theme 'ample-light)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (load-theme 'ample-zen t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (load-theme 'atom-one-dark t)
-
-;; (use-package elpy
-;;   :config
-;;   (elpy-enable)
-;;   )
-
+ )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (and (display-graphic-p) (>= emacs-major-version 26))
-  (use-package posframe)
-  )
+(use-package posframe
+ :if (and (display-graphic-p) (>= emacs-major-version 26))
+ :ensure t
+ )
+
 (use-package pyim
-  ;; :ensure nil
+  :ensure t
   :demand t
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
-    ;; :ensure nil
+    :ensure t
     :config (pyim-basedict-enable))
 
   (setq default-input-method "pyim")
@@ -494,7 +141,9 @@
   (evil-mode 1)
   )
 
-(use-package goto-chg)
+(use-package goto-chg
+ :ensure t
+ )
 
 ;; evil-collection
 (use-package evil-collection
@@ -506,6 +155,7 @@
 
 ;; hungry-delete seting
 (use-package hungry-delete
+ :ensure t
   :defer
   :delight hungry-delete-mode
   :config
@@ -516,15 +166,8 @@
     (save-match-data (sp-delete-pair (ad-get-arg 0))))
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (use-package helm
-;;   :defer
-;;   :init
-;;   :delight
-;;   :config
-;;   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package ivy
+ :ensure t
   :defer
   :config
   (setq ivy-initial-inputs-alist nil
@@ -536,6 +179,7 @@
   )
 
 (use-package swiper
+ :ensure t
   :delight ivy-mode
   :config
   (ivy-mode 1)
@@ -546,7 +190,8 @@
 
 ;; smartparens setting
 ;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(use-package smartparens-config
+(use-package smartparens
+ :ensure t
   :delight smartparens-global-mode
   :delight smartparens-mode
   :config
@@ -557,6 +202,7 @@
 
 ;; js2-mode setting
 (use-package js2-mode
+ :ensure t
   :config
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
@@ -570,6 +216,7 @@
 ;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 (use-package web-mode
+ :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -584,6 +231,7 @@
   )
 
 (use-package emmet-mode
+ :ensure t
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
@@ -593,17 +241,20 @@
 
 ;; popwin setting
 (use-package popwin
+ :ensure t
   :delight popwin-mode
   :config
   (popwin-mode t)
   )
 
 (use-package powershell
+ :ensure t
   :if (eq system-type 'windows-nt)
   )
 
 ;; 开启全局company
 (use-package company
+ :ensure t
   :init
   :delight global-company-mode
   :delight company-mode
@@ -620,13 +271,17 @@
   (setq company-idle-delay 0.2)
   )
 
-(use-package fzf)
+(use-package fzf
+ :ensure t
+ )
 
 ;; org-pomodoro setting
 (use-package org-pomodoro
+ :ensure t
   :delight org-pomodoro)
 
 (use-package org2jekyll
+ :ensure t
   :config
   (custom-set-variables '(org2jekyll-blog-author "feng")
                         ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
@@ -695,6 +350,7 @@
 
 ;; magit setting
 (use-package magit
+ :ensure t
   :delight magit-mode
   :config
   )
@@ -702,16 +358,20 @@
 ;; evil-magit setting
 ;; (require 'evil-magit)
 (use-package evil-magit
+ :ensure t
   :delight
   :config
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
   )
 
-(use-package xpm)
+(use-package xpm
+ :ensure t
+ )
 
 ;; yasnippet setting
 (use-package yasnippet
+ :ensure t
   :delight yas-global-mode
   :delight yas-minor-mode
   :config
@@ -747,6 +407,7 @@
 
 ;; youdao-dictionary
 (use-package youdao-dictionary
+ :ensure t
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -759,12 +420,14 @@
   )
 
 (use-package go-mode
+ :ensure t
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   )
 
 (use-package rust-mode
+ :ensure t
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -775,6 +438,7 @@
 
 ;; {{ which-key-mode
 (use-package which-key
+ :ensure t
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
@@ -875,6 +539,7 @@
 ;; neotree
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
+ :ensure t
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
@@ -914,9 +579,10 @@
               (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
   )
 
-(when (display-graphic-p)
-  (use-package all-the-icons)
-  )
+    (use-package all-the-icons
+                 :ensure t
+                 :if (display-graphic-p)
+                 )
 
 (use-package projectile
   :ensure t
@@ -936,11 +602,13 @@
 ;;   )
 
 (use-package lispy
+  :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
   )
 
 (use-package lispyville
+  :ensure t
   :config
   (add-hook 'lispy-mode-hook #'lispyville-mode)
   )
@@ -958,6 +626,7 @@
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :delight rainbow-delimiters-mode
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -965,6 +634,7 @@
 
 ;; beacon
 (use-package beacon
+  :ensure t
   :delight beacon-mode
   :config
   (beacon-mode 1)
@@ -974,30 +644,36 @@
 ;; end https://github.com/jojojames/evil-collection
 ;; (require 'evil-leader)
 (use-package evil-escape
+  :ensure t
   :delight evil-escape-mode
   )
 
 (use-package evil-surround
+  :ensure t
   :delight evil-surround-mode
   )
 
 (use-package evil-nerd-commenter
+  :ensure t
   :delight
   )
 
 (use-package evil-easymotion
+  :ensure t
   :delight
   :config
   (evilem-default-keybindings "M-m")
   )
 
 (use-package evil-matchit
+  :ensure t
   :delight evil-matchit-mode
   :config
   (global-evil-matchit-mode 1)
   )
 
 (use-package evil-exchange
+  :ensure t
   :delight
   :config
   ;; change default key bindings (if you want) HERE
@@ -1013,15 +689,25 @@
 ;;  - "gg" the first occurence, "G" the last occurence
 ;;  - Please note ";;" or `avy-goto-char-timer' is also useful
 (use-package evil-iedit-state
+  :ensure t
   :delight)
 
-(use-package org)
-(use-package htmlize)
+(use-package org
+  :ensure t
+ )
+(use-package htmlize
+  :ensure t
+ )
 
-(use-package ob-go)
-(use-package ob-rust)
+(use-package ob-go
+  :ensure t
+ )
+(use-package ob-rust
+  :ensure t
+ )
 
 (use-package general
+  :ensure t
   :delight
   :config
   (general-evil-setup t)
@@ -1032,6 +718,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline
 (use-package powerline
+  :ensure t
   :delight
   :config
   ;; (powerline-default-theme)
@@ -1131,67 +818,18 @@
 ;;   ;; (setq doom-modeline-env-version t)
 ;;   )
 
-(when (not (display-graphic-p))
   ;; telephone-line
-  (use-package telephone-line-config
-    :delight telephone-line-mode
-    :config
-    (telephone-line-evil-config)
-    )
   (use-package telephone-line
+               :unless window-system
+   :ensure t
     :delight
     :config
-    ;; (setq telephone-line-lhs
-    ;;       '((evil   . (telephone-line-evil-tag-segment))
-    ;;         (accent . (telephone-line-vc-segment
-    ;;                    telephone-line-erc-modified-channels-segment
-    ;;                    telephone-line-process-segment))
-    ;;         (nil    . (telephone-line-minor-mode-segment
-    ;;                    telephone-line-buffer-segment))))
-    ;; (setq telephone-line-rhs
-    ;;       '((nil    . (telephone-line-misc-info-segment))
-    ;;         (accent . (telephone-line-major-mode-segment))
-    ;;         (evil   . (telephone-line-airline-position-segment))))
     (telephone-line-mode t))
-  ;; (use-package spaceline-config
-  ;;   :config
-  ;;   ;; When nil, winum-mode will not display window numbers in the mode-line.
-  ;;   ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
-  ;;   (setq winum-auto-setup-mode-line nil)
-  ;;   (spaceline-spacemacs-theme))
-    ;; (spaceline-emacs-theme))
-  )
 
-;; (when (display-graphic-p)
-;;   (use-package maple-modeline
-;;     :init
-;;     (load "maple-modeline-window.el")
-;;     :hook (after-init . maple-modeline-init)
-;;     :config
-;;     ;; standard or minimal
-;;     (setq maple-modeline-style 'standard)
-;;     ;; (setq maple-modeline-style 'minimal)
-;;     ;; standard or reset or some number
-;;     (setq maple-modeline-width 'standard)
-;;     ;; custom separator from https://github.com/honmaple/emacs-maple-xpm
-;;     (use-package maple-xpm
-;;       :ensure nil
-;;       :config
-;;       ;; :type '(choice (const default)
-;;       ;;                (const wave)
-;;       ;;                (const bar)
-;;       ;;                (const slant)
-;;       ;;                (const contour)
-;;       ;;                (const box)
-;;       ;;                (const butt)
-;;       ;;                (const curve)))
-;;       (setq maple-xpm-style (if (display-graphic-p) 'butt 'default))))
-;;   )
-
-;; modeline settings
-(when (display-graphic-p)
   ;; spaceline
-  (use-package spaceline-config
+  (use-package spaceline
+   :ensure t
+   :if window-system
     :config
     ;; When nil, winum-mode will not display window numbers in the mode-line.
     ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
@@ -1199,20 +837,9 @@
     (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
     ;; (spaceline-spacemacs-theme))
     (spaceline-emacs-theme))
-  ;; (use-package spaceline-all-the-icons
-  ;;   :after spaceline
-  ;;   :config
-  ;;   (spaceline-all-the-icons-theme)
-  ;;   (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
-  ;;   (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
-  ;;   (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
-  ;;   (spaceline-all-the-icons--setup-paradox)         ;; Enable Paradox mode line
-  ;;   (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
-  ;;   )
-  )
 
 (use-package winum
-  :init
+:ensure t
   :config
   (winum-mode)
   )
@@ -1242,12 +869,14 @@
 ;; highlight-symbol
 ;; (require 'highlight-symbol)
 (use-package highlight-symbol
+:ensure t
   :delight highlight-symbol-mode
   :config
   )
 
 ;; rainbow-mode
 (use-package rainbow-mode
+:ensure t
   :delight rainbow-mode
   :config
   (rainbow-mode 1)
@@ -1255,15 +884,18 @@
 
 ;; multifiles
 (use-package multifiles
+:ensure t
   :delight multifiles-minor-mode
   )
 
 ;; fix-word
 (use-package fix-word
+:ensure t
   :delight)
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
+:ensure t
   :delight browse-kill-ring-mode
   )
 
@@ -1318,6 +950,7 @@
 
 ;; ggtags
 (use-package ggtags
+:ensure t
   :init
   (my-gtags-init)
   :delight ggtags-mode
@@ -1364,6 +997,7 @@
 
 ;; symon
 (use-package symon
+:ensure t
   :delight symon-mode
   )
 
@@ -1377,6 +1011,7 @@
 
 ;; ace-window
 (use-package ace-window
+:ensure t
   :delight
   )
 
@@ -1392,6 +1027,7 @@
 
 ;; rainbow-identifiers
 (use-package rainbow-identifiers
+:ensure t
   :delight rainbow-identifiers-mode
   :config
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
@@ -1399,6 +1035,7 @@
 
 ;; highlight-numbers
 (use-package highlight-numbers
+:ensure t
   :delight highlight-numbers-mode
   :config
   (add-hook 'prog-mode-hook 'highlight-numbers-mode)
@@ -1406,6 +1043,7 @@
 
 ;; highlight-quoted
 (use-package highlight-quoted
+:ensure t
   :delight highlight-quoted-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
@@ -1413,6 +1051,7 @@
 
 ;; highlight-defined
 (use-package highlight-defined
+:ensure t
   :delight highlight-defined-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
@@ -1449,6 +1088,7 @@
 
 ;;
 (use-package evil-snipe
+:ensure t
   :delight evil-snipe-mode
   :delight evil-snipe-local-mode
   :config
@@ -1471,6 +1111,7 @@
 
 ;; evil-smartparens
 (use-package evil-smartparens
+:ensure t
   :delight evil-smartparens-mode
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
@@ -1490,6 +1131,7 @@
 
 ;; evil-visualstar
 (use-package evil-visualstar
+:ensure t
   :delight evil-visualstar-mode
   :config
   (global-evil-visualstar-mode)
@@ -1497,6 +1139,7 @@
 
 ;; evil-indent-plus
 (use-package evil-indent-plus
+:ensure t
   :delight
   :config
   ;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
@@ -1529,6 +1172,7 @@
 
 ;; highlight-parentheses
 (use-package highlight-parentheses
+:ensure t
   :delight highlight-parentheses-mode
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
@@ -1541,22 +1185,26 @@
 
 ;; direx
 (use-package direx
+:ensure t
   :config
   )
 
 ;; dired-imenu
 (use-package dired-imenu
+:ensure t
   :delight
   )
 
 ;; imenu-list
 (use-package imenu-list
+:ensure t
   :delight
   :config
   )
 
 ;; rich-minority
 (use-package rich-minority
+:ensure t
   :delight rich-minority-mode
   :config
   (rich-minority-mode 1)
@@ -1569,6 +1217,7 @@
 
 ;; smex
 (use-package smex
+:ensure t
   :defer
   :delight
   :config
@@ -1608,17 +1257,20 @@
   ;; )
 
 (use-package ivy-xref
+:ensure t
   :config
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
 (use-package fringe-helper
+:ensure t
   :init
   :delight
   :config
   )
 
 (use-package git-gutter
+:ensure t
   :config
   ;; If you enable global minor mode
   (global-git-gutter-mode t)
@@ -1651,13 +1303,14 @@
   ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
   )
 
-(when (display-graphic-p)
   (use-package git-gutter-fringe
+:ensure t
+:if (display-graphic-p)
     :config
     (set-face-foreground 'git-gutter-fr:modified "purple")
     (set-face-foreground 'git-gutter-fr:added    "green")
-    (set-face-foreground 'git-gutter-fr:deleted  "red"))
-  )
+    (set-face-foreground 'git-gutter-fr:deleted  "red")
+    )
 
 ;; (use-package diff-hl
 ;;   :init
@@ -1698,17 +1351,20 @@
 ;;   (set-face-foreground 'git-gutter-fr+-deleted  "red")
 ;;   )
 
-;; (use-package company-statistics
-;;   :config
-;;   (add-hook 'after-init-hook 'company-statistics-mode)
-;;   )
+(use-package company-statistics
+ :ensure t
+  :config
+  (add-hook 'after-init-hook 'company-statistics-mode)
+  )
 
-;; (use-package company-c-headers
-;;   :config
-;;   (add-to-list 'company-backends 'company-c-headers)
-;;   )
+ (use-package company-c-headers
+  :ensure t
+   :config
+   (add-to-list 'company-backends 'company-c-headers)
+   )
 
 (use-package ace-popup-menu
+:ensure t
   :config
   (ace-popup-menu-mode 1)
   )
@@ -1730,6 +1386,7 @@
 ;;   )
 
 (use-package dired-k
+:ensure t
   :config
   ;; always execute dired-k when dired buffer is opened
   (add-hook 'dired-initial-position-hook 'dired-k)
@@ -1744,6 +1401,7 @@
   )
 
 (use-package dired-rainbow
+:ensure t
   :commands dired-rainbow-define dired-rainbow-define-chmod
   :init
   (dired-rainbow-define dotfiles "gray" "\\..*")
@@ -1786,6 +1444,7 @@
 ;;   )
 
 (use-package company-jedi
+:ensure t
   :config
   (defun my/python-mode-hook ()
     (add-to-list 'company-backends 'company-jedi))
@@ -1806,6 +1465,7 @@
 ;;   )
 
 (use-package exec-path-from-shell
+:ensure t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
@@ -1816,6 +1476,7 @@
 ;; because i put some modes in this use-package code
 ;; block which not want to display in modeline
 (use-package delight
+:ensure t
   :delight
   :delight page-break-lines-mode
   :delight undo-tree-mode

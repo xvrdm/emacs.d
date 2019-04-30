@@ -102,6 +102,7 @@
     (eshell-send-input)))
 
 (use-package eshell
+:ensure t
   :commands eshell
   :init
   (progn
