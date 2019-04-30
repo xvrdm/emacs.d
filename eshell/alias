@@ -3,6 +3,7 @@ alias ga git add $1
 alias gd git diff
 alias gst git status
 alias gcl git clone $1
+alias gco git checkout $1
 alias gcmsg git commit -m $1
 alias gp git push
 alias gl git pull
