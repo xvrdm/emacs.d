@@ -335,10 +335,6 @@ foo                                     ; => (x a b)
 #+END_SRC
 前一个生成的列表的 CAR 部分是 (+ 1 2) 这个列表，而后一个是先对 (+ 1 2) 求值得到 3 后再生成列表。
 
-
-
-<2019-03-26 周二>
-
 ** 属性列表（property list，plist）
 https://blog.csdn.net/whackw/article/details/51542457
 这种列表中的第1个元素用来描述第2个元素，第3个元素用来描述第4个元素，以此类推，第奇数个元素都是用来描述相邻的第偶数个元素的，
@@ -352,3 +348,23 @@ https://blog.csdn.net/whackw/article/details/51542457
 #+BEGIN_SRC emacs-lisp
 (getf (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t) :作者)
 #+END_SRC
+
+* 函数参数
+#+BEGIN_SRC emacs-lisp
+(REQUIRED-VARS...
+ [&optional OPTIONAL-VARS...]
+ [&rest REST-VAR])
+#+END_SRC
+他的意思是说，你必须把提供的参数写在前面，可选的参数写在后面，最后一个符号表示剩余的所有参数(*是一个列表*)，python的函数参数也是同样的规则，不同的地方是最后的关键字参数是个map
+#+BEGIN_SRC emacs-lisp
+  (defun foo (var1 var2 &optional opt1 opt2 &rest rest)
+    (list var1 var2 opt1 opt2 rest))
+
+  (foo 1 2)                               ;;=>(1 2 nil nil nil)
+  (foo 1 2 3)                             ;;=>(1 2 3 nil nil)
+  (foo 1 2 3 4 5 6)                       ;;=>(1 2 3 4 (5 6))
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 | 4 | (5 6) |
+从上面的例子可以看出，当可选参数没有提供时候，对应的可选参数为nil。同样调用函数没有提供剩余参数时，其值也为nil，但是一旦提供了剩余参数，则所有的剩余参数是以列表的形式放在对应的变量里的。
