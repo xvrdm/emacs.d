@@ -32,7 +32,7 @@
   (package-install 'el-get)
   (require 'el-get))
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+;; (el-get 'sync)
 
 ;; (use-package el-get
 ;; :ensure t

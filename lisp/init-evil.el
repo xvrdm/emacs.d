@@ -219,6 +219,8 @@
                     ;; "gj" 'w3m-search-js-api-mdn
                     ;; "ga" 'w3m-java-search
                     ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
+                    "pf" 'project-find-file
+                    "pg" 'project-find-regexp
                     "ma" 'magit
                     "sm" 'smex
                     "sj" 'smex-major-mode-commands
@@ -451,6 +453,7 @@
                             (counsel-org-agenda-headlines))
                     ;; "om" 'toggle-org-or-message-mode
                     "pf" 'projectile-find-file-dwim
+                    "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
                     ;; "xx" 'er/expand-region
