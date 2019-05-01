@@ -5,10 +5,12 @@ alias gst git status
 alias gcl git clone $1
 alias gco git checkout $1
 alias gcmsg git commit -m $1
+alias gr git remote $1
 alias gp git push
 alias gl git pull
 # alias z fwar34/eshell-fasd-z $1
 # alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug . $1
 alias dow dired-other-window $1
-alias ff find-file-other-window $1
+alias fo find-file-other-window $1
 alias fow find-file-other-window nil
+alias ff find-file $1
