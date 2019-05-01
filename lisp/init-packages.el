@@ -34,14 +34,6 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 ;; (el-get 'sync)
 
-;; (use-package el-get
-;; :ensure t
-;; :load-path  "~/.emacs.d/el-get/el-get"
-;; :config
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; (el-get 'sync)
-;; )
-
 ;; :el-get keyword for use-package
 (use-package use-package-el-get
   :ensure t
@@ -955,12 +947,5 @@
   :delight lsp-mode
   :delight lsp
   )
-(use-package dired+
-   :init
-   (load "dired+.el")
-   :config
-    ;reuse single buffer in dired
-   (diredp-toggle-find-file-reuse-dir 1)
-   )
 
 (provide 'init-packages)

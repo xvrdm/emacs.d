@@ -1,22 +1,9 @@
 ;; init dired
-;; (use-package dired+
-;;   :init
-;;   (load "dired+.el")
-;;   :config
-;;   reuse single buffer in dired
-;;   (diredp-toggle-find-file-reuse-dir 1)
-;;   )
 
-;; (use-package dired+
-;;   :ensure t
-;;   :el-get t
-;;   :config
-;;   ;; reuse single buffer in dired
-;;   (diredp-toggle-find-file-reuse-dir 1)
-;;   )
 (el-get-bundle dired+
+  :features dired+
   ;; reuse single buffer in dired
-  (require 'dired+)
+  ;; (require 'dired+)
   (diredp-toggle-find-file-reuse-dir 1)
   )
 
