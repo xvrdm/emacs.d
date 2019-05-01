@@ -349,6 +349,49 @@ https://blog.csdn.net/whackw/article/details/51542457
 (getf (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t) :作者)
 #+END_SRC
 
+** 关联列表
+关联列表就是列表，在elisp编程中，列表最常用的形式应该就是作为一个关联列表了。所谓关联列表，就是可以用一个字符串（通常叫关键字，key）来查找对应值的数据结构。有列表实现的关联表有一个专门的名字叫做association list。尽管elisp中也有hash table，但是hash table想比于association list至少有几个缺点：
++ hash table里的关键字是无序的，而association list的关键字可以按照想要的顺序排列
++ hash table没有列表那样丰富的函数，只有一个maphash函数可以遍历列表。而assocication list就是一个列表，所有的列表函数都能适用
++ hash table没有读入语法和输入形式，这对于调试和使用都带来很多不便
+在association list中关键字放在元素的car部分，与它对应的数据放在这个元素的cdr部分。根据比较方法不同，有assq和assoc两个函数，他们分别对应查找使用eq和equal两种方法。例如：
+#+BEGIN_SRC emacs-lisp
+  (assoc "a" '(("a" 97) ("b" 98))) ;; => ("a" 97)
+  (assq 'a '((a . 97) (b . 98))) ;; => (a . 97)
+#+END_SRC
+通常我们只需要查找对应的数据，所以一般来说都要用cdr来得到对应的数据：
+#+BEGIN_SRC emacs-lisp
+  (cdr (assoc "a" '(("a" 97) ("b" 98)))) ;; => (97)
+  (cdr (assq 'a '((a . 97) (b . 98)))) ;; => 97
+#+END_SRC
+assoc-default可以一步完成这样的操作：
+#+BEGIN_SRC emacs-lisp
+  (assoc-default "a" '(("a" 97) ("b" 98))) ;; => (97)
+#+END_SRC
+如果查找用的键值（key）对应的数据也可以作为一个键值的话，还可以用rassoc和rassq来根据数据查找键值：
+#+BEGIN_SRC emacs-lisp
+  (rassoc '(97) '(("a" 97) ("b" 98))) ;; => ("a" 97)
+  (rassq '97 '((a . 97) (b . 98))) ;; => (a . 97)
+#+END_SRC
+
+*** 更新key对应的值两种比较有效的方法
+1. 删除老的key-value，添加新的key-value对
+   #+BEGIN_SRC emacs-lisp
+     ;; update value by delq and cons
+     (setq foo '(("a" . "hello elisp") ("b" . 98))) ;; => (("a" . "hello elisp") ("b" . 98))
+     (setq foo (cons '("a" . 97) (delq (assoc "a" foo) foo))) ;; => (("a" . 97) ("b" . 98))
+   #+END_SRC
+2. 直接更新key对应的value值
+   #+BEGIN_SRC emacs-lisp
+     ;; update value by setcdr
+     (setq foo '(("a" . 97) ("b" . 98)))     ;; => (("a" . 97) ("b" . 98))
+     (if (setq bar (assoc "a" foo))
+         (setcdr bar "this is a")
+       (setq foo (cons '("a" . "this is a") foo))) ;; => "this is a"
+     foo                                           ;; => (("a" . "this is a") ("b" . 98))
+   #+END_SRC
+如果不对顺序有要求的话，推荐用后一种方法吧。这样代码简洁，而且让最近更新的元素放到列表前端，查找更快。
+  
 * 函数参数
 #+BEGIN_SRC emacs-lisp
 (REQUIRED-VARS...
