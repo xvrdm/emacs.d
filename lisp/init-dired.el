@@ -1,10 +1,11 @@
 ;; init dired
 
-(el-get-bundle dired+
-  :features dired+
-  ;; reuse single buffer in dired
-  ;; (require 'dired+)
-  (diredp-toggle-find-file-reuse-dir 1)
+(when (not (equal system-type 'windows-nt))
+  (el-get-bundle dired+
+    :features dired+
+    ;; reuse single buffer in dired
+    ;; (require 'dired+)
+    (diredp-toggle-find-file-reuse-dir 1))
   )
 
 ;; dired-imenu

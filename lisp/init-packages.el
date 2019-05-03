@@ -24,15 +24,17 @@
 (require 'use-package)
 ;; (setq use-package-always-ensure t)
 
-;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (require 'package)
-  (package-refresh-contents)
-  (package-install 'el-get)
-  (require 'el-get))
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; (el-get 'sync)
+(when (not (equal system-type 'windows-nt))
+  ;; el-get
+  (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+  (unless (require 'el-get nil 'noerror)
+    (require 'package)
+    (package-refresh-contents)
+    (package-install 'el-get)
+    (require 'el-get))
+  (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+  ;; (el-get 'sync)
+  )
 
 ;; :el-get keyword for use-package
 (use-package use-package-el-get

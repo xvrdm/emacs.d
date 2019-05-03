@@ -134,4 +134,7 @@
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
+;; reference from zilongshanren
+;; (defadvice find-file (before make-dir))
+
 (provide 'init-better-default)
