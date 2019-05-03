@@ -180,7 +180,8 @@
                     "mm" 'evil-jump-item
                     "mf" 'mf/mirror-region-in-multifile
                     "tt" 'neotree-toggle
-                    "yy" 'youdao-dictionary-search-at-point
+                    ;; "yy" 'youdao-dictionary-search-at-point
+                    "yy" 'youdao-dictionary-search-at-point+
                     "yd" 'youdao-dictionary-search-from-input
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
