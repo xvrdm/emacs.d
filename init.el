@@ -14,7 +14,7 @@
 ;;-------------------------------------------------------------
 ;; reference from zilongshanren
 ;;-------------------------------------------------------------
-(setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPaht='tramp.%%C' -o ControlPersist=no")
+;; (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPaht='tramp.%%C' -o ControlPersist=no")
 (setq byte-compile-warnings '(not obsolete))
 
 (package-initialize)

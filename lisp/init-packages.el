@@ -36,11 +36,12 @@
   ;; (el-get 'sync)
   )
 
-;; :el-get keyword for use-package
-(use-package use-package-el-get
-  :ensure t
-  :config 
-  (use-package-el-get-setup)
+(when (not (equal system-type 'windows-nt))
+  ;; :el-get keyword for use-package
+  (use-package use-package-el-get
+    :ensure t
+    :config 
+    (use-package-el-get-setup))
   )
 
 ;; chords
