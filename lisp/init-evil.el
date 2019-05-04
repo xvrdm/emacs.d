@@ -338,6 +338,8 @@
                     "df" 'counsel-describe-function
                     "dv" 'counsel-describe-variable
                     "dk" 'describe-key
+                    "dd" 'lispy-describe-inline
+                    "da" 'lispy-arglist-inline
                     "gg" 'ggtags-find-tag-dwim
                     "gs" 'ggtags-find-other-symbol
                     "gr" 'ggtags-find-reference
