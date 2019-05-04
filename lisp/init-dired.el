@@ -1,12 +1,12 @@
 ;; init dired
 
-(when (not (equal system-type 'windows-nt))
-  (el-get-bundle dired+
-    :features dired+
-    ;; reuse single buffer in dired
-    ;; (require 'dired+)
-    (diredp-toggle-find-file-reuse-dir 1))
-  )
+;; (when (not (equal system-type 'windows-nt))
+;;   (el-get-bundle dired+
+;;     :features dired+
+;;     ;; reuse single buffer in dired
+;;     ;; (require 'dired+)
+;;     (diredp-toggle-find-file-reuse-dir 1))
+;;   )
 
 ;; dired-imenu
 (use-package dired-imenu
@@ -65,7 +65,6 @@
   ;; (define-key dired-mode-map (kbd "g") 'dired-k)
   )
 
-;; didn't work for me
 (use-package dired-single
   :ensure t
   :config
@@ -76,17 +75,16 @@
    loaded."
     ;; <add other stuff here>
     ;; (define-key dired-mode-map [return] 'dired-single-buffer)
-    (define-key evil-normal-state-map (kbd "RET") 'dired-single-buffer)
-    (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-    (define-key dired-mode-map "^"
-      (function
-       (lambda nil (interactive) (dired-single-buffer "..")))))
+    ;; (define-key evil-normal-state-map (kbd "RET") 'dired-single-buffer)
+    (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
+    (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+    ;; (evil-define-key 'normal dired-mode-map "^" (function (lambda nil (interactive) (dired-single-buffer "..")))))
+    (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer ".."))))
   ;; if dired's already loaded, then the keymap will be bound
   (if (boundp 'dired-mode-map)
       ;; we're good to go; just add our bindings
       (my-dired-init)
     ;; it's not loaded yet, so add our bindings to the load-hook
-    (add-hook 'dired-load-hook 'my-dired-init))
-  )
+    (add-hook 'dired-load-hook 'my-dired-init)))
 
 (provide 'init-dired)
