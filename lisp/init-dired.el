@@ -5,7 +5,8 @@
     :features dired+
     ;; reuse single buffer in dired
     ;; (require 'dired+)
-    (diredp-toggle-find-file-reuse-dir 1))
+    ;; (diredp-toggle-find-file-reuse-dir 1))
+    )
   )
 
 ;; dired-imenu
@@ -66,30 +67,31 @@
   )
 
 ;; didn't work for me
-;; (use-package dired-single
-;;   :ensure t
-;;   :config
-;;   ;; https://github.com/crocket/dired-single
-;;   ;; dired-single
-;;   (defun my-dired-init ()
-;;     "Bunch of stuff to run for dired, either immediately or when it's
-;;    loaded."
-;;     ;; <add other stuff here>
-;;     (save-excursion
-;;       (switch-to-buffer "*scratch*")
-;;       (goto-char (point-max))
-;;       (insert "xxxxxxxxx"))
-;;     (define-key dired-mode-map [return] 'dired-single-buffer)
-;;     (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-;;     (define-key dired-mode-map "^"
-;;       (function
-;;        (lambda nil (interactive) (dired-single-buffer "..")))))
-;;   ;; if dired's already loaded, then the keymap will be bound
-;;   (if (boundp 'dired-mode-map)
-;;       ;; we're good to go; just add our bindings
-;;       (my-dired-init)
-;;     ;; it's not loaded yet, so add our bindings to the load-hook
-;;     (add-hook 'dired-load-hook 'my-dired-init))
-;;   )
+(use-package dired-single
+  :ensure t
+  :config
+  ;; https://github.com/crocket/dired-single
+  ;; dired-single
+  (defun my-dired-init ()
+    "Bunch of stuff to run for dired, either immediately or when it's
+   loaded."
+    ;; <add other stuff here>
+    (save-excursion
+      (switch-to-buffer "*scratch*")
+      (goto-char (point-max))
+      (insert "xxxxxxxxx"))
+    ;; (define-key dired-mode-map [return] 'dired-single-buffer)
+    (define-key evil-normal-state-map (kbd "RET") 'dired-single-buffer)
+    (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+    (define-key dired-mode-map "^"
+      (function
+       (lambda nil (interactive) (dired-single-buffer "..")))))
+  ;; if dired's already loaded, then the keymap will be bound
+  (if (boundp 'dired-mode-map)
+      ;; we're good to go; just add our bindings
+      (my-dired-init)
+    ;; it's not loaded yet, so add our bindings to the load-hook
+    (add-hook 'dired-load-hook 'my-dired-init))
+  )
 
 (provide 'init-dired)

@@ -134,7 +134,14 @@
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
+;;-------------------------------------------------------------
 ;; reference from zilongshanren
-;; (defadvice find-file (before make-dir))
+;;-------------------------------------------------------------
+;; (defadvice counsel-find-file (before ))
+
+(defadvice evil-search-next (after advice-for-evil-search-next activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
+(defadvice evil-search-previous (after advice-for-evil-search-previous activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
 
 (provide 'init-better-default)
