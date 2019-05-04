@@ -11,9 +11,13 @@
 ;; this is master write
 ;; master write 2
 
-(package-initialize)
+;;-------------------------------------------------------------
+;; reference from zilongshanren
+;;-------------------------------------------------------------
+(setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPaht='tramp.%%C' -o ControlPersist=no")
+(setq byte-compile-warnings '(not obsolete))
 
-;; add feauther to load-path
+(package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)
 (require 'init-minefunc)

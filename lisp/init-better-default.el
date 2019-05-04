@@ -130,13 +130,15 @@
 ;; 花括号自动换行的问题
 ;; http://tieba.baidu.com/p/3572057629
 (when (fboundp 'electric-pair-mode)
-  (electric-pair-mode))
+  (electric-pair-mode t)
+  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
 ;;-------------------------------------------------------------
 ;; reference from zilongshanren
 ;;-------------------------------------------------------------
+(global-prettify-symbols-mode t)
 ;; (defadvice counsel-find-file (before ))
 
 (defadvice evil-search-next (after advice-for-evil-search-next activate)

@@ -5,8 +5,7 @@
     :features dired+
     ;; reuse single buffer in dired
     ;; (require 'dired+)
-    ;; (diredp-toggle-find-file-reuse-dir 1))
-    )
+    (diredp-toggle-find-file-reuse-dir 1))
   )
 
 ;; dired-imenu
@@ -76,10 +75,6 @@
     "Bunch of stuff to run for dired, either immediately or when it's
    loaded."
     ;; <add other stuff here>
-    (save-excursion
-      (switch-to-buffer "*scratch*")
-      (goto-char (point-max))
-      (insert "xxxxxxxxx"))
     ;; (define-key dired-mode-map [return] 'dired-single-buffer)
     (define-key evil-normal-state-map (kbd "RET") 'dired-single-buffer)
     (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
