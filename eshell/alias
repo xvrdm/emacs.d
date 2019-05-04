@@ -10,7 +10,7 @@ alias gp git push
 alias gl git pull
 # alias z fwar34/eshell-fasd-z $1
 # alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug . $1
-alias dow dired-other-window $1
+alias d dired $1
+alias do dired-other-window $1
 alias fo find-file-other-window $1
-alias fow find-file-other-window nil
 alias ff find-file $1

@@ -139,7 +139,9 @@
 ;; reference from zilongshanren
 ;;-------------------------------------------------------------
 (global-prettify-symbols-mode t)
-;; (defadvice counsel-find-file (before ))
+(defadvice counsel-find-file (before advice-counsel-find-file (filename &optional wildcards) activate)
+  (unless (file-exists-p filename)
+    (message "file not exist")))
 
 (defadvice evil-search-next (after advice-for-evil-search-next activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
