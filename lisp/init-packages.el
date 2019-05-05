@@ -931,6 +931,23 @@
   (exec-path-from-shell-initialize)
   )
 
+(use-package volatile-highlights
+  :ensure t
+  :config
+  (volatile-highlights-mode t)
+  ;;-----------------------------------------------------------------------------
+  ;; Supporting evil-mode.
+  ;;-----------------------------------------------------------------------------
+  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
+                        'evil-paste-pop 'evil-move)
+  (vhl/install-extension 'evil)
+  ;;-----------------------------------------------------------------------------
+  ;; Supporting undo-tree.
+  ;;-----------------------------------------------------------------------------
+  (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
+  (vhl/install-extension 'undo-tree)
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
 ;; because i put some modes in this use-package code

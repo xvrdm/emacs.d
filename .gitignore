@@ -33,3 +33,4 @@ el-get
 .youdao
 org/.directory
 straight/*
+stale_outputs_checked
