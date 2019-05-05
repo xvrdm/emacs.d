@@ -136,13 +136,15 @@
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
-(defun advice-find-file (filename)
+;; advice for find-file
+(defun advice-find-file (filename &optional wildcards)
   (interactive)
   (if (file-exists-p filename)
       t
     (y-or-n-p (message "%s not exist! create it?" filename))))
 (advice-add #'find-file :before-while #'advice-find-file)
 
+;; advice for evil search
 (defadvice evil-search-next (after advice-for-evil-search-next activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
 (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
