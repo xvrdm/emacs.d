@@ -24,25 +24,20 @@
 (require 'use-package)
 ;; (setq use-package-always-ensure t)
 
-(when (not (equal system-type 'windows-nt))
-  ;; el-get
-  (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-  (unless (require 'el-get nil 'noerror)
-    (require 'package)
-    (package-refresh-contents)
-    (package-install 'el-get)
-    (require 'el-get))
-  (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-  ;; (el-get 'sync)
-  )
-
-(when (not (equal system-type 'windows-nt))
-  ;; :el-get keyword for use-package
-  (use-package use-package-el-get
-    :ensure t
-    :config 
-    (use-package-el-get-setup))
-  )
+;; straight.el
+;; https://github.com/raxod502/straight.el#integration-with-use-package
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;; chords
 (use-package use-package-chords

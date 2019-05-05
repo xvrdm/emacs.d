@@ -1,12 +1,7 @@
 ;; init dired
 
-;; (when (not (equal system-type 'windows-nt))
-;;   (el-get-bundle dired+
-;;     :features dired+
-;;     ;; reuse single buffer in dired
-;;     ;; (require 'dired+)
-;;     (diredp-toggle-find-file-reuse-dir 1))
-;;   )
+(use-package dired+
+  :straight t)
 
 ;; dired-imenu
 (use-package dired-imenu
