@@ -266,4 +266,12 @@ want to use in the modeline *in lieu of* the original.")
   (interactive)
   (load user-init-file nil t))
 
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
 (provide 'init-minefunc)
