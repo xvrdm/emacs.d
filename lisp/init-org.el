@@ -47,8 +47,8 @@
 
 (add-hook 'org-mode-hook 'evil-org-mode)
 ;; (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-;(require 'evil-org-agenda)
-;(evil-org-agenda-set-keys)
+;; (require 'evil-org-agenda)
+;; (evil-org-agenda-set-keys)
 ;; https://github.com/Somelauw/evil-org-mode#common-issues
 (setq evil-want-C-i-jump nil)
 
@@ -59,15 +59,15 @@
 
 ;; 在配置文件中（我使用的是模块化的配置，所以我的配置在 init-org.el 文件中）增加如下程序，就可实现 org-mode 中的自动换行。
 (add-hook 'org-mode-hook 
-	  (lambda () (setq truncate-lines nil)))
+          (lambda () (setq truncate-lines nil)))
 
 ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
 ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-    (emacs-lisp . t)
-    (C . t)))
+   (emacs-lisp . t)
+   (C . t)))
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-fontify-natively t)
 

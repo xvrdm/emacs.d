@@ -29,12 +29,12 @@
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 (when (eq system-type 'windows-nt)
- (setq gc-cons-threshold (* 512 1024 1024))
- (setq gc-cons-percentage 0.5)
- (run-with-idle-timer 5 t #'garbage-collect)
- ;; 显示垃圾回收信息，这个可以作为调试用
- ;; (setq garbage-collection-messages t)
- )
+  (setq gc-cons-threshold (* 512 1024 1024))
+  (setq gc-cons-percentage 0.5)
+  (run-with-idle-timer 5 t #'garbage-collect)
+  ;; 显示垃圾回收信息，这个可以作为调试用
+  ;; (setq garbage-collection-messages t)
+  )
 
 (global-prettify-symbols-mode t)
 ;; 禁用响铃
@@ -60,9 +60,9 @@
 (define-advice show-paren-function(:around (fn) fix-show-paren-function)
   "Highlight enclosing parens."
   (cond ((looking-at-p "\\s(") (funcall fn))
-	(t (save-excursion
-	     (ignore-errors (backward-up-list))
-	     (funcall fn)))))
+        (t (save-excursion
+             (ignore-errors (backward-up-list))
+             (funcall fn)))))
 
 ;; 括号匹配高亮
 ;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)

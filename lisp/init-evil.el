@@ -483,7 +483,7 @@
 
 
 ;; must put after "nvmap :prefix \"SPC\""
-;;evil-easymotion
+;; evil-easymotion
 ;; (evilem-default-keybindings "SPC")
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

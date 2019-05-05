@@ -19,7 +19,7 @@
 
 ;; 增强occur, 抓取选中或者光标的词
 (defun occur-dwim ()
-    "Call `occur' with a sane default."
+  "Call `occur' with a sane default."
   (interactive)
   (push (if (region-active-p)
             (buffer-substring-no-properties
@@ -34,9 +34,9 @@
 ;; org mode
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/.emacs.d/gtd.org" "工作安排")
-	 "* TODO [#B] %?\n  %i\n"
-	 :empty-lines 1)))
-	 
+         "* TODO [#B] %?\n  %i\n"
+         :empty-lines 1)))
+
 ;; gnu-global
 (defun gtags-update-single(filename)
   "Update Gtags database for changes in a single file"
@@ -135,14 +135,14 @@ want to use in the modeline *in lieu of* the original.")
 (defun clean-mode-line ()
   (interactive)
   (cl-loop for cleaner in mode-line-cleaner-alist
-        do (let* ((mode (car cleaner))
-                  (mode-str (cdr cleaner))
-                  (old-mode-str (cdr (assq mode minor-mode-alist))))
-             (when old-mode-str
-               (setcar old-mode-str mode-str))
-             ;; major mode
-             (when (eq mode major-mode)
-               (setq mode-name mode-str)))))
+           do (let* ((mode (car cleaner))
+                     (mode-str (cdr cleaner))
+                     (old-mode-str (cdr (assq mode minor-mode-alist))))
+                (when old-mode-str
+                  (setcar old-mode-str mode-str))
+                ;; major mode
+                (when (eq mode major-mode)
+                  (setq mode-name mode-str)))))
 
 (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
@@ -161,7 +161,7 @@ want to use in the modeline *in lieu of* the original.")
 (font-lock-add-keywords
  'c++-mode
  ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
-  '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
+ '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
 
 (font-lock-add-keywords
  'c++-mode
@@ -234,7 +234,7 @@ want to use in the modeline *in lieu of* the original.")
 
 ;; #!/usr/bin/env python3
 ;; #-*- coding: utf-8 -*-
- 
+
 ;; # File Name: file_test1.py
 ;; # Author: Feng
 ;; # Created Time: Fri 24 Mar 2017 02:27:39 PM CST

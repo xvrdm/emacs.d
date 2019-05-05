@@ -102,7 +102,7 @@
     (eshell-send-input)))
 
 (use-package eshell
-:ensure t
+  :ensure t
   :commands eshell
   :init
   (progn
@@ -192,47 +192,45 @@
   "Pop and hide eshell with this function."
   (interactive)
   (let* ((eshell-buffer-name "*eshell*")
-	 (eshell-window (get-buffer-window eshell-buffer-name 'visible))
-	 (cwd default-directory)
-	 (change-cwd (lambda ()
-		       (progn
-			 (goto-char (point-max))
-			 (evil-insert-state)
-			 (eshell-kill-input)
-			 ;; There is somethings wrong with eshell/cd
-			 ;; So replace with `insert`
-			 (insert " cd " cwd)
-			 (eshell-send-input)
-			 ))))
+         (eshell-window (get-buffer-window eshell-buffer-name 'visible))
+         (cwd default-directory)
+         (change-cwd (lambda ()
+                       (progn
+                         (goto-char (point-max))
+                         (evil-insert-state)
+                         (eshell-kill-input)
+                         ;; There is somethings wrong with eshell/cd
+                         ;; So replace with `insert`
+                         (insert " cd " cwd)
+                         (eshell-send-input)
+                         ))))
     ;; Eshell buffer exists?
     (if (get-buffer eshell-buffer-name)
-	;; Eshell buffer is visible?
-	(if eshell-window
-	    ;; Buffer in current window is eshell buffer?
-	    (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
-		(if (not (one-window-p))
-		    (progn (bury-buffer)
-			   (delete-window)))
-	      ;; If not, select window which points to eshell bufffer.
-	      (select-window eshell-window)
-	      (funcall change-cwd)
-	      )
-	  ;; If eshell buffer is not visible, split a window and switch to it.
-	  (progn
-	    ;; Use `split-window-sensibly` to split window with policy
-	    ;; If window cannot be split, force to split split window horizontally
-	    (when (not (split-window-sensibly))
-	      (samray/split-window-below-and-move))
-	    (switch-to-buffer eshell-buffer-name)
-	    (funcall change-cwd)
-	    ))
+        ;; Eshell buffer is visible?
+        (if eshell-window
+            ;; Buffer in current window is eshell buffer?
+            (if (string= (buffer-name (window-buffer)) eshell-buffer-name)
+                (if (not (one-window-p))
+                    (progn (bury-buffer)
+                           (delete-window)))
+              ;; If not, select window which points to eshell bufffer.
+              (select-window eshell-window)
+              (funcall change-cwd)
+              )
+          ;; If eshell buffer is not visible, split a window and switch to it.
+          (progn
+            ;; Use `split-window-sensibly` to split window with policy
+            ;; If window cannot be split, force to split split window horizontally
+            (when (not (split-window-sensibly))
+              (samray/split-window-below-and-move))
+            (switch-to-buffer eshell-buffer-name)
+            (funcall change-cwd)))
       ;; If eshell buffer doesn't exist, create one
       (progn
-	(when (not (split-window-sensibly))
-	  (samray/split-window-below-and-move))
-	(eshell)
-	(funcall change-cwd)
-	)))
+        (when (not (split-window-sensibly))
+          (samray/split-window-below-and-move))
+        (eshell)
+        (funcall change-cwd))))
   )
 
 (require 'company)

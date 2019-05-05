@@ -245,8 +245,8 @@
     '((t
        :inherit secondary-selection
        ))))
-    "Face used for volatile highlights."
-    :group 'volatile-highlights)
+  "Face used for volatile highlights."
+  :group 'volatile-highlights)
 
 
 ;;;============================================================================
@@ -294,10 +294,10 @@ When the face `FACE' is not specified or its value is `nil',
 the default face `vhl/default-face' will
 be used as the value."
   (let* ((face (or face 'vhl/default-face))
-		 (hl (vhl/.make-hl beg end buf face)))
-	(setq vhl/.hl-lst
-		  (cons hl vhl/.hl-lst))
-	(add-hook 'pre-command-hook 'vhl/clear-all)))
+         (hl (vhl/.make-hl beg end buf face)))
+    (setq vhl/.hl-lst
+          (cons hl vhl/.hl-lst))
+    (add-hook 'pre-command-hook 'vhl/clear-all)))
 (define-obsolete-function-alias 'vhl/add 'vhl/add-range "1.5")
 
 ;;-----------------------------------------------------------------------------
@@ -311,7 +311,7 @@ If Vhl/highlight-zero-width-ranges is nil, do nothing.
 Optional args are the same as `vhl/add-range'."
   (when (and Vhl/highlight-zero-width-ranges (not (zerop (buffer-size))))
     (when (> pos (buffer-size))
-        (setq pos (- pos 1)))
+      (setq pos (- pos 1)))
     (apply 'vhl/add-range pos (+ pos 1) other-args)))
 
 ;;-----------------------------------------------------------------------------
@@ -321,10 +321,10 @@ Optional args are the same as `vhl/add-range'."
   "Clear all volatile highlights."
   (interactive)
   (while vhl/.hl-lst
-	(vhl/.clear-hl (car vhl/.hl-lst))
-	(setq vhl/.hl-lst
-		  (cdr vhl/.hl-lst)))
-	  (remove-hook 'pre-command-hook 'vhl/clear-all))
+    (vhl/.clear-hl (car vhl/.hl-lst))
+    (setq vhl/.hl-lst
+          (cdr vhl/.hl-lst)))
+  (remove-hook 'pre-command-hook 'vhl/clear-all))
 
 ;;-----------------------------------------------------------------------------
 ;; (vhl/force-clear-all) => VOID
@@ -347,20 +347,20 @@ Optional args are the same as `vhl/add-range'."
 (defun vhl/.make-hl (beg end buf face)
   "Make a volatile highlight at the position specified by `BEG' and `END'."
   (let (hl)
-	(cond
-	 (vhl/.xemacsp
-	  ;; XEmacs
-	  (setq hl (make-extent beg end buf))
-	  (set-extent-face hl face)
-	  (highlight-extent hl t)
-	  (set-extent-property hl 'volatile-highlights t))
-	 (t
-	  ;; GNU Emacs
-	  (setq hl (make-overlay beg end buf))
-	  (overlay-put hl 'face face)
-	  (overlay-put hl 'priority 1)
-	  (overlay-put hl 'volatile-highlights t)))
-	 hl))
+    (cond
+     (vhl/.xemacsp
+      ;; XEmacs
+      (setq hl (make-extent beg end buf))
+      (set-extent-face hl face)
+      (highlight-extent hl t)
+      (set-extent-property hl 'volatile-highlights t))
+     (t
+      ;; GNU Emacs
+      (setq hl (make-overlay beg end buf))
+      (overlay-put hl 'face face)
+      (overlay-put hl 'priority 1)
+      (overlay-put hl 'volatile-highlights t)))
+    hl))
 
 ;;-----------------------------------------------------------------------------
 ;; (vhl/.clear-hl HIGHLIGHT) => VOID
@@ -370,12 +370,12 @@ Optional args are the same as `vhl/add-range'."
   (cond
    ;; XEmacs (not tested!)
    (vhl/.xemacsp
-	(and (extentp hl)
-		 (delete-extent hl)))
+    (and (extentp hl)
+         (delete-extent hl)))
    ;; GNU Emacs
    (t
-	(and (overlayp hl)
-		 (delete-overlay hl)))))
+    (and (overlayp hl)
+         (delete-overlay hl)))))
 
 ;;-----------------------------------------------------------------------------
 ;; (vhl/.force-clear-all-hl) => VOID
@@ -385,17 +385,17 @@ Optional args are the same as `vhl/add-range'."
   (cond
    ;; XEmacs (not tested!)
    (vhl/.xemacsp
-      (map-extents (lambda (hl maparg)
-                     (and (extent-property hl 'volatile-highlights)
-						  (vhl/.clear-hl hl)))))
+    (map-extents (lambda (hl maparg)
+                   (and (extent-property hl 'volatile-highlights)
+                        (vhl/.clear-hl hl)))))
    ;; GNU Emacs
    (t
-	(save-restriction
-	  (widen)
-	  (mapcar (lambda (hl)
-				(and (overlay-get hl 'volatile-highlights)
-					 (vhl/.clear-hl hl)))
-			  (overlays-in (point-min) (point-max)))))))
+    (save-restriction
+      (widen)
+      (mapcar (lambda (hl)
+                (and (overlay-get hl 'volatile-highlights)
+                     (vhl/.clear-hl hl)))
+              (overlays-in (point-min) (point-max)))))))
 
 
 ;;;============================================================================
@@ -481,8 +481,8 @@ Optional args are the same as `vhl/add-range'."
 
 (defun vhl/disable-advice-if-defined (fn-name class ad-name)
   (when (vhl/advice-defined-p fn-name class ad-name)
-	(ad-disable-advice fn-name class ad-name)
-	(ad-activate fn-name)))
+    (ad-disable-advice fn-name class ad-name)
+    (ad-activate fn-name)))
 
 (defun vhl/.make-vhl-on-change (beg end len-removed)
   (let ((insert-p (zerop len-removed)))
@@ -494,13 +494,13 @@ Optional args are the same as `vhl/add-range'."
 
 (defmacro vhl/give-advice-to-make-vhl-on-changes (fn-name)
   (let* ((ad-name (intern (concat "vhl/make-vhl-on-"
-                                 (format "%s" fn-name)))))
+                                  (format "%s" fn-name)))))
     (or (symbolp fn-name)
         (error "vhl/give-advice-to-make-vhl-on-changes: `%s' is not type of symbol." fn-name))
     `(progn
        (defadvice ,fn-name (around
-                              ,ad-name
-                              (&rest args))
+                            ,ad-name
+                            (&rest args))
          (vhl/.push-to-after-change-hook (quote ,fn-name))
          (unwind-protect
              ad-do-it
@@ -520,9 +520,9 @@ Optional args are the same as `vhl/add-range'."
     (file-error nil)))
 
 (eval-and-compile
-;; Utility function by Ryan Thompson.
-(defun vhl/.make-list-string (items)
-  "Makes an English-style list from a list of strings.
+  ;; Utility function by Ryan Thompson.
+  (defun vhl/.make-list-string (items)
+    "Makes an English-style list from a list of strings.
 
 Converts a list of strings into a string that lists the items
 separated by commas, as well as the word `and' before the last
@@ -532,28 +532,28 @@ would be listed in english.
 This is included as a private support function for generating
 lists of symbols to be included docstrings of auto-generated
 extensions."
-  (assert (listp items))
-  (cond ((null items)
-         ;; Zero items
-         "")
-        ((null (cdr items))
-         ;; One item
-         (assert (stringp (first items)))
-         (format "%s" (first items)))
-        ((null (cddr items))
-         ;; Two items
-         (assert (stringp (first items)))
-         (assert (stringp (second items)))
-         (apply 'format "%s and %s" items))
-        ((null (cdddr items))
-         ;; Three items
-         (assert (stringp (first items)))
-         (assert (stringp (second items)))
-         (assert (stringp (third items)))
-         (apply 'format "%s, %s, and %s" items))
-        (t
-         ;; 4 or more items
-         (format "%s, %s" (first items) (vhl/.make-list-string (rest items)))))))
+    (assert (listp items))
+    (cond ((null items)
+           ;; Zero items
+           "")
+          ((null (cdr items))
+           ;; One item
+           (assert (stringp (first items)))
+           (format "%s" (first items)))
+          ((null (cddr items))
+           ;; Two items
+           (assert (stringp (first items)))
+           (assert (stringp (second items)))
+           (apply 'format "%s and %s" items))
+          ((null (cdddr items))
+           ;; Three items
+           (assert (stringp (first items)))
+           (assert (stringp (second items)))
+           (assert (stringp (third items)))
+           (apply 'format "%s, %s, and %s" items))
+          (t
+           ;; 4 or more items
+           (format "%s, %s" (first items) (vhl/.make-list-string (rest items)))))))
 
 ;; The following makes it trivial to define simple vhl extensions
 (defmacro vhl/define-extension (name &rest functions)
@@ -777,13 +777,13 @@ extensions."
 
 (defmacro vhl/ext/nonincremental-search/.advice-to-vhl (fn)
   `(when (fboundp (quote ,fn))
-      (defadvice ,fn (after
-                      ,(intern (format "vhl/ext/nonincremental-search/%s"
-                                       fn))
-                      (&rest args))
-        (when ad-return-value
-          (vhl/add-range (match-beginning 0) (match-end 0) nil 'match)))
-      (ad-activate (quote ,fn))))
+     (defadvice ,fn (after
+                     ,(intern (format "vhl/ext/nonincremental-search/%s"
+                                      fn))
+                     (&rest args))
+       (when ad-return-value
+         (vhl/add-range (match-beginning 0) (match-end 0) nil 'match)))
+     (ad-activate (quote ,fn))))
 
 (defmacro vhl/ext/nonincremental-search/.disable-advice-to-vhl (fn)
   `(vhl/disable-advice-if-defined
@@ -833,9 +833,9 @@ extensions."
                                          (overlays-in bol (1+ eol))))))
            (boov (and ov-folded (overlay-start ov-folded)))
            (eoov (and ov-folded (overlay-end ov-folded))))
-    
+      
       ad-do-it
-    
+      
       (when (and boov eoov)
         (vhl/add-range boov eoov))))
   (ad-activate 'hs-show-block))

@@ -36,7 +36,7 @@
 
 ;; no scroll bar
 (if (fboundp 'set-scroll-bar-mode)
-   (set-scroll-bar-mode nil))
+    (set-scroll-bar-mode nil))
 
 ;; 更改光标样式
 ;; (set-default 'cursor-type 'hbar)
