@@ -1,7 +1,7 @@
 ;; init dired
 
-(use-package dired+
-  :straight t)
+;; (use-package dired+
+;;   :straight t)
 
 ;; dired-imenu
 (use-package dired-imenu
@@ -68,13 +68,14 @@
   (defun my-dired-init ()
     "Bunch of stuff to run for dired, either immediately or when it's
    loaded."
-    ;; <add other stuff here>
-    ;; (define-key dired-mode-map [return] 'dired-single-buffer)
-    ;; (define-key evil-normal-state-map (kbd "RET") 'dired-single-buffer)
-    (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
-    (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-    ;; (evil-define-key 'normal dired-mode-map "^" (function (lambda nil (interactive) (dired-single-buffer "..")))))
-    (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer ".."))))
+    (if (display-graphic-p)
+        (progn
+          (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
+          (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+          (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer ".."))))
+      (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-single-buffer)
+      (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer ".."))))
+    )
   ;; if dired's already loaded, then the keymap will be bound
   (if (boundp 'dired-mode-map)
       ;; we're good to go; just add our bindings
