@@ -29,7 +29,6 @@
 (require 'init-company)
 (require 'init-eshell)
 (require 'init-dired)
-;; (require 'init-modeline)
                           
 ;; cl - Common List Extension
 (require 'cl-lib)
