@@ -472,6 +472,11 @@
   :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
+  ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
+  ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
+  ;; (define-key lispy-mode-map (kbd “C-y”) #'lispy-yank)
+  ;; (define-key lispy-mode-map (kbd “C-e”) #'lispy-move-end-of-line) 
   )
 
 (use-package lispyville
