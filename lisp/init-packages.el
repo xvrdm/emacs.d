@@ -611,12 +611,11 @@
   ;; (spaceline-spacemacs-theme))
   (spaceline-emacs-theme))
 
-(use-package winum
-  :ensure t
-  :config
-  (winum-mode)
-  (setq winum-mode-line-position -1)
-  )
+;; (use-package winum
+;;   :ensure t
+;;   :config
+;;   (winum-mode)
+;;   )
 
 (use-package highlight-symbol
   :ensure t
