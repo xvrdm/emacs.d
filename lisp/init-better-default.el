@@ -36,6 +36,7 @@
  ;; (setq garbage-collection-messages t)
  )
 
+(global-prettify-symbols-mode t)
 ;; 禁用响铃
 (setq ring-bell-function 'ignore)
 
@@ -135,13 +136,12 @@
 (when (eval-when-compile (version< "24.4" emacs-version))
   (electric-indent-mode 1))
 
-;;-------------------------------------------------------------
-;; reference from zilongshanren
-;;-------------------------------------------------------------
-(global-prettify-symbols-mode t)
-(defadvice counsel-find-file (before advice-counsel-find-file (filename &optional wildcards) activate)
-  (unless (file-exists-p filename)
-    (message "file not exist")))
+(defun advice-find-file (filename)
+  (interactive)
+  (if (file-exists-p filename)
+      t
+    (y-or-n-p (message "%s not exist! create it?" filename))))
+(advice-add #'find-file :before-while #'advice-find-file)
 
 (defadvice evil-search-next (after advice-for-evil-search-next activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
