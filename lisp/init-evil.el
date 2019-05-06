@@ -79,7 +79,7 @@
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
 (define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
 (define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
-(global-set-key (kbd "C-r") 'undo-tree-redo)
+;; (global-set-key (kbd "C-r") 'undo-tree-redo)
 
  ;; {{ Use `;` as one leader key
 (general-define-key :keymaps '(normal insert visual emacs)

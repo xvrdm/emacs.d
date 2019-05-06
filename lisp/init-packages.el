@@ -860,47 +860,56 @@
   :config
   )
 
-(use-package git-gutter
-  :ensure t
-  :config
-  ;; If you enable global minor mode
-  (global-git-gutter-mode t)
-  ;; If you would like to use git-gutter.el and linum-mode
-  (when (not (display-graphic-p)) (git-gutter:linum-setup))
-  ;; Use for 'Git'(`git`), 'Mercurial'(`hg`), 'Bazaar'(`bzr`), and 'Subversion'(`svn`) projects
-  ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
-  (custom-set-variables '(git-gutter:handled-backends '(git svn)))
-  ;; inactivate git-gutter-mode in asm-mode and image-mode
-  (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode)))
-  ;; Hide gutter when there are no changes if git-gutter:hide-gutter is non-nil. (Default is nil)
-  (custom-set-variables '(git-gutter:hide-gutter t))
-  ;; diff information is updated at hooks in git-gutter:update-hooks.
-  (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
-  ;; diff information is updated after command in git-gutter:update-commands executed.
-  (add-to-list 'git-gutter:update-commands 'other-window)
-  ;; (custom-set-variables
-  ;;  '(git-gutter:modified-sign "~") ;; two space
-  ;;  '(git-gutter:added-sign "++")    ;; multiple character is OK
-  ;;  '(git-gutter:deleted-sign "--"))
-  ;; (set-face-background 'git-gutter:modified "purple") ;; background color
-  ;; (set-face-foreground 'git-gutter:added "green")
-  ;; (set-face-foreground 'git-gutter:deleted "red")
-  ;; (set-face-background 'git-gutter:modified "purple") ;; background color
-  ;; (set-face-background 'git-gutter:added "green")
-  ;; (set-face-background 'git-gutter:deleted "red")
-  ;; Jump to next/previous hunk
-  ;; (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
-  ;; (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
-  ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
-  )
+;; (use-package git-gutter
+;;   :ensure t
+;;   :config
+;;   ;; If you enable global minor mode
+;;   (global-git-gutter-mode t)
+;;   ;; If you would like to use git-gutter.el and linum-mode
+;;   (when (not (display-graphic-p)) (git-gutter:linum-setup))
+;;   ;; Use for 'Git'(`git`), 'Mercurial'(`hg`), 'Bazaar'(`bzr`), and 'Subversion'(`svn`) projects
+;;   ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
+;;   (custom-set-variables '(git-gutter:handled-backends '(git svn)))
+;;   ;; inactivate git-gutter-mode in asm-mode and image-mode
+;;   (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode)))
+;;   ;; Hide gutter when there are no changes if git-gutter:hide-gutter is non-nil. (Default is nil)
+;;   (custom-set-variables '(git-gutter:hide-gutter t))
+;;   ;; diff information is updated at hooks in git-gutter:update-hooks.
+;;   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
+;;   ;; diff information is updated after command in git-gutter:update-commands executed.
+;;   (add-to-list 'git-gutter:update-commands 'other-window)
+;;   ;; (custom-set-variables
+;;   ;;  '(git-gutter:modified-sign "~") ;; two space
+;;   ;;  '(git-gutter:added-sign "++")    ;; multiple character is OK
+;;   ;;  '(git-gutter:deleted-sign "--"))
+;;   ;; (set-face-background 'git-gutter:modified "purple") ;; background color
+;;   ;; (set-face-foreground 'git-gutter:added "green")
+;;   ;; (set-face-foreground 'git-gutter:deleted "red")
+;;   ;; (set-face-background 'git-gutter:modified "purple") ;; background color
+;;   ;; (set-face-background 'git-gutter:added "green")
+;;   ;; (set-face-background 'git-gutter:deleted "red")
+;;   ;; Jump to next/previous hunk
+;;   ;; (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
+;;   ;; (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
+;;   ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
+;;   )
 
-(use-package git-gutter-fringe
+;; (use-package git-gutter-fringe
+;;   :ensure t
+;;   :if (display-graphic-p)
+;;   :config
+;;   (set-face-foreground 'git-gutter-fr:modified "purple")
+;;   (set-face-foreground 'git-gutter-fr:added    "green")
+;;   (set-face-foreground 'git-gutter-fr:deleted  "red")
+;;   )
+
+(use-package diff-hl
   :ensure t
-  :if (display-graphic-p)
   :config
-  (set-face-foreground 'git-gutter-fr:modified "purple")
-  (set-face-foreground 'git-gutter-fr:added    "green")
-  (set-face-foreground 'git-gutter-fr:deleted  "red")
+  (global-diff-hl-mode)
+  (diff-hl-margin-mode) 
+  (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   )
 
 (use-package company-statistics
