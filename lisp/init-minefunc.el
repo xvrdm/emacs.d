@@ -273,5 +273,12 @@ want to use in the modeline *in lieu of* the original.")
   (save-some-buffers)
   (kill-emacs)
   )
+;;-------------------------------------------------------------
+;; proxy function
+;;-------------------------------------------------------------
+(defun fwar34/proxy-function (command)
+  "Execute command with proxy"
+  (interactive)
+  )
 
 (provide 'init-minefunc)

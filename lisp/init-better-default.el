@@ -72,10 +72,10 @@
 ;; )
 
 ;; 行号
-(global-linum-mode 1)
-(when (not (display-graphic-p))
-  (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
-  )
+(when (display-graphic-p)
+  (global-linum-mode 1)
+  (when (not (display-graphic-p))
+    (setq linum-format "%d "))) ;; 注意%d后面有空格，即用空格将行号和代码隔
 
 ;;
 (delete-selection-mode 1)

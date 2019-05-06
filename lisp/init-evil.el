@@ -308,10 +308,16 @@
                     ;; (define-key evil-normal-state-map (kbd "[ cp") 'git-gutter+-previous-hunk)
                     ;; (define-key evil-normal-state-map (kbd "[ cn") 'git-gutter+-next-hunk)
                     ;; (define-key evil-normal-state-map (kbd "[ st") 'git-gutter+-stage-hunk)
-                    ;; "cn" 'git-gutter+-next-hunk
+                    "cn" (lambda ()
+                           (interactive) (if (display-graphic-p)
+                                             (git-gutter:next-hunk) 
+                                           (diff-hl-next-hunk)))
                     ;; "cp" 'git-gutter+-previous-hunk
-                    "cn" 'git-gutter:next-hunk
-                    "cp" 'git-gutter:previous-hunk
+                    ;; "cn" 'git-gutter:next-hunk
+                    ;; "cp" 'git-gutter:previous-hunk
+                    "cp" (lambda () (interactive) (if (display-graphic-p)
+                                                 (git-gutter:previous-hunk)
+                                               (diff-hl-previous-hunk)))
                     "c=" 'vc-diff
                     "cl" 'vc-pull
                     "cu" 'vc-push
