@@ -1,6 +1,6 @@
 * 工作安排
 
 ** TODO [#B] 
-1. eshell添加脚本foxy.sh
+1. eshell添加脚本foxy.sh(可以直接写lisp函数，在eshell中可以调用，先看下eshell可以写脚本么)
 2. 配置autoload延迟加载
 3. lispyville是否要去掉，一些快捷键冲突
