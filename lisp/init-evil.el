@@ -309,15 +309,18 @@
                     ;; (define-key evil-normal-state-map (kbd "[ cn") 'git-gutter+-next-hunk)
                     ;; (define-key evil-normal-state-map (kbd "[ st") 'git-gutter+-stage-hunk)
                     "cn" (lambda ()
-                           (interactive) (if (display-graphic-p)
-                                             (git-gutter:next-hunk) 
-                                           (diff-hl-next-hunk)))
+                           (interactive)
+                           (if (display-graphic-p)
+                               (git-gutter:next-hunk (line-number-at-pos)) 
+                             (diff-hl-next-hunk)))
                     ;; "cp" 'git-gutter+-previous-hunk
                     ;; "cn" 'git-gutter:next-hunk
                     ;; "cp" 'git-gutter:previous-hunk
-                    "cp" (lambda () (interactive) (if (display-graphic-p)
-                                                 (git-gutter:previous-hunk)
-                                               (diff-hl-previous-hunk)))
+                    "cp" (lambda ()
+                           (interactive)
+                           (if (display-graphic-p)
+                               (git-gutter:previous-hunk (line-number-at-pos))
+                             (diff-hl-previous-hunk)))
                     "c=" 'vc-diff
                     "cl" 'vc-pull
                     "cu" 'vc-push
@@ -454,6 +457,7 @@
                     ;; "ss" 'swiper-the-thing ; http://oremacs.com/2015/03/25/swiper-0.2.0/ for guide
                     ;; liang.feng
                     ;; "bc" '(lambda () (interactive) (wxhelp-browse-class-or-api (thing-at-point 'symbol)))
+
                     "og" 'org-agenda
                     "otl" 'org-toggle-link-display
                     "oa" '(lambda ()
