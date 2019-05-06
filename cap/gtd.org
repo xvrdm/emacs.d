@@ -1,0 +1,5 @@
+* 工作安排
+
+** TODO [#B] 
+1. eshell添加脚本foxy.sh
+2. 配置autoload延迟加载
