@@ -3,3 +3,4 @@
 ** TODO [#B] 
 1. eshell添加脚本foxy.sh
 2. 配置autoload延迟加载
+3. lispyville是否要去掉，一些快捷键冲突
