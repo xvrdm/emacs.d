@@ -411,3 +411,54 @@ assoc-default可以一步完成这样的操作：
 #+RESULTS:
 | 1 | 2 | 3 | 4 | (5 6) |
 从上面的例子可以看出，当可选参数没有提供时候，对应的可选参数为nil。同样调用函数没有提供剩余参数时，其值也为nil，但是一旦提供了剩余参数，则所有的剩余参数是以列表的形式放在对应的变量里的。
+
+* autoload
+配置 X 并不要求加载 X，Emacs 在加载配置本身上的时间常常可以忽略不计。比如你可以在 Org-mode 没有加载时就配置它，Emacs 已经尽量这么做了：
+
+#+BEGIN_SRC elisp
+;; Emacs autoload 了 org-store-link，即使 org 没有加载，你也能使用它
+(global-set-key (kbd "C-c l") #'org-store-link)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+;; setq 有特效，无论 org 什么时候加载，下面设置均有效
+(setq org-agenda-files '("~/Sync/org/"))
+
+;; add-hook 有特效，org-mode-hook 没定义也可以用；
+;; org-bullets-mode 已经被 package.el 自动 autoload
+(add-hook 'org-mode-hook #'org-bullets-mode)
+#+END_SRC
+
+但是你试图调用 Org-mode 中的某些函数的话，比如
+
+#+BEGIN_SRC elisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (shell      . t)
+   (ruby       . t)))
+#+END_SRC
+
+它会迫使 Emacs 启动时就加载 Org-mode，这会严重拖累 Emacs 启动速度，而且也没必要，你完全可以等到你打开 .org 文件时，再执行这段配置
+
+#+BEGIN_SRC elisp
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (shell      . t)
+     (ruby       . t))))
+#+END_SRC
+
+同样你也可以把上面的 setq 和 add-hook 放到 with-eval-after-load 里面来。
+
+(emacs) Lisp Libraries 中关于 Autoload 的一点说明：
+
+#+BEGIN_QUOTE
+Some commands are “autoloaded”; when you run them, Emacs
+automatically loads the associated library first.  For instance, the
+‘M-x compile’ command (*note Compilation::) is autoloaded; if you call
+it, Emacs automatically loads the ‘compile’ library first.  In contrast,
+the command ‘M-x recompile’ is not autoloaded, so it is unavailable
+until you load the ‘compile’ library.
+#+END_QUOTE

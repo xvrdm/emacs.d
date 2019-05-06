@@ -1,39 +1,7 @@
 
-# Table of Contents
-
-1.  [learn function](#orge39a6af)
-    1.  [symbol #' and symbol-value symbol-function](#org81e7ebf)
-    2.  [function call](#org50e864d)
-    3.  [#' mapcar](#org551c35a)
-    4.  [lambda](#org9304e7a)
-2.  [learn variable](#orga34425a)
-    1.  [setq and defvar](#orgb4730b2)
-    2.  [let and let\*](#org76fb24c)
-3.  [控制结构](#orgf02ea48)
-    1.  [progn](#orge507899)
-    2.  [if 和 cond](#org4ea363e)
-    3.  [while](#orgfa19bc6)
-4.  [逻辑运算](#orgd7b608f)
-5.  [函数列表](#org6a15ac5)
-6.  [基本数据类型](#org1490662)
-    1.  [函数列表](#orgef16453)
-    2.  [变量列表](#org99c6300)
-7.  [字符和字符串](#org45c2fa8)
-    1.  [测试函数](#orgcc1151d)
-    2.  [函数列表](#orgdcee5d7)
-8.  [cons cell 和列表](#orgf3dab47)
-    1.  [测试函数](#org64d2b84)
-    2.  [构造函数](#org0e56691)
-    3.  [属性列表（property list，plist）](#org58b0127)
-
-
-
-<a id="orge39a6af"></a>
 
 # learn function
 
-
-<a id="org81e7ebf"></a>
 
 ## symbol #' and symbol-value symbol-function
 
@@ -51,8 +19,6 @@
     (double 3)
 
 
-<a id="org50e864d"></a>
-
 ## function call
 
 下面几个函数调用都是相同的作用，调用了函数+
@@ -64,8 +30,6 @@
     (apply #'+ 1 '(2))
     (funcall #'* 1 2)
 
-
-<a id="org551c35a"></a>
 
 ## #' mapcar
 
@@ -91,8 +55,6 @@
     (w32-version)
 
 
-<a id="org9304e7a"></a>
-
 ## lambda
 
 用funcall调用lambda表达式，还可以把lambda赋给一个变量然后在用funcall调用
@@ -104,12 +66,8 @@
     (funcall foo "Emacs")
 
 
-<a id="orga34425a"></a>
-
 # learn variable
 
-
-<a id="orgb4730b2"></a>
 
 ## setq and defvar
 
@@ -121,8 +79,6 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (defvar foo "Did I have a value?"
      "A demo variable")
 
-
-<a id="org76fb24c"></a>
 
 ## let and let\*
 
@@ -141,19 +97,13 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (circle-area2 3)
 
 
-<a id="orgf02ea48"></a>
-
 # 控制结构
 
-
-<a id="orge507899"></a>
 
 ## progn
 
     (progn (setq foo 3) (message "foo set to 3"))
 
-
-<a id="org4ea363e"></a>
 
 ## if 和 cond
 
@@ -170,15 +120,11 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
 使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
 
 
-<a id="orgfa19bc6"></a>
-
 ## while
 
     (while condition
       body)
 
-
-<a id="orgd7b608f"></a>
 
 # 逻辑运算
 
@@ -192,8 +138,6 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (hello-world)
     (hello-world "Elisp")
 
-
-<a id="org6a15ac5"></a>
 
 # 函数列表
 
@@ -214,12 +158,8 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (not OBJECT)
 
 
-<a id="org1490662"></a>
-
 # 基本数据类型
 
-
-<a id="orgef16453"></a>
 
 ## 函数列表
 
@@ -269,22 +209,16 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
     (random &optional N)
 
 
-<a id="org99c6300"></a>
-
 ## 变量列表
 
     most-positive-fixnum
     most-negative-fixnum
 
 
-<a id="org45c2fa8"></a>
-
 # 字符和字符串
 
 <http://www.woola.net/detail/2016-08-23-elisp-string.html>
 
-
-<a id="orgcc1151d"></a>
 
 ## 测试函数
 
@@ -295,8 +229,6 @@ nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型�
     (defun string-emptyp(str)
       (not (string< "" str)))
 
-
-<a id="orgdcee5d7"></a>
 
 ## 函数列表
 
@@ -332,8 +264,6 @@ nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型�
     (replace-regexp-in-string REGEXP REP STRING &optional FIXEDCASE LITERAL SUBEXP START)
     (subst-char-in-string FROMCHAR TOCHAR STRING &optional INPLACE)
 
-
-<a id="orgf3dab47"></a>
 
 # cons cell 和列表
 
@@ -392,8 +322,6 @@ invalid-function。之所以前面没有遇到这个问题，那是因为前面�
 cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列表。
 
 
-<a id="org64d2b84"></a>
-
 ## 测试函数
 
 测试一个对象是否是 cons cell 用 consp，是否是列表用 listp。
@@ -408,8 +336,6 @@ cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列�
 没有内建的方法测试一个列表是不是一个真列表。通常如果一个函数需要一个真列表作为参数，都是在运行时发出错误，而不是进行参数检查，因为检查一个列表是真列表的代价比较高。
 测试一个对象是否是 nil 用 null 函数。只有当对象是空表时，null 才返回空值。
 
-
-<a id="org0e56691"></a>
 
 ## 构造函数
 
@@ -440,10 +366,6 @@ cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列�
 
 前一个生成的列表的 CAR 部分是 (+ 1 2) 这个列表，而后一个是先对 (+ 1 2) 求值得到 3 后再生成列表。
 
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2019-03-26 周二&gt;</span></span>
-
-
-<a id="org58b0127"></a>
 
 ## 属性列表（property list，plist）
 
@@ -458,4 +380,111 @@ cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列�
 我们想要查询刚才建立的 plist 中的 :书名 属性名所对应的属性值：
 
     (getf (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t) :作者)
+
+
+## 关联列表
+
+关联列表就是列表，在elisp编程中，列表最常用的形式应该就是作为一个关联列表了。所谓关联列表，就是可以用一个字符串（通常叫关键字，key）来查找对应值的数据结构。有列表实现的关联表有一个专门的名字叫做association list。尽管elisp中也有hash table，但是hash table想比于association list至少有几个缺点：
+
+-   hash table里的关键字是无序的，而association list的关键字可以按照想要的顺序排列
+-   hash table没有列表那样丰富的函数，只有一个maphash函数可以遍历列表。而assocication list就是一个列表，所有的列表函数都能适用
+-   hash table没有读入语法和输入形式，这对于调试和使用都带来很多不便
+
+在association list中关键字放在元素的car部分，与它对应的数据放在这个元素的cdr部分。根据比较方法不同，有assq和assoc两个函数，他们分别对应查找使用eq和equal两种方法。例如：
+
+    (assoc "a" '(("a" 97) ("b" 98))) ;; => ("a" 97)
+    (assq 'a '((a . 97) (b . 98))) ;; => (a . 97)
+
+通常我们只需要查找对应的数据，所以一般来说都要用cdr来得到对应的数据：
+
+    (cdr (assoc "a" '(("a" 97) ("b" 98)))) ;; => (97)
+    (cdr (assq 'a '((a . 97) (b . 98)))) ;; => 97
+
+assoc-default可以一步完成这样的操作：
+
+    (assoc-default "a" '(("a" 97) ("b" 98))) ;; => (97)
+
+如果查找用的键值（key）对应的数据也可以作为一个键值的话，还可以用rassoc和rassq来根据数据查找键值：
+
+    (rassoc '(97) '(("a" 97) ("b" 98))) ;; => ("a" 97)
+    (rassq '97 '((a . 97) (b . 98))) ;; => (a . 97)
+
+-   更新key对应的值两种比较有效的方法
+
+    1.  删除老的key-value，添加新的key-value对
+        
+            ;; update value by delq and cons
+            (setq foo '(("a" . "hello elisp") ("b" . 98))) ;; => (("a" . "hello elisp") ("b" . 98))
+            (setq foo (cons '("a" . 97) (delq (assoc "a" foo) foo))) ;; => (("a" . 97) ("b" . 98))
+    2.  直接更新key对应的value值
+        
+            ;; update value by setcdr
+            (setq foo '(("a" . 97) ("b" . 98)))     ;; => (("a" . 97) ("b" . 98))
+            (if (setq bar (assoc "a" foo))
+                (setcdr bar "this is a")
+              (setq foo (cons '("a" . "this is a") foo))) ;; => "this is a"
+            foo                                           ;; => (("a" . "this is a") ("b" . 98))
+    
+    如果不对顺序有要求的话，推荐用后一种方法吧。这样代码简洁，而且让最近更新的元素放到列表前端，查找更快。
+
+
+# 函数参数
+
+    (REQUIRED-VARS...
+     [&optional OPTIONAL-VARS...]
+     [&rest REST-VAR])
+
+他的意思是说，你必须把提供的参数写在前面，可选的参数写在后面，最后一个符号表示剩余的所有参数(**是一个列表**)，python的函数参数也是同样的规则，不同的地方是最后的关键字参数是个map
+
+    (defun foo (var1 var2 &optional opt1 opt2 &rest rest)
+      (list var1 var2 opt1 opt2 rest))
+    
+    (foo 1 2)                               ;;=>(1 2 nil nil nil)
+    (foo 1 2 3)                             ;;=>(1 2 3 nil nil)
+    (foo 1 2 3 4 5 6)                       ;;=>(1 2 3 4 (5 6))
+
+从上面的例子可以看出，当可选参数没有提供时候，对应的可选参数为nil。同样调用函数没有提供剩余参数时，其值也为nil，但是一旦提供了剩余参数，则所有的剩余参数是以列表的形式放在对应的变量里的。
+
+
+# autoload
+
+配置 X 并不要求加载 X，Emacs 在加载配置本身上的时间常常可以忽略不计。比如你可以在 Org-mode 没有加载时就配置它，Emacs 已经尽量这么做了：
+
+    ;; Emacs autoload 了 org-store-link，即使 org 没有加载，你也能使用它
+    (global-set-key (kbd "C-c l") #'org-store-link)
+
+    ;; setq 有特效，无论 org 什么时候加载，下面设置均有效
+    (setq org-agenda-files '("~/Sync/org/"))
+    
+    ;; add-hook 有特效，org-mode-hook 没定义也可以用；
+    ;; org-bullets-mode 已经被 package.el 自动 autoload
+    (add-hook 'org-mode-hook #'org-bullets-mode)
+
+但是你试图调用 Org-mode 中的某些函数的话，比如
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (shell      . t)
+       (ruby       . t)))
+
+它会迫使 Emacs 启动时就加载 Org-mode，这会严重拖累 Emacs 启动速度，而且也没必要，你完全可以等到你打开 .org 文件时，再执行这段配置
+
+    (with-eval-after-load 'org
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((emacs-lisp . t)
+         (shell      . t)
+         (ruby       . t))))
+
+同样你也可以把上面的 setq 和 add-hook 放到 with-eval-after-load 里面来。
+
+(emacs) Lisp Libraries 中关于 Autoload 的一点说明：
+
+> Some commands are “autoloaded”; when you run them, Emacs
+> automatically loads the associated library first.  For instance, the
+> ‘M-x compile’ command (\*note Compilation::) is autoloaded; if you call
+> it, Emacs automatically loads the ‘compile’ library first.  In contrast,
+> the command ‘M-x recompile’ is not autoloaded, so it is unavailable
+> until you load the ‘compile’ library.
 
