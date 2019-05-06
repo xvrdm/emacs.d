@@ -454,7 +454,8 @@
                             (interactive)
                             (unless (featurep 'org) (require 'org))
                             (counsel-org-agenda-headlines))
-                    "oc" 'counsel-org-capture
+                    ;; "oc" 'counsel-org-capture
+                    "oc" 'org-capture
                     ;; "om" 'toggle-org-or-message-mode
                     "pf" 'projectile-find-file-dwim
                     "pg" 'projectile-grep
