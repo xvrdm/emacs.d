@@ -2,6 +2,41 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
+(defun zilongshanren/display-mode-indent-width ()
+    (let ((mode-indent-level
+           (catch 'break
+             (dolist (test spacemacs--indent-variable-alist)
+               (let ((mode (car test))
+                     (val (cdr test)))
+                 (when (or (and (symbolp mode) (derived-mode-p mode))
+                           (and (listp mode) (apply 'derived-mode-p mode))
+                           (eq 't mode))
+                   (when (not (listp val))
+                     (setq val (list val)))
+                   (dolist (v val)
+                     (cond
+                      ((integerp v) (throw 'break v))
+                      ((and (symbolp v) (boundp v))
+                       (throw 'break (symbol-value v))))))))
+             (throw 'break (default-value 'evil-shift-width)))))
+      (concat "TS:" (int-to-string (or mode-indent-level 0)))))
+
+(defun zilong/modeline--evil-substitute ()
+  "Show number of matches for evil-ex substitutions and highlights in real time."
+  (when (and (bound-and-true-p evil-local-mode)
+             (or (assq 'evil-ex-substitute evil-ex-active-highlights-alist)
+                 (assq 'evil-ex-global-match evil-ex-active-highlights-alist)
+                 (assq 'evil-ex-buffer-match evil-ex-active-highlights-alist)))
+  (propertize
+   (let ((range (if evil-ex-range
+                    (cons (car evil-ex-range) (cadr evil-ex-range))
+                  (cons (line-beginning-position) (line-end-position))))
+         (pattern (car-safe (evil-delimited-arguments evil-ex-argument 2))))
+     (if pattern
+         (format " %s matches " (how-many pattern (car range) (cdr range)))
+       " - "))
+   'face 'font-lock-preprocessor-face)))
+
 (defun mode-line-fill (face reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
   (unless reserve (setq reserve 20))
@@ -58,6 +93,7 @@
    ":"
    (propertize "%02c" 'face 'font-lock-type-face)
    ")"))
+
 (setq encoding-mode-line
   (quote (:eval (propertize 
          (concat (pcase (coding-system-eol-type buffer-file-coding-system)
@@ -73,11 +109,38 @@
 (setq-default mode-line-format
       (list
        " %1"
-       major-mode-mode-line
+       '(:eval (when (bound-and-true-p winum-mode) (propertize
+                                                    (window-number-mode-line)
+                                                    'face
+                                                    'font-lock-type-face)))
+
+       " "
+       '(:eval (zilong/modeline--evil-substitute))
        " %1"
-       buffer-name-mode-line
+       major-mode-mode-line
+       ;; " %1"
+       ;; buffer-name-mode-line
+       "%1 "
+       ;; the buffer name; the file name as a tool tip
+       '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+                           'help-echo (buffer-file-name)))
+       ;; relative position, size of file
+       "["
+       (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
+       "/"
+       (propertize "%I" 'face 'font-lock-constant-face) ;; size
+       "] "
+       " "
+       ;; git info
+       '(:eval (when (> (window-width) 90)
+                 `(vc-mode vc-mode)))
        " %1"
        file-status-mode-line
+       "%1 "
+       ;; evil state
+       '(:eval evil-mode-line-tag)
+       ;; " "
+       ;; '(:eval (zilongshanren/display-mode-indent-width))
        " %1"
        projectile-mode-line
        " %1"
@@ -90,4 +153,4 @@
        time-mode-line
        ))
 
-(provide 'init-modeline2)
+(provide 'init-modeline)

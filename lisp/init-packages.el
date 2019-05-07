@@ -621,12 +621,12 @@
   )
 
 (use-package init-modeline
-  :disabled
   :load-path "lisp"
   :unless window-system
   )
 
 (use-package init-modeline-chenbin
+  :disabled
   :load-path "lisp"
   :unless window-system
   )
@@ -647,8 +647,10 @@
 (use-package winum
   ;; Navigate windows and frames using numbers.
   :ensure t
-  :if (display-graphic-p)
+  :init
+  ;; :if (display-graphic-p)
   :config
+  (setq winum-auto-setup-mode-line nil)
   (winum-mode)
   )
 
@@ -912,7 +914,7 @@
   )
 
 (use-package diff-hl
-  ;; :disabled
+  :disabled
   :ensure t
   :if (not (display-graphic-p))
   :config
