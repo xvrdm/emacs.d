@@ -116,8 +116,6 @@
 
        " "
        '(:eval (zilong/modeline--evil-substitute))
-       " %1"
-       major-mode-mode-line
        ;; " %1"
        ;; buffer-name-mode-line
        "%1 "
@@ -130,10 +128,18 @@
        "/"
        (propertize "%I" 'face 'font-lock-constant-face) ;; size
        "] "
+
        " "
        ;; git info
        '(:eval (when (> (window-width) 90)
                  `(vc-mode vc-mode)))
+
+       " %1"
+       major-mode-mode-line
+       ;; ;; minor modes
+       ;; '(:eval (when (> (window-width) 90)
+       ;;           minor-mode-alist))
+
        " %1"
        file-status-mode-line
        "%1 "
@@ -151,6 +157,7 @@
        encoding-mode-line
        " "
        time-mode-line
+       ;; mode-line-end-spaces
        ))
 
 (provide 'init-modeline)
