@@ -12,14 +12,12 @@
                   (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
       (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
   )
+(my-gtags-init)
 
 ;; ggtags
 (use-package ggtags
-  :disabled
   :defer
   :ensure t
-  :init
-  (my-gtags-init)
   :delight ggtags-mode
   :config
   (setq ggtags-highlight-tag nil)
@@ -38,8 +36,6 @@
 (use-package counsel-gtags
   :ensure t
   :defer
-  :init
-  (my-gtags-init)
   :config
   )
 
