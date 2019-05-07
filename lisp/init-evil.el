@@ -379,6 +379,7 @@
                     ;; "bm" 'bookmark-set
                     ;; "bj" 'bookmark-jump
                     "bm" 'counsel-bookmark
+                    "be" 'edit-bookmarks
                     ;; "gs" (lambda ()
                            ;; (interactive)
                            ;; (let* ((ffip-diff-backends
