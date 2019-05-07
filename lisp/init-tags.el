@@ -16,8 +16,9 @@
 
 ;; ggtags
 (use-package ggtags
-  :defer
   :ensure t
+  :hook
+  (prog-mode . ggtags-mode)
   :delight ggtags-mode
   :config
   (setq ggtags-highlight-tag nil)
@@ -29,17 +30,17 @@
   ;;           (lambda()
   ;;             (when (derived-mode-p 'python-mode)
   ;;               (ggtags-mode 1))))
-  (ggtags-mode 1)
+  ;; (ggtags-mode 1)
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
 
 (use-package counsel-gtags
   :ensure t
-  :defer
   :config
   )
 
 (use-package counsel-etags
+  :disabled
   :ensure t
   :defer
   :config
@@ -49,10 +50,6 @@
        (add-to-list 'counsel-etags-ignore-directories "build_clang")
        (add-to-list 'counsel-etags-ignore-directories "debian")
        ;; counsel-etags-ignore-filenames supports wildcast
-       (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "GPATH")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "GTAGS")
-       ;; (add-to-list 'counsel-etags-ignore-filenames "GRTAGS")
        (add-to-list 'counsel-etags-ignore-filenames "*.log")
        (add-to-list 'counsel-etags-ignore-filenames "*.html")
        (add-to-list 'counsel-etags-ignore-filenames "*.tag")

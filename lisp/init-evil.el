@@ -158,8 +158,8 @@
                     "jd" 'xref-find-definitions
                     "jr" 'xref-find-references
                     ;; "jb" 'dumb-jump-back
-                    ;; "dj" 'dired-jump ;; open the dired from current file
-                    "dj" 'counsel-dired
+                    "dj" 'dired-jump ;; open the dired from current file
+                    ;; "dj" 'counsel-dired
                     "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
                     "hr" 'counsel-etags-recent-tag
                     "hf" 'counsel-etags-find-tag
