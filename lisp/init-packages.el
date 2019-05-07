@@ -610,6 +610,7 @@
 (set-cursor-color "green")
 
 (use-package telephone-line
+  :disabled
   :unless window-system
   :ensure t
   :delight
