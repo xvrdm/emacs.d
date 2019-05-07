@@ -50,11 +50,12 @@
        (add-to-list 'counsel-etags-ignore-directories "debian")
        ;; counsel-etags-ignore-filenames supports wildcast
        (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-       (add-to-list 'counsel-etags-ignore-filenames "GPATH")
-       (add-to-list 'counsel-etags-ignore-filenames "GTAGS")
-       (add-to-list 'counsel-etags-ignore-filenames "GRTAGS")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "GPATH")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "GTAGS")
+       ;; (add-to-list 'counsel-etags-ignore-filenames "GRTAGS")
        (add-to-list 'counsel-etags-ignore-filenames "*.log")
        (add-to-list 'counsel-etags-ignore-filenames "*.html")
+       (add-to-list 'counsel-etags-ignore-filenames "*.tag")
        (add-to-list 'counsel-etags-ignore-filenames "*.json")))
 
   ;; auto update tags

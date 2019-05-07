@@ -176,6 +176,7 @@
         ivy-use-virtual-buffers t)
   (ivy-mode +1) 
   (setq enable-recursive-minibuffers t)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 
 ;; smartparens setting
