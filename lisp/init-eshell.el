@@ -106,8 +106,7 @@
   :commands eshell
   :init
   (progn
-    (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
-    )
+    (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias")))
   :hook
   (eshell-mode . company-mode)
   :config
@@ -136,7 +135,6 @@
 
 (use-package esh-autosuggest
   :ensure t
-  :after eshell
   :hook
   ;; eshell-banner-message "What would you like to do?\n\n"
   (eshell-mode . esh-autosuggest-mode)
@@ -147,8 +145,8 @@
   )
 
 (use-package eshell-prompt-extras
-  :ensure t
   :after eshell
+  :ensure t
   :init
   (progn
     (setq eshell-highlight-prompt nil

@@ -1,5 +1,6 @@
 ;; org-mode
 (use-package evil-org
+  :defer
   :ensure t)
 ;; reference from http://ju.outofmemory.cn/entry/348743
 (with-eval-after-load 'org

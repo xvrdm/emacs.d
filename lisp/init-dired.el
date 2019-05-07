@@ -5,11 +5,13 @@
 
 ;; dired-imenu
 (use-package dired-imenu
+  :defer
   :ensure t
   :delight
   )
 
 (use-package dired-rainbow
+  :defer
   :ensure t
   :commands dired-rainbow-define dired-rainbow-define-chmod
   :init
@@ -47,6 +49,7 @@
   )
 
 (use-package dired-k
+  :defer
   :ensure t
   :config
   ;; always execute dired-k when dired buffer is opened
@@ -61,6 +64,7 @@
   )
 
 (use-package dired-single
+  :defer
   :ensure t
   :config
   ;; https://github.com/crocket/dired-single

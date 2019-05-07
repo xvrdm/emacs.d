@@ -28,6 +28,7 @@ org/*.html
 GPATH
 GTAGS
 GRTAGS
+TAGS
 abbrev_defs
 el-get
 .youdao

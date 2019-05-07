@@ -142,10 +142,10 @@
                     "pb" 'evil-paste-before
                     ;; "hv" 'describe-variable
                     "ge" 'goto-line
-                    ;; "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-                    ;; "gs" 'counsel-gtags-find-symbol
-                    ;; "gr" 'counsel-gtags-find-reference
-                    ;; "gu" 'counsel-gtags-update-tags
+                    "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+                    "gs" 'counsel-gtags-find-symbol
+                    "gr" 'counsel-gtags-find-reference
+                    "gu" 'counsel-gtags-update-tags
                     "ud" 'undo-tree-visualize
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
@@ -158,10 +158,13 @@
                     "jd" 'xref-find-definitions
                     "jr" 'xref-find-references
                     ;; "jb" 'dumb-jump-back
-                    "dj" 'dired-jump ;; open the dired from current file
-                    ;; "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
-                    ;; "rt" 'counsel-etags-recent-tag
-                    ;; "ft" 'counsel-etags-find-tag
+                    ;; "dj" 'dired-jump ;; open the dired from current file
+                    "dj" 'counsel-dired
+                    "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
+                    "hr" 'counsel-etags-recent-tag
+                    "hf" 'counsel-etags-find-tag
+                    "hg" 'counsel-etags-grep
+
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
@@ -256,7 +259,7 @@
                     ;; "gr" 'git-gutter-reset-to-default
                     ;; "ps" 'profiler-start
                     ;; "pr" 'profiler-report
-                    "ud" 'my-gud-gdb
+                    ;; "ud" 'my-gud-gdb
                     ;; "uk" 'gud-kill-yes
                     ;; "ur" 'gud-remove
                     ;; "ub" 'gud-break
@@ -373,8 +376,9 @@
                     ;; "tua" 'artbollocks-mode
                     ;; "cby" 'cb-switch-between-controller-and-view
                     ;; "cbu" 'cb-get-url-from-controller
-                    "bm" 'bookmark-set
-                    "bj" 'bookmark-jump
+                    ;; "bm" 'bookmark-set
+                    ;; "bj" 'bookmark-jump
+                    "bm" 'counsel-bookmark
                     ;; "gs" (lambda ()
                            ;; (interactive)
                            ;; (let* ((ffip-diff-backends

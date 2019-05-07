@@ -266,10 +266,12 @@
 
 ;; org-pomodoro setting
 (use-package org-pomodoro
+  :defer
   :ensure t
   :delight org-pomodoro)
 
 (use-package org2jekyll
+  :defer
   :ensure t
   :config
   (custom-set-variables '(org2jekyll-blog-author "feng")
@@ -360,6 +362,7 @@
 
 ;; yasnippet setting
 (use-package yasnippet
+  :disabled
   :ensure t
   :delight yas-global-mode
   :delight yas-minor-mode
@@ -469,6 +472,7 @@
   )
 
 (use-package lispy
+  :defer
   :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
@@ -480,17 +484,19 @@
   )
 
 (use-package lispyville
+  :defer
   :ensure t
   :config
   (add-hook 'lispy-mode-hook #'lispyville-mode)
   )
 
 ;; linum-relative
-;; (use-package linum-relative
-;;   :delight linum-relative-mode
-;;   :config
-;;   ;; (linum-relative-toggle)
-;;   )
+(use-package linum-relative
+  :disabled
+  :delight linum-relative-mode
+  :config
+  ;; (linum-relative-toggle)
+  )
 
 (use-package rainbow-delimiters
   :ensure t
@@ -560,16 +566,20 @@
   :delight)
 
 (use-package org
+  :defer
   :ensure t
   )
 (use-package htmlize
+  :defer
   :ensure t
   )
 
 (use-package ob-go
+  :defer
   :ensure t
   )
 (use-package ob-rust
+  :defer
   :ensure t
   )
 
@@ -581,6 +591,7 @@
   )
 
 (use-package powerline
+  :disabled
   :ensure t
   :delight
   :config
@@ -617,6 +628,7 @@
   (spaceline-emacs-theme))
 
 (use-package winum
+  ;; Navigate windows and frames using numbers.
   :ensure t
   :if (display-graphic-p)
   :config
@@ -652,38 +664,6 @@
 (use-package browse-kill-ring
   :ensure t
   :delight browse-kill-ring-mode
-  )
-
-(defun my-gtags-init()
-  (when (executable-find "pygmentize")
-    (setenv "GTAGSLABEL" "pygments")
-    (if (eq system-type 'windows-nt)
-        ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
-        (setenv "GTAGSCONF"
-                (let ((str (executable-find "gtags")))
-                  (string-match "global.*" str)
-                  (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
-      (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
-  )
-
-;; ggtags
-(use-package ggtags
-  :ensure t
-  :init
-  (my-gtags-init)
-  :delight ggtags-mode
-  :config
-  (setq ggtags-highlight-tag nil)
-  ;; (add-hook 'c-mode-common-hook
-  ;;           (lambda()
-  ;;             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-  ;;               (ggtags-mode 1))))
-  ;; (add-hook 'python-hook
-  ;;           (lambda()
-  ;;             (when (derived-mode-p 'python-mode)
-  ;;               (ggtags-mode 1))))
-  (ggtags-mode 1)
-  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
   )
 
 (use-package symon
@@ -742,6 +722,7 @@
   )
 
 (use-package evil-snipe
+  :defer
   :ensure t
   :delight evil-snipe-mode
   :delight evil-snipe-local-mode
@@ -765,6 +746,7 @@
 
 ;; evil-smartparens
 (use-package evil-smartparens
+  :defer
   :ensure t
   :delight evil-smartparens-mode
   :config
@@ -781,6 +763,7 @@
 
 ;; evil-indent-plus
 (use-package evil-indent-plus
+  :disabled
   :ensure t
   :delight
   :config
@@ -806,13 +789,13 @@
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   (define-globalized-minor-mode global-highlight-parentheses-mode
     highlight-parentheses-mode
-    (lambda()
-      (highlight-parentheses-mode t)))
+    (lambda () (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)
   )
 
 ;; direx
 (use-package direx
+  :defer
   :ensure t
   :config
   )
@@ -820,6 +803,7 @@
 
 ;; imenu-list
 (use-package imenu-list
+  :defer
   :ensure t
   :delight
   :config
@@ -862,6 +846,7 @@
 
 (use-package git-gutter
   ;; :disabled        
+  :defer
   :ensure t
   :if (display-graphic-p)
   :config
@@ -911,6 +896,7 @@
 
 (use-package diff-hl
   ;; :disabled
+  :defer
   :ensure t
   :if (not (display-graphic-p))
   :config
@@ -927,6 +913,7 @@
   )
 
 (use-package company-c-headers
+  :defer
   :ensure t
   :config
   (add-to-list 'company-backends 'company-c-headers)
@@ -939,6 +926,7 @@
   )
 
 (use-package company-jedi
+  :defer
   :ensure t
   :config
   (defun my/python-mode-hook ()
@@ -954,6 +942,7 @@
   )
 
 (use-package volatile-highlights
+  :defer
   :ensure t
   :config
   (volatile-highlights-mode t)
