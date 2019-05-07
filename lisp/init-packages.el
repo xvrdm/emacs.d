@@ -621,6 +621,12 @@
   )
 
 (use-package init-modeline
+  :disabled
+  :load-path "lisp"
+  :unless window-system
+  )
+
+(use-package init-modeline-chenbin
   :load-path "lisp"
   :unless window-system
   )

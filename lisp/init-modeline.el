@@ -4,8 +4,7 @@
 ;;-------------------------------------------------------------
 (defun mode-line-fill (face reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
-  (unless reserve
-    (setq reserve 20))
+  (unless reserve (setq reserve 20))
   (when (and window-system (eq 'right (get-scroll-bar-mode)))
     (setq reserve (- reserve 3)))
   (propertize " "
@@ -54,8 +53,7 @@
                      "]")
                          'face face)))))))
 (setq line-column-mode-line
-  (concat
-   "("
+  (concat "("
    (propertize "%02l" 'face 'font-lock-type-face)
    ":"
    (propertize "%02c" 'face 'font-lock-type-face)
@@ -71,8 +69,7 @@
                "UTF-8"
                  (upcase (symbol-name (plist-get sys :name)))))
              )))))
-(setq time-mode-line
-      (quote (:eval (propertize (format-time-string "%H:%M")))))
+(setq time-mode-line (quote (:eval (propertize (format-time-string "%H:%M")))))
 (setq-default mode-line-format
       (list
        " %1"
@@ -93,4 +90,4 @@
        time-mode-line
        ))
 
-(provide 'init-modeline)
+(provide 'init-modeline2)
