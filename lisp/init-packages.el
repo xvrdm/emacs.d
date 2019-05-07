@@ -620,6 +620,7 @@
 
 ;; spaceline
 (use-package spaceline
+  :disabled
   :ensure t
   :if window-system
   :config
