@@ -464,8 +464,12 @@
                             (interactive)
                             (unless (featurep 'org) (require 'org))
                             (counsel-org-agenda-headlines))
-                    ;; "oc" 'counsel-org-capture
-                    "oc" 'org-capture
+                    "oc" (lambda ()
+                           (interactive)
+                           (if (> emacs-major-version 25)
+                               (counsel-org-capture)
+                             (org-capture)))
+                    ;; "oc" 'org-capture
                     ;; "om" 'toggle-org-or-message-mode
                     "pf" 'projectile-find-file-dwim
                     "pg" 'projectile-grep
