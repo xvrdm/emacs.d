@@ -238,6 +238,7 @@
   )
 
 (use-package powershell
+  :defer
   :ensure t
   :if (eq system-type 'windows-nt)
   )
@@ -262,6 +263,7 @@
   )
 
 (use-package fzf
+  :defer
   :ensure t
   )
 
@@ -272,7 +274,6 @@
   :delight org-pomodoro)
 
 (use-package org2jekyll
-  :defer
   :ensure t
   :config
   (custom-set-variables '(org2jekyll-blog-author "feng")
@@ -897,7 +898,6 @@
 
 (use-package diff-hl
   ;; :disabled
-  :defer
   :ensure t
   :if (not (display-graphic-p))
   :config
