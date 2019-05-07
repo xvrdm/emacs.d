@@ -474,10 +474,11 @@
   )
 
 (use-package lispy
-  :defer
   :ensure t
+  :hook
+  (emacs-lisp-mode . lispy-mode)
   :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
   ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
   ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
   ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
@@ -486,10 +487,11 @@
   )
 
 (use-package lispyville
-  :defer
   :ensure t
+  :hook
+  (lispy-mode . lispyville-mode)
   :config
-  (add-hook 'lispy-mode-hook #'lispyville-mode)
+  ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
   )
 
 ;; linum-relative
@@ -618,9 +620,14 @@
   (telephone-line-mode t)
   )
 
+(use-package init-modeline
+  :load-path "lisp"
+  :unless window-system
+  )
+
 ;; spaceline
 (use-package spaceline
-  :disabled
+  ;; :disabled
   :ensure t
   :if window-system
   :config

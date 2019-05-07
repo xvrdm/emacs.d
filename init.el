@@ -13,7 +13,6 @@
 
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'init-modeline)
 (require 'init-packages)
 (require 'init-minefunc)
 (require 'init-ui)
