@@ -193,14 +193,14 @@
                                  (when (buffer-file-name)
                                    (pcase (vc-state (buffer-file-name))
                                      (`up-to-date " ")
-                                     (`edited " Mod")
-                                     (`added " Add")
-                                     (`unregistered " ??")
-                                     (`removed " Del")
-                                     (`needs-merge " Con")
-                                     (`needs-update " Upd")
-                                     (`ignored " Ign")
-                                     (_ " Unk")))))
+                                     (`edited "@Mod")
+                                     (`added "@Add")
+                                     (`unregistered "@??")
+                                     (`removed "@Del")
+                                     (`needs-merge "@Con")
+                                     (`needs-update "@Upd")
+                                     (`ignored "@Ign")
+                                     (_ "@Unk")))))
                  ))
 
 
@@ -217,7 +217,6 @@
        '(:eval evil-mode-line-tag)
        ;; " "
        ;; '(:eval (zilongshanren/display-mode-indent-width))
-       " %1"
        projectile-mode-line
        " %1"
        line-column-mode-line
