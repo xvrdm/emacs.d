@@ -2,6 +2,29 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
+;; reference from spaceline
+(defun spaceline--column-number-at-pos (pos)
+  "Column number at POS.  Analog to `line-number-at-pos'."
+  (save-excursion (goto-char pos) (current-column)))
+
+(setq my-selection-info 
+      '(:eval (when (or mark-active
+            (and (bound-and-true-p evil-local-mode)
+                 (eq 'visual evil-state)))
+    (let* ((lines (count-lines (region-beginning) (min (1+ (region-end)) (point-max))))
+           (chars (- (1+ (region-end)) (region-beginning)))
+           (cols (1+ (abs (- (spaceline--column-number-at-pos (region-end))
+                             (spaceline--column-number-at-pos (region-beginning))))))
+           (evil (and (bound-and-true-p evil-state) (eq 'visual evil-state)))
+           (rect (or (bound-and-true-p rectangle-mark-mode)
+                     (and evil (eq 'block evil-visual-selection))))
+           (multi-line (or (> lines 1) (and evil (eq 'line evil-visual-selection)))))
+      (cond
+       (rect (propertize (format "%d×%d block" lines (if evil cols (1- cols)))
+                                  'face 'font-lock-variable-name-face))
+       (multi-line (propertize (format "%d lines" lines) 'face 'font-lock-variable-name-face))
+       (t (propertize (format "%d chars" (if evil chars (1- chars))) 'face 'font-lock-variable-name-face)))))))
+
 (setq my-flycheck-mode-line
       '(:eval
         (when
@@ -174,7 +197,7 @@
 
        " %1"
        major-mode-mode-line
-       ;; ;; minor modes
+
        ;; '(:eval (when (> (window-width) 90)
        ;;           minor-mode-alist))
 
@@ -189,6 +212,8 @@
        projectile-mode-line
        " %1"
        line-column-mode-line
+       " "
+       my-selection-info
        ;; " "
        ;; flycheck-status-mode-line
        "%1 "

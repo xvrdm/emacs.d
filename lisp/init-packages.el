@@ -496,6 +496,7 @@
 
 ;; linum-relative
 (use-package linum-relative
+  ;; emacs26 builtin
   :disabled
   :delight linum-relative-mode
   :config
@@ -718,10 +719,23 @@
 
 ;; highlight-numbers
 (use-package highlight-numbers
+  :disabled
   :ensure t
   :delight highlight-numbers-mode
   :config
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+  ;; (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+  (let ((hook-list '(sh-mode-hook
+                     cmake-mode-hook
+                     emacs-lisp-mode-hook
+                     matlab-mode-hook
+                     python-mode-hook
+                     c-mode-common-hook
+                     makefile-gmake-mode-hook
+                     ;;  Gnome
+                     makefile-bsdmake-mode-hook ; OS X
+                     ess-mode-hook)))  
+    (dolist (hook-element hook-list)
+      (add-hook hook-element 'highlight-numbers-mode)))
   )
 
 ;; highlight-quoted
