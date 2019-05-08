@@ -371,8 +371,6 @@
   :config
   (yas-global-mode 1)
   )
-;; (yas-reload-all)
-;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 
 ;; youdao-dictionary
 (use-package youdao-dictionary
@@ -670,10 +668,10 @@
   )
 
 ;; multifiles
-(use-package multifiles
-  :ensure t
-  :delight multifiles-minor-mode
-  )
+;; (use-package multifiles
+;;   :ensure t
+;;   :delight multifiles-minor-mode
+;;   )
 
 ;; fix-word
 (use-package fix-word
@@ -687,8 +685,12 @@
   )
 
 (use-package symon
+  ;; tiny graphical system monitor 
+  ;; https://github.com/zk-phi/symon
   :ensure t
   :delight symon-mode
+  :config
+  (symon-mode)
   )
 
 (use-package markdown-mode
@@ -705,10 +707,11 @@
   :delight
   )
 
-;; hydra
-;; (use-package hydra
-;;   :delight
-;;   )
+(use-package hydra
+  :disabled
+  :ensure t
+  :config
+  )
 
 (use-package rainbow-identifiers
   :ensure t
@@ -721,20 +724,9 @@
 (use-package highlight-numbers
   :ensure t
   :delight highlight-numbers-mode
+  :unless window-system
   :config
-  ;; (add-hook 'prog-mode-hook 'highlight-numbers-mode)
-  (let ((hook-list '(sh-mode-hook
-                     cmake-mode-hook
-                     emacs-lisp-mode-hook
-                     matlab-mode-hook
-                     python-mode-hook
-                     c-mode-common-hook
-                     makefile-gmake-mode-hook
-                     ;;  Gnome
-                     makefile-bsdmake-mode-hook ; OS X
-                     ess-mode-hook)))  
-    (dolist (hook-element hook-list)
-      (add-hook hook-element 'highlight-numbers-mode)))
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
   )
 
 ;; highlight-quoted
@@ -840,9 +832,10 @@
   :config
   )
 
-;; rich-minority
 (use-package rich-minority
+  ;; Clean-up and Beautify the list of minor-modes.
   :ensure t
+  :unless window-system
   :delight rich-minority-mode
   :config
   (rich-minority-mode 1)
@@ -855,6 +848,7 @@
 
 ;; smex
 (use-package smex
+  :disabled
   :ensure t
   :defer
   :delight
@@ -868,12 +862,13 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
-(use-package fringe-helper
-  :ensure t
-  :init
-  :delight
-  :config
-  )
+;; (use-package fringe-helper
+;;   ;; helper functions for fringe bitmaps
+;;   :ensure t
+;;   :init
+;;   :delight
+;;   :config
+;;   )
 
 (use-package git-gutter
   ;; :disabled        
