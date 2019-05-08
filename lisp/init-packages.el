@@ -1,6 +1,6 @@
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
+  (if (< emacs-major-version 27) (package-initialize))
   ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
   (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
