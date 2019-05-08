@@ -719,7 +719,6 @@
 
 ;; highlight-numbers
 (use-package highlight-numbers
-  :disabled
   :ensure t
   :delight highlight-numbers-mode
   :config
@@ -832,7 +831,6 @@
   :ensure t
   :config
   )
-
 
 ;; imenu-list
 (use-package imenu-list
