@@ -865,9 +865,12 @@
 
 (use-package git-gutter
   ;; :disabled        
-  :defer
+  ;; :defer
+  ;; :bind
+  ;; (("SPC c n" . git-gutter:next-hunk)
+  ;;  ("SPC c p" . git-gutter:previous-hunk)) 
   :ensure t
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
   (global-git-gutter-mode t)
@@ -882,8 +885,11 @@
   (custom-set-variables '(git-gutter:hide-gutter t))
   ;; If you set git-gutter :update-interval seconds larger than 0,
   ;; git-gutter updates diff information in real-time by idle timer.
-  (custom-set-variables '(git-gutter :update-interval 2))
-  (custom-set-variables '(git-gutter :visual-line t))
+  (custom-set-variables '(git-gutter:update-interval 2))
+  (custom-set-variables '(git-gutter:visual-line t))
+
+  ;; console not display, because git-gutter has bug in emacs26 no window
+  (unless window-system (custom-set-variables '(git-gutter:display-p nil)))
   ;; diff information is updated at hooks in git-gutter:update-hooks.
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   ;; diff information is updated after command in git-gutter:update-commands executed.
