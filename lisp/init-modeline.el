@@ -2,18 +2,77 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
+;; reference from file "font-lock.el.gz" 
+(defface font-lock-evil-normal-face
+  '((((class grayscale) (background light)) :foreground "DimGray" :slant italic)
+    (((class grayscale) (background dark))  :foreground "LightGray" :slant italic)
+    (((class color) (min-colors 88) (background light)) :foreground "VioletRed4")
+    (((class color) (min-colors 88) (background dark))  :foreground "LightSalmon")
+    (((class color) (min-colors 16) (background light)) :foreground "RosyBrown")
+    (((class color) (min-colors 16) (background dark))  :foreground "LightSalmon")
+    (((class color) (min-colors 8)) :foreground "green")
+    (t :slant italic))
+  "Font Lock mode face used to highlight strings."
+  :group 'font-lock-evil-faces)
+(defface font-lock-evil-insert-face
+  '((((class color) (min-colors 88) (background light)) :foreground "Blue1")
+    (((class color) (min-colors 88) (background dark))  :foreground "LightSkyBlue")
+    (((class color) (min-colors 16) (background light)) :foreground "Blue")
+    (((class color) (min-colors 16) (background dark))  :foreground "LightSkyBlue")
+    (((class color) (min-colors 8)) :foreground "blue" :weight bold)
+    (t :inverse-video t :weight bold))
+  "Font Lock mode face used to highlight function names."
+  :group 'font-lock-evil-faces)
+(defface font-lock-evil-visual-face
+  '((((class grayscale) (background light)) :foreground "Gray90" :weight bold)
+    (((class grayscale) (background dark))  :foreground "DimGray" :weight bold)
+    (((class color) (min-colors 88) (background light)) :foreground "ForestGreen")
+    (((class color) (min-colors 88) (background dark))  :foreground "PaleGreen")
+    (((class color) (min-colors 16) (background light)) :foreground "ForestGreen")
+    (((class color) (min-colors 16) (background dark))  :foreground "PaleGreen")
+    (((class color) (min-colors 8)) :foreground "green")
+    (t :weight bold :underline t))
+  "Font Lock mode face used to highlight type and classes."
+  :group 'font-lock-evil-faces)
+(defface font-lock-emacs-face
+  '((((class grayscale) (background light))
+     :foreground "LightGray" :weight bold :underline t)
+    (((class grayscale) (background dark))
+     :foreground "Gray50" :weight bold :underline t)
+    (((class color) (min-colors 88) (background light)) :foreground "dark cyan")
+    (((class color) (min-colors 88) (background dark))  :foreground "Aquamarine")
+    (((class color) (min-colors 16) (background light)) :foreground "CadetBlue")
+    (((class color) (min-colors 16) (background dark))  :foreground "Aquamarine")
+    (((class color) (min-colors 8)) :foreground "magenta")
+    (t :weight bold :underline t))
+  "Font Lock mode face used to highlight constants and labels."
+  :group 'font-lock-evil-faces)
+
+(defun fwar34/evil-state ()
+  "Display evil state in differente color"
+  '(:eval
+    (when (bound-and-true-p evil-local-mode)
+      (cond
+       ((eq 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
+       ((eq 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
+       ((eq 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
+       ((eq 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
+       (t nil)
+       )))
+  )
+
 ;; reference from spaceline
 (setq window-number
       ;; "The current window number.
       ;; Requires either `winum-mode' or `window-numbering-mode' to be enabled."
       '(:eval (let* ((num (cond
-                   ((bound-and-true-p winum-mode)
-                    (winum-get-number))
-                   ((bound-and-true-p window-numbering-mode)
-                    (window-numbering-get-number))
-                   (t nil)))
-             (str (when num (int-to-string num))))
-        (when num (propertize str 'face 'font-lock-variable-name-face)))))
+                           ((bound-and-true-p winum-mode)
+                            (winum-get-number))
+                           ((bound-and-true-p window-numbering-mode)
+                            (window-numbering-get-number))
+                           (t nil)))
+                     (str (when num (int-to-string num))))
+                (when num (propertize str 'face 'font-lock-variable-name-face)))))
 
 (defun spaceline--column-number-at-pos (pos)
   "Column number at POS.  Analog to `line-number-at-pos'."
@@ -183,7 +242,15 @@
        "/"
        (propertize "%I" 'face 'font-lock-constant-face) ;; size
        "] "
-
+       ;; evil state
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-constant-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-preprocessor-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-warning-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-negation-char-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-function-name-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
+       ;; '(:eval (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
+       (fwar34/evil-state)
        " "
        ;; git info
        '(:eval (when (> (window-width) 90)
@@ -212,9 +279,6 @@
 
        " %1"
        file-status-mode-line
-       "%1 "
-       ;; evil state
-       '(:eval evil-mode-line-tag)
        ;; " "
        ;; '(:eval (zilongshanren/display-mode-indent-width))
        projectile-mode-line

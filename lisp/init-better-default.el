@@ -65,7 +65,8 @@
              (funcall fn)))))
 
 ;; 括号匹配高亮
-;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(set-cursor-color "red")
 
 ;; (if (not (equal 'windows-nt system-type))
 ;;     (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
