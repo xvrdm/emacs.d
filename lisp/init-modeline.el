@@ -185,4 +185,12 @@
        ;; mode-line-end-spaces
        ))
 
+;; (set-face-background 'modeline "#4466aa")
+;; (set-face-background 'modeline-inactive "#99aaff")
+;; (set-face-background 'fringe "#809088")
+
+;; Here 's how I get a box around the active mode-line :
+(custom-set-faces
+ '(mode-line ((t (:box (:line-width 2 :color "red"))))))
+
 (provide 'init-modeline)
