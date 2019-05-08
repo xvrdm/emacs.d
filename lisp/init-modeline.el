@@ -2,24 +2,47 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
+(setq my-flycheck-mode-line
+        '(:eval
+          (when
+              (and (bound-and-true-p flycheck-mode)
+                   (or flycheck-current-errors
+                       (eq 'running flycheck-last-status-change)))
+            (pcase flycheck-last-status-change
+              ((\` not-checked) nil)
+              ((\` no-checker) (propertize " -" 'face 'warning))
+              ((\` running) (propertize " ✷" 'face 'success))
+              ((\` errored) (propertize " !" 'face 'error))
+              ((\` finished)
+               (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+                      (no-errors (cdr (assq 'error error-counts)))
+                      (no-warnings (cdr (assq 'warning error-counts)))
+                      (face (cond (no-errors 'error)
+                                  (no-warnings 'warning)
+                                  (t 'success))))
+                 (propertize (format "[%s/%s]" (or no-errors 0) (or no-warnings 0))
+                             'face face)))
+              ((\` interrupted) " -")
+              ((\` suspicious) '(propertize " ?" 'face 'warning))))))
+
 (defun zilongshanren/display-mode-indent-width ()
-    (let ((mode-indent-level
-           (catch 'break
-             (dolist (test spacemacs--indent-variable-alist)
-               (let ((mode (car test))
-                     (val (cdr test)))
-                 (when (or (and (symbolp mode) (derived-mode-p mode))
-                           (and (listp mode) (apply 'derived-mode-p mode))
-                           (eq 't mode))
-                   (when (not (listp val))
-                     (setq val (list val)))
-                   (dolist (v val)
-                     (cond
-                      ((integerp v) (throw 'break v))
-                      ((and (symbolp v) (boundp v))
-                       (throw 'break (symbol-value v))))))))
-             (throw 'break (default-value 'evil-shift-width)))))
-      (concat "TS:" (int-to-string (or mode-indent-level 0)))))
+  (let ((mode-indent-level
+         (catch 'break
+           (dolist (test spacemacs--indent-variable-alist)
+             (let ((mode (car test))
+                   (val (cdr test)))
+               (when (or (and (symbolp mode) (derived-mode-p mode))
+                         (and (listp mode) (apply 'derived-mode-p mode))
+                         (eq 't mode))
+                 (when (not (listp val))
+                   (setq val (list val)))
+                 (dolist (v val)
+                   (cond
+                    ((integerp v) (throw 'break v))
+                    ((and (symbolp v) (boundp v))
+                     (throw 'break (symbol-value v))))))))
+           (throw 'break (default-value 'evil-shift-width)))))
+    (concat "TS:" (int-to-string (or mode-indent-level 0)))))
 
 (defun zilong/modeline--evil-substitute ()
   "Show number of matches for evil-ex substitutions and highlights in real time."
@@ -45,7 +68,7 @@
   (propertize " "
               'display `((space :align-to
                                 (- (+ right right-fringe right-margin) ,reserve)))
-              'face 'face))
+              'face face))
 (setq projectile-mode-line
       (quote (:eval (when (projectile-project-p)
                       (propertize (format " P[%s]" (projectile-project-name))
@@ -108,20 +131,20 @@
 (setq time-mode-line (quote (:eval (propertize (format-time-string "%H:%M")))))
 (setq-default mode-line-format
       (list
-       " %1"
-       '(:eval (when (bound-and-true-p winum-mode) (propertize
-                                                    (window-number-mode-line)
-                                                    'face
-                                                    'font-lock-type-face)))
+       ;; " %1"
+       ;; '(:eval (when (bound-and-true-p winum-mode) (propertize
+       ;;                                              (window-number-mode-line)
+       ;;                                              'face
+       ;;                                              'font-lock-type-face)))
 
        " "
        '(:eval (zilong/modeline--evil-substitute))
-       ;; " %1"
-       ;; buffer-name-mode-line
-       "%1 "
-       ;; the buffer name; the file name as a tool tip
-       '(:eval (propertize "%b " 'face 'font-lock-keyword-face
-                           'help-echo (buffer-file-name)))
+       " %1"
+       buffer-name-mode-line
+       ;; "%1 "
+       ;; ;; the buffer name; the file name as a tool tip
+       ;; '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+       ;;                     'help-echo (buffer-file-name)))
        ;; relative position, size of file
        "["
        (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
@@ -151,8 +174,10 @@
        projectile-mode-line
        " %1"
        line-column-mode-line
-       " "
-       flycheck-status-mode-line
+       ;; " "
+       ;; flycheck-status-mode-line
+       "%1 "
+       my-flycheck-mode-line
        (mode-line-fill 'mode-line 15)
        encoding-mode-line
        " "
