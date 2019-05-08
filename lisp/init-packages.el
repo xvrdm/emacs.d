@@ -541,6 +541,14 @@
   (evilem-default-keybindings "M-m")
   )
 
+(use-package ace-jump-mode
+  :ensure t
+  :config
+  (eval-after-load "ace-jump-mode"
+    '(ace-jump-mode-enable-mark-sync))
+  ;; (define-key evil-normal-state-map (kbd "M-m a") 'ace-jump-mode)
+  )
+
 (use-package evil-matchit
   :ensure t
   :delight evil-matchit-mode
@@ -684,6 +692,7 @@
 
 (use-package function-args
   ;; GNU Emacs package for showing an inline arguments hint for the C/C++ function at point
+  :disabled
   :ensure t
   :config
   (fa-config-default)

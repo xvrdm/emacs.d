@@ -55,7 +55,9 @@
       (cond
        ((eq 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
        ((eq 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
+       ((eq 'replace evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
        ((eq 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
+       ((eq 'operator evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
        ((eq 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
        (t nil)
        )))

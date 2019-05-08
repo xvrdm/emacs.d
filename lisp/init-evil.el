@@ -5,6 +5,60 @@
 ;; (evil-leader/set-key
 ;; (evil-leader/set-leader ";")
 
+;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
+;; (setq-default evil-search-module 'evil-search)
+
+;; highlight persistent
+;; https://stackoverflow.com/questions/25768036/emacs-evil-non-incremental-search-and-persistent-highlighting/34252236#34252236
+;; This will highlight all searches done with isearch or Evil search. 
+;; The highlight will remain until you make another one or 
+;; call highlight-remove-all. I've mapped it to leader SPC with:
+(defun highlight-remove-all ()
+  (interactive)
+  (hi-lock-mode -1)
+  (hi-lock-mode 1))
+(defun search-highlight-persist ()
+  (highlight-regexp (car-safe (if isearch-regexp
+                                  regexp-search-ring
+                                search-ring)) (facep 'hi-yellow)))
+(defadvice isearch-exit (after isearch-hl-persist activate)
+  (highlight-remove-all)
+  (search-highlight-persist))
+(defadvice evil-search-incrementally (after evil-search-hl-persist activate)
+  (highlight-remove-all)
+  (search-highlight-persist))
+
+;; esc quit
+;; http://wikemacs.org/index.php/Evil
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+;; (evil-set-initial-state 'git-commit-mode 'insert) ;; enter insert mode to edit a commit message
+;; (evil-set-initial-state 'dired-mode 'emacs) ;; enter insert mode to edit a commit message
+;; Here is a handy loop to define more at once
+;; (loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
+;;                               (nrepl-mode . insert)
+;;                               (pylookup-mode . emacs)
+;;                               (comint-mode . normal)
+;;                               (shell-mode . insert)
+;;                               (git-commit-mode . insert)
+;;                               (git-rebase-mode . emacs)
+;;                               (term-mode . emacs)
+;;                               (help-mode . emacs)
+;;                               (helm-grep-mode . emacs)
+;;                               (grep-mode . emacs)
+;;                               (bc-menu-mode . emacs)
+;;                               (magit-branch-manager-mode . emacs)
+;;                               (rdictcc-buffer-mode . emacs)
+;;                               (dired-mode . emacs)
+;;                               (wdired-mode . normal))
+;;       do (evil-set-initial-state mode state))
+
 ;; TAB and C-i is the same
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
 ;; (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
@@ -101,7 +155,8 @@
                     "5" 'winum-select-window-5
                     "6" 'winum-select-window-6
                     "7" 'winum-select-window-7
-                    "xx" 'delete-window
+                    "dw" 'delete-window
+                    "xx" 'highlight-remove-all
                     ;; "x1" 'delete-other-windows
                     "x2" 'split-window-below
                     "x3" 'split-window-right
@@ -480,6 +535,7 @@
                     "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
+                    "ae" 'ace-jump-mode
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin
