@@ -3,6 +3,18 @@
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
 ;; reference from spaceline
+(setq window-number
+      ;; "The current window number.
+      ;; Requires either `winum-mode' or `window-numbering-mode' to be enabled."
+      '(:eval (let* ((num (cond
+                   ((bound-and-true-p winum-mode)
+                    (winum-get-number))
+                   ((bound-and-true-p window-numbering-mode)
+                    (window-numbering-get-number))
+                   (t nil)))
+             (str (when num (int-to-string num))))
+        (when num (propertize str 'face 'font-lock-variable-name-face)))))
+
 (defun spaceline--column-number-at-pos (pos)
   "Column number at POS.  Analog to `line-number-at-pos'."
   (save-excursion (goto-char pos) (current-column)))
@@ -69,7 +81,7 @@
 
 (defun zilong/modeline--evil-substitute ()
   "Show number of matches for evil-ex substitutions and highlights in real time."
-  (when (and (bound-and-true-p evil-local-mode)
+  '(:eval (when (and (bound-and-true-p evil-local-mode)
              (or (assq 'evil-ex-substitute evil-ex-active-highlights-alist)
                  (assq 'evil-ex-global-match evil-ex-active-highlights-alist)
                  (assq 'evil-ex-buffer-match evil-ex-active-highlights-alist)))
@@ -82,6 +94,7 @@
          (format " %s matches " (how-many pattern (car range) (cdr range)))
        " - "))
    'face 'font-lock-preprocessor-face)))
+  )
 
 (defun mode-line-fill (face reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
@@ -155,13 +168,9 @@
 (setq-default mode-line-format
       (list
        ;; " %1"
-       ;; '(:eval (when (bound-and-true-p winum-mode) (propertize
-       ;;                                              (window-number-mode-line)
-       ;;                                              'face
-       ;;                                              'font-lock-type-face)))
-
-       " "
-       '(:eval (zilong/modeline--evil-substitute))
+       "["
+       window-number
+       "]"
        " %1"
        buffer-name-mode-line
        ;; "%1 "
@@ -214,6 +223,8 @@
        line-column-mode-line
        " "
        my-selection-info
+       " "
+       (zilong/modeline--evil-substitute)
        ;; " "
        ;; flycheck-status-mode-line
        "%1 "
