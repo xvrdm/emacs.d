@@ -72,16 +72,35 @@
 ;; )
 
 ;; 行号
-(global-linum-mode 1)
-(when (not (display-graphic-p))
-  (setq linum-format "%d ")) ;; 注意%d后面有空格，即用空格将行号和代码隔
+(if (>= emacs-major-version 26)
+    ;; config built-in "display-line-number-mode" (require Emacs >= 26)
+    ;; enable line numbering (or "linum-mode")
+    (let ((hook-list '(sh-mode-hook
+                       cmake-mode-hook
+                       emacs-lisp-mode-hook
+                       matlab-mode-hook
+                       python-mode-hook
+                       c-mode-common-hook
+                       makefile-gmake-mode-hook
+                       ;;  Gnome
+                       makefile-bsdmake-mode-hook ; OS X
+                       ess-mode-hook)))  
+      (setq-default display-line-numbers-width 2)
+      (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
+      (setq-default display-line-numbers-type 'relative)
+      (setq display-line-numbers-current-absolute t)
+      (dolist (hook-element hook-list)
+        (add-hook hook-element 'display-line-numbers-mode)))
+  (global-linum-mode 1)
+  (when (not (display-graphic-p))
+    (setq linum-format "%d "))) ;; 注意%d后面有空格，即用空格将行号和代码隔
 
 ;;
 (delete-selection-mode 1)
 
 ;; abbrev
-(abbrev-mode t)
-(define-abbrev-table 'global-abbrev-table '(("lf" "liang.feng")))
+;; (abbrev-mode t)
+;; (define-abbrev-table 'global-abbrev-table '(("lf" "liang.feng")))
 
 ;; 打开recent files
 (require 'recentf)
