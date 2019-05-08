@@ -351,6 +351,7 @@
                     "dk" 'describe-key
                     "dd" 'lispy-describe-inline
                     "da" 'lispy-arglist-inline
+                    "ss" 'fa-show
                     "gg" 'ggtags-find-tag-dwim
                     "gs" 'ggtags-find-other-symbol
                     "gr" 'ggtags-find-reference

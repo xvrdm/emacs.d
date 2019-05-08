@@ -684,6 +684,14 @@
   :delight browse-kill-ring-mode
   )
 
+(use-package function-args
+  ;; GNU Emacs package for showing an inline arguments hint for the C/C++ function at point
+  :ensure t
+  :config
+  (fa-config-default)
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  )
+
 (use-package symon
   ;; tiny graphical system monitor 
   ;; https://github.com/zk-phi/symon
