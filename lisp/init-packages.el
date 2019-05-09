@@ -188,7 +188,7 @@
 ;; smartparens setting
 (use-package smartparens
   :ensure t
-  :defer 1
+  :after after-init
   :delight smartparens-global-mode
   :delight smartparens-mode
   :config
@@ -200,7 +200,7 @@
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
@@ -215,7 +215,7 @@
 
 (use-package web-mode
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -231,7 +231,7 @@
 
 (use-package emmet-mode
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
@@ -243,7 +243,7 @@
 (use-package popwin
   :ensure t
   :delight popwin-mode
-  :defer 1
+  :after after-init
   :config
   (popwin-mode t)
   )
@@ -259,8 +259,8 @@
   )
 
 (use-package powershell
-  :defer 1
   :ensure t
+  :after after-init
   :if (eq system-type 'windows-nt)
   )
 
@@ -285,13 +285,13 @@
   )
 
 (use-package fzf
-  :defer 1
   :ensure t
+  :after after-init
   )
 
 (use-package ack
   :ensure t
-  :defer 1
+  :after after-init
   :config
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
@@ -314,8 +314,8 @@
   )
 
 (use-package xpm
-  :defer 1
   :ensure t
+  :after after-init
   )
 
 ;; yasnippet setting
@@ -324,7 +324,7 @@
   :ensure t
   :delight yas-global-mode
   :delight yas-minor-mode
-  :defer 1
+  :after after-init
   :config
   (yas-global-mode 1)
   )
@@ -332,7 +332,7 @@
 ;; youdao-dictionary
 (use-package youdao-dictionary
   :ensure t
-  :defer 2
+  :after after-init
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -346,7 +346,7 @@
 
 (use-package go-mode
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
@@ -354,7 +354,7 @@
 
 (use-package rust-mode
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -367,7 +367,7 @@
 
 (use-package which-key
   :ensure t
-  :defer 1
+  :after after-init
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
@@ -422,13 +422,13 @@
 
 (use-package all-the-icons
   :ensure t
-  :defer 2
+  :after after-init
   :if (display-graphic-p)
   )
 
 (use-package projectile
   :ensure t
-  :defer 1
+  :after after-init
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
@@ -476,7 +476,7 @@
 (use-package beacon
   :ensure t
   :delight beacon-mode
-  :defer 1
+  :after after-init
   :config
   (beacon-mode 1)
   )
@@ -559,8 +559,8 @@
 
 
 (use-package highlight-symbol
-  :defer
   :ensure t
+  :after after-init
   :delight highlight-symbol-mode
   :config
   )
@@ -581,14 +581,14 @@
 
 ;; fix-word
 (use-package fix-word
-  :defer
   :ensure t
+  :after after-init
   )
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
-  :defer
   :ensure t
+  :after after-init
   :delight browse-kill-ring-mode
   )
 
@@ -741,8 +741,8 @@
 
 ;; imenu-list
 (use-package imenu-list
-  :defer
   :ensure t
+  :after after-init
   :delight
   :config
   )
@@ -765,7 +765,7 @@
 (use-package smex
   :disabled
   :ensure t
-  :defer
+  :after after-init
   :delight
   :config
   (smex-initialize)
@@ -791,7 +791,7 @@
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
   :ensure t
-  :defer 1
+  :after after-init
   ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
@@ -855,14 +855,14 @@
 
 (use-package company-statistics
   :ensure t
-  :defer
+  :after after-init
   :config
   (add-hook 'after-init-hook 'company-statistics-mode)
   )
 
 (use-package company-c-headers
-  :defer
   :ensure t
+  :after after-init
   :config
   (add-to-list 'company-backends 'company-c-headers)
   )
@@ -874,8 +874,8 @@
   )
 
 (use-package company-jedi
-  :defer
   :ensure t
+  :after python
   :config
   (defun my/python-mode-hook ()
     (add-to-list 'company-backends 'company-jedi))
@@ -884,15 +884,15 @@
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
-  :defer
+  :after after-init
   :ensure t
   :config
   (exec-path-from-shell-initialize)
   )
 
 (use-package volatile-highlights
-  :defer
   :ensure t
+  :after after-init
   :config
   (volatile-highlights-mode t)
   ;;-----------------------------------------------------------------------------
