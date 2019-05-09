@@ -229,7 +229,8 @@
                     ;; "cm" 'counsel-git-find-my-file
                     ;; buffer ;;;;;
                     "bk" 'kill-buffer
-                    "bs" 'switch-to-buffer
+                    ;; "bs" 'switch-to-buffer
+                    "bs" 'counsel-switch-buffer
                     "bp" 'switch-to-prev-buffer
                     "bb" 'evil-buffer
                     "zz" 'save-buffer

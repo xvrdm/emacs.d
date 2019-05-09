@@ -172,7 +172,6 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
-  :after after-init
   :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
   :config
   (setq ivy-initial-inputs-alist nil
@@ -201,7 +200,7 @@
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
-  :defer
+  :defer 1
   :config
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
@@ -216,7 +215,7 @@
 
 (use-package web-mode
   :ensure t
-  :defer
+  :defer 1
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -232,7 +231,7 @@
 
 (use-package emmet-mode
   :ensure t
-  :defer
+  :defer 1
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
@@ -244,12 +243,23 @@
 (use-package popwin
   :ensure t
   :delight popwin-mode
+  :defer 1
   :config
   (popwin-mode t)
   )
 
+(use-package winum
+  ;; Navigate windows and frames using numbers.
+  :ensure t
+  :hook
+  (after-init . winum-mode)
+  :config
+  (setq winum-auto-setup-mode-line nil)
+  ;; (winum-mode)
+  )
+
 (use-package powershell
-  :defer
+  :defer 1
   :ensure t
   :if (eq system-type 'windows-nt)
   )
@@ -260,8 +270,9 @@
   :init
   :delight global-company-mode
   :delight company-mode
+  :hook
+  (after-init . global-company-mode)
   :config
-  (global-company-mode 1)
   ;; (add-hook 'after-init-hook 'global-company-mode)
   ;; 显示候选项的数字号。根据数字号选择候选项
   (setq company-show-numbers t)
@@ -274,17 +285,16 @@
   )
 
 (use-package fzf
-  :defer
+  :defer 1
   :ensure t
   )
 
 (use-package ack
   :ensure t
-  :after after-init
+  :defer 1
   :config
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
-  (minibuffer-local-map)
   )
 
 ;; magit setting
@@ -307,6 +317,7 @@
   )
 
 (use-package xpm
+  :defer 1
   :ensure t
   )
 
@@ -316,6 +327,7 @@
   :ensure t
   :delight yas-global-mode
   :delight yas-minor-mode
+  :defer 1
   :config
   (yas-global-mode 1)
   )
@@ -323,7 +335,7 @@
 ;; youdao-dictionary
 (use-package youdao-dictionary
   :ensure t
-  :defer
+  :defer 2
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -337,7 +349,7 @@
 
 (use-package go-mode
   :ensure t
-  :defer
+  :defer 1
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
@@ -345,7 +357,7 @@
 
 (use-package rust-mode
   :ensure t
-  :defer
+  :defer 1
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -358,7 +370,7 @@
 
 (use-package which-key
   :ensure t
-  :defer
+  :defer 1
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
@@ -370,7 +382,7 @@
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
   :ensure t
-  :defer
+  :defer 1
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
@@ -413,11 +425,13 @@
 
 (use-package all-the-icons
   :ensure t
+  :defer 2
   :if (display-graphic-p)
   )
 
 (use-package projectile
   :ensure t
+  :after after-init
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
@@ -465,6 +479,7 @@
 (use-package beacon
   :ensure t
   :delight beacon-mode
+  :defer 1
   :config
   (beacon-mode 1)
   )
@@ -537,23 +552,6 @@
   :after evil
   :delight)
 
-(use-package org
-  :defer
-  :ensure t
-  )
-(use-package htmlize
-  :defer
-  :ensure t
-  )
-
-(use-package ob-go
-  :defer
-  :ensure t
-  )
-(use-package ob-rust
-  :defer
-  :ensure t
-  )
 
 (use-package general
   :ensure t
@@ -562,57 +560,6 @@
   (general-evil-setup t)
   )
 
-(use-package powerline
-  :disabled
-  :ensure t
-  :delight
-  :config
-  ;; (powerline-default-theme)
-  ;; (powerline-center-theme)
-  ;; (powerline-center-evil-theme)
-  ;; (powerline-vim-theme)
-  ;; (powerline-evil-center-color-theme)
-  ;; (powerline-evil-vim-theme)
-  ;; (powerline-evil-vim-color-theme)
-  ;; (powerline-nano-theme)
-  )
-
-(use-package telephone-line
-  :disabled
-  :unless window-system
-  :ensure t
-  :delight
-  :config
-  (telephone-line-mode t)
-  )
-
-(use-package init-modeline
-  :load-path "lisp"
-  :unless window-system
-  )
-
-;; spaceline
-(use-package spaceline
-  ;; :disabled
-  :ensure t
-  :if window-system
-  :config
-  ;; When nil, winum-mode will not display window numbers in the mode-line.
-  ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
-  (setq winum-auto-setup-mode-line nil)
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  ;; (spaceline-spacemacs-theme))
-  (spaceline-emacs-theme))
-
-(use-package winum
-  ;; Navigate windows and frames using numbers.
-  :ensure t
-  :init
-  ;; :if (display-graphic-p)
-  :config
-  (setq winum-auto-setup-mode-line nil)
-  (winum-mode)
-  )
 
 (use-package highlight-symbol
   :defer

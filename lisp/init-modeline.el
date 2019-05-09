@@ -2,6 +2,35 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
+(use-package powerline
+  :disabled
+  :ensure t
+  :delight
+  :config
+  ;; (powerline-default-theme)
+  ;; (powerline-center-theme)
+  ;; (powerline-center-evil-theme)
+  ;; (powerline-vim-theme)
+  ;; (powerline-evil-center-color-theme)
+  ;; (powerline-evil-vim-theme)
+  ;; (powerline-evil-vim-color-theme)
+  ;; (powerline-nano-theme)
+  )
+
+(use-package telephone-line
+  :disabled
+  :unless window-system
+  :ensure t
+  :delight
+  :config
+  (telephone-line-mode t)
+  )
+
+;; (use-package init-modeline
+;;   :load-path "lisp"
+;;   :unless window-system
+;;   )
+
 ;; reference from file "font-lock.el.gz" 
 (defface font-lock-evil-normal-face
   '((((class grayscale) (background light)) :foreground "DimGray" :slant italic)
@@ -226,6 +255,7 @@
                  (upcase (symbol-name (plist-get sys :name)))))
              )))))
 (setq time-mode-line (quote (:eval (propertize (format-time-string "%H:%M")))))
+
 (setq-default mode-line-format
       (list
        ;; " %1"
