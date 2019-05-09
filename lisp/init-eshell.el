@@ -129,7 +129,7 @@
    ;; ([remap evil-insert-digraph] . paredit-kill)
    ;; ("C-k" . paredit-kill)
    ([remap evil-paste-from-register] . samray/esh-history)
-   ("C-r" . samray/esh-history)
+   ;; ("C-r" . samray/esh-history)
    ;; ("C-l" . fwar34/eshell-clear-buffer))
    ))
 

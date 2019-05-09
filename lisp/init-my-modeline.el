@@ -4,6 +4,13 @@
 ;;-------------------------------------------------------------
 (require 'modeline-face)
 
+;; (defun fwar34/mode-line-process ()
+;;   '(:eval
+;;     (when mode-line-process
+;;       (propertize (format "(%s)" mode-line-process) 'face 'font-lock-string-face)
+;;       )) 
+;;   )
+
 (defun fwar34/evil-state ()
   "Display evil state in differente color"
   '(:eval
@@ -131,8 +138,15 @@
 (setq buffer-name-mode-line
       (quote (:eval (propertize "%b " 'face 'font-lock-string-face))))
 
-(setq major-mode-mode-line
-      (quote (:eval (propertize "%m " 'face 'font-lock-keyword-face))))
+;; (setq major-mode-mode-line
+;;       (quote (:eval (propertize "%m " 'face 'font-lock-keyword-face))))
+
+(setq my-modeline-major-mode 
+  ;; major modes
+  (list
+    '(:eval (propertize "%m" 'face 'font-lock-string-face
+                       'help-echo buffer-file-coding-system))
+    '("" mode-line-process)))
 
 (setq file-status-mode-line 
   (quote (:eval (concat "["
@@ -208,6 +222,8 @@
        "/"
        (propertize "%I" 'face 'font-lock-constant-face) ;; size
        "] "
+       ;; (fwar34/mode-line-process)
+       ;; mode-line-process
        ;; evil state
        (fwar34/evil-state)
        " "
@@ -226,13 +242,12 @@
                                      (`needs-merge "@Con")
                                      (`needs-update "@Upd")
                                      (`ignored "@Ign")
-                                     (_ "@Unk")))))
-                 ))
+                                     (_ "@Unk")))))))
 
-
-       " %1"
-       major-mode-mode-line
-
+       ;; " %1"
+       " "
+       ;major-mode-mode-line
+       my-modeline-major-mode 
        ;; '(:eval (when (> (window-width) 90)
        ;;           minor-mode-alist))
 

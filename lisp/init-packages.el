@@ -801,7 +801,7 @@
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
   :ensure t
-  :after after-init
+  :after evil
   ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
