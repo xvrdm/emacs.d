@@ -676,11 +676,17 @@
   ;; and disable in specific modes
   (push 'dired-mode evil-snipe-disabled-modes)
 
+  ;; To map : to a python function (but only in python-mode):
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (make-variable-buffer-local 'evil-snipe-aliases)
+              (push '(?: "def .+:") evil-snipe-aliases)))
+
   ;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
   ;; https://github.com/hlissner/evil-snipe
   ;; (evil-snipe-override-mode 1)
   ;; https://github.com/hlissner/evil-snipe#integration-into-avy/evil-easymotion
-  ;; (define-key evil-snipe-parent-transient-map (kbd "C-;")
+  ;; (define-key evil-snipe-parent-transient-map (kbd C-;)
   ;;  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
   ;;  (evilem-create 'evil-snipe-repeat
   ;;                 :bind ((evil-snipe-scope 'buffer)
