@@ -297,16 +297,13 @@
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
   )
 
-;; magit setting
 (use-package magit
   :ensure t
-  :defer 1
+  :after after-init
   :delight magit-mode
   :config
   )
 
-;; evil-magit setting
-;; (require 'evil-magit)
 (use-package evil-magit
   :ensure t
   :after (magit evil) 
