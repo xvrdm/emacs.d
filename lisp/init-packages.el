@@ -188,7 +188,7 @@
 ;; smartparens setting
 (use-package smartparens
   :ensure t
-  :defer 2
+  :defer 1
   :delight smartparens-global-mode
   :delight smartparens-mode
   :config
@@ -281,7 +281,7 @@
 ;; magit setting
 (use-package magit
   :ensure t
-  :defer 2
+  :defer 1
   :delight magit-mode
   :config
   )
@@ -838,7 +838,7 @@
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
   :ensure t
-  :defer 2
+  :defer 1
   ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
