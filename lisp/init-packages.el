@@ -702,6 +702,7 @@
 (use-package symon
   ;; tiny graphical system monitor 
   ;; https://github.com/zk-phi/symon
+  :disabled
   :ensure t
   :delight symon-mode
   :config
