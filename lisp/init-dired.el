@@ -85,7 +85,8 @@
   (with-eval-after-load 'evil
     (defun my-dired-init ()
       "Bunch of stuff to run for dired, either immediately or when it's loaded."
-      (evil-define-key 'normal dired-mode-map "f" (lambda () (interactive) (dired-single-buffer "..")))
+      (evil-define-key 'normal dired-mode-map "f" (lambda () (interactive) (swiper)))
+      (evil-define-key 'normal dired-mode-map "i" (lambda () (interactive) (dired-single-buffer "..")))
       (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer "..")))
       (if (display-graphic-p)
           (progn
