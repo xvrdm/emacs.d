@@ -3,6 +3,13 @@
 ;; (use-package dired+
 ;;   :straight t)
 
+(with-eval-after-load 'dired
+  ;; dired递归copy delete
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (require 'dired-x)
+  (setq dired-dwim-target t))
+
 ;; dired-imenu
 (use-package dired-imenu
   :after dired

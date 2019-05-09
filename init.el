@@ -11,6 +11,16 @@
 ;; (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPaht='tramp.%%C' -o ControlPersist=no")
 ;; (setq byte-compile-warnings '(not obsolete))
 
+(setq gc-cons-threshold (* 50 1000 1000))
+
+;; Use a hook so the message doesn't get clobbered by other messages.
+(add-hook 'emacs-startup-hook (lambda ()
+                                (message "Emacs ready in %s with %d garbage collections."
+                                         (format "%.2f seconds"
+                                                 (float-time
+                                                  (time-subtract after-init-time before-init-time)))
+                                         gcs-done)))
+
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)
@@ -32,4 +42,5 @@
 (if (file-exists-p (expand-file-name "custom.el"))
     (load-file custom-file))
 
+(setq gc-cons-threshold (* 2 1000 1000))
 ;; ycmd write 2

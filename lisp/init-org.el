@@ -1,4 +1,18 @@
 ;; org-mode
+(use-package org
+  :defer 1
+  :config
+  ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
+  ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (emacs-lisp . t)
+     (C . t)))
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively t)
+  )
+
 (use-package evil-org
   :ensure t
   :after (evil org)
@@ -6,81 +20,80 @@
   (org-mode . evil-org-mode)
   )
 
-
 ;; org-pomodoro setting
 (use-package org-pomodoro
   :after org
   :ensure t
   :delight org-pomodoro)
 
-(use-package org2jekyll
-  :ensure t
-  :after org
-  :config
-  (custom-set-variables '(org2jekyll-blog-author "feng")
-                        ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
-                        ;; '(org2jekyll-jekyll-directory (expand-file-name "~/test/public_html"))
-                        '(org2jekyll-source-directory  "")
-                        '(org2jekyll-jekyll-directory  "")
-                        '(org2jekyll-jekyll-drafts-dir "")
-                        ;; '(org2jekyll-jekyll-posts-dir  "_posts/")
-                        '(org2jekyll-jekyll-posts-dir "")
-                        '(org-publish-project-alist
-                          `(("default"
-                             :base-directory ,(org2jekyll-input-directory)
-                             :base-extension "org"
-                             ;; :publishing-directory "/ssh:user@host:~/html/notebook/"
-                             :publishing-directory ,(org2jekyll-output-directory)
-                             :publishing-function org-html-publish-to-html
-                             :headline-levels 4
-                             :section-numbers nil
-                             :with-toc nil
-                             :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
-                             :html-preamble t
-                             :recursive t
-                             :make-index t
-                             :html-extension "html"
-                             :body-only t)
+;; (use-package org2jekyll
+;;   :ensure t
+;;   :after org
+;;   :config
+;;   (custom-set-variables '(org2jekyll-blog-author "feng")
+;;                         ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
+;;                         ;; '(org2jekyll-jekyll-directory (expand-file-name "~/test/public_html"))
+;;                         '(org2jekyll-source-directory  "")
+;;                         '(org2jekyll-jekyll-directory  "")
+;;                         '(org2jekyll-jekyll-drafts-dir "")
+;;                         ;; '(org2jekyll-jekyll-posts-dir  "_posts/")
+;;                         '(org2jekyll-jekyll-posts-dir "")
+;;                         '(org-publish-project-alist
+;;                           `(("default"
+;;                              :base-directory ,(org2jekyll-input-directory)
+;;                              :base-extension "org"
+;;                              ;; :publishing-directory "/ssh:user@host:~/html/notebook/"
+;;                              :publishing-directory ,(org2jekyll-output-directory)
+;;                              :publishing-function org-html-publish-to-html
+;;                              :headline-levels 4
+;;                              :section-numbers nil
+;;                              :with-toc nil
+;;                              :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+;;                              :html-preamble t
+;;                              :recursive t
+;;                              :make-index t
+;;                              :html-extension "html"
+;;                              :body-only t)
 
-                            ("post"
-                             :base-directory ,(org2jekyll-input-directory)
-                             :base-extension "org"
-                             :publishing-directory ,(org2jekyll-output-directory org2jekyll-jekyll-posts-dir)
-                             :publishing-function org-html-publish-to-html
-                             :headline-levels 4
-                             :section-numbers nil
-                             :with-toc nil
-                             :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
-                             :html-preamble t
-                             :recursive t
-                             :make-index t
-                             :html-extension "html"
-                             :body-only t)
+;;                             ("post"
+;;                              :base-directory ,(org2jekyll-input-directory)
+;;                              :base-extension "org"
+;;                              :publishing-directory ,(org2jekyll-output-directory org2jekyll-jekyll-posts-dir)
+;;                              :publishing-function org-html-publish-to-html
+;;                              :headline-levels 4
+;;                              :section-numbers nil
+;;                              :with-toc nil
+;;                              :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+;;                              :html-preamble t
+;;                              :recursive t
+;;                              :make-index t
+;;                              :html-extension "html"
+;;                              :body-only t)
 
-                            ("images"
-                             :base-directory ,(org2jekyll-input-directory "img")
-                             :base-extension "jpg\\|gif\\|png"
-                             :publishing-directory ,(org2jekyll-output-directory "img")
-                             :publishing-function org-publish-attachment
-                             :recursive t)
+;;                             ("images"
+;;                              :base-directory ,(org2jekyll-input-directory "img")
+;;                              :base-extension "jpg\\|gif\\|png"
+;;                              :publishing-directory ,(org2jekyll-output-directory "img")
+;;                              :publishing-function org-publish-attachment
+;;                              :recursive t)
 
-                            ("js"
-                             :base-directory ,(org2jekyll-input-directory "js")
-                             :base-extension "js"
-                             :publishing-directory ,(org2jekyll-output-directory "js")
-                             :publishing-function org-publish-attachment
-                             :recursive t)
+;;                             ("js"
+;;                              :base-directory ,(org2jekyll-input-directory "js")
+;;                              :base-extension "js"
+;;                              :publishing-directory ,(org2jekyll-output-directory "js")
+;;                              :publishing-function org-publish-attachment
+;;                              :recursive t)
 
-                            ("css"
-                             :base-directory ,(org2jekyll-input-directory "css")
-                             :base-extension "css\\|el"
-                             :publishing-directory ,(org2jekyll-output-directory "css")
-                             :publishing-function org-publish-attachment
-                             :recursive t)
+;;                             ("css"
+;;                              :base-directory ,(org2jekyll-input-directory "css")
+;;                              :base-extension "css\\|el"
+;;                              :publishing-directory ,(org2jekyll-output-directory "css")
+;;                              :publishing-function org-publish-attachment
+;;                              :recursive t)
 
-                            ;; ("web" :components ("images" "js" "css"))
-                            )))
-  )
+;;                             ;; ("web" :components ("images" "js" "css"))
+;;                             )))
+;;   )
 
 ;; reference from http://ju.outofmemory.cn/entry/348743
 (with-eval-after-load 'org
@@ -135,21 +148,28 @@
 
 ;; 默认情况下，Org Mode没有打开Markdown文档的转换功能，需要将下面的小代码放到Emacs 的启动配置文件中：
 ;; (setq org-export-backends (quote (ascii html icalendar latex md)))
-(eval-after-load "org"
-  '(require 'ox-md nil t))
+(eval-after-load "org" '(require 'ox-md nil t))
 
 ;; 在配置文件中（我使用的是模块化的配置，所以我的配置在 init-org.el 文件中）增加如下程序，就可实现 org-mode 中的自动换行。
-(add-hook 'org-mode-hook 
-          (lambda () (setq truncate-lines nil)))
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
-;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
-;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (emacs-lisp . t)
-   (C . t)))
-(setq org-confirm-babel-evaluate nil)
-(setq org-src-fontify-natively t)
+;; (with-eval-after-load 'org
+;;   ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
+;;   ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
+;;   (org-babel-do-load-languages
+;;    'org-babel-load-languages
+;;    '((python . t)
+;;      (emacs-lisp . t)
+;;      (C . t)))
+;;   (setq org-confirm-babel-evaluate nil)
+;;   (setq org-src-fontify-natively t))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (emacs-lisp . t)
+     (C . t)))
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-src-fontify-natively t)
 
 (provide 'init-org)

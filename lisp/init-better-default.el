@@ -28,49 +28,55 @@
 ;; 编码设置 end
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
-(when (eq system-type 'windows-nt)
-  (setq gc-cons-threshold (* 512 1024 1024))
-  (setq gc-cons-percentage 0.5)
-  (run-with-idle-timer 5 t #'garbage-collect)
-  ;; 显示垃圾回收信息，这个可以作为调试用
-  ;; (setq garbage-collection-messages t)
+;; (when (eq system-type 'windows-nt)
+;;   (setq gc-cons-threshold (* 512 1024 1024))
+;;   (setq gc-cons-percentage 0.5)
+;;   (run-with-idle-timer 5 t #'garbage-collect)
+;;   ;; 显示垃圾回收信息，这个可以作为调试用
+;;   ;; (setq garbage-collection-messages t)
+;;   )
+
+;; delay 1 second execute
+(use-package recentf
+  :defer 1
+  :config
+  ;; 打开recent files
+  (require 'recentf)
+  (recentf-mode 1)
+  (setq recentf-max-menu-item 10)
   )
 
-(global-prettify-symbols-mode t)
-;; 禁用响铃
-(setq ring-bell-function 'ignore)
+;; delay 2 seconds execute
+(use-package uniquify
+  :defer 2
+  :config
+  (global-prettify-symbols-mode t)
+  ;; 禁用响铃
+  (setq ring-bell-function 'ignore)
+  ;; display time in modeline
+  (display-time-mode 1)
+  ;; auto reload file
+  (global-auto-revert-mode t)
+  ;; 在使用emacs时，一行文字如果不按回车键，那么它就会一直往右延伸，不会自动换行。这是很不方便的。
+  (setq work-wrap 'off)
+  ;; 禁用备份文件
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+  ;; 高亮光标增强
+  (define-advice show-paren-function(:around (fn) fix-show-paren-function)
+    "Highlight enclosing parens."
+    (cond ((looking-at-p "\\s(") (funcall fn))
+          (t (save-excursion
+               (ignore-errors (backward-up-list))
+               (funcall fn)))))
 
-;; ruler
-;; (ruler-mode t)
-
-;; display time in modeline
-(display-time-mode 1)
-
-;; auto reload file
-(global-auto-revert-mode t)
-
-;; 在使用emacs时，一行文字如果不按回车键，那么它就会一直往右延伸，不会自动换行。这是很不方便的。
-(setq work-wrap 'off)
-
-;; 禁用备份文件
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-
-;; 高亮光标增强
-(define-advice show-paren-function(:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-        (t (save-excursion
-             (ignore-errors (backward-up-list))
-             (funcall fn)))))
-
-;; 括号匹配高亮
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(set-cursor-color "red")
-
-;; (if (not (equal 'windows-nt system-type))
-;;     (setq linum-format "%d ") ;; 注意%d后面有空格，即用空格将行号和代码隔
-;; )
+  ;; 括号匹配高亮
+  (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+  (set-cursor-color "red")
+  (fset 'yes-or-no-p 'y-or-n-p)
+  ;;
+  (delete-selection-mode 1)
+  )
 
 ;; 行号
 (if (>= emacs-major-version 26)
@@ -96,27 +102,11 @@
   (when (not (display-graphic-p))
     (setq linum-format "%d "))) ;; 注意%d后面有空格，即用空格将行号和代码隔
 
-;;
-(delete-selection-mode 1)
 
 ;; abbrev
 ;; (abbrev-mode t)
 ;; (define-abbrev-table 'global-abbrev-table '(("lf" "liang.feng")))
 
-;; 打开recent files
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-item 10)
-
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; dired递归copy delete
-(setq dired-recursive-copies 'always)
-(setq dired-recursive-deletes 'always)
-
-(require 'dired-x)
-
-(setq dired-dwim-target t)
 
 ;; When you visit a file, point goes to the last place where it was when you previously visited the same file.
 ;; remember cursor position. When file is opened, put cursor at last position

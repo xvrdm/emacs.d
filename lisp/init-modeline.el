@@ -258,7 +258,7 @@
        '(:eval (when (> (window-width) 90)
                  `(vc-mode vc-mode)
                  ;; reference from spaceline
-                 (s-trim (concat vc-mode
+                 (string-trim (concat vc-mode
                                  (when (buffer-file-name)
                                    (pcase (vc-state (buffer-file-name))
                                      (`up-to-date " ")
