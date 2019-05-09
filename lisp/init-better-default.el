@@ -88,6 +88,7 @@
                        matlab-mode-hook
                        python-mode-hook
                        c-mode-common-hook
+                       org-mode-hook
                        makefile-gmake-mode-hook
                        ;;  Gnome
                        makefile-bsdmake-mode-hook ; OS X
