@@ -673,9 +673,12 @@
   :config
   (evil-snipe-mode +1)
   (evil-snipe-override-mode +1)
+  ;; and disable in specific modes
+  (push 'dired-mode evil-snipe-disabled-modes)
+
   ;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
   ;; https://github.com/hlissner/evil-snipe
-  (evil-snipe-override-mode 1)
+  ;; (evil-snipe-override-mode 1)
   ;; https://github.com/hlissner/evil-snipe#integration-into-avy/evil-easymotion
   ;; (define-key evil-snipe-parent-transient-map (kbd "C-;")
   ;;  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
