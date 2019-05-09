@@ -428,7 +428,7 @@
 
 (use-package projectile
   :ensure t
-  :after after-init
+  :after evil
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
