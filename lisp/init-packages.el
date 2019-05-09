@@ -382,7 +382,7 @@
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
   :ensure t
-  :defer 1
+  :after after-init
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
@@ -431,7 +431,7 @@
 
 (use-package projectile
   :ensure t
-  :after after-init
+  :defer 1
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)

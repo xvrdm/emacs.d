@@ -31,51 +31,7 @@
 ;;   :unless window-system
 ;;   )
 
-;; reference from file "font-lock.el.gz" 
-(defface font-lock-evil-normal-face
-  '((((class grayscale) (background light)) :foreground "DimGray" :slant italic)
-    (((class grayscale) (background dark))  :foreground "LightGray" :slant italic)
-    (((class color) (min-colors 88) (background light)) :foreground "VioletRed4")
-    (((class color) (min-colors 88) (background dark))  :foreground "LightSalmon")
-    (((class color) (min-colors 16) (background light)) :foreground "RosyBrown")
-    (((class color) (min-colors 16) (background dark))  :foreground "LightSalmon")
-    (((class color) (min-colors 8)) :foreground "green")
-    (t :slant italic))
-  "Font Lock mode face used to highlight strings."
-  :group 'font-lock-evil-faces)
-(defface font-lock-evil-insert-face
-  '((((class color) (min-colors 88) (background light)) :foreground "Blue1")
-    (((class color) (min-colors 88) (background dark))  :foreground "LightSkyBlue")
-    (((class color) (min-colors 16) (background light)) :foreground "Blue")
-    (((class color) (min-colors 16) (background dark))  :foreground "LightSkyBlue")
-    (((class color) (min-colors 8)) :foreground "blue" :weight bold)
-    (t :inverse-video t :weight bold))
-  "Font Lock mode face used to highlight function names."
-  :group 'font-lock-evil-faces)
-(defface font-lock-evil-visual-face
-  '((((class grayscale) (background light)) :foreground "Gray90" :weight bold)
-    (((class grayscale) (background dark))  :foreground "DimGray" :weight bold)
-    (((class color) (min-colors 88) (background light)) :foreground "ForestGreen")
-    (((class color) (min-colors 88) (background dark))  :foreground "PaleGreen")
-    (((class color) (min-colors 16) (background light)) :foreground "ForestGreen")
-    (((class color) (min-colors 16) (background dark))  :foreground "PaleGreen")
-    (((class color) (min-colors 8)) :foreground "green")
-    (t :weight bold :underline t))
-  "Font Lock mode face used to highlight type and classes."
-  :group 'font-lock-evil-faces)
-(defface font-lock-emacs-face
-  '((((class grayscale) (background light))
-     :foreground "LightGray" :weight bold :underline t)
-    (((class grayscale) (background dark))
-     :foreground "Gray50" :weight bold :underline t)
-    (((class color) (min-colors 88) (background light)) :foreground "dark cyan")
-    (((class color) (min-colors 88) (background dark))  :foreground "Aquamarine")
-    (((class color) (min-colors 16) (background light)) :foreground "CadetBlue")
-    (((class color) (min-colors 16) (background dark))  :foreground "Aquamarine")
-    (((class color) (min-colors 8)) :foreground "magenta")
-    (t :weight bold :underline t))
-  "Font Lock mode face used to highlight constants and labels."
-  :group 'font-lock-evil-faces)
+(require 'modeline-face)
 
 (defun fwar34/evil-state ()
   "Display evil state in differente color"
@@ -195,14 +151,18 @@
               'display `((space :align-to
                                 (- (+ right right-fringe right-margin) ,reserve)))
               'face face))
+
 (setq projectile-mode-line
-      (quote (:eval (when (projectile-project-p)
+      (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
                       (propertize (format " P[%s]" (projectile-project-name))
                                   'face 'font-lock-variable-name-face)))))
+
 (setq buffer-name-mode-line
       (quote (:eval (propertize "%b " 'face 'font-lock-string-face))))
+
 (setq major-mode-mode-line
       (quote (:eval (propertize "%m " 'face 'font-lock-keyword-face))))
+
 (setq file-status-mode-line 
   (quote (:eval (concat "["
             (when (buffer-modified-p)
@@ -220,6 +180,7 @@
                       'face 'font-lock-type-face
                       'help-echo "Buffer is read-only"))
             "]"))))
+
 (setq flycheck-status-mode-line
   (quote (:eval (pcase flycheck-last-status-change
           (`finished
@@ -236,6 +197,7 @@
                       (t "✔"))
                      "]")
                          'face face)))))))
+
 (setq line-column-mode-line
   (concat "("
    (propertize "%02l" 'face 'font-lock-type-face)
@@ -254,6 +216,7 @@
                "UTF-8"
                  (upcase (symbol-name (plist-get sys :name)))))
              )))))
+
 (setq time-mode-line (quote (:eval (propertize (format-time-string "%H:%M")))))
 
 (setq-default mode-line-format
