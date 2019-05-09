@@ -38,7 +38,7 @@
 
 ;; delay 1 second execute
 (use-package recentf
-  :defer 1
+  :after after-init 
   :config
   ;; 打开recent files
   ;; (require 'recentf)
@@ -48,7 +48,7 @@
 
 ;; delay 2 seconds execute
 (use-package uniquify
-  :defer 2
+  :after after-init 
   :config
   (global-prettify-symbols-mode t)
   ;; 禁用响铃
