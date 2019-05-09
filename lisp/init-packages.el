@@ -66,10 +66,12 @@
 
 (use-package pyim
   :ensure t
+  :if window-system
   :demand t
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
+    :if window-system
     :ensure t
     :config (pyim-basedict-enable))
 
@@ -125,10 +127,12 @@
 ;; evil
 (use-package evil
   :ensure t
+  ;;:hook
+  ;;(after-init . evil-mode)
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  :config
-  (evil-mode 1)
+  ;; :config
+  ;; (evil-mode 1)
   )
 
 (use-package goto-chg
@@ -145,10 +149,11 @@
 
 (use-package hungry-delete
   :ensure t
-  :defer
+  :hook
+  (after-init . global-hungry-delete-mode)
   :delight hungry-delete-mode
   :config
-  (global-hungry-delete-mode)
+  ;; (global-hungry-delete-mode)
   ;; https://emacs-china.org/t/smartparens/2778/7
   ;; fix hungry-delete & smartparents conflict
   (defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
@@ -156,6 +161,7 @@
   )
 
 (use-package expand-region
+  :defer
   :ensure t
   )
 
@@ -182,6 +188,7 @@
 ;; smartparens setting
 (use-package smartparens
   :ensure t
+  :defer 2
   :delight smartparens-global-mode
   :delight smartparens-mode
   :config
@@ -193,6 +200,7 @@
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
+  :defer
   :config
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
@@ -207,6 +215,7 @@
 
 (use-package web-mode
   :ensure t
+  :defer
   :config
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -222,6 +231,7 @@
 
 (use-package emmet-mode
   :ensure t
+  :defer
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
   (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
@@ -275,6 +285,7 @@
 
 (use-package org2jekyll
   :ensure t
+  :defer
   :config
   (custom-set-variables '(org2jekyll-blog-author "feng")
                         ;; '(org2jekyll-source-directory (expand-file-name "~/test/org"))
@@ -344,6 +355,7 @@
 ;; magit setting
 (use-package magit
   :ensure t
+  :defer 2
   :delight magit-mode
   :config
   )
@@ -352,6 +364,7 @@
 ;; (require 'evil-magit)
 (use-package evil-magit
   :ensure t
+  :after magit
   :delight
   :config
   ;; https://www.helplib.com/GitHub/article_131559
@@ -375,6 +388,7 @@
 ;; youdao-dictionary
 (use-package youdao-dictionary
   :ensure t
+  :defer
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -388,6 +402,7 @@
 
 (use-package go-mode
   :ensure t
+  :defer
   :config
   (autoload 'go-mode "go-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
@@ -395,6 +410,7 @@
 
 (use-package rust-mode
   :ensure t
+  :defer
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -407,6 +423,7 @@
 
 (use-package which-key
   :ensure t
+  :defer
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
@@ -418,6 +435,7 @@
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
   :ensure t
+  :defer
   :delight neotree-mode
   :config
   (global-set-key [f8] 'neotree-toggle)
@@ -504,8 +522,8 @@
 (use-package rainbow-delimiters
   :ensure t
   :delight rainbow-delimiters-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  :hook
+  (prog-mode . rainbow-delimiters-mode)
   )
 
 ;; beacon
@@ -521,21 +539,25 @@
 ;; (require 'evil-leader)
 (use-package evil-escape
   :ensure t
+  :after evil
   :delight evil-escape-mode
   )
 
 (use-package evil-surround
   :ensure t
+  :after evil
   :delight evil-surround-mode
   )
 
 (use-package evil-nerd-commenter
   :ensure t
+  :after evil
   :delight
   )
 
 (use-package evil-easymotion
   :ensure t
+  :after evil
   :delight
   :config
   (evilem-default-keybindings "M-m")
@@ -543,6 +565,7 @@
 
 (use-package ace-jump-mode
   :ensure t
+  :after evil
   :config
   (eval-after-load "ace-jump-mode"
     '(ace-jump-mode-enable-mark-sync))
@@ -551,6 +574,7 @@
 
 (use-package evil-matchit
   :ensure t
+  :after evil
   :delight evil-matchit-mode
   :config
   (global-evil-matchit-mode 1)
@@ -558,6 +582,7 @@
 
 (use-package evil-exchange
   :ensure t
+  :after evil
   :delight
   :config
   ;; change default key bindings (if you want) HERE
@@ -574,6 +599,7 @@
 ;;  - Please note ";;" or `avy-goto-char-timer' is also useful
 (use-package evil-iedit-state
   :ensure t
+  :after evil
   :delight)
 
 (use-package org
@@ -630,12 +656,6 @@
   :unless window-system
   )
 
-(use-package init-modeline-chenbin
-  :disabled
-  :load-path "lisp"
-  :unless window-system
-  )
-
 ;; spaceline
 (use-package spaceline
   ;; :disabled
@@ -660,6 +680,7 @@
   )
 
 (use-package highlight-symbol
+  :defer
   :ensure t
   :delight highlight-symbol-mode
   :config
@@ -681,11 +702,13 @@
 
 ;; fix-word
 (use-package fix-word
+  :defer
   :ensure t
-  :delight)
+  )
 
 ;; browse-kill-ring
 (use-package browse-kill-ring
+  :defer
   :ensure t
   :delight browse-kill-ring-mode
   )
@@ -732,8 +755,8 @@
 (use-package rainbow-identifiers
   :ensure t
   :delight rainbow-identifiers-mode
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+  :hook
+  (prog-mode . rainbow-identifiers-mode)
   )
 
 ;; highlight-numbers
@@ -741,29 +764,31 @@
   :ensure t
   :delight highlight-numbers-mode
   :unless window-system
-  :config
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+  :hook
+  (prog-mode . highlight-numbers-mode)
   )
 
 ;; highlight-quoted
 (use-package highlight-quoted
   :ensure t
   :delight highlight-quoted-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode)
+  :hook
+  (emacs-lisp-mode . highlight-quoted-mode)
   )
 
 ;; highlight-defined
 (use-package highlight-defined
   :ensure t
   :delight highlight-defined-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+  :hook
+  (emacs-lisp-mode . highlight-defined-mode)
   )
 
 (use-package evil-snipe
-  :defer
   :ensure t
+  :after evil
+  ;; :hook
+  ;; (magit-mode . turn-off-evil-snipe-override-mode)
   :delight evil-snipe-mode
   :delight evil-snipe-local-mode
   :config
@@ -786,16 +811,18 @@
 
 ;; evil-smartparens
 (use-package evil-smartparens
-  :defer
+  :after evil
   :ensure t
   :delight evil-smartparens-mode
-  :config
-  (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  :hook
+  (smartparens-enabled . evil-smartparens-mode)
+  ;; :config
+  ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
   )
 
 ;; evil-visualstar
 (use-package evil-visualstar
-  :ensure t
+  :after evil
   :delight evil-visualstar-mode
   :config
   (global-evil-visualstar-mode)
@@ -831,13 +858,6 @@
     highlight-parentheses-mode
     (lambda () (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)
-  )
-
-;; direx
-(use-package direx
-  :defer
-  :ensure t
-  :config
   )
 
 ;; imenu-list
@@ -888,11 +908,11 @@
 
 (use-package git-gutter
   ;; :disabled        
-  ;; :defer
   ;; :bind
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
   :ensure t
+  :defer 2
   ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
@@ -935,6 +955,7 @@
 
 (use-package git-gutter-fringe
   :ensure t
+  :after git-gutter
   :if (display-graphic-p)
   :config
   (set-face-foreground 'git-gutter-fr:modified "purple")
@@ -955,6 +976,7 @@
 
 (use-package company-statistics
   :ensure t
+  :defer
   :config
   (add-hook 'after-init-hook 'company-statistics-mode)
   )
@@ -983,6 +1005,7 @@
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
+  :defer
   :ensure t
   :config
   (exec-path-from-shell-initialize)

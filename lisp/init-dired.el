@@ -5,7 +5,7 @@
 
 ;; dired-imenu
 (use-package dired-imenu
-  :defer
+  :after dired
   :ensure t
   :delight
   )
@@ -62,11 +62,18 @@
   ;; (define-key dired-mode-map (kbd "g") 'dired-k)
   )
 
+;; direx
+(use-package direx
+  :after dired
+  :ensure t
+  :config
+  )
+
 (use-package dired-single
   ;; https://github.com/crocket/dired-single
   ;; dired-single
   :ensure t
-  :defer
+  :after dired
   :init
   (defun my-dired-init ()
     "Bunch of stuff to run for dired, either immediately or when it's loaded."
