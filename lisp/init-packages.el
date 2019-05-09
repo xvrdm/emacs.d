@@ -127,8 +127,8 @@
 ;; evil
 (use-package evil
   :ensure t
-  ;;:hook
-  ;;(after-init . evil-mode)
+  :hook
+  (after-init . evil-mode)
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   ;; :config
@@ -136,6 +136,7 @@
   )
 
 (use-package goto-chg
+  :after evil
   :ensure t
   )
 
@@ -161,7 +162,7 @@
   )
 
 (use-package expand-region
-  :defer
+  :after evil-visual
   :ensure t
   )
 
@@ -171,7 +172,7 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
-  ;; :defer
+  :after after-init
   :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
   :config
   (setq ivy-initial-inputs-alist nil
@@ -277,6 +278,14 @@
   :ensure t
   )
 
+(use-package ack
+  :ensure t
+  :after after-init
+  :config
+  ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
+  ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
+  (minibuffer-local-map)
+  )
 
 ;; magit setting
 (use-package magit

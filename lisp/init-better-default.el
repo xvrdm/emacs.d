@@ -41,7 +41,7 @@
   :defer 1
   :config
   ;; 打开recent files
-  (require 'recentf)
+  ;; (require 'recentf)
   (recentf-mode 1)
   (setq recentf-max-menu-item 10)
   )
