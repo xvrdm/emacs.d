@@ -299,7 +299,7 @@
 
 (use-package magit
   :ensure t
-  :after after-init
+  :after evil
   :delight magit-mode
   :config
   )
