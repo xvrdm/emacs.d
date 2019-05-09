@@ -1,6 +1,6 @@
 ;; org-mode
 (use-package org
-  :defer 1
+  :after after-init
   :config
   ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
   ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
