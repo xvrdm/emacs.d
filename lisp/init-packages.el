@@ -367,7 +367,7 @@
 
 (use-package which-key
   :ensure t
-  :after after-init
+  :after evil
   :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
