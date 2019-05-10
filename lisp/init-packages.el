@@ -151,19 +151,12 @@
 (use-package hungry-delete
   :ensure t
   :hook
-  (after-init . global-hungry-delete-mode)
-  :delight hungry-delete-mode
-  :config
-  ;; (global-hungry-delete-mode)
-  ;; https://emacs-china.org/t/smartparens/2778/7
-  ;; fix hungry-delete & smartparents conflict
-  (defadvice hungry-delete-backward (before sp-delete-pair-advice activate)
-    (save-match-data (sp-delete-pair (ad-get-arg 0))))
+  (evil-mode . global-hungry-delete-mode)
   )
 
 (use-package expand-region
-  :after evil-visual
   :ensure t
+  :defer t
   )
 
 (use-package counsel
@@ -173,23 +166,25 @@
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
   :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
+  :after evil
   :config
+  (ivy-mode)
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
         ivy-height 15
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
         ivy-use-virtual-buffers t)
-  (ivy-mode +1) 
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 
 ;; smartparens setting
 (use-package smartparens
+  :disabled
   :ensure t
   :hook
-  (after-init . smartparens-global-mode)
+  (after-init . smartparens-mode)
   :config
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
@@ -198,18 +193,10 @@
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
-  :defer t
+  :after js2-mode
   :preface
-  (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   )
-
-
-;; nodejs-repl setting
-;; (require 'nodejs-repl)
-
-;; setting add-node-modules-path
-;; (eval-after-load 'js2-mode
-;;                  '(add-hook 'js2-mode-hook #'add-node-modules-path))
 
 (use-package web-mode
   :ensure t
@@ -223,7 +210,6 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   :after web-mode
-  ;; :defer t
   :config
   (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
   )
@@ -231,50 +217,37 @@
 (use-package emmet-mode
   :ensure t
   :hook
-  ((sgml-mdoe . emmet-mode)
-   (html-mode . emmet-mode)
+  ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
+   (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
    (web-mode . emmet-mode)
    (css-mode . emmet-mode))
-  :config
-  (message "xxxxxxxxxxx")
-  ;; (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-  ;; (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-  ;; (add-hook 'html-mode-hook 'emmet-mode)
-  ;; (add-hook 'web-mode-hook 'emmet-mode)
-  ;; (emmet-mode)
   )
 
 ;; popwin setting
 (use-package popwin
   :ensure t
-  :delight popwin-mode
-  :after after-init
-  :config
-  (popwin-mode t)
+  :hook
+  (evil-mode . popwin-mode)
   )
 
 (use-package winum
   ;; Navigate windows and frames using numbers.
   :ensure t
   :hook
-  (after-init . winum-mode)
+  (evil-mode . winum-mode)
   :config
   (setq winum-auto-setup-mode-line nil)
-  ;; (winum-mode)
   )
 
 (use-package powershell
   :ensure t
-  :after after-init
   :if (eq system-type 'windows-nt)
+  :defer t
   )
 
 ;; 开启全局company
 (use-package company
   :ensure t
-  :init
-  :delight global-company-mode
-  :delight company-mode
   :hook
   (after-init . global-company-mode)
   :config
@@ -291,12 +264,13 @@
 
 (use-package fzf
   :ensure t
-  :after after-init
+  :unless (eq system-type 'windows-nt)
+  :defer t
   )
 
 (use-package ack
   :ensure t
-  :after after-init
+  :defer t
   :config
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
@@ -305,39 +279,26 @@
 (use-package magit
   :ensure t
   :after evil
-  :delight magit-mode
-  :config
   )
 
 (use-package evil-magit
   :ensure t
   :after (magit evil) 
-  :delight
   :config
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
-  )
-
-(use-package xpm
-  :ensure t
-  :after after-init
   )
 
 ;; yasnippet setting
 (use-package yasnippet
   :disabled
   :ensure t
-  :delight yas-global-mode
-  :delight yas-minor-mode
-  :after after-init
-  :config
-  (yas-global-mode 1)
+  :defer t
   )
 
-;; youdao-dictionary
 (use-package youdao-dictionary
   :ensure t
-  :after after-init
+  :defer t
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
@@ -351,18 +312,20 @@
 
 (use-package go-mode
   :ensure t
-  :after after-init
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+  :after go-mode
   :config
   (autoload 'go-mode "go-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
   )
 
 (use-package rust-mode
   :ensure t
-  :after after-init
+  :preface
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+  :after rust-mode
   :config
   (autoload 'rust-mode "rust-mode" nil t)
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
   ;; The rust-format-buffer function will format your code with rustfmt if installed.
   ;; By default, this is bound to C-c C-f.
   ;; Placing (setq rust-format-on-save t) in your ~/.emacs will enable automatic
@@ -373,19 +336,24 @@
 (use-package which-key
   :ensure t
   :after evil
-  :delight which-key-mode
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
   (setq which-key-separator ":")
+  )
+
+(use-package projectile
+  :ensure t
+  :hook
+  (evil-mode . projectile-mode)
   :config
-  (which-key-mode 1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
   :ensure t
-  :after after-init
-  :delight neotree-mode
+  :defer t
   :config
   (global-set-key [f8] 'neotree-toggle)
   ;; Note: For users who want to use the icons theme. Pls make sure you have
@@ -427,17 +395,8 @@
 
 (use-package all-the-icons
   :ensure t
-  :after after-init
-  :if (display-graphic-p)
-  )
-
-(use-package projectile
-  :ensure t
-  :after evil
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  :defer t
+  :unless window-system
   )
 
 (use-package lispy
@@ -445,7 +404,6 @@
   :hook
   (emacs-lisp-mode . lispy-mode)
   :config
-  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
   ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
   ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
   ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
@@ -455,24 +413,21 @@
 
 (use-package lispyville
   :ensure t
-  :hook
-  (lispy-mode . lispyville-mode)
+  :after (lispy evil)
   :config
-  ;; (add-hook 'lispy-mode-hook #'lispyville-mode)
+  (lispyville-mode)
   )
 
 ;; linum-relative
 (use-package linum-relative
   ;; emacs26 builtin
   :disabled
-  :delight linum-relative-mode
   :config
   ;; (linum-relative-toggle)
   )
 
 (use-package rainbow-delimiters
   :ensure t
-  :delight rainbow-delimiters-mode
   :hook
   (prog-mode . rainbow-delimiters-mode)
   )
@@ -480,54 +435,45 @@
 ;; beacon
 (use-package beacon
   :ensure t
-  :delight beacon-mode
-  :after after-init
-  :config
-  (beacon-mode 1)
+  :hook
+  (evil-mode . beacon-mode)
   )
-
 
 ;; end https://github.com/jojojames/evil-collection
 ;; (require 'evil-leader)
 (use-package evil-escape
   :ensure t
   :after evil
-  :delight evil-escape-mode
   )
 
 (use-package evil-surround
   :ensure t
   :after evil
-  :delight evil-surround-mode
   )
 
 (use-package evil-nerd-commenter
   :ensure t
   :after evil
-  :delight
   )
 
 (use-package evil-easymotion
   :ensure t
   :after evil
-  :delight
   :config
   (evilem-default-keybindings "M-m")
   )
 
 (use-package ace-jump-mode
   :ensure t
-  :after evil
+  :defer t
   :config
   (eval-after-load "ace-jump-mode"
     '(ace-jump-mode-enable-mark-sync))
-  ;; (define-key evil-normal-state-map (kbd "M-m a") 'ace-jump-mode)
   )
 
 (use-package evil-matchit
   :ensure t
   :after evil
-  :delight evil-matchit-mode
   :config
   (global-evil-matchit-mode 1)
   )
@@ -535,7 +481,6 @@
 (use-package evil-exchange
   :ensure t
   :after evil
-  :delight
   :config
   ;; change default key bindings (if you want) HERE
   ;; (setq evil-exchange-key (kbd "zx"))
@@ -552,12 +497,11 @@
 (use-package evil-iedit-state
   :ensure t
   :after evil
-  :delight)
-
+  )
 
 (use-package general
   :ensure t
-  :delight
+  :after evil
   :config
   (general-evil-setup t)
   )
@@ -565,42 +509,32 @@
 
 (use-package highlight-symbol
   :ensure t
-  :after after-init
-  :delight highlight-symbol-mode
-  :config
+  :defer t
   )
 
 ;; rainbow-mode
 (use-package rainbow-mode
   :ensure t
-  :delight rainbow-mode
+  :after evil
   :config
   (rainbow-mode 1)
   )
 
-;; multifiles
-;; (use-package multifiles
-;;   :ensure t
-;;   :delight multifiles-minor-mode
-;;   )
-
-;; fix-word
 (use-package fix-word
   :ensure t
-  :after after-init
+  :after evil
   )
 
-;; browse-kill-ring
 (use-package browse-kill-ring
   :ensure t
-  :after after-init
-  :delight browse-kill-ring-mode
+  :defer t
   )
 
 (use-package function-args
   ;; GNU Emacs package for showing an inline arguments hint for the C/C++ function at point
   :disabled
   :ensure t
+  :after evil
   :config
   (fa-config-default)
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -611,7 +545,7 @@
   ;; https://github.com/zk-phi/symon
   :disabled
   :ensure t
-  :delight symon-mode
+  :after evil
   :config
   (symon-mode)
   )
@@ -624,10 +558,10 @@
   :init (setq markdown-command "multimarkdown")
   )
 
-;; ace-window
 (use-package ace-window
+  :disabled
   :ensure t
-  :delight
+  :defer t
   )
 
 (use-package hydra
@@ -638,7 +572,7 @@
 
 (use-package rainbow-identifiers
   :ensure t
-  :delight rainbow-identifiers-mode
+  :after evil
   :hook
   (prog-mode . rainbow-identifiers-mode)
   )
@@ -646,8 +580,8 @@
 ;; highlight-numbers
 (use-package highlight-numbers
   :ensure t
-  :delight highlight-numbers-mode
   :unless window-system
+  :after evil
   :hook
   (prog-mode . highlight-numbers-mode)
   )
@@ -655,7 +589,6 @@
 ;; highlight-quoted
 (use-package highlight-quoted
   :ensure t
-  :delight highlight-quoted-mode
   :hook
   (emacs-lisp-mode . highlight-quoted-mode)
   )
@@ -663,7 +596,6 @@
 ;; highlight-defined
 (use-package highlight-defined
   :ensure t
-  :delight highlight-defined-mode
   :hook
   (emacs-lisp-mode . highlight-defined-mode)
   )
@@ -673,8 +605,6 @@
   :after evil
   ;; :hook
   ;; (magit-mode . turn-off-evil-snipe-override-mode)
-  :delight evil-snipe-mode
-  :delight evil-snipe-local-mode
   :config
   (evil-snipe-mode +1)
   ;; and disable in specific modes
@@ -705,9 +635,9 @@
 
 ;; evil-smartparens
 (use-package evil-smartparens
+  :disabled
   :after evil
   :ensure t
-  :delight evil-smartparens-mode
   :hook
   (smartparens-enabled . evil-smartparens-mode)
   ;; :config
@@ -717,7 +647,6 @@
 ;; evil-visualstar
 (use-package evil-visualstar
   :after evil
-  :delight evil-visualstar-mode
   :config
   (global-evil-visualstar-mode)
   )
@@ -726,7 +655,7 @@
 (use-package evil-indent-plus
   :disabled
   :ensure t
-  :delight
+  :after evil
   :config
   ;; This is a continuation of evil-indent-textobject. It provides six new text objects to evil based on indentation:
   ;; ii: A block of text with the same or higher indentation.
@@ -745,7 +674,7 @@
 
 (use-package highlight-parentheses
   :ensure t
-  :delight highlight-parentheses-mode
+  :after evil
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   (define-globalized-minor-mode global-highlight-parentheses-mode
@@ -756,17 +685,16 @@
 
 ;; imenu-list
 (use-package imenu-list
+  :disabled
   :ensure t
-  :after after-init
-  :delight
-  :config
+  :after evil
   )
 
 (use-package rich-minority
   ;; Clean-up and Beautify the list of minor-modes.
+  :disabled
   :ensure t
   :unless window-system
-  :delight rich-minority-mode
   :config
   (rich-minority-mode 1)
   (setq rm-blacklist
@@ -780,14 +708,14 @@
 (use-package smex
   :disabled
   :ensure t
-  :after after-init
-  :delight
+  :after evil
   :config
   (smex-initialize)
   )
 
 (use-package ivy-xref
   :ensure t
+  :after evil
   :config
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
@@ -860,6 +788,7 @@
 (use-package diff-hl
   :disabled
   :ensure t
+  :after evil
   :if (not (display-graphic-p))
   :config
   (global-diff-hl-mode)
@@ -877,13 +806,14 @@
 
 (use-package company-c-headers
   :ensure t
-  :after after-init
+  :after evil
   :config
   (add-to-list 'company-backends 'company-c-headers)
   )
 
 (use-package ace-popup-menu
   :ensure t
+  :after evil
   :config
   (ace-popup-menu-mode 1)
   )
@@ -899,7 +829,7 @@
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
-  :after after-init
+  :after evil
   :ensure t
   :config
   (exec-path-from-shell-initialize)
@@ -907,7 +837,7 @@
 
 (use-package volatile-highlights
   :ensure t
-  :after after-init
+  :after evil
   :config
   (volatile-highlights-mode t)
   ;;-----------------------------------------------------------------------------
@@ -928,6 +858,7 @@
 ;; because i put some modes in this use-package code
 ;; block which not want to display in modeline
 (use-package delight
+  :disabled
   :ensure t
   :delight
   :delight page-break-lines-mode

@@ -1,7 +1,7 @@
-;; org-mode
-(use-package org
-  :after after-init
-  :config
+;;-------------------------------------------------------------
+;; init-org
+;;-------------------------------------------------------------
+(with-eval-after-load 'org
   ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
   ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
   (org-babel-do-load-languages
@@ -10,8 +10,7 @@
      (emacs-lisp . t)
      (C . t)))
   (setq org-confirm-babel-evaluate nil)
-  (setq org-src-fontify-natively t)
-  )
+  (setq org-src-fontify-natively t))
 
 (use-package htmlize
   :after org
@@ -22,24 +21,24 @@
   :ensure t
   :after org
   )
+
 (use-package ob-rust
   :ensure t
   :after org
-  )
+  ) 
 
 
 (use-package evil-org
   :ensure t
   :after (evil org)
-  :hook
-  (org-mode . evil-org-mode)
+  (evil-org-mode)
   )
 
 ;; org-pomodoro setting
 (use-package org-pomodoro
-  :after org
   :ensure t
-  :delight org-pomodoro)
+  :after org
+  )
 
 (use-package org2jekyll
   :ensure t

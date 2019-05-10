@@ -348,6 +348,7 @@
                     ;; "bb" 'back-to-previous-buffer
                     ;; liang.feng
                     ;; "em" 'erase-message-buffer
+                    "fa" 'ack
                     "fz" 'fzf
                     "ft" 'fzf-git
                     "ff" 'fzf-git-files
