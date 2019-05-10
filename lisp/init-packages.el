@@ -609,7 +609,7 @@
   (evil-snipe-mode +1)
   ;; and disable in specific modes
   (push 'dired-mode evil-snipe-disabled-modes)
-
+  (push 'package-menu-mode evil-snipe-disabled-modes)
   ;; To map : to a python function (but only in python-mode):
   (add-hook 'python-mode-hook
             (lambda ()

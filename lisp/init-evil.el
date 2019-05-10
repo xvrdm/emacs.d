@@ -73,6 +73,7 @@
 
 (define-key evil-visual-state-map "gg" 'evil-change-to-previous-state)
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
+(evil-define-key 'normal package-menu-mode-map "s" (lambda () (interactive) (swiper)))
 
 ;; evil setting
 (evil-mode)
