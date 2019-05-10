@@ -188,11 +188,9 @@
 ;; smartparens setting
 (use-package smartparens
   :ensure t
-  :after after-init
-  :delight smartparens-global-mode
-  :delight smartparens-mode
+  :hook
+  (after-init . smartparens-global-mode)
   :config
-  (smartparens-global-mode t)
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
   )
@@ -200,8 +198,8 @@
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
-  :after after-init
-  :config
+  :defer t
+  :preface
   (setq auto-mode-alist (append '(("\\.js\\'" . js2-mode)) auto-mode-alist))
   )
 
@@ -215,8 +213,7 @@
 
 (use-package web-mode
   :ensure t
-  :after after-init
-  :config
+  :preface
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -225,18 +222,26 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
+  :after web-mode
+  ;; :defer t
+  :config
   (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
   )
 
 (use-package emmet-mode
   :ensure t
-  :after after-init
+  :hook
+  ((sgml-mdoe . emmet-mode)
+   (html-mode . emmet-mode)
+   (web-mode . emmet-mode)
+   (css-mode . emmet-mode))
   :config
-  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-  (add-hook 'html-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode)
+  (message "xxxxxxxxxxx")
+  ;; (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  ;; (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+  ;; (add-hook 'html-mode-hook 'emmet-mode)
+  ;; (add-hook 'web-mode-hook 'emmet-mode)
+  ;; (emmet-mode)
   )
 
 ;; popwin setting
