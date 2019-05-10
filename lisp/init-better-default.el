@@ -36,20 +36,11 @@
 ;;   ;; (setq garbage-collection-messages t)
 ;;   )
 
-;; delay 1 second execute
 (use-package recentf
-  :after after-init 
+  :after evil
   :config
-  ;; 打开recent files
-  ;; (require 'recentf)
   (recentf-mode 1)
   (setq recentf-max-menu-item 10)
-  )
-
-;; delay 2 seconds execute
-(use-package uniquify
-  :after after-init 
-  :config
   (global-prettify-symbols-mode t)
   ;; 禁用响铃
   (setq ring-bell-function 'ignore)
@@ -69,7 +60,6 @@
           (t (save-excursion
                (ignore-errors (backward-up-list))
                (funcall fn)))))
-
   ;; 括号匹配高亮
   (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
   (set-cursor-color "red")
@@ -120,7 +110,7 @@
 ;; tab settings
 (setq-default indent-tabs-mode nil) ; tab 改为插入空格
 (setq c-basic-offset 4) ; c c++ 缩进4个空格
-;; (setq c-default-style "linux"); 没有这个 { } 就会瞎搞
+(setq c-default-style "linux"); 没有这个 { } 就会瞎搞
 (setq default-tab-width 4)
 ;; (add-hook 'python-mode-hook #'(lambda () (setq python-indent-offset 4)))
 
