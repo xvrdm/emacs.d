@@ -61,7 +61,7 @@
                (ignore-errors (backward-up-list))
                (funcall fn)))))
   ;; 括号匹配高亮
-  (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+  ;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
   ;;
@@ -79,6 +79,7 @@
                        python-mode-hook
                        c-mode-common-hook
                        org-mode-hook
+                       package-menu-mode-hook
                        makefile-gmake-mode-hook
                        ;;  Gnome
                        makefile-bsdmake-mode-hook ; OS X
@@ -156,10 +157,5 @@
   (evil-scroll-line-to-center (line-number-at-pos)))
 (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
-
-(defun fwar34/proxy-command (cmd)
-  (interactive "sCommand with proxy:")
-  (let ((proxy "foxy.sh "))
-    (shell-command (concat proxy cmd) "*eshell*" "*eshell*")))
 
 (provide 'init-better-default)
