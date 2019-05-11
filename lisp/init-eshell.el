@@ -318,29 +318,13 @@
   "Completion rules for the `sudo' command."
   (let ((pcomplete-ignore-case t))
     (pcomplete-here (funcall pcomplete-command-completion-function))
-    (while (pcomplete-here (pcomplete-entries)))
-    ))
+    (while (pcomplete-here (pcomplete-entries)))))
 
-
-(defun fwar34/proxy-command (first &rest other)
+(defun fwar34/foxy-command (first &rest other)
   (let ((command first))
     (if (listp other)
-        (dolist (ele other)
-          (if (stringp ele)
-              (message "element is string"))
-          (concat command " " ele)))
-    ;; (shell-command command)
-    (message "-----%s" command))
-  )
-
-(defun fwar34/proxy-command2 (first &rest other)
-  
-  )
-
-(defun fwar34/proxy-command-interactive (command)
-  (interactive "sCommand with proxy: ")
-  (shell-command command))
-
-(defalias 'foxy #'fwar34/proxy-command)
+        (setq command (concat first " " (mapconcat 'identity other " "))))
+    (shell-command (concat "foxy.sh " command))))
+(defalias 'foxy #'fwar34/foxy-command)
 
 (provide 'init-eshell)
