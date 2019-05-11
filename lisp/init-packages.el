@@ -174,9 +174,26 @@
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
         ivy-use-virtual-buffers t)
-  (ivy-mode)
+  (ivy-mode +1)
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  )
+
+(use-package ivy-xref
+  :ensure t
+  :after ivy
+  :init
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+  )
+
+(use-package ivy-rich
+  :ensure t
+  :after ivy
+  :config
+  (ivy-rich-mode 1)
+  (setq ivy-format-function #'ivy-format-function-line)
+  ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+  (setq ivy-rich-path-style 'abbrev)
   )
 
 ;; smartparens setting
@@ -714,12 +731,7 @@
   (smex-initialize)
   )
 
-(use-package ivy-xref
-  :ensure t
-  :after ivy
-  :init
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
-  )
+
 
 ;; (use-package fringe-helper
 ;;   ;; helper functions for fringe bitmaps
