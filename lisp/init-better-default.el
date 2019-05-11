@@ -137,12 +137,19 @@
   (electric-indent-mode 1))
 
 ;; advice for find-file
-(defun advice-find-file (filename &optional wildcards)
-  (interactive)
+;; (defun advice-find-file (filename &optional wildcards)
+;;   (interactive)
+;;   (if (file-exists-p filename)
+;;       t
+;;     (y-or-n-p (message "%s not exist! create it?" filename))))
+;; (advice-add #'find-file :before-while #'advice-find-file)
+
+(defadvice find-file (around advice-find-file activate)
   (if (file-exists-p filename)
-      t
-    (y-or-n-p (message "%s not exist! create it?" filename))))
-(advice-add #'find-file :before-while #'advice-find-file)
+      ad-do-it
+    (if (y-or-n-p (message "%s not exist! create it!" filename))
+        ad-do-it))
+  )
 
 ;; advice for evil search
 (defadvice evil-search-next (after advice-for-evil-search-next activate)

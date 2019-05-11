@@ -8,6 +8,7 @@ alias gcmsg git commit -m $1
 alias gr git remote $1
 alias gp git push
 alias gl git pull
+# alias foxy fwar34/proxy-command $*
 # alias z fwar34/eshell-fasd-z $1
 # alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug . $1
 alias d dired $1
