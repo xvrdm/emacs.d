@@ -650,6 +650,7 @@
   :after evil
   :config
   (global-evil-visualstar-mode)
+  ;; (setq evil-visualstar/persistent t)
   )
 
 ;; evil-indent-plus
