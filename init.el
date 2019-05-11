@@ -13,6 +13,12 @@
 
 (setq gc-cons-threshold (* 500 1000 1000))
 
+;; http://www.sohu.com/a/301863132_100034897
+;; -q ignores personal Emacs files but loads the site files.
+;; emacs -q --eval='(message "%s" (emacs-init-time))'
+;; For macOS users:
+;; open -n /Applications/Emacs.app --args -q --eval='(message "%s" (emacs-init-time))'
+
 ;; Use a hook so the message doesn't get clobbered by other messages.
 (add-hook 'emacs-startup-hook
           (lambda ()
