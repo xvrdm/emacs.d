@@ -150,4 +150,13 @@
 (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
 
+(defun fwar34/proxy-git-push ()
+  (interactive)
+  (let ((command "git push"))
+    (fwar34/proxy-command )
+    )
+  )
+(defun fwar34/proxy-command (cmd)
+  )
+
 (provide 'init-better-default)

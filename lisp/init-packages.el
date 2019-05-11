@@ -168,13 +168,13 @@
   :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
   :after evil
   :config
-  (ivy-mode)
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
         ivy-height 15
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
         ivy-use-virtual-buffers t)
+  (ivy-mode)
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
@@ -413,9 +413,8 @@
 
 (use-package lispyville
   :ensure t
-  :after (lispy evil)
-  :config
-  (lispyville-mode)
+  :hook
+  (lispy-mode . lispyville-mode)
   )
 
 ;; linum-relative
@@ -717,8 +716,8 @@
 
 (use-package ivy-xref
   :ensure t
-  :after evil
-  :config
+  :after ivy
+  :init
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
