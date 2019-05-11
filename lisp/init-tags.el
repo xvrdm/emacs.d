@@ -16,6 +16,7 @@
 
 ;; ggtags
 (use-package ggtags
+  :disabled
   :ensure t
   :hook
   (prog-mode . ggtags-mode)
@@ -36,7 +37,9 @@
 
 (use-package counsel-gtags
   :ensure t
+  :defer t
   :config
+  (setq counsel-gtags-auto-update t)
   )
 
 (use-package counsel-etags
