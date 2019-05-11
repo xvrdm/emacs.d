@@ -646,6 +646,7 @@
 
 ;; evil-visualstar
 (use-package evil-visualstar
+  :ensure t
   :after evil
   :config
   (global-evil-visualstar-mode)
