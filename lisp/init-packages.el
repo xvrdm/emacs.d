@@ -179,6 +179,14 @@
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
 
+(use-package smex
+  ;; I use this package to display history for M-x
+  :ensure t
+  :after evil
+  :config
+  (smex-initialize)
+  )
+
 (use-package ivy-xref
   :ensure t
   :after ivy
@@ -722,13 +730,6 @@
                            "\\|")))
   )
 
-;; smex
-(use-package smex
-  :ensure t
-  :after evil
-  :config
-  (smex-initialize)
-  )
 
 
 
