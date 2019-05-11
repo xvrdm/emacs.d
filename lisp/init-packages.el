@@ -174,7 +174,7 @@
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
         ivy-use-virtual-buffers t)
-  (ivy-mode +1)
+  (ivy-mode 1)
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   )
@@ -724,7 +724,6 @@
 
 ;; smex
 (use-package smex
-  :disabled
   :ensure t
   :after evil
   :config
