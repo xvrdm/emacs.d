@@ -69,13 +69,6 @@
   ;; (define-key dired-mode-map (kbd "g") 'dired-k)
   )
 
-;; direx
-(use-package direx
-  :after dired
-  :ensure t
-  :config
-  )
-
 (use-package dired-single
   ;; https://github.com/crocket/dired-single
   ;; dired-single

@@ -38,6 +38,7 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+(evil-set-initial-state 'youdao-dictionary-mode 'emacs)
 ;; (evil-set-initial-state 'git-commit-mode 'insert) ;; enter insert mode to edit a commit message
 ;; (evil-set-initial-state 'dired-mode 'emacs) ;; enter insert mode to edit a commit message
 ;; Here is a handy loop to define more at once
@@ -241,7 +242,7 @@
                     "mm" 'evil-jump-item
                     "mf" 'mf/mirror-region-in-multifile
                     "tt" 'neotree-toggle
-                    ;; "yy" 'youdao-dictionary-search-at-point
+                    "yw" 'youdao-dictionary-search-at-point
                     "yy" 'youdao-dictionary-search-at-point+
                     "yd" 'youdao-dictionary-search-from-input
                     ;; "er" 'er/expand-region
