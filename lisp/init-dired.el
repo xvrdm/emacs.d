@@ -14,11 +14,11 @@
 (use-package dired-imenu
   :after dired
   :ensure t
-  :delight
   )
 
 (use-package dired-rainbow
   :ensure t
+  :after dired
   :commands dired-rainbow-define dired-rainbow-define-chmod
   :init
   (dired-rainbow-define dotfiles "gray" "\\..*")

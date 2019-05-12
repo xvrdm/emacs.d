@@ -327,4 +327,22 @@
     (shell-command (concat "foxy.sh " command))))
 (defalias 'foxy #'fwar34/foxy-command)
 
+;;-------------------------------------------------------------
+;; impliment
+;;-------------------------------------------------------------
+(defun fwar34/port-exist-p (port)
+  (let ((ss-output (shell-command-to-string "ss -l")))
+    (if (string-match (format "\\b%d\\b" port) ss-output)
+        t
+      nil)))
+
+(defun fwar34/proxy-command-lisp ()
+
+  )
+
+;; (if (fwar34/port-exist-p 1080)
+;;     (message "port 1080 used!!!!!")
+;;   (shell-command "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn" nil nil)
+;;   )
+
 (provide 'init-eshell)
