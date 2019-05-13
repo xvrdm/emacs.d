@@ -5,12 +5,6 @@
 ;; this is master write
 ;; master write 2
 
-;;-------------------------------------------------------------
-;; reference from zilongshanren
-;;-------------------------------------------------------------
-;; (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPaht='tramp.%%C' -o ControlPersist=no")
-;; (setq byte-compile-warnings '(not obsolete))
-
 (setq gc-cons-threshold (* 500 1000 1000))
 
 ;; http://www.sohu.com/a/301863132_100034897
