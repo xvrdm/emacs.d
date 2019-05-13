@@ -670,11 +670,13 @@
 
 ;; evil-visualstar
 (use-package evil-visualstar
+  :disabled
   :ensure t
   :after evil
   :config
   (global-evil-visualstar-mode)
   ;; (setq evil-visualstar/persistent t)
+  ;; (custom-set-variables '(evil-visualstar/persistent t))
   )
 
 ;; evil-indent-plus
