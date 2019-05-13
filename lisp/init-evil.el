@@ -39,6 +39,9 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 (evil-set-initial-state 'youdao-dictionary-mode 'emacs)
+;; for shell-command
+(evil-set-initial-state 'fundamental-mode 'emacs)
+(define-key evil-emacs-state-map (kbd "q") 'quit-window)
 ;; (evil-set-initial-state 'git-commit-mode 'insert) ;; enter insert mode to edit a commit message
 ;; (evil-set-initial-state 'dired-mode 'emacs) ;; enter insert mode to edit a commit message
 ;; Here is a handy loop to define more at once
