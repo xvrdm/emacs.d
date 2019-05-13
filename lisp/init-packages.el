@@ -360,7 +360,8 @@
 
 (use-package which-key
   :ensure t
-  :after evil
+  :hook
+  (evil-mode . which-key-mode)
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
   (setq which-key-separator ":")
