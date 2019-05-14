@@ -131,8 +131,9 @@
   (after-init . evil-mode)
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  ;; :config
-  ;; (evil-mode 1)
+  :config
+  (setq evil-want-C-i-jump t)
+  (setq evil-want-Y-yank-to-eol t)
   )
 
 (use-package goto-chg
@@ -788,6 +789,11 @@
   ;; (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
   ;; (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
   ;; (define-key evil-normal-state-map (kbd "] s") 'git-gutter:stage-hunk)
+
+  ;; https://github.com/noctuid/evil-guide
+  ;; you could use this to have git-gutter’s commands for navigating hunks save the current location before jumping:
+  (evil-add-command-properties #'git-gutter:next-hunk :jump t)
+  (evil-add-command-properties #'git-gutter:previous-hunk :jump t)
   )
 
 (use-package git-gutter-fringe

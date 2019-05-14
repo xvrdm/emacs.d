@@ -153,9 +153,16 @@
   )
 
 ;; advice for evil search
-(defadvice evil-search-next (after advice-for-evil-search-next activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
-(defadvice evil-search-previous (after advice-for-evil-search-previous activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
+;; (defadvice evil-search-next (after advice-for-evil-search-next activate)
+;;   (evil-scroll-line-to-center (line-number-at-pos)))
+;; (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
+;;   (evil-scroll-line-to-center (line-number-at-pos)))
+
+;; equivalent of nnoremap n nzz in vim
+;; https://github.com/noctuid/evil-guide
+(defun my-center-line (&rest _)
+  (evil-scroll-line-to-center nil))
+(advice-add 'evil-search-next :after #'my-center-line)
+(advice-add 'evil-search-previous :after #'my-center-line)
 
 (provide 'init-better-default)

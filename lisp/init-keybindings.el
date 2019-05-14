@@ -45,7 +45,7 @@
 (global-set-key (kbd "H-y") #'aya-expand)
 
 ;; set C-w delte a word backward
-(global-set-key (kbd "C-w") 'backward-kill-word)
+;; (global-set-key (kbd "C-w") 'backward-kill-word)
 ;; browse-kill-ring
 (global-set-key (kbd "M-m y") 'browse-kill-ring)
 

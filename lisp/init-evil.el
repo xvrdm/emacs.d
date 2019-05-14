@@ -122,7 +122,7 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-(define-key evil-normal-state-map "Y" (kbd "y$"))
+;; (define-key evil-normal-state-map "Y" (kbd "y$"))
 ;; (define-key evil-normal-state-map (kbd "RET") 'ivy-switch-buffer-by-pinyin) ; RET key is preserved for occur buffer
 (define-key evil-normal-state-map "go" 'goto-char)
 ;; (define-key evil-normal-state-map (kbd "M-y") 'counsel-browse-kill-ring)
