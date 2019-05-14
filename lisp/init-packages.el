@@ -671,7 +671,6 @@
 
 ;; evil-visualstar
 (use-package evil-visualstar
-  :disabled
   :ensure t
   :after evil
   :config
