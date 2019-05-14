@@ -653,6 +653,7 @@
   )
 
 (use-package evil-snipe
+  :disabled
   :ensure t
   :after evil
   ;; :hook
