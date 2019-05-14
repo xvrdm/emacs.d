@@ -616,11 +616,6 @@
   :defer t
   )
 
-(use-package hydra
-  :ensure t
-  :config
-  )
-
 (use-package rainbow-identifiers
   :ensure t
   :after evil
