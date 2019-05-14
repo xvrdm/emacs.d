@@ -868,6 +868,15 @@
   (vhl/install-extension 'undo-tree)
   )
 
+(use-package company-english-helper
+  ;; write by lazycat
+  :after evil
+  :straight
+  (:host github :repo "manateelazycat/company-english-helper")
+  :config
+  ;; toggle-company-english-helper
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; put these at bottom of this file
 ;; because i put some modes in this use-package code
