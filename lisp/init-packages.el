@@ -137,10 +137,13 @@
   (setq evil-want-Y-yank-to-eol t)
 
   ;; for quit shell-command output buffer
-  (defun my-quit-window (&rest _)
+  ;; (defun my-quit-window (&rest _)
+  ;;   (with-current-buffer "*Shell Command Output*"
+  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  ;; (advice-add 'shell-command :after #'my-quit-window)
+  (defadvice shell-command (after advice-find-file activate)
     (with-current-buffer "*Shell Command Output*"
       (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  (advice-add 'shell-command :after #'my-quit-window)
   )
 
 (use-package goto-chg
@@ -343,10 +346,13 @@
   (setq youdao-dictionary-use-chinese-word-segmentation t)
 
   ;; press 'q' to quit youdao output buffer
-  (defun my-quit-window (&rest _)
+  ;; (defun my-quit-window (&rest _)
+  ;;   (with-current-buffer "*Youdao Dictionary*"
+  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  ;; (advice-add 'youdao-dictionary-search-at-point :after #'my-quit-window)
+  (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
     (with-current-buffer "*Youdao Dictionary*"
       (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  (advice-add 'youdao-dictionary-search-at-point :after #'my-quit-window)
   )
 
 (use-package go-mode
