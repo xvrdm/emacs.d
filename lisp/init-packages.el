@@ -146,6 +146,12 @@
       (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   )
 
+(use-package undo-tree
+  :ensure t
+  :hook
+  (after-init . global-undo-tree-mode)
+  )
+
 (use-package goto-chg
   :after evil
   :ensure t
@@ -350,9 +356,10 @@
   ;;   (with-current-buffer "*Youdao Dictionary*"
   ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   ;; (advice-add 'youdao-dictionary-search-at-point :after #'my-quit-window)
-  (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
-    (with-current-buffer "*Youdao Dictionary*"
-      (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  ;; (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
+  ;;   (with-current-buffer "*Youdao Dictionary*"
+  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  (evil-define-key 'normal youdao-dictionary-mode-map "q" #'quit-window)
   )
 
 (use-package go-mode

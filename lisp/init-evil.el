@@ -141,7 +141,36 @@
 (define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
 ;; (global-set-key (kbd "C-r") 'undo-tree-redo)
 
- ;; {{ Use `;` as one leader key
+;; https://github.com/noctuid/evil-guide#default-keybindings-and-getting-help
+;; Command Properties :jump
+;; (loop for (func . jump) in '((ivy-switch-buffer . t)
+;;                              (counsel-gtags-dwim . t)
+;;                              (counsel-gtags-find-definition . t)
+;;                              (counsel-gtags-find-symbol . t)
+;;                              (counsel-gtags-find-file . t)
+;;                              (counsel-gtags-go-forward . t)
+;;                              (counsel-gtags-go-backward . t)
+;;                              (counsel-find-file . t)
+;;                              (counsel-imenu . t)
+;;                              (beginning-of-defun . t)
+;;                              (dired-single-buffer . t)
+;;                              (end-of-defun . t))
+;;       do ((evil-add-command-properties func :jump t)))
+
+(evil-add-command-properties #'ivy-switch-buffer :jump t)
+(evil-add-command-properties #'counsel-gtags-dwim :jump t)
+(evil-add-command-properties #'counsel-gtags-find-definition :jump t)
+(evil-add-command-properties #'counsel-gtags-find-symbol :jump t)
+(evil-add-command-properties #'counsel-gtags-find-file :jump t)
+(evil-add-command-properties #'counsel-gtags-go-forward :jump t)
+(evil-add-command-properties #'counsel-gtags-go-backward :jump t)
+(evil-add-command-properties #'counsel-find-file :jump t)
+(evil-add-command-properties #'counsel-imenu :jump t)
+(evil-add-command-properties #'beginning-of-defun :jump t)
+(evil-add-command-properties #'end-of-defun :jump t)
+(evil-add-command-properties #'dired-single-buffer :jump t)
+
+;; {{ Use `;` as one leader key
 (general-define-key :keymaps '(normal insert visual emacs)
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
@@ -229,8 +258,8 @@
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
-                    "cf" 'counsel-grep ; grep current buffer
-                    "cg" 'counsel-git ; find file
+                    "cf" 'counsel-grep  ; grep current buffer
+                    "cg" 'counsel-git   ; find file
                     ;; "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
                     ;; "cm" 'counsel-git-find-my-file
                     ;; buffer ;;;;;
