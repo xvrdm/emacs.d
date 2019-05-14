@@ -20,7 +20,6 @@
   :ensure t
   :hook
   (prog-mode . ggtags-mode)
-  :delight ggtags-mode
   :config
   (setq ggtags-highlight-tag nil)
   ;; (add-hook 'c-mode-common-hook
