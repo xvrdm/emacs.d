@@ -38,7 +38,7 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-(evil-set-initial-state 'youdao-dictionary-mode 'emacs)
+;; (evil-set-initial-state 'youdao-dictionary-mode 'emacs)
 ;; ;; for shell-command
 ;; (evil-set-initial-state 'fundamental-mode 'emacs)
 ;; (define-key evil-emacs-state-map (kbd "q") 'quit-window)
@@ -81,7 +81,7 @@
 (evil-define-key 'normal package-menu-mode-map "s" (lambda () (interactive) (swiper)))
 
 ;; evil setting
-(evil-mode)
+;; (evil-mode)
 
 ;; evil-surround setting
 (global-evil-surround-mode)

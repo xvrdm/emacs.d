@@ -133,7 +133,14 @@
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   :config
   (setq evil-want-C-i-jump t)
+  (setq evil-want-fine-undo "Yes")
   (setq evil-want-Y-yank-to-eol t)
+
+  ;; for quit shell-command output buffer
+  (defun my-quit-window (&rest _)
+    (with-current-buffer "*Shell Command Output*"
+      (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  (advice-add 'shell-command :after #'my-quit-window)
   )
 
 (use-package goto-chg
@@ -334,6 +341,12 @@
   (setq youdao-dictionary-search-history-file "~/.emacs.d/.youdao")
   ;; Enable Chinese word segmentation support (支持中文分词)
   (setq youdao-dictionary-use-chinese-word-segmentation t)
+
+  ;; press 'q' to quit youdao output buffer
+  (defun my-quit-window (&rest _)
+    (with-current-buffer "*Youdao Dictionary*"
+      (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  (advice-add 'youdao-dictionary-search-at-point :after #'my-quit-window)
   )
 
 (use-package go-mode
@@ -636,6 +649,7 @@
   ;; and disable in specific modes
   (push 'dired-mode evil-snipe-disabled-modes)
   (push 'package-menu-mode evil-snipe-disabled-modes)
+  (push 'global-mode evil-snipe-disabled-modes)
   ;; To map : to a python function (but only in python-mode):
   (add-hook 'python-mode-hook
             (lambda ()
