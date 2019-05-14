@@ -617,7 +617,6 @@
   )
 
 (use-package hydra
-  :disabled
   :ensure t
   :config
   )
