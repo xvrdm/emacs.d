@@ -23,9 +23,7 @@
        ((eq 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
        ((eq 'operator evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
        ((eq 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
-       (t nil)
-       )))
-  )
+       (t nil)))))
 
 ;; reference from spaceline
 (setq window-number
@@ -58,9 +56,9 @@
            (multi-line (or (> lines 1) (and evil (eq 'line evil-visual-selection)))))
       (cond
        (rect (propertize (format "%d×%d block" lines (if evil cols (1- cols)))
-                                  'face 'font-lock-variable-name-face))
-       (multi-line (propertize (format "%d lines" lines) 'face 'font-lock-variable-name-face))
-       (t (propertize (format "%d chars" (if evil chars (1- chars))) 'face 'font-lock-variable-name-face)))))))
+                                  'face 'font-lock-evil-visual-face))
+       (multi-line (propertize (format "%d lines" lines) 'face 'font-lock-evil-visual-face))
+       (t (propertize (format "%d chars" (if evil chars (1- chars))) 'face 'font-lock-evil-visual-face)))))))
 
 (setq my-flycheck-mode-line
       '(:eval
@@ -84,6 +82,13 @@
                            'face face)))
             ((\` interrupted) " -")
             ((\` suspicious) '(propertize " ?" 'face 'warning))))))
+
+(setq my-modeline-time
+      '(:eval
+        (concat "["
+                ;; (propertize (format-time-string "[%H:%M]") 'face 'font-lock-constant-face)
+                (propertize (format-time-string "%H:%M") 'face 'font-lock-constant-face) 
+                "]")))
 
 (defun zilongshanren/display-mode-indent-width ()
   (let ((mode-indent-level
@@ -222,10 +227,13 @@
        (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
        "/"
        (propertize "%I" 'face 'font-lock-constant-face) ;; size
-       "] "
+       "]"
+       " %1"
+       line-column-mode-line
        ;; (fwar34/mode-line-process)
        ;; mode-line-process
        ;; evil state
+       " "
        (fwar34/evil-state)
        " "
        ;; git info
@@ -257,8 +265,6 @@
        ;; " "
        ;; '(:eval (zilongshanren/display-mode-indent-width))
        projectile-mode-line
-       " %1"
-       line-column-mode-line
        " "
        my-selection-info
        " "
@@ -267,10 +273,15 @@
        ;; flycheck-status-mode-line
        "%1 "
        my-flycheck-mode-line
-       (mode-line-fill 'mode-line 15)
+       (mode-line-fill 'mode-line 16)
        encoding-mode-line
        " "
-       time-mode-line
+       ;; "["
+       ;; time-mode-line
+       ;; (propertize (format-time-string "[%H:%M]") 'face 'font-lock-constant-face) ;; size
+       ;; (propertize (format-time-string "%H:%M") 'face 'font-lock-constant-face) ;; size
+       ;; "]"
+       my-modeline-time
        ;; mode-line-end-spaces
        ))
 
