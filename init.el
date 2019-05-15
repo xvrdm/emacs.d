@@ -43,11 +43,13 @@
 (add-hook 'after-init-hook (lambda () (require 'init-better-default)))
 ;; (add-hook 'after-init-hook (lambda () (require 'init-keybindings)))
 (add-hook 'after-init-hook (lambda () (require 'init-minefunc)))
-(add-hook 'after-init-hook (lambda ()
-                             (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-                             (if (file-exists-p (expand-file-name "custom.el"))
-                                 (load-file custom-file))))
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+            (if (file-exists-p (expand-file-name "custom.el"))
+                (load-file custom-file))))
 
+(global-set-key [f9] #'lispy-mode)
 (add-hook 'emacs-startup-hook (lambda ()
                                 (setq gc-cons-threshold 16777216
                                       gc-cons-percentage 0.1)))

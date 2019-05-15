@@ -25,6 +25,12 @@
        ((eq 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
        (t nil)))))
 
+(defun fwar34/lispy-state ()
+  "Display lispy mode in modeline"
+  '(:eval
+    (unless lispy-mode
+        (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face))))
+
 ;; reference from spaceline
 (setq window-number
       ;; "The current window number.
@@ -235,6 +241,7 @@
        ;; evil state
        " "
        (fwar34/evil-state)
+       (fwar34/lispy-state)
        " "
        ;; git info
        '(:eval (when (> (window-width) 90)

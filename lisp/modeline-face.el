@@ -114,7 +114,7 @@
     (t :weight bold :underline t))
   "Font Lock mode face used to highlight type and classes."
   :group 'font-lock-evil-faces)
-(defface font-lock-emacs-face
+(defface font-lock-evil-emacs-face
   '((((class grayscale) (background light))
      :foreground "LightGray" :weight bold :underline t)
     (((class grayscale) (background dark))

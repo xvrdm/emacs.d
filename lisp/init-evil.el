@@ -45,27 +45,6 @@
 ;; (evil-set-initial-state 'fundamental-mode 'emacs)
 ;; (define-key evil-emacs-state-map (kbd "q") 'quit-window)
 
-;; (evil-set-initial-state 'git-commit-mode 'insert) ;; enter insert mode to edit a commit message
-;; (evil-set-initial-state 'dired-mode 'emacs) ;; enter insert mode to edit a commit message
-;; Here is a handy loop to define more at once
-;; (loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
-;;                               (nrepl-mode . insert)
-;;                               (pylookup-mode . emacs)
-;;                               (comint-mode . normal)
-;;                               (shell-mode . insert)
-;;                               (git-commit-mode . insert)
-;;                               (git-rebase-mode . emacs)
-;;                               (term-mode . emacs)
-;;                               (help-mode . emacs)
-;;                               (helm-grep-mode . emacs)
-;;                               (grep-mode . emacs)
-;;                               (bc-menu-mode . emacs)
-;;                               (magit-branch-manager-mode . emacs)
-;;                               (rdictcc-buffer-mode . emacs)
-;;                               (dired-mode . emacs)
-;;                               (wdired-mode . normal))
-;;       do (evil-set-initial-state mode state))
-
 ;; TAB and C-i is the same
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
 (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
@@ -73,7 +52,7 @@
 ;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)
 ;; (define-key evil-normal-state-map (kbd "M-i") 'fa-show)
 (define-key evil-normal-state-map (kbd "M-u") 'fix-word-upcase)
-(define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
+;; (define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
 (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
 ;; (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
 ;; (define-key evil-normal-state-map (kbd "[rc") 'clipboard-yank)
@@ -116,7 +95,7 @@
   "gl" 'outline-next-visible-heading
   "gj" 'outline-forward-same-level
   "gk" 'outline-backward-same-level
-    (kbd "TAB") 'org-cycle)
+  (kbd "TAB") 'org-cycle)
 
 ;; I prefer Emacs way after pressing ":" in evil-mode
 (define-key evil-ex-completion-map (kbd "C-a") 'evil-first-non-blank)
@@ -722,7 +701,7 @@
                     "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
-                    "ae" 'ace-jump-mode
+                    "ee" 'ace-jump-mode
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin

@@ -106,8 +106,7 @@
   :ensure t
   :commands eshell
   :init
-  (progn
-    (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias")))
+  (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
   :hook
   (eshell-mode . company-mode)
   :config
@@ -119,8 +118,11 @@
     (add-hook 'eshell-mode-hook
               (lambda ()(eshell-cmpl-initialize)))
     (add-hook 'eshell-mode-hook (lambda ()
-                                  (setq-local global-hl-line-mode nil)))
-    )
+                                  (setq-local global-hl-line-mode nil))))
+  (evil-set-initial-state 'eshell-mode 'emacs)
+  (add-hook 'eshell-mode-hook (lambda ()
+                                (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)))
+  
   ;; (add-hook 'eshell-mode-hook 'company-mode)
   :bind
   (;; ([remap samray/smarter-move-beginning-of-line] . eshell-bol)
