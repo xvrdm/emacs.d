@@ -28,8 +28,9 @@
 (defun fwar34/lispy-state ()
   "Display lispy mode in modeline"
   '(:eval
-    (unless lispy-mode
-        (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face))))
+    (and (not (eq major-mode 'dired-mode)) (not lispy-mode)
+          (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face))
+        ))
 
 ;; reference from spaceline
 (setq window-number
@@ -297,6 +298,6 @@
 ;; (set-face-background 'fringe "#809088")
 
 ;; Here 's how I get a box around the active mode-line :
-(custom-set-faces '(mode-line ((t (:box (:line-width 2 :color "red"))))))
+;; (custom-set-faces '(mode-line ((t (:box (:line-width 2 :color "red"))))))
 
 (provide 'init-my-modeline)

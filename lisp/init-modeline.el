@@ -3,20 +3,6 @@
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
-(use-package powerline
-  :disabled
-  :ensure t
-  :delight
-  :config
-  ;; (powerline-default-theme)
-  ;; (powerline-center-theme)
-  ;; (powerline-center-evil-theme)
-  ;; (powerline-vim-theme)
-  ;; (powerline-evil-center-color-theme)
-  ;; (powerline-evil-vim-theme)
-  ;; (powerline-evil-vim-color-theme)
-  ;; (powerline-nano-theme)
-  )
 
 (use-package telephone-line
   :disabled
@@ -27,18 +13,17 @@
   (telephone-line-mode t)
   )
 
-(unless window-system
-  (add-hook 'after-init-hook
-            (lambda () (require 'init-my-modeline))))
 
 ;; (use-package init-my-modeline
 ;;   :load-path "lisp"
-;;   :unless window-system
+;;   ;; :unless window-system
 ;;   )
+
+(add-hook 'after-init-hook (lambda () (require 'init-my-modeline)))
 
 ;; spaceline
 (use-package spaceline
-  ;; :disabled
+  :disabled
   :ensure t
   :if window-system
   :config
