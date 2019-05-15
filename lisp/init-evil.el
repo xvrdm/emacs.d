@@ -145,27 +145,25 @@
 
 ;; https://github.com/noctuid/evil-guide#default-keybindings-and-getting-help
 ;; Command Properties :jump
-(mapcar (lambda (func) (evil-add-command-properties func :jump t))
-        '(ivy-switch-buffer 
-          counsel-gtags-dwim
-          counsel-gtags-find-definition
-          counsel-gtags-find-symbol
-          counsel-gtags-find-file
-          counsel-gtags-go-forward
-          counsel-gtags-go-backward
-          counsel-find-file
-          counsel-imenu
-          beginning-of-defun
-          dired-single-buffer
-          end-of-defun))
-;; (mapcar (lambda (con) (evil-add-command-properties (car con) :jump (cdr con)))
-;;         '((ivy-switch-buffer t)
-;;           (counsel-gtags-dwim t)
-;;           (counsel-gtags-find-definition t) 
-;;           (counsel-imenu t)))
+(dolist (con '(ivy-switch-buffer 
+               counsel-gtags-dwim
+               counsel-gtags-find-definition
+               counsel-gtags-find-symbol
+               counsel-gtags-find-file
+               counsel-gtags-go-forward
+               counsel-gtags-go-backward
+               counsel-find-file
+               counsel-imenu
+               beginning-of-defun
+               dired-single-buffer
+               end-of-defun))
+  (evil-add-command-properties con :jump t))
+;; (dolist (con '((ivy-switch-buffer . t)
+;;                (counsel-gtags-dwim . t)))
+;;   (evil-add-command-properties (car con) :jump (cdr con)))
 
 ;; {{ Use `;` as one leader key
- (general-define-key :keymaps '(normal insert visual emacs)
+(general-define-key :keymaps '(normal insert visual emacs)
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
                     :non-normal-prefix "M-;"
