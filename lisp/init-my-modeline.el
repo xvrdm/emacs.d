@@ -28,9 +28,9 @@
 (defun fwar34/lispy-state ()
   "Display lispy mode in modeline"
   '(:eval
-    (and (not (eq major-mode 'dired-mode)) (not lispy-mode)
-          (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face))
-        ))
+    (let ((disabled-mode '(dired-mode eshell-mode)))
+      (and (not (memq major-mode disabled-mode)) (not lispy-mode)
+           (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
 ;; reference from spaceline
 (setq window-number
