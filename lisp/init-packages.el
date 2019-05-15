@@ -909,20 +909,4 @@
   ;; toggle-company-english-helper
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; put these at bottom of this file
-;; because i put some modes in this use-package code
-;; block which not want to display in modeline
-(use-package delight
-  :disabled
-  :ensure t
-  :delight
-  :delight page-break-lines-mode
-  :delight undo-tree-mode
-  :delight abbrev-mode
-  :delight eldoc-mode
-  :delight lsp-mode
-  :delight lsp
-  )
-
 (provide 'init-packages)

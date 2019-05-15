@@ -32,9 +32,7 @@
 (require 'init-ui)
 (require 'init-modeline)
 
-(with-eval-after-load 'evil
-  (require 'init-evil)
-  (require 'init-keybindings))
+(with-eval-after-load 'evil (require 'init-evil))
 (add-hook 'after-init-hook (lambda () (require 'init-company)))
 (add-hook 'after-init-hook (lambda () (require 'init-tags)))
 (add-hook 'after-init-hook (lambda () (require 'init-eshell)))
