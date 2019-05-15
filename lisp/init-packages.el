@@ -361,6 +361,9 @@
   ;;   (with-current-buffer "*Youdao Dictionary*"
   ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   (evil-define-key 'normal youdao-dictionary-mode-map "q" #'quit-window)
+  ;; (add-hook 'youdao-dictionary-mode-hook
+  ;;           (lambda ()
+  ;;             (define-key evil-normal-state-local-map (kbd "q") 'quit-window)))
   )
 
 (use-package go-mode
