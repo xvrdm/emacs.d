@@ -36,12 +36,17 @@
   ;; M-m
   (defhydra hydra-M-m (:color pink :hint nil)
     "
-    ^kill-ring^                  ^iedit-mode^   
-    ^^^^^^^^---------------------------------------
-    _p_: paste from clipboard    _ie_: iedit mode
+    ^kill-ring^                  ^iedit-mode^        ^fix-word^
+    ^^^^^^^^-----------------------------------------------------
+    _p_: paste from clipboard    _ie_: iedit mode    _u_: fix-word-upcase
+    ^ ^                          ^  ^                _d_: fix-word-downcase
+    ^ ^                          ^  ^                _c_: fix-word-capitalize
     "
     ("p" clipboard-yank)
     ("ie" iedit-mode)
+    ("u" fix-word-upcase)
+    ("d" fix-word-downcase)
+    ("c" fix-word-capitalize)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-l") #'hydra-M-m/body)
   )

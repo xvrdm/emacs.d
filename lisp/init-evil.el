@@ -51,9 +51,9 @@
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 ;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)
 ;; (define-key evil-normal-state-map (kbd "M-i") 'fa-show)
-(define-key evil-normal-state-map (kbd "M-u") 'fix-word-upcase)
+;; (define-key evil-normal-state-map (kbd "M-u") 'fix-word-upcase)
 ;; (define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
-(define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
+;; (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
 ;; (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
 ;; (define-key evil-normal-state-map (kbd "[rc") 'clipboard-yank)
 
