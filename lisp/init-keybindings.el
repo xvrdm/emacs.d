@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; define my prefix C-y
 ;; (define-prefix-command 'ctl-y-map)
 ;; (global-set-key (kbd "C-y") 'ctl-y-map)

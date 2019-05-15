@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; encoding
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)

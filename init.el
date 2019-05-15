@@ -1,11 +1,14 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; (require 'org-install)
 ;; (require 'ob-tangle)
 ;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
+;; (setq gc-cons-threshold (* 2 1000 1000))
 
 ;; this is master write
 ;; master write 2
 
-(setq gc-cons-threshold (* 500 1000 1000))
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
 
 ;; http://www.sohu.com/a/301863132_100034897
 ;; -q ignores personal Emacs files but loads the site files.
@@ -45,5 +48,7 @@
                              (if (file-exists-p (expand-file-name "custom.el"))
                                  (load-file custom-file))))
 
-(setq gc-cons-threshold (* 2 1000 1000))
+(add-hook 'emacs-startup-hook (lambda ()
+                                (setq gc-cons-threshold 16777216
+                                      gc-cons-percentage 0.1)))
 ;; ycmd write 2

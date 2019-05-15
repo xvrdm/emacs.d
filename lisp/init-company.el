@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 (add-hook 'after-init-hook 'global-company-mode)
 
 (if (fboundp 'evil-declare-change-repeat)

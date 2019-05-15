@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 (when (>= emacs-major-version 24)
   (require 'package)
   (if (< emacs-major-version 27) (package-initialize))

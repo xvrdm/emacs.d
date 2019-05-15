@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; evil leader key
 ;; (setq evil-leader/in-all-states t)
 

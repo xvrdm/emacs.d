@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;;-------------------------------------------------------------
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246

@@ -1,3 +1,4 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; init eshell
 
 ;; https://emacs-china.org/t/topic/4579
