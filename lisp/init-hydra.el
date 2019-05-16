@@ -11,6 +11,7 @@
   (global-set-key (kbd "M-u") 'M-u-map)
   :config
 
+  ;;-------------------------------------------------------------
   ;; vi
   (defun hydra-vi/pre ()
     (set-cursor-color "#e52b50"))
@@ -24,13 +25,15 @@
                     ("j" next-line)
                     ("k" previous-line)
                     ("m" set-mark-command "mark")
-                    ("a" move-beginning-of-line "beg")
+                    ;; ("a" move-beginning-of-line "beg")
+                    ("a" evil-first-non-blank "beg")
                     ("e" move-end-of-line "end")
                     ("d" delete-region "del" :color blue)
                     ("y" kill-ring-save "yank" :color blue)
                     ("q" nil "quit")))
   (hydra-set-property 'hydra-vi :verbosity 1)
-    
+  
+  ;;-------------------------------------------------------------
   ;; window
   (defhydra hydra-window
     (:color red :hint nil)
@@ -55,6 +58,7 @@
     ("q" nil "quit menu" :color blue :column nil))
   (global-set-key (kbd "M-u w") #'hydra-window/body)
 
+  ;;-------------------------------------------------------------
   ;; org
   (defhydra hydra-org (:color red :hint nil)
     "
@@ -73,9 +77,11 @@
     ("oc" org-capture)
     ("q" nil "cancel" :color bule)
     )
-  (evil-define-key 'normal org-mode-map "M-u o" #'hydra-org/body)
-  ;; (define-key org-mode-map "M-u og" 'hydra-org/body) 
+  ;; (evil-define-key 'normal org-mode-map "M-u o" #'hydra-org/body)
+  (with-eval-after-load 'org
+    (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
+  ;;-------------------------------------------------------------
   ;; fwar34
   (defhydra hydra-fwar34 (:columns 3 :exit t)
     "
@@ -86,6 +92,7 @@
     ("q" nil "cancale" :color blue))
   (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
 
+  ;;-------------------------------------------------------------
   ;; M-um
   (defhydra hydra-M-um (:color pink :hint nil)
     "
@@ -103,6 +110,7 @@
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u m") #'hydra-M-um/body)
 
+  ;;-------------------------------------------------------------
   ;; apropos
   (defhydra hydra-apropos (:color blue :hint nil)
     "
@@ -119,6 +127,7 @@
     ("e" apropos-value))
   (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
 
+  ;;-------------------------------------------------------------
   ;; agenda
   (defhydra hydra-org-agenda-view (:hint none)
     "
@@ -150,8 +159,10 @@
            (message "Display now includes inactive timestamps as well")))
     ("q" (message "Abort") :exit t)
     ("v" nil))
-  (define-key org-agenda-mode-map "M-u ag" 'hydra-org-agenda-view/body)
+  (with-eval-after-load 'org-agenda
+    (define-key org-agenda-mode-map (kbd "M-u ag") 'hydra-org-agenda-view/body))
 
+  ;;-------------------------------------------------------------
   ;; pyim
   (defhydra hydra-pyim (:color pink :hint nil)
     "
@@ -163,6 +174,7 @@
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u y") #'hydra-pyim/body)
 
+  ;;-------------------------------------------------------------
   (require 'windmove)
   (defun hydra-move-splitter-left (arg)
     "Move window splitter left."
@@ -204,6 +216,7 @@
     ("l" hydra-move-splitter-right))
   (global-set-key (kbd "M-u sp") #'hydra-splitter/body)
 
+  ;;-------------------------------------------------------------
   ;; jump to error
   (defhydra hydra-error ()
     "goto-error"
