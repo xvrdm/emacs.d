@@ -128,4 +128,11 @@
   "Font Lock mode face used to highlight constants and labels."
   :group 'font-lock-evil-faces)
 
+(defface spaceline-highlight-face
+  `((t (:background "DarkGoldenrod2"
+        :foreground "#3E3D31"
+        :inherit 'mode-line)))
+  "Default highlight face for spaceline."
+  :group 'spaceline)
+
 (provide 'modeline-face)

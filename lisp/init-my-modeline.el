@@ -17,7 +17,8 @@
   '(:eval
     (when (bound-and-true-p evil-local-mode)
       (cond
-       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
+       ;; ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
+       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'spaceline-highlight-face))
        ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
        ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
        ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
