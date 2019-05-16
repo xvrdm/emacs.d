@@ -28,7 +28,7 @@
 (defun fwar34/lispy-state ()
   "Display lispy mode in modeline"
   '(:eval
-    (let ((disabled-mode '(dired-mode eshell-mode)))
+    (let ((disabled-mode '(dired-mode eshell-mode org-mode package-menu-mode)))
       (and (not (memq major-mode disabled-mode)) (not lispy-mode)
            (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
