@@ -50,7 +50,7 @@
 (use-package monokai-theme
   :ensure t
   :config
-  (if (and (eq system-type 'windows-nt) (> emacs-major-version 24))
+  (if (and (equal system-type 'windows-nt) (> emacs-major-version 24))
       (add-hook 'window-setup-hook '(lambda () (load-theme 'monokai t)))
     (add-hook 'after-init-hook '(lambda () (load-theme 'monokai t))))
   (setq monokai-height-minus-1 0.8
@@ -284,7 +284,7 @@
 
 (use-package powershell
   :ensure t
-  :if (eq system-type 'windows-nt)
+  :if (equal system-type 'windows-nt)
   :defer t
   )
 
@@ -307,7 +307,7 @@
 
 (use-package fzf
   :ensure t
-  :unless (eq system-type 'windows-nt)
+  :unless (equal system-type 'windows-nt)
   :defer t
   )
 

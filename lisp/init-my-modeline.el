@@ -17,18 +17,18 @@
   '(:eval
     (when (bound-and-true-p evil-local-mode)
       (cond
-       ((eq 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
-       ((eq 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
-       ((eq 'replace evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
-       ((eq 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
-       ((eq 'operator evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
-       ((eq 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
+       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
+       ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
+       ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
+       ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
+       ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
+       ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
        (t nil)))))
 
 (defun fwar34/lispy-state ()
   "Display lispy mode in modeline"
   '(:eval
-    (let ((disabled-mode '(dired-mode eshell-mode org-mode package-menu-mode)))
+    (let ((disabled-mode '(dired-mode eshell-mode org-mode package-menu-mode special-mode)))
       (and (not (member major-mode disabled-mode)) (not (bound-and-true-p lispy-mode))
            (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
