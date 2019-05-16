@@ -77,9 +77,9 @@
     ("oc" org-capture)
     ("q" nil "cancel" :color bule)
     )
-  ;; (evil-define-key 'normal org-mode-map "M-u o" #'hydra-org/body)
-  (with-eval-after-load 'org
-    (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
+  (evil-define-key 'normal org-mode-map "M-u o" #'hydra-org/body)
+  ;; (with-eval-after-load 'org
+  ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
   ;;-------------------------------------------------------------
   ;; fwar34
