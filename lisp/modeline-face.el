@@ -128,11 +128,29 @@
   "Font Lock mode face used to highlight constants and labels."
   :group 'font-lock-evil-faces)
 
-(defface spaceline-highlight-face
-  `((t (:background "DarkGoldenrod2"
-        :foreground "#3E3D31"
-        :inherit 'mode-line)))
-  "Default highlight face for spaceline."
-  :group 'spaceline)
+;; (defface spaceline-highlight-face
+;;   `((t (:background "DarkGoldenrod2"
+;;         :foreground "#3E3D31"
+;;         :inherit 'mode-line)))
+;;   "Default highlight face for spaceline."
+;;   :group 'spaceline)
+
+;; Define various other highlight faces
+(dolist (s '((spaceline-evil-normal "DarkGoldenrod2" "Evil normal state face.")
+             (spaceline-evil-insert "chartreuse3" "Evil insert state face.")
+             (spaceline-evil-emacs "SkyBlue2" "Evil emacs state face.")
+             (spaceline-evil-replace "chocolate" "Evil replace state face.")
+             (spaceline-evil-visual "gray" "Evil visual state face.")
+             (spaceline-evil-motion "plum3" "Evil motion state face.")
+             (spaceline-unmodified "DarkGoldenrod2" "Unmodified buffer face.")
+             (spaceline-modified "SkyBlue2" "Modified buffer face.")
+             (spaceline-read-only "plum3" "Read-only buffer face.")))
+  (eval `(defface ,(nth 0 s)
+           `((t (:background ,(nth 1 s)
+                 :foreground "#3E3D31"
+                 :inherit 'mode-line)))
+           ,(nth 2 s)
+           :group 'spaceline)))
+
 
 (provide 'modeline-face)
