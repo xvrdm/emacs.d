@@ -90,7 +90,8 @@
     ("li" fwar34/insert-lisp-commit "lisp commit")
     ("py" fwar34/insert-python "python commit")
     ("q" nil "cancale" :color blue))
-  (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
+  ;; (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
+  (evil-define-key '(normal insert) 'global (kbd "M-u f") #'hydra-fwar34/body)
 
   ;;-------------------------------------------------------------
   ;; M-um

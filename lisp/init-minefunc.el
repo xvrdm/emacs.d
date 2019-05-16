@@ -150,23 +150,23 @@ want to use in the modeline *in lieu of* the original.")
 ;; highlight call function exculde (if,else,while,for)
 ;; https://www.emacswiki.org/emacs/AddKeywords
 ;; https://www.emacswiki.org/emacs/FontLockKeywords
-(font-lock-add-keywords
- 'c-mode
- ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
- '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
+;; (font-lock-add-keywords
+;;  'c-mode
+;;  ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
+;;  '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
 
-(font-lock-add-keywords
- 'c-mode
- '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
+;; (font-lock-add-keywords
+;;  'c-mode
+;;  '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
 
-(font-lock-add-keywords
- 'c++-mode
- ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
- '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
+;; (font-lock-add-keywords
+;;  'c++-mode
+;;  ;; '(("\\<\\(\\sw+\\) ?(" 1 'company-echo-common)))
+;;  '(("\\<\\(\\sw+\\) *(" 1 'font-lock-function-name-face)))
 
-(font-lock-add-keywords
- 'c++-mode
- '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
+;; (font-lock-add-keywords
+;;  'c++-mode
+;;  '(("\\<\\(if\\|for\\|switch\\|while\\)\\>" . 'font-lock-keyword-face)))
 
 ;; A highlighting printf format specifier like vim
 ;; https://www.emacswiki.org/emacs/AddKeywords
@@ -184,8 +184,7 @@ want to use in the modeline *in lieu of* the original.")
             (font-lock-add-keywords nil
                                     '(("[^%]\\(%\\([[:digit:]]+\\$\\)?[-+' #0*]*\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\(\\.\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?\\([hlLjzt]\\|ll\\|hh\\)?\\([aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)"
                                        1 font-lock-format-specifier-face t)
-                                      ("\\(%%\\)" 
-                                       1 font-lock-format-specifier-face t)) )))
+                                      ("\\(%%\\)" 1 font-lock-format-specifier-face t)))))
 
 ;; http://maskray.me/blog/2017-12-03-c++-language-server-cquery
 ;; C/C++ mode hook在项目根目录有compile_commands.json时自动启用`lsp-cquery-enable
