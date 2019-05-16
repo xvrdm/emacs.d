@@ -61,9 +61,6 @@
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
 (evil-define-key 'normal package-menu-mode-map "s" #'swiper)
 
-;; evil setting
-;; (evil-mode)
-
 ;; evil-surround setting
 (global-evil-surround-mode)
 
