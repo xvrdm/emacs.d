@@ -15,7 +15,7 @@
      ;; @see https://github.com/company-mode/company-mode/issues/348
      (company-statistics-mode)
 
-     (add-to-list 'company-backends 'company-cmake)
+     ;; (add-to-list 'company-backends 'company-cmake)
      (add-to-list 'company-backends 'company-c-headers)
      ;; can't work with TRAMP
      (setq company-backends (delete 'company-ropemacs company-backends))
@@ -59,8 +59,8 @@
      ;; company-mode，可以使用数字键来选取 condicates
      (defun ora-company-number ()
        "Forward to `company-complete-number'.
-Unless the number is potentially part of the candidate.
-In that case, insert the number."
+        Unless the number is potentially part of the candidate.
+        In that case, insert the number."
        (interactive)
        (let* ((k (this-command-keys))
               (re (concat "^" company-prefix k)))

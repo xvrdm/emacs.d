@@ -13,11 +13,13 @@
 
 ;; dired-imenu
 (use-package dired-imenu
+  :disabled
   :after dired
   :ensure t
   )
 
 (use-package dired-rainbow
+  :disabled
   :ensure t
   :after dired
   :commands dired-rainbow-define dired-rainbow-define-chmod
@@ -56,7 +58,7 @@
   )
 
 (use-package dired-k
-  :defer
+  :after dired
   :ensure t
   :config
   ;; always execute dired-k when dired buffer is opened
