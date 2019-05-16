@@ -9,6 +9,31 @@
   (define-prefix-command 'M-u-map)
   (global-set-key (kbd "M-u") 'M-u-map)
   :config
+    
+  ;; window
+  (defhydra hydra-window
+    (:color red :hint nil)
+    "
+                               -- WINDOW MENU --
+    "
+    
+    ("z" ace-window "ace" :color blue :column "1-Switch")
+    ("h" windmove-left "← window")
+    ("j" windmove-down "↓ window")
+    ("k" windmove-up "↑ window")
+    ("l" windmove-right "→ window")
+    ("s" split-window-below "split window" :color blue :column "2-Split Management")
+    ("v" split-window-right "split window vertically" :color blue)
+    ("d" delete-window "delete current window")
+    ("f" follow-mode "toogle follow mode")
+    ("u" winner-undo "undo window conf" :column "3-Undo/Redo")
+    ("r" winner-redo "redo window conf")
+    ("b" balance-windows "balance window height" :column "4-Sizing")
+    ("m" maximize-window "maximize current window")
+    ("M" minimize-window "minimize current window")
+    ("q" nil "quit menu" :color blue :column nil))
+  (global-set-key (kbd "M-u w") #'hydra-pyim/body)
+
   ;; org
   (defhydra hydra-org (:color red :hint nil)
     "
@@ -28,8 +53,9 @@
     ("q" nil "cancel" :color bule)
     )
   (evil-define-key 'normal org-mode-map ",o" #'hydra-org/body)
+
   ;; fwar34
-  (defhydra hydra-fwar34 (:color blue)
+  (defhydra hydra-fwar34 (:color blue :columns 3)
     "fwar34 commands"
     ("li" fwar34/insert-lisp-commit "lisp commit")
     ("py" fwar34/insert-python "python commit")
@@ -52,6 +78,7 @@
     ("c" fix-word-capitalize)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u m") #'hydra-M-um/body)
+
   ;; pyim
   (defhydra hydra-pyim (:color pink :hint nil)
     "
