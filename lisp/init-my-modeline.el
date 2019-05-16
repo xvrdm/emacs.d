@@ -37,7 +37,7 @@
   '(:eval
     (let ((enable-mode '(emacs-lisp-mode lisp-interaction-mode)))
       (and (member major-mode enable-mode) (not (bound-and-true-p lispy-mode))
-           (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
+           (propertize " PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
 ;; reference from spaceline
 (setq window-number
