@@ -29,7 +29,7 @@
   "Display lispy mode in modeline"
   '(:eval
     (let ((disabled-mode '(dired-mode eshell-mode org-mode package-menu-mode)))
-      (and (not (memq major-mode disabled-mode)) (not lispy-mode)
+      (and (not (memq major-mode disabled-mode)) (not (bound-and-true-p lispy-mode))
            (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
 ;; reference from spaceline
