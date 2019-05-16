@@ -29,7 +29,7 @@
   "Display lispy mode in modeline"
   '(:eval
     (let ((disabled-mode '(dired-mode eshell-mode org-mode package-menu-mode)))
-      (and (not (memq major-mode disabled-mode)) (not (bound-and-true-p lispy-mode))
+      (and (not (member major-mode disabled-mode)) (not (bound-and-true-p lispy-mode))
            (propertize "PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
 ;; reference from spaceline
@@ -210,7 +210,7 @@
                (1 "CRLF ")
                (2 "CR "))
              (let ((sys (coding-system-plist buffer-file-coding-system)))
-               (if (memq (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
+               (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
                "UTF-8"
                  (upcase (symbol-name (plist-get sys :name)))))
              )))))
