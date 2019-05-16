@@ -9,6 +9,28 @@
   (define-prefix-command 'M-u-map)
   (global-set-key (kbd "M-u") 'M-u-map)
   :config
+
+  ;; test
+  (defun hydra-vi/pre ()
+    (set-cursor-color "#e52b50"))
+
+  (defun hydra-vi/post ()
+    (set-cursor-color "#ffffff"))
+  (global-set-key
+   (kbd "M-u z")
+   (defhydra hydra-vi (:pre hydra-vi/pre :post hydra-vi/post :color amaranth)
+     "vi"
+     ("l" forward-char)
+     ("h" backward-char)
+     ("j" next-line)
+     ("k" previous-line)
+     ("m" set-mark-command "mark")
+     ("a" move-beginning-of-line "beg")
+     ("e" move-end-of-line "end")
+     ("d" delete-region "del" :color blue)
+     ("y" kill-ring-save "yank" :color blue)
+     ("q" nil "quit")))
+    (hydra-set-property 'hydra-vi :verbosity 1)
     
   ;; window
   (defhydra hydra-window
@@ -32,7 +54,7 @@
     ("m" maximize-window "maximize current window")
     ("M" minimize-window "minimize current window")
     ("q" nil "quit menu" :color blue :column nil))
-  (global-set-key (kbd "M-u w") #'hydra-pyim/body)
+  (global-set-key (kbd "M-u w") #'hydra-window/body)
 
   ;; org
   (defhydra hydra-org (:color red :hint nil)
@@ -54,9 +76,12 @@
     )
   (evil-define-key 'normal org-mode-map ",o" #'hydra-org/body)
 
+  
   ;; fwar34
   (defhydra hydra-fwar34 (:color blue :columns 3)
-    "fwar34 commands"
+    "
+            -- MY COMMANDS --
+    "
     ("li" fwar34/insert-lisp-commit "lisp commit")
     ("py" fwar34/insert-python "python commit")
     ("q" nil "cancale" :color blue))
@@ -88,7 +113,6 @@
     "
     ("se" (lambda () (set-input-method "pyim")))
     ("q" nil "cancale" :color blue))
-  (global-set-key (kbd "M-u y") #'hydra-pyim/body)
-  )
+  (global-set-key (kbd "M-u y") #'hydra-pyim/body))
 
 (provide 'init-hydra)
