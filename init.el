@@ -39,8 +39,9 @@
 (add-hook 'after-init-hook (lambda () (require 'init-dired)))
 (add-hook 'after-init-hook (lambda () (require 'init-org)))
 (add-hook 'after-init-hook (lambda () (require 'init-better-default)))
-;; (add-hook 'after-init-hook (lambda () (require 'init-keybindings)))
-(add-hook 'after-init-hook (lambda () (require 'init-minefunc)))
+(add-hook 'after-init-hook (lambda ()
+                             (require 'init-minefunc)
+                             (require 'init-c)))
 (add-hook 'after-init-hook
           (lambda ()
             (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
