@@ -281,7 +281,7 @@
        ;; flycheck-status-mode-line
        "%1 "
        my-flycheck-mode-line
-       (mode-line-fill 'mode-line 16)
+       (mode-line-fill 'mode-line 22)
        encoding-mode-line
        " "
        ;; "["
