@@ -1,10 +1,13 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; evil leader key
-;; (setq evil-leader/in-all-states t)
 
-;; (global-evil-leader-mode)
-;; (evil-leader/set-key
-;; (evil-leader/set-leader ";")
+(use-package evil-plugins
+  :disabled
+  :after evil
+  :straight
+  (:host github :repo "tarao/evil-plugins")
+  :config
+  (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
+  )
 
 ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
 ;; (setq-default evil-search-module 'evil-search)
@@ -49,15 +52,7 @@
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
 (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
-;; (define-key evil-normal-state-map (kbd "SPC-qq") 'save-buffers-kill-terminal)
-;; (define-key evil-normal-state-map (kbd "M-i") 'fa-show)
-;; (define-key evil-normal-state-map (kbd "M-u") 'fix-word-upcase)
-;; (define-key evil-normal-state-map (kbd "M-l") 'fix-word-downcase)
-;; (define-key evil-normal-state-map (kbd "M-c") 'fix-word-capitalize)
-;; (define-key evil-normal-state-map (kbd "M-g") 'fa-abort)
-;; (define-key evil-normal-state-map (kbd "[rc") 'clipboard-yank)
-
-(define-key evil-visual-state-map "gg" 'evil-change-to-previous-state)
+(define-key evil-visual-state-map (kbd "gg") 'evil-change-to-previous-state)
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
 (evil-define-key 'normal package-menu-mode-map "s" #'swiper)
 

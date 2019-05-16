@@ -111,6 +111,9 @@
     ("c" fix-word-capitalize :exit t)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u m") #'hydra-M-um/body)
+  ;; (define-key evil-ex-completion-map (kbd "M-u m") #'hydra-M-um/body)
+  ;; (define-key evil-ex-search-keymap (kbd "M-u m") #'hydra-M-um/body)
+
 
   ;;-------------------------------------------------------------
   ;; apropos
