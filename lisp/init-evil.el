@@ -702,6 +702,8 @@
                     ;; "ps" 'projectile-speedbar-toggle
                     "ar" 'align-regexp
                     "ee" 'ace-jump-mode
+                    "ec" 'ace-jump-char-mode
+                    "el" 'ace-jump-line-mode
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin

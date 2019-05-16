@@ -87,7 +87,7 @@
                        ess-mode-hook)))  
       (setq-default display-line-numbers-width 2)
       (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
-      (setq-default display-line-numbers-type 'relative)
+      ;; (setq-default display-line-numbers-type 'relative)
       (setq display-line-numbers-current-absolute t)
       (dolist (hook-element hook-list)
         (add-hook hook-element 'display-line-numbers-mode)))
