@@ -137,6 +137,7 @@
   (setq evil-want-fine-undo "Yes")
   (setq evil-want-Y-yank-to-eol t)
 
+  (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
   ;; for quit shell-command output buffer
   ;; (defun my-quit-window (&rest _)
   ;;   (with-current-buffer "*Shell Command Output*"

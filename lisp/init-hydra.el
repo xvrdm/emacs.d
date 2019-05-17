@@ -114,22 +114,23 @@
   ;; (define-key evil-ex-completion-map (kbd "M-u m") #'hydra-M-um/body)
   ;; (define-key evil-ex-search-keymap (kbd "M-u m") #'hydra-M-um/body)
 
-
   ;;-------------------------------------------------------------
   ;; apropos
   (defhydra hydra-apropos (:color blue :hint nil)
-    "
-    _a_propos        _c_ommand
-    _d_ocumentation  _l_ibrary
-    _v_ariable       _u_ser-option
-    ^ ^          valu_e_"
-    ("a" apropos)
-    ("d" apropos-documentation)
-    ("v" apropos-variable)
-    ("c" apropos-command)
-    ("l" apropos-library)
-    ("u" apropos-user-option)
-    ("e" apropos-value))
+    ;; "
+    ;; _a_propos        _c_ommand
+    ;; _d_ocumentation  _l_ibrary
+    ;; _v_ariable       _u_ser-option
+    ;; ^ ^          valu_e_"
+    ("a" apropos "apropos" :column "Apropos")
+    ("d" apropos-documentation "documentation")
+    ("v" apropos-variable "variable")
+    ("c" apropos-command "command")
+    ("l" apropos-library "library")
+    ("u" apropos-user-option "user-option")
+    ("e" apropos-value "value")
+    ("q" nil "cancel" :exit t :column nil)
+    )
   (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
 
   ;;-------------------------------------------------------------
