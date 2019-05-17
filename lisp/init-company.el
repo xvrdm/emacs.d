@@ -106,7 +106,7 @@
 
 ;; message-mode use company-bbdb.
 ;; So we should NOT turn on company-ispell
-(add-hook 'org-mode-hook 'company-ispell-setup)
+;; (add-hook 'org-mode-hook 'company-ispell-setup)
 ;; }}
 
 (eval-after-load 'company-etags
