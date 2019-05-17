@@ -61,6 +61,40 @@
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
   )
+
+;; (use-package monokai-pro-theme
+;;   :disabled
+;;   :ensure t
+;;   :config
+;;   (load-theme 'monokai-pro t)
+;;   )
+
+;; (use-package darkokai-theme
+;;   :disabled
+;;   :ensure t
+;;   :config
+;;   (load-theme 'darkokai t)
+;;   )
+
+;; (use-package monokai-alt-theme
+;;   :disabled
+;;   :ensure t
+;;   :config
+;;   )
+
+;; (use-package color-theme-almost-monokai
+;;   :disabled
+;;   :load-path "lisp"
+;;   :config
+;;   (color-theme-almost-monokai)
+;;   )
+
+;; (use-package color-theme-molokai
+;;   :straight
+;;   (:host github :repo "alloy-d/color-theme-molokai")
+;;   :config
+;;   (color-theme-molokai)
+;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (and (display-graphic-p) (>= emacs-major-version))
   (use-package posframe :ensure t))
