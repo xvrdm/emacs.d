@@ -73,11 +73,11 @@
     ("l" outline-next-visible-heading)
     ("j" outline-forward-same-level)
     ("k" outline-backward-same-level)
-    ("oa" org-agenda)
-    ("oc" org-capture)
+    ("oa" org-agenda :exit t)
+    ("oc" org-capture :exit t)
     ("q" nil "cancel" :color bule)
     )
-  (evil-define-key 'normal org-mode-map "M-u og" #'hydra-org/body)
+  (evil-define-key 'normal 'global (kbd "M-u og") #'hydra-org/body)
   ;; (with-eval-after-load 'org
   ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
@@ -91,7 +91,7 @@
     ("py" fwar34/insert-python "python commit")
     ("q" nil "cancale" :color blue))
   ;; (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
-  (evil-define-key '(normal insert) 'global (kbd "M-u f") #'hydra-fwar34/body)
+  (evil-define-key '(normal insert) 'global (kbd "M-u fw") #'hydra-fwar34/body)
 
   ;;-------------------------------------------------------------
   ;; M-um

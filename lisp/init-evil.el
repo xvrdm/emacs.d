@@ -1,10 +1,11 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(use-package evil-plugins
-  :disabled
+(use-package evil-ex-registers
+  ;; :disabled
   :after evil
-  :straight
-  (:host github :repo "tarao/evil-plugins")
+  :load-path "lisp"
+  ;; :straight
+  ;; (:host github :repo "tarao/evil-plugins")
   :config
   (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
   )
