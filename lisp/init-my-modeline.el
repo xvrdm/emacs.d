@@ -249,8 +249,11 @@
        ;; evil state
        " "
        (fwar34/evil-state)
+       " %1"
+       '(:eval (when (featurep 'lispyville)
+                 (lispyville-mode-line-string)))
        (fwar34/lispy-state)
-       " "
+       ;; " "
        ;; git info
        '(:eval (when (> (window-width) 90)
                  `(vc-mode vc-mode)
@@ -274,7 +277,6 @@
        my-modeline-major-mode 
        ;; '(:eval (when (> (window-width) 90)
        ;;           minor-mode-alist))
-
        " %1"
        file-status-mode-line
        ;; " "
