@@ -251,7 +251,7 @@
        (fwar34/evil-state)
        " %1"
        '(:eval (when (featurep 'lispyville)
-                 (lispyville-mode-line-string)))
+                 (lispyville-mode-line-string "@lispy-special@ ")))
        (fwar34/lispy-state)
        ;; " "
        ;; git info
