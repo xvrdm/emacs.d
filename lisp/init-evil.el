@@ -135,166 +135,10 @@
 ;;   (evil-add-command-properties (car con) :jump (cdr con)))
 
 ;; {{ Use `;` as one leader key
-(general-define-key :keymaps '(normal insert visual emacs)
+(general-define-key :keymaps '(normal visual)
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
-                    :non-normal-prefix "M-;"
-                    ;; switch window
-                    ;; "1" 'select-window-1
-                    ;; "2" 'select-window-2
-                    ;; "3" 'select-window-3
-                    ;; "4" 'select-window-4
-                    ;; "5" 'select-window-5
-                    ;; "6" 'select-window-6
-                    ;; "7" 'select-window-7
-                    "1" 'winum-select-window-1
-                    "2" 'winum-select-window-2
-                    "3" 'winum-select-window-3
-                    "4" 'winum-select-window-4
-                    "5" 'winum-select-window-5
-                    "6" 'winum-select-window-6
-                    "7" 'winum-select-window-7
-                    "dw" 'delete-window
-                    "xx" 'highlight-remove-all
-                    ;; "x1" 'delete-other-windows
-                    "x2" 'split-window-below
-                    "x3" 'split-window-right
-                    ;;
-                    "a" 'evil-first-non-blank
-                    "e" 'evil-end-of-line
-                    "SPC" 'counsel-M-x
-                    "TAB" 'other-window
-                    ;; highlight-symbol
-                    "hs" 'highlight-symbol
-                    "hn" 'highlight-symbol-next
-                    "hp" 'highlight-symbol-prev
-                    "hr" 'highlight-symbol-query-replace
-                    "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
-                    ;;
-                    "ia" 'my-append-semicolon-excursion
-                    "ic" 'fwar34/insert-python
-                    ;; "ia" 'my-append-semicolon-marker
-                    "do" 'delete-other-windows
-                    "ff" 'counsel-find-file
-                    "fd" 'my-display-full-path-of-current-buffer
-                    "fb" 'beginning-of-defun
-                    "fz" 'counsel-fzf
-                    ;; "wf" 'popup-which-function
-                    ;; "ww" 'narrow-or-widen-dwim
-                    "ii" 'counsel-imenu
-                    "tb" 'imenu-list-smart-toggle
-                    "xm" 'my-M-x
-                    ;; "bk" 'buf-move-up
-                    ;; "bj" 'buf-move-down
-                    ;; "bh" 'buf-move-left
-                    ;; "bl" 'buf-move-right
-                    "ss" 'swiper
-                    "sa" 'swiper-all
-                    "fs" 'occur-dwim
-                    "qq" 'quit-window
-                    "pa" 'evil-paste-after
-                    "pb" 'evil-paste-before
-                    ;; "hv" 'describe-variable
-                    "ge" 'goto-line
-                    "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-                    "gs" 'counsel-gtags-find-symbol
-                    "gr" 'counsel-gtags-find-reference
-                    "gu" 'counsel-gtags-update-tags
-                    "ud" 'undo-tree-visualize
-                    ;; "qg" 'counsel-etags-grep
-                    ;; "dd" 'counsel-etags-grep-symbol-at-point
-                    "fa" 'counsel-ag
-                    ;; "ha" 'helm-ag
-                    "fe" 'end-of-defun
-                    "fm" 'mark-defun
-                    ;; "sc" 'scratch
-                    ;; "jd" 'dumb-jump-go
-                    "jd" 'xref-find-definitions
-                    "jr" 'xref-find-references
-                    ;; "jb" 'dumb-jump-back
-                    "dj" 'dired-jump ;; open the dired from current file
-                    ;; "dj" 'counsel-dired
-                    "ht" 'counsel-etags-find-tag-at-point ; better than find-tag C-]
-                    "hr" 'counsel-etags-recent-tag
-                    "hf" 'counsel-etags-find-tag
-                    "hg" 'counsel-etags-grep
-
-                    ;; "bm" 'counsel-bookmark-goto
-                    ;; "br" 'counsel-browse-kill-ring
-                    "kr" 'browse-kill-ring
-                    "cf" 'counsel-grep  ; grep current buffer
-                    "cg" 'counsel-git   ; find file
-                    ;; "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
-                    ;; "cm" 'counsel-git-find-my-file
-                    ;; buffer ;;;;;
-                    "bk" 'kill-buffer
-                    ;; "bs" 'switch-to-buffer
-                    ;; "bs" 'counsel-switch-buffer
-                    "bs" 'ivy-switch-buffer
-                    "bp" 'switch-to-prev-buffer
-                    "bb" 'evil-buffer
-                    "zz" 'save-buffer
-                    ;; ;;;;;;;;;;;;;;;;;;;;;;;
-                    "fo" 'ff-find-other-file
-                    "mm" 'evil-jump-item
-                    "mf" 'mf/mirror-region-in-multifile
-                    "tt" 'neotree-toggle
-                    "yw" 'youdao-dictionary-search-at-point
-                    "yy" 'youdao-dictionary-search-at-point+
-                    "yd" 'youdao-dictionary-search-from-input
-                    ;; "er" 'er/expand-region
-                    ;; "rf" 'recentf-open-files
-                    ;; "rm" 'my-recent-file
-                    "rm" 'counsel-recentf
-                    "sf" 'isearch-forward-regexp
-                    "sb" 'isearch-backward-regexp
-                    "sr" 'replace-regexp
-                    "ci" 'evilnc-comment-or-uncomment-lines
-                    "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-                    ;; "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
-                    "cc" 'evilnc-copy-and-comment-lines
-                    "cp" 'evilnc-comment-or-uncomment-paragraphs
-                    "cr" 'comment-or-uncomment-region
-                    "cv" 'evilnc-toggle-invert-comment-line-by-line
-                    "."  'evilnc-copy-and-comment-operator
-                    "\\" 'evilnc-comment-operator ; if you prefer backslash key
-                    ;; Search character(s) at the beginning of word
-                    ;; See https://github.com/abo-abo/avy/issues/70
-                    ;; You can change the avy font-face in ~/.custom.el:
-                    ;;  (eval-after-load 'avy
-                    ;;   '(progn
-                    ;;      (set-face-attribute 'avy-lead-face-0 nil :foreground "black")
-                    ;;      (set-face-attribute 'avy-lead-face-0 nil :background "#f86bf3")))
-                    ;; ";" 'avy-goto-char-2
-                    ;; "w" 'avy-goto-word-or-subword-1
-                    ;; "a" 'avy-goto-char-timer
-                    ;; "db" 'sdcv-search-pointer ; in buffer
-                    ;; "dt" 'sdcv-search-input+ ; in tip
-                    ;; "dd" 'my-lookup-dict-org
-                    ;; "lm" 'lookup-doc-in-man
-                    ;; "lf" 'list-funcs
-                    ;; "gs" 'w3m-google-search
-                    ;; "gf" 'w3m-google-by-filetype
-                    ;; "gd" 'w3m-search-financial-dictionary
-                    ;; "gj" 'w3m-search-js-api-mdn
-                    ;; "ga" 'w3m-java-search
-                    ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
-                    "pf" 'project-find-file
-                    "pg" 'project-find-regexp
-                    "ma" 'magit
-                    "sm" 'smex
-                    "sj" 'smex-major-mode-commands
-                    "se" 'open-init-file
-                    "ce" 'evil-emacs-state
-                    ;; "gq" 'w3m-stackoverflow-search
-                    ;; "mws" 'mpc-which-song
-                    ;; "ms" 'mpc-next-prev-song
-                    "tm" 'eshell
-                    "rr" 'fwar34/counsel-goto-recent-directory)
-(general-define-key :keymaps '(normal insert visual emacs)
-                    ;; :states '(normal motion insert emacs)
-                    :prefix ";"
-                    :non-normal-prefix "M-;"
+                    ;; :non-normal-prefix "M-;"
                     ;; switch window
                     ;; "1" 'select-window-1
                     ;; "2" 'select-window-2
@@ -450,10 +294,10 @@
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
-(general-define-key :keymaps '(normal insert visual emacs)
+(general-define-key :keymaps '(normal visual)
                     ;; :states '(normal insert emacs)
                     :prefix "SPC"
-                    :non-normal-prefix "M-SPC"
+                    ;; :non-normal-prefix "M-SPC"
                     "SPC" 'evil-ex
                     "ef" 'with-editor-finish
                     "ec" 'with-editor-cancel
