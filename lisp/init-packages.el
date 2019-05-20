@@ -507,7 +507,15 @@
   :ensure t
   :hook
   (lispy-mode . lispyville-mode)
-  )
+  :config
+  (lispyville-set-key-theme
+   ;; his is probably the simplest method of improving things. By default,
+   ;; pressing escape after using something like lispy-mark from special will
+   ;; enter normal state but won’t cancel the region. Lispyville provides lispyville-normal-state
+   ;; to deactivate the region and enter normal state in one step. You can map it manually or
+   ;; use the escape key theme (e.g. (lispyville-set-key-theme '(... (escape insert emacs)))).
+   '((escape insert)
+     (additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap normal))))
 
 ;; linum-relative
 (use-package linum-relative
