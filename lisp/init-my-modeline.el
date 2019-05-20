@@ -8,6 +8,9 @@
 ;;-------------------------------------------------------------
 ;; reference from lispyville : integrating with lispy in modeline
 ;;-------------------------------------------------------------
+(defvar lispyville-insert-states '(insert emacs hybrid iedit-insert)
+  "Insertion states that lispy special can be used from.")
+
 ;; * Mode Line Integration
 (defun lispyville--special-p ()
   "Return whether the point is in special."
@@ -25,7 +28,7 @@
        (memq evil-state lispyville-insert-states)
        (lispyville--special-p)))
 
-(defun lispyville-mode-line-string (&optional (special-text "🍰-special ")
+(cl-defun lispyville-mode-line-string (&optional (special-text "🍰-special ")
                                               default-text)
   "When added to the mode line, show SPECIAL-TEXT when in special.
 When not in special (or not in a state in `lispyville-insert-states'), show
