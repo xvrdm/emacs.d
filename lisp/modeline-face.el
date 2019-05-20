@@ -1,6 +1,11 @@
 ;;-------------------------------------------------------------
 ;; modeline face
 ;;-------------------------------------------------------------
+(defface lispyville-special-face
+  '((t :foreground "#aa4456"))
+  "Face for lispyville special mode line indicator."
+  :group 'lispyville)
+
 (defface font-lock-builtin-face
   '((((class grayscale) (background light)) :foreground "LightGray" :weight bold)
     (((class grayscale) (background dark))  :foreground "DimGray" :weight bold)
