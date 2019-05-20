@@ -72,23 +72,23 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
 ;; with uppercased character or 'g' or special character except "=" and "-"
-(evil-declare-key 'normal org-mode-map
-  "gh" 'outline-up-heading
-  "gl" 'outline-next-visible-heading
-  "gj" 'outline-forward-same-level
-  "gk" 'outline-backward-same-level
-  "$" 'org-end-of-line ; smarter behaviour on headlines etc.
-  "^" 'org-beginning-of-line ; ditto
-  "<" (lambda () (interactive) (org-demote-or-promote 1)) ; out-dent
-  ">" 'org-demote-or-promote ; indent
-  (kbd "TAB") 'org-cycle)
+;; (evil-declare-key 'normal org-mode-map
+;;   "gh" 'outline-up-heading
+;;   "gl" 'outline-next-visible-heading
+;;   "gj" 'outline-forward-same-level
+;;   "gk" 'outline-backward-same-level
+;;   "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+;;   "^" 'org-beginning-of-line ; ditto
+;;   "<" (lambda () (interactive) (org-demote-or-promote 1)) ; out-dent
+;;   ">" 'org-demote-or-promote ; indent
+;;   (kbd "TAB") 'org-cycle)
 
-(evil-declare-key 'normal markdown-mode-map
-  "gh" 'outline-up-heading
-  "gl" 'outline-next-visible-heading
-  "gj" 'outline-forward-same-level
-  "gk" 'outline-backward-same-level
-  (kbd "TAB") 'org-cycle)
+;; (evil-declare-key 'normal markdown-mode-map
+;;   "gh" 'outline-up-heading
+;;   "gl" 'outline-next-visible-heading
+;;   "gj" 'outline-forward-same-level
+;;   "gk" 'outline-backward-same-level
+;;   (kbd "TAB") 'org-cycle)
 
 ;; I prefer Emacs way after pressing ":" in evil-mode
 (define-key evil-ex-completion-map (kbd "C-a") 'evil-first-non-blank)
@@ -101,18 +101,18 @@
 (define-key evil-normal-state-map "go" 'goto-char)
 ;; (define-key evil-normal-state-map (kbd "M-y") 'counsel-browse-kill-ring)
 ;; (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
-(define-key evil-insert-state-map (kbd "C-x C-n") 'evil-complete-next-line)
-(define-key evil-insert-state-map (kbd "C-x C-p") 'evil-complete-previous-line)
+;; (define-key evil-insert-state-map (kbd "C-x C-n") 'evil-complete-next-line)
+;; (define-key evil-insert-state-map (kbd "C-x C-p") 'evil-complete-previous-line)
 
 ;; I learn this trick from ReneFroger, need latest expand-region
 ;; @see https://github.com/redguardtoo/evil-matchit/issues/38
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 (define-key evil-insert-state-map (kbd "C-a") 'evil-first-non-blank)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
-(define-key evil-insert-state-map (kbd "C-u") 'kill-whole-line)
-(define-key evil-insert-state-map (kbd "C-k") 'kill-line)
-(define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
-(define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
+;; (define-key evil-insert-state-map (kbd "C-u") 'kill-whole-line)
+;; (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+;; (define-key evil-insert-state-map (kbd "M-j") 'yas-expand)
+;; (define-key evil-emacs-state-map (kbd "M-j") 'yas-expand)
 ;; (global-set-key (kbd "C-r") 'undo-tree-redo)
 
 ;; https://github.com/noctuid/evil-guide#default-keybindings-and-getting-help
