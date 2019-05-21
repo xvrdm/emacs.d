@@ -32,7 +32,7 @@
                     ("y" kill-ring-save "yank" :color blue)
                     ("q" nil "quit")))
   (hydra-set-property 'hydra-vi :verbosity 1)
-  
+
   ;;-------------------------------------------------------------
   ;; window
   (defhydra hydra-window
@@ -40,7 +40,7 @@
     "
                                -- WINDOW MENU --
     "
-    
+
     ("z" ace-window "ace" :color blue :column "1-Switch")
     ("h" windmove-left "← window")
     ("j" windmove-down "↓ window")
@@ -75,8 +75,7 @@
     ("k" outline-backward-same-level)
     ("oa" org-agenda :exit t)
     ("oc" org-capture :exit t)
-    ("q" nil "cancel" :color bule)
-    )
+    ("q" nil "cancel" :color bule))
   (evil-define-key 'normal 'global (kbd "M-u og") #'hydra-org/body)
   ;; (with-eval-after-load 'org
   ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
@@ -129,8 +128,7 @@
     ("l" apropos-library "library")
     ("u" apropos-user-option "user-option")
     ("e" apropos-value "value")
-    ("q" nil "cancel" :exit t :column nil)
-    )
+    ("q" nil "cancel" :exit t :column nil))
   (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
 
   ;;-------------------------------------------------------------
@@ -232,6 +230,14 @@
     ("v" recenter-top-bottom "recenter")
     ("q" nil "quit"))
   (global-set-key (kbd "M-u er") #'hydra-error/body)
-  )
+
+  ;;-------------------------------------------------------------
+  ;; lispyville
+  (defhydra hydra-lispyville (:color blue :hint nil)
+    ("(" lispyville-wrap-round "wrap round with (" :column "lispyville-wrap")
+    ("[" lispyville-wrap-brackets "wrap round with [")
+    ("[" lispyville-wrap-braces "wrap round with {")
+    ("q" nil "cancel" :exit t :column nil))
+  (global-set-key (kbd "M-u li") #'hydra-lispyville/body))
 
 (provide 'init-hydra)

@@ -517,7 +517,7 @@
    ;; '((escape insert emacs) 
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
    '((escape insert emacs) 
-     additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
+     additional-movement prettify atom-motions slurp/barf-cp additional))
   )
 
 ;; linum-relative
