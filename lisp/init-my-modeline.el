@@ -283,12 +283,10 @@ DEFAULT-TEXT."
        ;; evil state
        " "
        (fwar34/evil-state)
-       " %1"
        '(:eval (when (featurep 'lispyville)
-                 (lispyville-mode-line-string "@lispy-special@")))
-       " "
+                 (lispyville-mode-line-string " @lispy-special@ ")))
        (fwar34/lispy-state)
-       ;; " "
+       " "
        ;; git info
        '(:eval (when (> (window-width) 90)
                  `(vc-mode vc-mode)
