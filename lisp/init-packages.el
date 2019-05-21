@@ -514,8 +514,11 @@
    ;; enter normal state but won’t cancel the region. Lispyville provides lispyville-normal-state
    ;; to deactivate the region and enter normal state in one step. You can map it manually or
    ;; use the escape key theme (e.g. (lispyville-set-key-theme '(... (escape insert emacs)))).
-   '((escape insert)
-     (additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap normal))))
+   ;; '((escape insert emacs) 
+   ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
+   '((escape insert emacs) 
+     additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
+  )
 
 ;; linum-relative
 (use-package linum-relative
