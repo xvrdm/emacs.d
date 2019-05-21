@@ -230,7 +230,8 @@
   (ivy-mode 1)
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-  )
+  (global-set-key (kbd "C-h f") #'counsel-describe-function)
+  (global-set-key (kbd "C-h v") #'counsel-describe-variable))
 
 (use-package smex
   ;; I use this package to display history for M-x
@@ -791,19 +792,19 @@
   :after evil
   )
 
-(use-package rich-minority
-  ;; Clean-up and Beautify the list of minor-modes.
-  :disabled
-  :ensure t
-  :unless window-system
-  :config
-  (rich-minority-mode 1)
-  (setq rm-blacklist
-        (format "^ \\(%s\\)$"
-                (mapconcat #'identity
-                           '(".*" "Projectile.*" "PgLn")
-                           "\\|")))
-  )
+;; (use-package rich-minority
+;;   ;; Clean-up and Beautify the list of minor-modes.
+;;   :disabled
+;;   :ensure t
+;;   :unless window-system
+;;   :config
+;;   (rich-minority-mode 1)
+;;   (setq rm-blacklist
+;;         (format "^ \\(%s\\)$"
+;;                 (mapconcat #'identity
+;;                            '(".*" "Projectile.*" "PgLn")
+;;                            "\\|")))
+;;   )
 
 
 
