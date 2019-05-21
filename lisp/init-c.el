@@ -33,12 +33,20 @@
 ;;   :group 'font-lock-faces)
 
 ;; https://emacs-china.org/t/topic/9320/2
-(add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (font-lock-add-keywords nil
-                                    '(("[^%]\\(%\\([[:digit:]]+\\$\\)?[-+' #0*]*\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\(\\.\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?\\([hlLjzt]\\|ll\\|hh\\)?\\([aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)"
-                                       1 font-lock-builtin-face t)
-				      ("\\(%%\\)" 1 font-lock-type-face t)) t)))
+(add-hook
+ 'c-mode-common-hook
+ (lambda ()
+   (font-lock-add-keywords
+    nil
+    '(("[^%]\\(%\\([[:digit:]]+\\$\\)?[-+' #0*]*\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\(\\.\\([[:digit:]]*\\|\\*\\|\\*[[:digit:]]+\\$\\)\\)?\\([hlLjzt]\\|ll\\|hh\\)?\\([aAbdiuoxXDOUfFeEgGcCsSpn]\\|\\[\\^?.[^]]*\\]\\)\\)"
+       1
+       font-lock-builtin-face
+       t)
+      ("\\(%%\\)"
+       1
+       font-lock-type-face
+       t))
+    t)))
 
 ;; http://maskray.me/blog/2017-12-03-c++-language-server-cquery
 ;; C/C++ mode hook在项目根目录有compile_commands.json时自动启用`lsp-cquery-enable

@@ -25,7 +25,8 @@
 (defun search-highlight-persist ()
   (highlight-regexp (car-safe (if isearch-regexp
                                   regexp-search-ring
-                                search-ring)) (facep 'hi-yellow)))
+                                search-ring))
+                    (facep 'hi-yellow)))
 (defadvice isearch-exit (after isearch-hl-persist activate)
   (highlight-remove-all)
   (search-highlight-persist))
