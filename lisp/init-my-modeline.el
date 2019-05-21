@@ -284,7 +284,7 @@ DEFAULT-TEXT."
        " "
        (fwar34/evil-state)
        '(:eval (when (featurep 'lispyville)
-                 (lispyville-mode-line-string " @lispy-special@ ")))
+                 (lispyville-mode-line-string " @lispy-special@")))
        (fwar34/lispy-state)
        " "
        ;; git info
