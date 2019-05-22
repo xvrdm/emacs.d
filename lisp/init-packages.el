@@ -787,10 +787,8 @@
 
 ;; imenu-list
 (use-package imenu-list
-  :disabled
   :ensure t
-  :after evil
-  )
+  :after evil)
 
 ;; (use-package fringe-helper
 ;;   ;; helper functions for fringe bitmaps
