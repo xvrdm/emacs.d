@@ -169,6 +169,8 @@
 
 ;; adjust for work server
 (when (or (equal system-name "tms2") (equal system-name "ceph1"))
-  (add-hook 'emacs-startup-hook #'(lambda () (quit-windows-on "*Warnings*"))))
+  (add-hook 'emacs-startup-hook #'(lambda ()
+                                    (if (get-buffer "*Warnings*")
+                                        (quit-windows-on "*Warnings*")))))
 
 (provide 'init-better-default)
