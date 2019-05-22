@@ -112,19 +112,22 @@
 ;; tab settings
 (setq-default indent-tabs-mode nil) ; tab 改为插入空格
 (setq c-basic-offset 4) ; c c++ 缩进4个空格
-(setq c-default-style "linux"); 没有这个 { } 就会瞎搞
+
+;; https://www.emacswiki.org/emacs/IndentingC
+;; https://en.wikipedia.org/wiki/Indent_style
+(setq c-default-style "linux")
 (setq default-tab-width 4)
 ;; (add-hook 'python-mode-hook #'(lambda () (setq python-indent-offset 4)))
 
 ;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
-(progn
-  ;; make tab key always call a indent command.
-  ;; (setq-default tab-always-indent t)
-  ;; make tab key call indent command or insert tab character, depending on cursor position
-  ;; (setq-default tab-always-indent nil)
-  ;; make tab key do indent first then completion.
-  ;; (setq-default tab-always-indent 'complete)
-  )
+;; (progn
+;;   ;; make tab key always call a indent command.
+;;   (setq-default tab-always-indent t)
+;;   ;; make tab key call indent command or insert tab character, depending on cursor position
+;;   (setq-default tab-always-indent nil)
+;;   ;; make tab key do indent first then completion.
+;;   (setq-default tab-always-indent 'complete)
+;;   )
 
 ;; Underscore "_" is not a word character
 ;; https://github.com/emacs-evil/evil
@@ -135,8 +138,6 @@
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode t)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
-(when (eval-when-compile (version< "24.4" emacs-version))
-  (electric-indent-mode 1))
 
 ;; advice for find-file
 ;; (defun advice-find-file (filename &optional wildcards)

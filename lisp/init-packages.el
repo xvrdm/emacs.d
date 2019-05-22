@@ -812,7 +812,7 @@
   ;; If you enable global minor mode
   (global-git-gutter-mode t)
   ;; If you would like to use git-gutter.el and linum-mode
-  (when (not (display-graphic-p)) (git-gutter:linum-setup))
+  (unless (display-graphic-p) (git-gutter:linum-setup))
   ;; Use for 'Git'(`git`), 'Mercurial'(`hg`), 'Bazaar'(`bzr`), and 'Subversion'(`svn`) projects
   ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
   (custom-set-variables '(git-gutter:handled-backends '(git svn)))
@@ -826,7 +826,7 @@
   (custom-set-variables '(git-gutter:visual-line t))
 
   ;; console not display, because git-gutter has bug in emacs26 no window
-  (unless window-system (custom-set-variables '(git-gutter:display-p nil)))
+  ;; (unless window-system (custom-set-variables '(git-gutter:display-p nil)))
   ;; diff information is updated at hooks in git-gutter:update-hooks.
   (add-to-list 'git-gutter:update-hooks 'focus-in-hook)
   ;; diff information is updated after command in git-gutter:update-commands executed.
