@@ -160,7 +160,7 @@
 ;; (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
 ;;   (evil-scroll-line-to-center (line-number-at-pos)))
 
-;; equivalent of nnoremap n nzz in vim
+;; equivalent of 'nnoremap n nzz' in vim
 ;; https://github.com/noctuid/evil-guide
 (defun my-center-line (&rest _)
   (evil-scroll-line-to-center nil))
@@ -168,8 +168,12 @@
 (advice-add 'evil-search-previous :after #'my-center-line)
 
 ;; adjust for work server
-(when (or (equal system-name "tms2") (equal system-name "ceph1"))
-  (add-hook 'emacs-startup-hook #'(lambda ()
-                                    (quit-windows-on (get-buffer  "*Warnings*")))))
+(when (or (equal system-name "tms2")
+          (equal system-name "ceph1"))
+  (add-hook
+   'emacs-startup-hook
+   #'(lambda ()
+       (quit-windows-on
+        (get-buffer "*Warnings*")))))
 
 (provide 'init-better-default)
