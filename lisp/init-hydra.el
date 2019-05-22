@@ -238,6 +238,15 @@
     ("[" lispyville-wrap-brackets "wrap round with [")
     ("{" lispyville-wrap-braces "wrap round with {")
     ("q" nil "cancel" :exit t :column nil))
-  (global-set-key (kbd "M-u li") #'hydra-lispyville/body))
+  (global-set-key (kbd "M-u li") #'hydra-lispyville/body)
+
+  ;;-------------------------------------------------------------
+  ;; dired
+  (defhydra hydra-dired (:color blue :hint nil)
+    ("ud" dired-undo "Undo in a Dired buffer." :column "dired commands")
+    ("ha" dired-hide-all "Hide all subdirectories, leaving only their header lines.")
+    ("q" nil "cancel" :exit t :column nil))
+  (define-key dired-mode-map (kbd "M-u dd") 'hydra-dired/body)
+  )
 
 (provide 'init-hydra)

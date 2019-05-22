@@ -368,11 +368,11 @@
   )
 
 ;; yasnippet setting
-(use-package yasnippet
-  :disabled
-  :ensure t
-  :defer t
-  )
+;; (use-package yasnippet
+;;   :disabled
+;;   :ensure t
+;;   :defer t
+;;   )
 
 (use-package youdao-dictionary
   :ensure t
