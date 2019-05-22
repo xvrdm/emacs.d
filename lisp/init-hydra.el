@@ -97,7 +97,7 @@
   (defhydra hydra-M-um (:color pink :hint nil)
     "
     ^kill-ring^                      ^iedit-mode^        ^fix-word^
-    ^^^^^^^^-----------------------------------------------------------------------
+    ^^-----------------------------------------------------------------------------
     _p_: paste from clipboard        _me_: iedit mode    _u_: fix-word-upcase
     _y_: grab the symbol at point    ^  ^                _d_: fix-word-downcase
     ^ ^                              ^  ^                _c_: fix-word-capitalize

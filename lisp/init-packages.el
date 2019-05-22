@@ -792,23 +792,6 @@
   :after evil
   )
 
-;; (use-package rich-minority
-;;   ;; Clean-up and Beautify the list of minor-modes.
-;;   :disabled
-;;   :ensure t
-;;   :unless window-system
-;;   :config
-;;   (rich-minority-mode 1)
-;;   (setq rm-blacklist
-;;         (format "^ \\(%s\\)$"
-;;                 (mapconcat #'identity
-;;                            '(".*" "Projectile.*" "PgLn")
-;;                            "\\|")))
-;;   )
-
-
-
-
 ;; (use-package fringe-helper
 ;;   ;; helper functions for fringe bitmaps
 ;;   :ensure t
