@@ -951,6 +951,8 @@
   :ensure t
   :after evil
   :config
-  (evil-define-key 'normal diff-mode-map "q" #'kill-this-buffer))
+  (evil-define-key 'normal diff-mode-map "q" #'kill-this-buffer)
+  (evil-define-key 'normal help-mode-map "q" #'kill-this-buffer)
+  )
 
 (provide 'init-packages)
