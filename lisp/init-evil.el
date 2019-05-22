@@ -129,6 +129,7 @@
                counsel-imenu
                beginning-of-defun
                dired-single-buffer
+               dired-jump
                end-of-defun))
   (evil-add-command-properties con :jump t))
 ;; (dolist (con '((ivy-switch-buffer . t)
