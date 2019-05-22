@@ -148,6 +148,7 @@
                     ;; "5" 'select-window-5
                     ;; "6" 'select-window-6
                     ;; "7" 'select-window-7
+                    ";" 'evil-repeat-find-char
                     "1" 'winum-select-window-1
                     "2" 'winum-select-window-2
                     "3" 'winum-select-window-3
