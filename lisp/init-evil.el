@@ -45,7 +45,6 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; (evil-set-initial-state 'youdao-dictionary-mode 'emacs)
 ;; ;; for shell-command
 ;; (evil-set-initial-state 'fundamental-mode 'emacs)
 ;; (define-key evil-emacs-state-map (kbd "q") 'quit-window)
@@ -184,7 +183,8 @@
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
                     "ii" 'counsel-imenu
-                    "tb" 'imenu-list-smart-toggle
+                    "il" 'imenu-list-smart-toggle
+                    "tb" 'taglist-list-tags
                     "xm" 'my-M-x
                     ;; "bk" 'buf-move-up
                     ;; "bj" 'buf-move-down

@@ -790,6 +790,16 @@
   :ensure t
   :after evil)
 
+(use-package taglist
+  :defer t
+  :straight
+  (:host github :repo "liugang/taglist")
+  :config
+  (evil-define-key 'normal taglist-mode-map "q" #'quit-window)
+  (evil-define-key 'normal taglist-mode-map "s" #'swiper)
+  (evil-define-key 'normal taglist-mode-map (kbd "RET") #'taglist-jump-to-tag)
+  (add-hook 'taglist-mode-hook #'read-only-mode))
+
 ;; (use-package fringe-helper
 ;;   ;; helper functions for fringe bitmaps
 ;;   :ensure t
