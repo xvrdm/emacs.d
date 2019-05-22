@@ -167,4 +167,8 @@
 (advice-add 'evil-search-next :after #'my-center-line)
 (advice-add 'evil-search-previous :after #'my-center-line)
 
+;; adjust for work server
+(when (or (equal system-name "tms2") (equal system-name "ceph1"))
+  (add-hook 'emacs-startup-hook #'(lambda () (quit-windows-on "*Warnings*"))))
+
 (provide 'init-better-default)

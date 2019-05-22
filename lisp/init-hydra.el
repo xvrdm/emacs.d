@@ -168,15 +168,17 @@
 
   ;;-------------------------------------------------------------
   ;; pyim
-  (defhydra hydra-pyim (:color pink :hint nil)
+  (defhydra hydra-pyim (:color blue :hint nil)
     "
     ^pyim^                  
     ^^^^^^^^-----------------
-    _se_: set input pyim   
+    _si_: set input pyim
+    _co_: convert string at point
     "
-    ("se" (lambda () (set-input-method "pyim")))
+    ("si" (lambda () (set-input-method "pyim")))
+    ("co" pyim-convert-string-at-point )
     ("q" nil "cancale" :color blue))
-  (global-set-key (kbd "M-u y") #'hydra-pyim/body)
+  (global-set-key (kbd "M-u py") #'hydra-pyim/body)
 
   ;;-------------------------------------------------------------
   (require 'windmove)
