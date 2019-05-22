@@ -331,6 +331,7 @@
 (defalias 'foxy #'fwar34/foxy-command)
 
 (defalias 'q #'kill-this-buffer)
+(defalias 'exit #'kill-this-buffer)
 
 ;;-------------------------------------------------------------
 ;; impliment
