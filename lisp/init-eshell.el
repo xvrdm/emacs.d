@@ -337,18 +337,22 @@
 ;; impliment
 ;;-------------------------------------------------------------
 (defun fwar34/port-exist-p (port)
-  (let ((ss-output (shell-command-to-string "ss -l")))
-    (if (string-match (format "\\b%d\\b" port) ss-output)
-        t
-      nil)))
+  "Judge port already in use"
+  (string-match (format "\\b%d\\b" port) (shell-command-to-string "ss -l")))
 
-(defun fwar34/proxy-command-lisp ()
-
-  )
-
-;; (if (fwar34/port-exist-p 1080)
-;;     (message "port 1080 used!!!!!")
-;;   (shell-command "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn" nil nil)
-;;   )
+(defun fwar34/proxy-command-use-lisp (first &rest other)
+  (if (fwar34/port-exist-p 1080)
+      (message
+       "port 1080 already in use!!!!!")
+    (shell-command
+     "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn")
+    (if (fwar34/port-exist-p 1080)
+        (let ((command first))
+          (if (listp other)
+              (setq command (concat first " " (mapconcat 'identity other " "))))
+          (message command)
+          (shell-command (concat "proxychains4 " command)))))
+  (shell-command "pkill -9 v2ray"))
+(defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
 (provide 'init-eshell)
