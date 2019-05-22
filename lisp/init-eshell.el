@@ -330,6 +330,8 @@
     (shell-command (concat "foxy.sh " command))))
 (defalias 'foxy #'fwar34/foxy-command)
 
+(defalias 'q #'kill-this-buffer)
+
 ;;-------------------------------------------------------------
 ;; impliment
 ;;-------------------------------------------------------------

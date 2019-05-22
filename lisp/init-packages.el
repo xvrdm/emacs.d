@@ -179,14 +179,13 @@
   ;; (advice-add 'shell-command :after #'my-quit-window)
   (defadvice shell-command (after advice-find-file activate)
     (with-current-buffer "*Shell Command Output*"
-      (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  )
+      ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+      (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer))))
 
 (use-package undo-tree
   :ensure t
   :hook
-  (after-init . global-undo-tree-mode)
-  )
+  (after-init . global-undo-tree-mode))
 
 (use-package goto-chg
   :after evil
@@ -396,7 +395,7 @@
   ;; (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
   ;;   (with-current-buffer "*Youdao Dictionary*"
   ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  (evil-define-key 'normal youdao-dictionary-mode-map "q" #'quit-window)
+  (evil-define-key 'normal youdao-dictionary-mode-map "q" #'kill-this-buffer)
   ;; (add-hook 'youdao-dictionary-mode-hook
   ;;           (lambda ()
   ;;             (define-key evil-normal-state-local-map (kbd "q") 'quit-window)))
@@ -795,7 +794,7 @@
   :straight
   (:host github :repo "liugang/taglist")
   :config
-  (evil-define-key 'normal taglist-mode-map "q" #'quit-window)
+  (evil-define-key 'normal taglist-mode-map "q" #'kill-this-buffer)
   (evil-define-key 'normal taglist-mode-map "s" #'swiper)
   (evil-define-key 'normal taglist-mode-map (kbd "RET") #'taglist-jump-to-tag)
   ;; (add-hook 'taglist-mode-hook #'read-only-mode)
