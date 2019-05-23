@@ -249,6 +249,13 @@
     ("ha" dired-hide-all "Hide all subdirectories, leaving only their header lines.")
     ("q" nil "cancel" :exit t :column nil))
   (define-key dired-mode-map (kbd "M-u dd") 'hydra-dired/body)
+
+  ;;-------------------------------------------------------------
+  ;; magit
+  (defhydra hydra-magit (:color blue :hint nil)
+    ("rv" magit-revert "Revert existing commits, with or without creating new commits." :column "magit commands")
+    ("q" nil "cancel" :exit t :column nil))
+  (define-key magit-mode-map (kbd "M-u gi") 'hydra-magit/body)
   )
 
 (provide 'init-hydra)

@@ -880,6 +880,7 @@
   (diff-hl-margin-mode) 
   (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
   )
 
 (use-package company-statistics
