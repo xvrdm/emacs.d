@@ -118,6 +118,7 @@
 ;; https://github.com/noctuid/evil-guide#default-keybindings-and-getting-help
 ;; Command Properties :jump
 (dolist (con '(ivy-switch-buffer 
+               evil-indent
                counsel-gtags-dwim
                counsel-gtags-find-definition
                counsel-gtags-find-symbol
