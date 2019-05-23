@@ -185,11 +185,12 @@
   (evil-define-key 'normal help-mode-map "q" #'kill-buffer-and-window)
   (evil-define-key 'motion apropos-mode-map "q" #'kill-buffer-and-window)
   ;; create a thread to auto focus on *apropos* window
-  (add-hook 'apropos-mode-hook (lambda ()
-                                 (make-thread (lambda ()
-                                                (while (not (get-buffer-window "*Apropos*"))
-                                                  (sleep-for 0 100))
-                                                (select-window (get-buffer-window "*Apropos*"))
-                                                )))))
+  (when (fboundp 'make-thread)
+    (add-hook 'apropos-mode-hook (lambda ()
+                                   (make-thread (lambda ()
+                                                  (while (not (get-buffer-window "*Apropos*"))
+                                                    (sleep-for 0 100))
+                                                  (select-window (get-buffer-window "*Apropos*"))
+                                                  ))))))
 
 (provide 'init-better-default)
