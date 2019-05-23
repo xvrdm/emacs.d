@@ -176,4 +176,19 @@
        (quit-windows-on
         (get-buffer "*Warnings*")))))
 
+(use-package diff
+  :ensure t
+  :after evil
+  :config
+  (evil-define-key 'normal diff-mode-map "q" #'kill-this-buffer)
+  (evil-define-key 'normal help-mode-map "q" #'kill-this-buffer)
+  (evil-define-key 'motion apropos-mode-map "q" #'kill-buffer-and-window)
+  ;; create a thread to auto focus on *apropos* window
+  (add-hook 'apropos-mode-hook (lambda ()
+                                 (make-thread (lambda ()
+                                                (while (not (get-buffer-window "*Apropos*"))
+                                                  (sleep-for 0 100))
+                                                (select-window (get-buffer-window "*Apropos*"))
+                                                )))))
+
 (provide 'init-better-default)

@@ -342,17 +342,21 @@
 
 (defun fwar34/proxy-command-use-lisp (first &rest other)
   (if (fwar34/port-exist-p 1080)
-      (message
-       "port 1080 already in use!!!!!")
-    (shell-command
-     "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn")
-    (if (fwar34/port-exist-p 1080)
-        (let ((command first))
-          (if (listp other)
-              (setq command (concat first " " (mapconcat 'identity other " "))))
-          (message command)
-          (shell-command (concat "proxychains4 " command)))))
-  (shell-command "pkill -9 v2ray"))
+      (message "port 1080 already in use!!!!!")
+    ;; (shell-command "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn > /dev/null 2>&1 &")
+    (start-process
+     "my-v2ray"
+     nil
+     "/usr/bin/v2ray/v2ray"
+     "-config ~/mine/Other/v2ray/client.config.json.nocdn")
+    (while (not (fwar34/port-exist-p 1080)))
+    (let ((command first))
+       (if (listp other)
+           (setq command (concat first " " (mapconcat 'identity other " "))))
+       (message command)
+       (shell-command (concat "proxychains4 " command))))
+  (delete-process "v2ray")
+  )
 (defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
 (provide 'init-eshell)
