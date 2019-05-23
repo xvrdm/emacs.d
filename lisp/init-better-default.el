@@ -132,6 +132,7 @@
 ;; Underscore "_" is not a word character
 ;; https://github.com/emacs-evil/evil
 (add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?- "w")))
 
 ;; 花括号自动换行的问题
 ;; http://tieba.baidu.com/p/3572057629
