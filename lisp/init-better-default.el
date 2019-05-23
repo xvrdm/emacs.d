@@ -182,7 +182,7 @@
   :after evil
   :config
   (evil-define-key 'normal diff-mode-map "q" #'kill-this-buffer)
-  (evil-define-key 'normal help-mode-map "q" #'kill-this-buffer)
+  (evil-define-key 'normal help-mode-map "q" #'kill-buffer-and-window)
   (evil-define-key 'motion apropos-mode-map "q" #'kill-buffer-and-window)
   ;; create a thread to auto focus on *apropos* window
   (add-hook 'apropos-mode-hook (lambda ()

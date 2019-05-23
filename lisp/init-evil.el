@@ -411,7 +411,12 @@
                     "df" 'counsel-describe-function
                     "dv" 'counsel-describe-variable
                     "dk" 'describe-key
-                    "dd" 'lispy-describe-inline
+                    ;; "dd" 'lispy-describe-inline
+                    "dd" (lambda ()
+                           (interactive)
+                           (lispy-describe-inline)
+                           (if (window-live-p (get-buffer-window "*lispy-help*"))
+                               (select-window (get-buffer-window "*lispy-help*"))))
                     "da" 'lispy-arglist-inline
                     "ss" 'fa-show
                     "gg" 'ggtags-find-tag-dwim
