@@ -78,9 +78,15 @@
   :ensure t
   :after dired
   :init
+  (setq dired-single-use-magic-buffer t)
+  (setq dired-single-magic-buffer-name "*dired-buffer*")
+  (add-hook 'dired-mode-hook (lambda () (rename-buffer "*dired-buffer*")))
+
+  ;; key map
   (with-eval-after-load 'evil
     (defun my-dired-init ()
       "Bunch of stuff to run for dired, either immediately or when it's loaded."
+      (evil-define-key 'normal dired-mode-map "q" #'kill-this-buffer)
       (evil-define-key 'normal dired-mode-map "s" #'swiper)
       (evil-define-key 'normal dired-mode-map "f" (lambda () (interactive) (dired-single-buffer "..")))
       (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer "..")))
@@ -95,6 +101,16 @@
         (my-dired-init)
       ;; it's not loaded yet, so add our bindings to the load-hook
       (add-hook 'dired-load-hook 'my-dired-init)))
+  :config
+  (defadvice dired-single-buffer (around advice-dired-single-buffer activate)
+    (end-of-line)
+    (let* ((eol (point))
+           (need-del (progn
+                       (beginning-of-line)
+                       (not (re-search-forward "^ d" eol t)))))
+      ad-do-it
+      (if need-del
+          (kill-buffer "*dired-buffer*"))))
   )
 
 (provide 'init-dired)
