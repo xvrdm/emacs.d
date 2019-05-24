@@ -126,7 +126,6 @@
 ;; disable guess python indent warning
 (setq python-indent-guess-indent-offset-verbose nil)
 
-;; (add-hook 'python-mode-hook #'(lambda () (setq python-indent-offset 4)))
 
 ;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
 ;; (progn
@@ -140,8 +139,9 @@
 
 ;; Underscore "_" is not a word character
 ;; https://github.com/emacs-evil/evil
-(add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-(add-hook 'prog-mode-hook #'(lambda () (modify-syntax-entry ?- "w")))
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (modify-syntax-entry ?_ "w")
+                              (modify-syntax-entry ?- "w")))
 
 ;; 花括号自动换行的问题
 ;; http://tieba.baidu.com/p/3572057629
