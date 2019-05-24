@@ -102,15 +102,26 @@
       ;; it's not loaded yet, so add our bindings to the load-hook
       (add-hook 'dired-load-hook 'my-dired-init)))
   :config
-  (defadvice dired-single-buffer (around advice-dired-single-buffer activate)
-    (end-of-line)
-    (let* ((eol (point))
-           (need-del (progn
-                       (beginning-of-line)
-                       (not (re-search-forward "^ d" eol t)))))
-      ad-do-it
-      (if need-del
-          (kill-buffer "*dired-buffer*"))))
+  ;; (defun advice-dired-single-buffer (&rest other)
+
+  ;;   )
+  ;; (advice-add #'dired-single-buffer :around #'advice-dired-single-buffer)
+  ;;-------------------------------------------------------------
+  ;; 
+  ;;-------------------------------------------------------------
+  (defadvice dired-single-buffer (around advice-dired-single-buffer (&optional DEFAULT-DIRNAME) activate)
+    (save-excursion
+      (message "XXXX %s" DEFAULT-DIRNAME)
+      (end-of-line)
+      (let* ((eol (point))
+             (need-del (if (string= DEFAULT-DIRNAME "..")
+                           nil
+                         (beginning-of-line)
+                         (not (re-search-forward "^  d" eol t)))))
+        ad-do-it
+        (princ need-del)
+        (if need-del
+            (kill-buffer "*dired-buffer*")))))
   )
 
 (provide 'init-dired)
