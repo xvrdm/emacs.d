@@ -335,7 +335,7 @@ DEFAULT-TEXT."
        ;; flycheck-status-mode-line
        "%1 "
        my-flycheck-mode-line
-       '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (format-mode-line (encoding-string))))))
+       '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (encoding-string)))))
        encoding-mode-line
        " "
        ;; "["
