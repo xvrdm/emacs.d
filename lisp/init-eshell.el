@@ -323,12 +323,12 @@
     (pcomplete-here (funcall pcomplete-command-completion-function))
     (while (pcomplete-here (pcomplete-entries)))))
 
-(defun fwar34/foxy-command (first &rest other)
-  (let ((command first))
-    (if (listp other)
-        (setq command (concat first " " (mapconcat 'identity other " "))))
-    (shell-command (concat "foxy.sh " command))))
-(defalias 'foxy #'fwar34/foxy-command)
+;; (defun fwar34/foxy-command (first &rest other)
+;;   (let ((command first))
+;;     (if (listp other)
+;;         (setq command (concat first " " (mapconcat 'identity other " "))))
+;;     (shell-command (concat "foxy.sh " command))))
+;; (defalias 'foxy #'fwar34/foxy-command)
 
 (defalias 'q #'kill-this-buffer)
 (defalias 'exit #'kill-this-buffer)
@@ -347,10 +347,10 @@
 
 (defun fwar34/proxy-command-use-lisp (first &rest other)
   (if (fwar34/port1080-exist-p)
-      (message "port 1080 already in use!!!!!")
+      (error "port 1080 already in use!!!!!")
     (let ((process (start-process
                     "my-v2ray"
-                    (get-buffer "*Messages*")
+                    (get-buffer "*Warnings*")
                     "/usr/bin/v2ray/v2ray"
                     "-config"
                     (expand-file-name
@@ -359,7 +359,7 @@
       (let ((command first))
         (if (listp other)
             (setq command (concat first " " (mapconcat 'identity other " "))))
-        (message command)
+        (message "Start execute %s" command)
         (shell-command (concat "proxychains4 " command)))
       (if (eq (process-status process) 'run)
           (delete-process process))))
