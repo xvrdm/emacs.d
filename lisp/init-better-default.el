@@ -155,6 +155,12 @@
         ad-do-it))
   )
 
+;; after execute shell-command goto bottom of output buffer
+(defadvice shell-command (around adivce-shell-command activate)
+  ad-do-it
+  (switch-to-buffer "*Shell Command Output*")
+  (goto-char (point-max)))
+
 ;; advice for evil search
 ;; (defadvice evil-search-next (after advice-for-evil-search-next activate)
 ;;   (evil-scroll-line-to-center (line-number-at-pos)))
@@ -173,9 +179,9 @@
           (equal system-name "ceph1"))
   (add-hook
    'emacs-startup-hook
-   #'(lambda ()
-       (quit-windows-on
-        (get-buffer "*Warnings*")))))
+   (lambda ()
+     (quit-windows-on
+      (get-buffer "*Warnings*")))))
 
 (use-package diff
   :ensure t
