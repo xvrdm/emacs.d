@@ -367,8 +367,6 @@
                                  (select-window (get-buffer-window "*ack*")))))))
   )
 
-(length (window-list-1))
-
 (use-package magit
   :ensure t
   :after evil
