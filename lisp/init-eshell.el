@@ -336,26 +336,33 @@
 ;;-------------------------------------------------------------
 ;; impliment
 ;;-------------------------------------------------------------
-(defun fwar34/port-exist-p (port)
-  "Judge port already in use"
-  (string-match (format "\\b%d\\b" port) (shell-command-to-string "ss -l")))
+(defun fwar34/port1080-exist-p ()
+  "Judge port 1080 is already in use"
+  (or (and (executable-find "netstat")
+           (string-match "\\b:1080\\b" (shell-command-to-string "netstat -nap")))
+      (and (executable-find "ss")
+           (string-match
+            ".*1080\\b.*v2ray"
+            (shell-command-to-string "ss -lp")))))
 
 (defun fwar34/proxy-command-use-lisp (first &rest other)
-  (if (fwar34/port-exist-p 1080)
+  (if (fwar34/port1080-exist-p)
       (message "port 1080 already in use!!!!!")
-    ;; (shell-command "/usr/bin/v2ray/v2ray -config ~/mine/Other/v2ray/client.config.json.nocdn > /dev/null 2>&1 &")
-    (start-process
-     "my-v2ray"
-     nil
-     "/usr/bin/v2ray/v2ray"
-     "-config ~/mine/Other/v2ray/client.config.json.nocdn")
-    (while (not (fwar34/port-exist-p 1080)))
-    (let ((command first))
-       (if (listp other)
-           (setq command (concat first " " (mapconcat 'identity other " "))))
-       (message command)
-       (shell-command (concat "proxychains4 " command))))
-  (delete-process "v2ray")
+    (let ((process (start-process
+                    "my-v2ray"
+                    (get-buffer "*Messages*")
+                    "/usr/bin/v2ray/v2ray"
+                    "-config"
+                    (expand-file-name
+                     "~/mine/Other/v2ray/client.config.json.nocdn"))))
+      (while (not (fwar34/port1080-exist-p)))
+      (let ((command first))
+        (if (listp other)
+            (setq command (concat first " " (mapconcat 'identity other " "))))
+        (message command)
+        (shell-command (concat "proxychains4 " command)))
+      (if (eq (process-status process) 'run)
+          (delete-process process))))
   )
 (defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
