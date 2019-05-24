@@ -117,6 +117,12 @@
 ;; https://en.wikipedia.org/wiki/Indent_style
 (setq c-default-style "linux")
 (setq default-tab-width 4)
+
+;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/c_002doffsets_002dalist.html#c_002doffsets_002dalist
+;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Style-Variables.html#Style-Variables
+;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Custom-Line_002dUp.html#Custom-Line_002dUp
+(c-set-offset 'innamespace 0)
+
 ;; (add-hook 'python-mode-hook #'(lambda () (setq python-indent-offset 4)))
 
 ;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
