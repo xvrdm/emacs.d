@@ -352,7 +352,22 @@
   :config
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
+  (evil-define-key 'normal ack-mode-map "q"
+    (lambda ()
+      (interactive)
+      (if (= (length (window-list-1)) 1)
+          (quit-window)
+        (delete-window))))
+  (if (fboundp 'make-thread)
+      (add-hook 'ack-mode-hook
+                (lambda ()
+                  (make-thread (lambda ()
+                                 (while (not (get-buffer-window "*ack*"))
+                                   (sleep-for 0 100))
+                                 (select-window (get-buffer-window "*ack*")))))))
   )
+
+(length (window-list-1))
 
 (use-package magit
   :ensure t
