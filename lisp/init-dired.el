@@ -102,26 +102,51 @@
       ;; it's not loaded yet, so add our bindings to the load-hook
       (add-hook 'dired-load-hook 'my-dired-init)))
   :config
-  ;; (defun advice-dired-single-buffer (&rest other)
-
-  ;;   )
-  ;; (advice-add #'dired-single-buffer :around #'advice-dired-single-buffer)
   ;;-------------------------------------------------------------
-  ;; 
+  ;; advice-add 
   ;;-------------------------------------------------------------
-  (defadvice dired-single-buffer (around advice-dired-single-buffer (&optional DEFAULT-DIRNAME) activate)
+  (defun advice-dired-single-buffer (fn &optional DEFAULT-DIRNAME)
     (save-excursion
-      (message "XXXX %s" DEFAULT-DIRNAME)
       (end-of-line)
       (let* ((eol (point))
              (need-del (if (string= DEFAULT-DIRNAME "..")
                            nil
                          (beginning-of-line)
                          (not (re-search-forward "^  d" eol t)))))
-        ad-do-it
-        (princ need-del)
+        (funcall fn DEFAULT-DIRNAME)
         (if need-del
             (kill-buffer "*dired-buffer*")))))
+  (advice-add #'dired-single-buffer :around #'advice-dired-single-buffer)
+  ;;-------------------------------------------------------------
+  ;; define-advice
+  ;;-------------------------------------------------------------
+  ;; (define-advice dired-single-buffer (:around (fn &optional DEFAULT-DIRNAME) advice-dired-single-buffer)
+  ;;   "kill dired buffer when file open"
+  ;;   (end-of-line)
+  ;;   (let* ((eol (point))
+  ;;          (need-del (if (string= DEFAULT-DIRNAME "..")
+  ;;                        nil
+  ;;                      (beginning-of-line)
+  ;;                      (not (re-search-forward "^  d" eol t))
+  ;;                      )))
+  ;;     (funcall fn DEFAULT-DIRNAME)
+  ;;     (if need-del
+  ;;         (kill-buffer "*dired-buffer*")))
+  ;;     )
+  ;;-------------------------------------------------------------
+  ;; defadvice
+  ;;-------------------------------------------------------------
+  ;; (defadvice dired-single-buffer (around advice-dired-single-buffer (&optional DEFAULT-DIRNAME) activate)
+  ;;   (save-excursion
+  ;;     (end-of-line)
+  ;;     (let* ((eol (point))
+  ;;            (need-del (if (string= DEFAULT-DIRNAME "..")
+  ;;                          nil
+  ;;                        (beginning-of-line)
+  ;;                        (not (re-search-forward "^  d" eol t)))))
+  ;;       ad-do-it
+  ;;       (if need-del
+  ;;           (kill-buffer "*dired-buffer*")))))
   )
 
 (provide 'init-dired)
