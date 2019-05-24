@@ -190,12 +190,7 @@
                                      (make-thread (lambda ()
                                                     (while (not (get-buffer-window "*Apropos*"))
                                                       (sleep-for 0 100))
-                                                    (select-window (get-buffer-window "*Apropos*"))))))
-    (add-hook 'apropos-mode-hook 
-              (async-start (lambda ()
-                             (while (not (get-buffer-window "*Apropos*"))
-                               (sleep-for 0 100))
-                             (select-window (get-buffer-window "*Apropos*"))))))
+                                                    (select-window (get-buffer-window "*Apropos*")))))))
   )
 
 (provide 'init-better-default)
