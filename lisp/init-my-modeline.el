@@ -184,6 +184,7 @@ DEFAULT-TEXT."
                                 (- (+ right right-fringe right-margin) ,reserve)))
               'face face))
 
+
 (setq projectile-mode-line
       (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
                       (propertize (format " P[%s]" (projectile-project-name))
@@ -244,17 +245,28 @@ DEFAULT-TEXT."
    (propertize "%02c" 'face 'font-lock-type-face)
    ")"))
 
+(defun encoding-string ()
+  (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+            (0 "LF ")
+            (1 "CRLF ")
+            (2 "CR "))
+          (let ((sys (coding-system-plist buffer-file-coding-system)))
+            (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
+                "UTF-8"
+              (upcase (symbol-name (plist-get sys :name)))))
+          " "))
+
 (setq encoding-mode-line
-  (quote (:eval (propertize 
-         (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-               (0 "LF ")
-               (1 "CRLF ")
-               (2 "CR "))
-             (let ((sys (coding-system-plist buffer-file-coding-system)))
-               (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
-               "UTF-8"
-                 (upcase (symbol-name (plist-get sys :name)))))
-             )))))
+      '(:eval (propertize 
+               (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+                         (0 "LF ")
+                         (1 "CRLF ")
+                         (2 "CR "))
+                       (let ((sys (coding-system-plist buffer-file-coding-system)))
+                         (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
+                             "UTF-8"
+                           (upcase (symbol-name (plist-get sys :name)))))
+                       ))))
 
 (setq time-mode-line (quote (:eval (propertize (format-time-string "%H:%M")))))
 
@@ -323,7 +335,7 @@ DEFAULT-TEXT."
        ;; flycheck-status-mode-line
        "%1 "
        my-flycheck-mode-line
-       (mode-line-fill 'mode-line 22)
+       '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (format-mode-line (encoding-string))))))
        encoding-mode-line
        " "
        ;; "["
