@@ -61,14 +61,37 @@
   ;;         (t (save-excursion
   ;;              (ignore-errors (backward-up-list))
   ;;              (funcall fn)))))
+  ;;-------------------------------------------------------------
+  ;; paren settings
+  ;;-------------------------------------------------------------
   (show-paren-mode)
-  ;; 括号匹配高亮
-  ;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+  ;; https://stackoverflow.com/questions/22951181/emacs-parenthesis-match-colors-styling
+  ;; "C-u C-x =(aka C-u M-x what-cursor-position)" with the cursor on the highlighted parenthesis,
+  ;; you will know what the highlighting face is.
+  ;; (defmacro dyn-let (varlist fn setfaces setvars)
+  ;;   (list 'let (append varlist (funcall fn)) setfaces setvars))
+  ;; (defun create-spacemacs-theme (variant)
+  ;;   (dyn-let ((class '((class color) (min-colors 89))) ;;              ~~ Dark ~~                              ~~ Light ~~
+  ;;             ;;                                                          GUI       TER                           GUI       TER
+  ;;             (green-bg-s (if (eq variant 'dark) (if (true-color-p) "#29422d" "#262626") (if (true-color-p) "#dae6d0" "#ffffff")))
+  ;;             )))
+  (defun true-color-p ()
+    (or
+    (display-graphic-p)
+    (= (tty-display-color-cells) 16777216)))
+  (setq variant 'dark)
+  (setq green-bg-s (if (eq variant 'dark) (if (true-color-p) "#29422d" "#262626") (if (true-color-p) "#dae6d0" "#ffffff")))
+  ;; (set-face-attribute 'show-paren-match nil :background green-bg-s :underline t)
+  (set-face-attribute 'show-paren-match nil :foreground "#86dc2f" :underline t)
+
+  ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
+  ;; causes highlighting also when point is on the inside of a parenthesis. 
+  ;; (setq show-paren-when-point-inside-paren t)
+
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
   ;;
-  (delete-selection-mode 1)
-  )
+  (delete-selection-mode 1))
 
 ;; 行号
 (if (>= emacs-major-version 26)

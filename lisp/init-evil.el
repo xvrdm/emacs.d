@@ -130,7 +130,10 @@
                beginning-of-defun
                dired-single-buffer
                dired-jump
-               end-of-defun))
+               end-of-defun
+               lispyville-beginning-of-defun
+               lispyville-end-of-defun
+               ))
   (evil-add-command-properties con :jump t))
 ;; (dolist (con '((ivy-switch-buffer . t)
 ;;                (counsel-gtags-dwim . t)))
@@ -205,6 +208,7 @@
                     "gr" 'counsel-gtags-find-reference
                     "gu" 'counsel-gtags-update-tags
                     "ud" 'undo-tree-visualize
+                    "ua" 'universal-argument
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
