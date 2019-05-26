@@ -1,9 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 (when window-system
   ;; 更改光标样式
-  ;; (set-default 'cursor-type 'hbar)
-  (set-default 'cursor-type 'bar)
+  ;; (set-default 'cursor-type 'box)
+  ;; (set-default 'cursor-type 'bar)
   ;; (setq cursor-type 'bar)
+  (setq cursor-type 'box)
   ;;设置窗口位置为屏库左上角(0,0)
   ;; (set-frame-position (selected-frame) 200 50)
   ;;设置宽和高
