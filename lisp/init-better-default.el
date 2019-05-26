@@ -74,13 +74,16 @@
     (or
      (display-graphic-p)
      (= (tty-display-color-cells) 16777216)))
+  ;; (setq variant 'light)
   (setq variant 'dark)
   (setq mat (if (eq variant 'dark) (if (true-color-p) "#86dc2f" "#86dc2f") (if (true-color-p) "#ba2f59" "#af005f")))
-  (set-face-attribute 'show-paren-match nil :foreground mat :underline t :background nil :inverse-video nil) 
+  ;; (set-face-attribute 'show-paren-match nil :foreground mat :underline t :background nil :inverse-video nil)
 
-  ;; (custom-set-faces
-  ;;  '(show-paren-match ((t (:foreground "#86dc2f" :underline t :background nil :inverse-video nil)))))
-  ;; custom-theme-set-faces
+  (custom-set-faces
+   `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
+  ;; (custom-theme-set-faces
+  ;;  'monokai
+  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
 
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
   ;; causes highlighting also when point is on the inside of a parenthesis. 
