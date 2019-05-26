@@ -68,26 +68,19 @@
   ;; https://stackoverflow.com/questions/22951181/emacs-parenthesis-match-colors-styling
   ;; "C-u C-x =(aka C-u M-x what-cursor-position)" with the cursor on the highlighted parenthesis,
   ;; you will know what the highlighting face is.
-  ;; (defmacro dyn-let (varlist fn setfaces setvars)
-  ;;   (list 'let (append varlist (funcall fn)) setfaces setvars))
-  ;; (defun create-spacemacs-theme (variant)
-  ;;   (dyn-let ((class '((class color) (min-colors 89))) ;;              ~~ Dark ~~                              ~~ Light ~~
-  ;;             ;;                                                          GUI       TER                           GUI       TER
-  ;;             (green-bg-s (if (eq variant 'dark) (if (true-color-p) "#29422d" "#262626") (if (true-color-p) "#dae6d0" "#ffffff")))
-  ;;             )))
+
+  ;; reference from spacemacs
   (defun true-color-p ()
     (or
      (display-graphic-p)
      (= (tty-display-color-cells) 16777216)))
   (setq variant 'dark)
-  (setq green-bg-s (if (eq variant 'dark) (if (true-color-p) "#29422d" "#262626") (if (true-color-p) "#dae6d0" "#ffffff")))
-  ;; (set-face-attribute 'show-paren-match nil :background green-bg-s :underline t)
-  ;; (set-face-attribute 'show-paren-match nil :foreground "#86dc2f" :underline t)
-  (set-face-attribute 'show-paren-match nil :underline t)
+  (setq mat (if (eq variant 'dark) (if (true-color-p) "#86dc2f" "#86dc2f") (if (true-color-p) "#ba2f59" "#af005f")))
+  (set-face-attribute 'show-paren-match nil :foreground mat :underline t :background nil :inverse-video nil) 
 
-  (custom-set-faces
-   '(show-paren-match ((t (:underline t))))
-   )
+  ;; (custom-set-faces
+  ;;  '(show-paren-match ((t (:foreground "#86dc2f" :underline t :background nil :inverse-video nil)))))
+  ;; custom-theme-set-faces
 
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
   ;; causes highlighting also when point is on the inside of a parenthesis. 
