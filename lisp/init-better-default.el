@@ -55,12 +55,13 @@
   (setq make-backup-files nil)
   (setq auto-save-default nil)
   ;; 高亮光标增强
-  (define-advice show-paren-function (:around (fn) fix-show-paren-function)
-    "Highlight enclosing parens."
-    (cond ((looking-at-p "\\s(") (funcall fn))
-          (t (save-excursion
-               (ignore-errors (backward-up-list))
-               (funcall fn)))))
+  ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  ;;   "Highlight enclosing parens."
+  ;;   (cond ((looking-at-p "\\s(") (funcall fn))
+  ;;         (t (save-excursion
+  ;;              (ignore-errors (backward-up-list))
+  ;;              (funcall fn)))))
+  (show-paren-mode)
   ;; 括号匹配高亮
   ;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
   (set-cursor-color "red")
