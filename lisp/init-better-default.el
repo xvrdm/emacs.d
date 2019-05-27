@@ -85,8 +85,8 @@
   ;; (setq show-paren-when-point-inside-paren t)
 
   ;;-------------------------------------------------------------
-  ;; 高亮光标增强 advice-add和define-advice,只有延时调用才起作用,还没搞清楚原因。
-  ;; defadvice起作用了
+  ;; 高亮光标增强 advice-add和define-advice,在windows下只有延时调用才起作用,还没搞清楚原因。
+  ;; defadvice在windows下就不用延时
   ;;-------------------------------------------------------------
   ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
   ;;   "Highlight enclosing parens."
