@@ -42,6 +42,7 @@
 (add-hook 'after-init-hook (lambda ()
                              (require 'init-minefunc)
                              (require 'init-c)))
+(require 'init-calendar)
 (add-hook 'after-init-hook
           (lambda ()
             (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
