@@ -35,13 +35,7 @@
   ;; 禁用备份文件
   (setq make-backup-files nil)
   (setq auto-save-default nil)
-  ;; 高亮光标增强
-  (define-advice show-paren-function (:around (fn) fix-show-paren-function)
-    "Highlight enclosing parens."
-    (cond ((looking-at-p "(\\|)") (funcall fn))
-          (t (save-excursion
-               (ignore-errors (backward-up-list))
-               (funcall fn)))))
+
   ;;-------------------------------------------------------------
   ;; paren settings
   ;;-------------------------------------------------------------
@@ -86,6 +80,31 @@
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
   ;; causes highlighting also when point is on the inside of a parenthesis. 
   ;; (setq show-paren-when-point-inside-paren t)
+
+  ;;-------------------------------------------------------------
+  ;; 高亮光标增强 advice-add和define-advice启动的时候都没有添加advice
+  ;; 只有defadvice起作用了，还没搞清楚原因
+  ;;-------------------------------------------------------------
+  ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  ;;   "Highlight enclosing parens."
+  ;;   (cond ((looking-at-p "(\\|)") (funcall fn))
+  ;;         (t (save-excursion
+  ;;              (ignore-errors (backward-up-list))
+  ;;              (funcall fn)))))
+  ;;-------------------------------------------------------------
+  ;; (defun advice-show-paren-function (fn)
+  ;;   (cond ((looking-at-p "(\\|)") (funcall fn))
+  ;;         (t (save-excursion
+  ;;              (ignore-errors (backward-up-list))
+  ;;              (funcall fn))))
+  ;;   )
+  ;; (advice-add #'show-paren-function :around #'advice-show-paren-function)
+  ;;-------------------------------------------------------------
+  (defadvice show-paren-function (around advice-show-paren-function activate)
+    (cond ((looking-at-p "(\\|)") ad-do-it)
+          (t (save-excursion
+               (ignore-errors (backward-up-list))
+               ad-do-it))))
 
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
