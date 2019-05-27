@@ -56,21 +56,23 @@
   (setq mat (if (eq variant 'dark) (if (true-color-p) "#86dc2f" "#86dc2f") (if (true-color-p) "#ba2f59" "#af005f")))
   (setq weight-value (if (window-system) 'normal 'extra-bold))
   ;;-------------------------------------------------------------
-  ;; set-face-attribute
+  ;; set-face-attribute 这个要延时调用才能起作用，没搞清楚原因，难道会被覆盖？
   ;;-------------------------------------------------------------
-  (set-face-attribute
-   'show-paren-match
-   nil
-   :foreground mat
-   :underline t
-   :background nil
-   :inverse-video nil
-   :weight weight-value)
+  ;; (defun custom-face ()
+  ;;   (set-face-attribute
+  ;;    'show-paren-match
+  ;;    nil
+  ;;    :foreground mat
+  ;;    :underline t
+  ;;    :background nil
+  ;;    :inverse-video nil
+  ;;    :weight weight-value))
+  ;; (run-with-idle-timer 2 nil #'custom-face)
   ;;-------------------------------------------------------------
   ;; custom-set-faces
   ;;-------------------------------------------------------------
-  ;; (custom-set-faces
-  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
+  (custom-set-faces
+   `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
   ;;-------------------------------------------------------------
   ;; custom-theme-set-faces
   ;;-------------------------------------------------------------
@@ -83,8 +85,8 @@
   ;; (setq show-paren-when-point-inside-paren t)
 
   ;;-------------------------------------------------------------
-  ;; 高亮光标增强 advice-add和define-advice启动的时候都没有添加advice
-  ;; 只有defadvice起作用了，还没搞清楚原因
+  ;; 高亮光标增强 advice-add和define-advice,只有延时调用才起作用,还没搞清楚原因。
+  ;; defadvice起作用了
   ;;-------------------------------------------------------------
   ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
   ;;   "Highlight enclosing parens."
@@ -99,7 +101,8 @@
   ;;              (ignore-errors (backward-up-list))
   ;;              (funcall fn))))
   ;;   )
-  ;; (advice-add #'show-paren-function :around #'advice-show-paren-function)
+  ;; (run-with-idle-timer 2 nil (lambda ()
+  ;;                              (advice-add #'show-paren-function :around #'advice-show-paren-function)))
   ;;-------------------------------------------------------------
   (defadvice show-paren-function (around advice-show-paren-function activate)
     (cond ((looking-at-p "(\\|)") ad-do-it)
