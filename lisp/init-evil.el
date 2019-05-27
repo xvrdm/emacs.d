@@ -34,7 +34,6 @@
   (highlight-remove-all)
   (search-highlight-persist))
 
-
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -45,9 +44,8 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; ;; for shell-command
-;; (evil-set-initial-state 'fundamental-mode 'emacs)
-;; (define-key evil-emacs-state-map (kbd "q") 'quit-window)
+;; initial apropos-mode to evil-normal-state
+(evil-set-initial-state 'apropos-mode 'normal)
 
 ;; TAB and C-i is the same
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
@@ -59,15 +57,12 @@
 
 ;; evil-surround setting
 (global-evil-surround-mode)
-
 ;; evil-nerd-commenter
 (evilnc-default-hotkeys)
-
 ;; evil-escape
 (evil-escape-mode 1)
 (setq-default evil-escape-delay 0.3)
 (setq-default evil-escape-key-sequence ";g")
-
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
