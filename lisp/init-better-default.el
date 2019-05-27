@@ -1,32 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; encoding
 (set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-
-;; 编码设置 begin
-;; (set-language-environment 'Chinese-GB)
-;; default-buffer-file-coding-system变量在emacs23.2之后已被废弃，使用buffer-file-coding-system代替
-(set-default buffer-file-coding-system 'utf-8-unix)
+;; (set-default-coding-systems 'utf-8)
 (set-default-coding-systems 'utf-8-unix)
-;; (setq-default pathname-coding-system 'euc-cn)
-;; (setq file-name-coding-system 'euc-cn)
-;; 另外建议按下面的先后顺序来设置中文编码识别方式。
-;; 重要提示:写在最后一行的，实际上最优先使用; 最前面一行，反而放到最后才识别。
-;; utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成
-;; utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature等多种)
-;; (prefer-coding-system 'cp950)
-;; (prefer-coding-system 'gb2312)
-;; (prefer-coding-system 'cp936)
-;; (prefer-coding-system 'gb18030)
-;; (prefer-coding-system 'utf-16le-with-signature)
-;; (prefer-coding-system 'utf-16)
-;; 新建文件使用utf-8-unix方式
-;; 如果不写下面两句，只写
-;; (prefer-coding-system 'utf-8)
-;; 这一句的话，新建文件以utf-8编码，行末结束符平台相关
-;; (prefer-coding-system 'utf-8-dos)
 (prefer-coding-system 'utf-8-unix)
-;; 编码设置 end
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; (when (eq system-type 'windows-nt)
@@ -45,6 +22,10 @@
   (global-prettify-symbols-mode t)
   ;; 禁用响铃
   (setq ring-bell-function 'ignore)
+  ;; 光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
+  (mouse-avoidance-mode 'animate)
+  ;; 当光标在行尾上下移动的时候，始终保持在行尾
+  (setq track-eol t)
   ;; display time in modeline
   (display-time-mode 1)
   ;; auto reload file
@@ -55,15 +36,17 @@
   (setq make-backup-files nil)
   (setq auto-save-default nil)
   ;; 高亮光标增强
-  ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  ;;   "Highlight enclosing parens."
-  ;;   (cond ((looking-at-p "\\s(") (funcall fn))
-  ;;         (t (save-excursion
-  ;;              (ignore-errors (backward-up-list))
-  ;;              (funcall fn)))))
+  (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+    "Highlight enclosing parens."
+    (cond ((looking-at-p "\\s(") (funcall fn))
+          (t (save-excursion
+               (ignore-errors (backward-up-list))
+               (funcall fn)))))
   ;;-------------------------------------------------------------
   ;; paren settings
   ;;-------------------------------------------------------------
+  ;; https://www.emacswiki.org/emacs/ShowParenMode#toc1
+  (setq show-paren-delay 0)
   (show-paren-mode)
   ;; https://stackoverflow.com/questions/22951181/emacs-parenthesis-match-colors-styling
   ;; "C-u C-x =(aka C-u M-x what-cursor-position)" with the cursor on the highlighted parenthesis,
@@ -77,10 +60,25 @@
   ;; (setq variant 'light)
   (setq variant 'dark)
   (setq mat (if (eq variant 'dark) (if (true-color-p) "#86dc2f" "#86dc2f") (if (true-color-p) "#ba2f59" "#af005f")))
-  ;; (set-face-attribute 'show-paren-match nil :foreground mat :underline t :background nil :inverse-video nil)
-
-  (custom-set-faces
-   `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
+  ;;-------------------------------------------------------------
+  ;; set-face-attribute
+  ;;-------------------------------------------------------------
+  (set-face-attribute
+   'show-paren-match
+   nil
+   :foreground mat
+   :underline t
+   :background nil
+   :inverse-video nil
+   :weight 'extra-bold)
+  ;;-------------------------------------------------------------
+  ;; custom-set-faces
+  ;;-------------------------------------------------------------
+  ;; (custom-set-faces
+  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
+  ;;-------------------------------------------------------------
+  ;; custom-theme-set-faces
+  ;;-------------------------------------------------------------
   ;; (custom-theme-set-faces
   ;;  'monokai
   ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
@@ -91,8 +89,8 @@
 
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
-  ;;
-  (delete-selection-mode 1))
+  (delete-selection-mode 1)
+  )
 
 ;; 行号
 (if (>= emacs-major-version 26)
@@ -134,33 +132,22 @@
       (setq-default save-place t))
   (save-place-mode 1))
 
+;;-------------------------------------------------------------
+;; code format
+;;-------------------------------------------------------------
 ;; tab settings
 (setq-default indent-tabs-mode nil) ; tab 改为插入空格
 (setq c-basic-offset 4) ; c c++ 缩进4个空格
-
 ;; https://www.emacswiki.org/emacs/IndentingC
 ;; https://en.wikipedia.org/wiki/Indent_style
 (setq c-default-style "linux")
 (setq default-tab-width 4)
-
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/c_002doffsets_002dalist.html#c_002doffsets_002dalist
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Style-Variables.html#Style-Variables
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Custom-Line_002dUp.html#Custom-Line_002dUp
 (c-set-offset 'innamespace 0)
-
 ;; disable guess python indent warning
 (setq python-indent-guess-indent-offset-verbose nil)
-
-
-;; http://ergoemacs.org/emacs/emacs_tabs_space_indentation_setup.html
-;; (progn
-;;   ;; make tab key always call a indent command.
-;;   (setq-default tab-always-indent t)
-;;   ;; make tab key call indent command or insert tab character, depending on cursor position
-;;   (setq-default tab-always-indent nil)
-;;   ;; make tab key do indent first then completion.
-;;   (setq-default tab-always-indent 'complete)
-;;   )
 
 ;; Underscore "_" is not a word character
 ;; https://github.com/emacs-evil/evil
