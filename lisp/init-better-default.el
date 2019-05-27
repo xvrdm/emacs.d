@@ -54,29 +54,29 @@
   ;; (setq variant 'light)
   (setq variant 'dark)
   (setq mat (if (eq variant 'dark) (if (true-color-p) "#86dc2f" "#86dc2f") (if (true-color-p) "#ba2f59" "#af005f")))
+  (setq weight-value (if (window-system) 'normal 'extra-bold))
   ;;-------------------------------------------------------------
   ;; set-face-attribute
   ;;-------------------------------------------------------------
-  ;; (set-face-attribute
-  ;;  'show-paren-match
-  ;;  nil
-  ;;  :foreground mat
-  ;;  :underline t
-  ;;  :background nil
-  ;;  :inverse-video nil
-  ;;  :weight 'extra-bold)
+  (set-face-attribute
+   'show-paren-match
+   nil
+   :foreground mat
+   :underline t
+   :background nil
+   :inverse-video nil
+   :weight weight-value)
   ;;-------------------------------------------------------------
   ;; custom-set-faces
   ;;-------------------------------------------------------------
-  (setq weight-value (if (window-system) 'normal 'extra-bold))
-  (custom-set-faces
-   `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
+  ;; (custom-set-faces
+  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
   ;;-------------------------------------------------------------
   ;; custom-theme-set-faces
   ;;-------------------------------------------------------------
   ;; (custom-theme-set-faces
   ;;  'monokai
-  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight bold)))))
+  ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
 
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
   ;; causes highlighting also when point is on the inside of a parenthesis. 
