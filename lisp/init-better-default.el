@@ -104,7 +104,8 @@
   ;; (advice-add #'show-paren-function :around #'advice-show-paren-function)
   ;;-------------------------------------------------------------
   (defadvice show-paren-function (around advice-show-paren-function activate)
-    (cond ((looking-at-p "\\s(") ad-do-it)
+    ;; (cond ((looking-at-p "\\s(") ad-do-it)
+    (cond ((looking-at-p "(\\|)") ad-do-it)
           (t (save-excursion
                (ignore-errors (backward-up-list))
                ad-do-it))))
