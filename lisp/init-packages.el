@@ -180,7 +180,8 @@
   (defadvice shell-command (after advice-find-file activate)
     (with-current-buffer "*Shell Command Output*"
       ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-      (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer))))
+      (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
+  )
 
 (use-package undo-tree
   :ensure t
@@ -534,12 +535,12 @@
   )
 
 ;; linum-relative
-(use-package linum-relative
-  ;; emacs26 builtin
-  :disabled
-  :config
-  ;; (linum-relative-toggle)
-  )
+;; (use-package linum-relative
+;;   ;; emacs26 builtin
+;;   :disabled
+;;   :config
+;;   ;; (linum-relative-toggle)
+;;   )
 
 (use-package rainbow-delimiters
   :ensure t

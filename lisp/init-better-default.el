@@ -16,6 +16,7 @@
 
 (use-package recentf
   :after evil
+  ;; :defer 2
   :config
   (recentf-mode 1)
   (setq recentf-max-menu-item 10)
@@ -85,7 +86,7 @@
   ;; (setq show-paren-when-point-inside-paren t)
 
   ;;-------------------------------------------------------------
-  ;; 高亮光标增强 advice-add和define-advice,在windows下只有延时调用才起作用,还没搞清楚原因。
+  ;; 高亮光标增强 advice-add和define-advice,只有延时调用或者禁用evil才起作用,还没搞清楚原因。
   ;; defadvice在windows下就不用延时
   ;;-------------------------------------------------------------
   ;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
@@ -96,24 +97,36 @@
   ;;              (funcall fn)))))
   ;;-------------------------------------------------------------
   ;; (defun advice-show-paren-function (fn)
-  ;;   (cond ((looking-at-p "(\\|)") (funcall fn))
+  ;;   (cond ((looking-at-p "\\s(") (funcall fn))
   ;;         (t (save-excursion
   ;;              (ignore-errors (backward-up-list))
-  ;;              (funcall fn))))
-  ;;   )
-  ;; (run-with-idle-timer 2 nil (lambda ()
-  ;;                              (advice-add #'show-paren-function :around #'advice-show-paren-function)))
+  ;;              (funcall fn)))))
+  ;; (advice-add #'show-paren-function :around #'advice-show-paren-function)
   ;;-------------------------------------------------------------
   (defadvice show-paren-function (around advice-show-paren-function activate)
-    (cond ((looking-at-p "(\\|)") ad-do-it)
+    (cond ((looking-at-p "\\s(") ad-do-it)
           (t (save-excursion
                (ignore-errors (backward-up-list))
                ad-do-it))))
 
+  (defun test-make ()
+    (interactive)
+    (if (looking-at-p "\\s(")
+        (message "found")
+      (message "not found")))
+
+  (defun test-back ()
+    (interactive)
+    (backward-up-list))
+
+  (defun test-remove-advice ()
+    (interactive)
+    (advice-remove #'show-paren-function #'advice-show-paren-function))
+
+
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
-  (delete-selection-mode 1)
-  )
+  (delete-selection-mode 1))
 
 ;; 行号
 (if (>= emacs-major-version 26)
