@@ -130,9 +130,6 @@
                lispyville-end-of-defun
                ))
   (evil-add-command-properties con :jump t))
-;; (dolist (con '((ivy-switch-buffer . t)
-;;                (counsel-gtags-dwim . t)))
-;;   (evil-add-command-properties (car con) :jump (cdr con)))
 
 ;; {{ Use `;` as one leader key
 (general-define-key :keymaps '(normal visual)

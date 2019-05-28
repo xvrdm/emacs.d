@@ -1,5 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 快速打开配置文件
+(define-namespace fwar34-)
 (defun open-init-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
@@ -205,6 +206,76 @@ want to use in the modeline *in lieu of* the original.")
   (insert ";; \n")
   (insert ";;-------------------------------------------------------------")
   )
+
+;; reference from http://ergoemacs.org/emacs/elisp_run_current_file.html
+(defvar fwar34-run-current-file-before-hook nil "Hook for `fwar34/run-current-file'. Before the file is run.")
+(defvar fwar34-run-current-file-after-hook nil "Hook for `fwar34/run-current-file'. After the file is run.")
+(defun fwar34/run-current-go-file ()
+  "Run or build current golang file.
+To build, call `universal-argument' first."
+  (interactive)
+  (unless (buffer-file-name) (save-buffer))
+  (when (buffer-modified-p) (save-buffer))
+  (let ((resize-mini-window-internal nil)
+        ($filename (buffer-file-name))
+        ($prog-name "go")
+        $cmd-str)
+    (setq $cmd-str (concat $prog-name " \"" $filename "\""))
+    (if current-prefix-arg
+        (setq $cmd-str (format "%s build \"%s\" " $prog-name $filename))
+      (setq $cmd-str (format "%s run \"%s\"" $prog-name $filename)))
+    (message "running %s" $filename)
+    (message "%s" $cmd-str)
+    (shell-command $cmd-str))
+  )
+(defun fwar34/run-current-file ()
+  "Execute the current file.
+
+For example, if the current buffer is x.py, then it'll call 「python x.py」 in a shell.
+Output is printed to buffer “*Shell Command Output*”.
+
+The file can be Emacs Lisp, Python, golang, Bash.
+File suffix is used to determine what program to run.
+
+If the file is modified or not saved, save it automatically before run.
+
+URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
+  (interactive)
+  (let ((resize-mini-window-internal nil)
+        ($suffix-map
+         ;; (‹extension› . ‹shell program name›)
+         `(("sh" . "bash")
+           ("go" . "go run")
+           ("py" . ,(if (string-equal system-type "windows-nt") "python" "python3"))
+           ("rs" . "cargo run")
+           ("cpp" . "g++")
+           ("java" . "javac")
+           ("c". "gcc")))
+        $filename
+        $file-suffix
+        $prog-name
+        $cmd-str)
+    (unless (buffer-file-name) (save-buffer))
+    (when (buffer-modified-p) (save-buffer))
+    (setq $filename (buffer-file-name))
+    (setq $file-suffix (file-name-extension $filename))
+    (setq $prog-name (cdr (assoc $file-suffix $suffix-map)))
+    (setq $cmd-str (concat $prog-name " \"" $filename "\""))
+    (run-hooks 'fwar34-run-current-file-before-hook)
+    (cond
+     ((string-equal $file-suffix "el")
+      (load $filename))
+     ((string-equal $file-suffix "go")
+      (fwar34-run-current-go-file))
+     ((string-equal $file-suffix "java")
+      (shell-command (format "java %s" (file-name-sans-extension (file-name-nondirectory $filename)))))
+     (t (if $prog-name
+            (progn
+              (message "Running")
+              (shell-command $cmd-str))
+          (error "No recognized program file suffix for this file.")))
+     )
+    (run-hooks 'fwar34-run-current-file-after-hook)))
 
 ;; 重新载入emacs配置
 (defun mage-reload-config()

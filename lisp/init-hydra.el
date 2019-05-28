@@ -88,6 +88,7 @@
     "
     ("li" fwar34/insert-lisp-commit "lisp commit")
     ("py" fwar34/insert-python "python commit")
+    ("rc" fwar34/run-current-file "run current file")
     ("q" nil "cancale" :color blue))
   ;; (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
   (evil-define-key '(normal insert) 'global (kbd "M-u fw") #'hydra-fwar34/body)
