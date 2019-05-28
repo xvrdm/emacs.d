@@ -290,7 +290,8 @@
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
                     "tm" 'eshell
-                    "rr" 'fwar34/counsel-goto-recent-directory)
+                    "rr" 'fwar34/counsel-goto-recent-directory
+                    "rc" 'fwar34/run-current-file)
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
