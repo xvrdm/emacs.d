@@ -277,6 +277,23 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
      )
     (run-hooks 'fwar34-run-current-file-after-hook)))
 
+;; inspired by http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html
+(defun fwar34/highlight-yank-content ()
+  "Highlight yank content in red color"
+  (interactive)
+  (let ((yank-content (substring-no-properties (get-register ?0)))
+        start
+        end)
+    (message yank-content)))
+
+;; evil-yank (beg end type register yank-handler)
+(defun test-evil-yank ()
+  (message "xxx")
+
+  )
+
+(advice-add #'evil-yank :after #'test-evil-yank)
+
 ;; 重新载入emacs配置
 (defun mage-reload-config()
   (interactive)

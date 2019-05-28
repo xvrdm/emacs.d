@@ -34,6 +34,21 @@
   (highlight-remove-all)
   (search-highlight-persist))
 
+;; highlight "* #" search
+(defadvice evil-search-word-forward (after advice-evil-search-word-forward activate)
+  (highlight-remove-all)
+  (search-highlight-persist))
+(defadvice evil-search-word-backward (after advice-evil-search-word-forward activate)
+  (highlight-remove-all)
+  (search-highlight-persist))
+
+;; equivalent of 'nnoremap n nzz' in vim
+;; https://github.com/noctuid/evil-guide
+(defun my-center-line (&rest _)
+  (evil-scroll-line-to-center nil))
+(advice-add 'evil-search-next :after #'my-center-line)
+(advice-add 'evil-search-previous :after #'my-center-line)
+
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
 (define-key evil-normal-state-map [escape] 'keyboard-quit)

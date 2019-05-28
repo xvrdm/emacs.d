@@ -224,12 +224,6 @@
 ;; (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
 ;;   (evil-scroll-line-to-center (line-number-at-pos)))
 
-;; equivalent of 'nnoremap n nzz' in vim
-;; https://github.com/noctuid/evil-guide
-(defun my-center-line (&rest _)
-  (evil-scroll-line-to-center nil))
-(advice-add 'evil-search-next :after #'my-center-line)
-(advice-add 'evil-search-previous :after #'my-center-line)
 
 ;; adjust for work server
 (when (or (equal system-name "tms2")
