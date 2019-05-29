@@ -23,10 +23,11 @@
   (hi-lock-mode -1)
   (hi-lock-mode 1))
 (defun search-highlight-persist ()
-  (highlight-regexp (car-safe (if isearch-regexp
-                                  regexp-search-ring
-                                search-ring))
-                    (facep 'hi-yellow)))
+  ;; (highlight-regexp (car-safe (if isearch-regexp
+  ;;                                 regexp-search-ring
+  ;;                               search-ring))
+  ;;                   (facep 'hi-yellow))
+  (highlight-regexp (car-safe regexp-search-ring)))
 (defadvice isearch-exit (after isearch-hl-persist activate)
   (highlight-remove-all)
   (search-highlight-persist))
