@@ -27,8 +27,8 @@
 
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'init-ui)
 (require 'init-packages)
+(require 'init-ui)
 (require 'init-hydra)
 (require 'init-modeline)
 
