@@ -45,6 +45,8 @@
 ;; equivalent of 'nnoremap n nzz' in vim
 ;; https://github.com/noctuid/evil-guide
 (defun my-center-line (&rest _)
+  (highlight-remove-all)
+  (search-highlight-persist)
   (evil-scroll-line-to-center nil))
 (advice-add 'evil-search-next :after #'my-center-line)
 (advice-add 'evil-search-previous :after #'my-center-line)

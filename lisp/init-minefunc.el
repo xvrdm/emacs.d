@@ -287,12 +287,38 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (message yank-content)))
 
 ;; evil-yank (beg end type register yank-handler)
-(defun test-evil-yank ()
-  (message "xxx")
-
+(defun test-evil-set-register (&rest _)
+  (message (get-register ?0))
+  (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow))
   )
 
-(advice-add #'evil-yank :after #'test-evil-yank)
+;; (advice-add #'evil-set-register :after #'test-evil-set-register)
+
+;; http://ergoemacs.org/emacs/elisp_text_properties.html
+(defun fwar34/color (beg end &optional color)
+  (with-silent-modifications
+    (put-text-property beg end 'font-lock-face `(:background ,color :foreground ,color))))
+
+(defface hi-yellow
+  '((((min-colors 88) (background dark))
+     (:background "yellow1" :foreground "black"))
+    (((background dark)) (:background "yellow" :foreground "black"))
+    (((min-colors 88)) (:background "yellow1"))
+    (t (:background "yellow")))
+  "Default face for hi-lock mode."
+  :group 'hi-lock-faces)
+
+(defun fwar34/highlight-yank (beg end &rest _)
+  (let ((overlay (make-overlay beg end)))
+    (overlay-put overlay 'face 'hi-yellow)
+    (make-thread (lambda ()
+                   (sleep-for 0 500)
+                   (remove-overlays beg end 'face 'hi-yellow))))
+  )
+(advice-add #'evil-yank :after #'fwar34/highlight-yank)
+(advice-add #'lispyville-yank :after #'fwar34/highlight-yank)
+
+
 
 ;; 重新载入emacs配置
 (defun mage-reload-config()
