@@ -299,26 +299,23 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (with-silent-modifications
     (put-text-property beg end 'font-lock-face `(:background ,color :foreground ,color))))
 
-(defface hi-yellow
+(defface fwar34-hi-yellow
   '((((min-colors 88) (background dark))
      (:background "yellow1" :foreground "black"))
     (((background dark)) (:background "yellow" :foreground "black"))
     (((min-colors 88)) (:background "yellow1"))
     (t (:background "yellow")))
-  "Default face for hi-lock mode."
-  :group 'hi-lock-faces)
+  "Default face for hi-lock mode.")
 
 (defun fwar34/highlight-yank (beg end &rest _)
   (let ((overlay (make-overlay beg end)))
-    (overlay-put overlay 'face 'hi-yellow)
+    (overlay-put overlay 'face 'fwar34-hi-yellow)
     (make-thread (lambda ()
                    (sleep-for 0 500)
-                   (remove-overlays beg end 'face 'hi-yellow))))
+                   (remove-overlays beg end 'face 'fwar34-hi-yellow))))
   )
 (advice-add #'evil-yank :after #'fwar34/highlight-yank)
 (advice-add #'lispyville-yank :after #'fwar34/highlight-yank)
-
-
 
 ;; 重新载入emacs配置
 (defun mage-reload-config()
