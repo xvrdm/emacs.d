@@ -54,6 +54,7 @@
 
 ;;-------------------------------------------------------------
 ;; highlight yank region
+;; https://emacs-china.org/t/emacs-vim/9203/13
 ;;-------------------------------------------------------------
 (defface fwar34-hi-yellow
   '((((min-colors 88) (background dark))
@@ -66,7 +67,7 @@
 (defun fwar34/highlight-yank (beg end &rest _)
   (let ((overlay (make-overlay beg end)))
     (overlay-put overlay 'face 'fwar34-hi-yellow)
-    ;; (overlay-put overlay 'fwar34-flag t) ;; set my overlay flag
+    (overlay-put overlay 'fwar34-flag t) ;; set my overlay flag
     (make-thread (lambda ()
                    (sleep-for 0 500)
                    ;; (remove-overlays beg end 'face 'fwar34-hi-yellow)))
@@ -89,8 +90,8 @@
         (when (overlay-get overlay 'fwar34-flag)
           (delete-overlay overlay)))
       (setq overlays (cdr overlays)))))
-;; (advice-add #'evil-paste-before :after #'fwar34/remove-fwar34-overlay-before-paste)
-;; (advice-add #'evil-paste-after :after #'fwar34/remove-fwar34-overlay-before-paste)
+(advice-add #'evil-paste-before :after #'fwar34/remove-fwar34-overlay-before-paste)
+(advice-add #'evil-paste-after :after #'fwar34/remove-fwar34-overlay-before-paste)
 
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
