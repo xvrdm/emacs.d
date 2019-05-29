@@ -167,6 +167,7 @@
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   :config
+  ;; (setq evil-no-display t)              ;; not display evil state in echo area
   (setq evil-want-C-i-jump t)
   (setq evil-want-fine-undo "Yes")
   (setq evil-want-Y-yank-to-eol t)
