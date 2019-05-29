@@ -36,7 +36,8 @@
 ;; menu bar
 (menu-bar-mode -1)
 ;; 关闭工具栏
-(tool-bar-mode -1)
+(if (boundp 'tool-bar-mode)
+    (tool-bar-mode -1))
 ;; no scroll bar
 (if (fboundp 'set-scroll-bar-mode)
     (set-scroll-bar-mode nil))
