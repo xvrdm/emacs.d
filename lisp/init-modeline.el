@@ -34,5 +34,55 @@
   ;; (spaceline-spacemacs-theme))
   (spaceline-emacs-theme))
 
+(use-package maple-modeline
+  :disabled
+  :load-path "lisp"
+  :hook (after-init . maple-modeline-init)
+  :config
+  ;; standard or minimal
+  (setq maple-modeline-style 'standard)
+  ;; standard or reset or some number
+  (setq maple-modeline-width 'standard))
+
+(use-package doom-modeline
+  :disabled
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+
+(use-package mood-line
+  :disabled
+  :ensure t
+  :hook
+  (after-init . mood-line-mode))
+
+(use-package smart-mode-line
+  :disabled
+  :ensure t
+  :init
+  (setq sml/theme 'light)
+  :hook
+  (after-init . (lambda () (sml/setup)))
+  )
+
+(use-package powerline
+  :disabled
+  :ensure t
+  :config
+  (powerline-default-theme)
+  )
+
+(use-package airline-themes
+  :disabled
+  :ensure t
+  :config
+  (load-theme 'airline-light)
+  )
+
+(use-package powerline-evil
+  :disabled
+  :ensure t
+  :config
+  ;; (setq powerline-evil-tag-style 'standard)
+  )
 
 (provide 'init-modeline)
