@@ -66,16 +66,31 @@
 (defun fwar34/highlight-yank (beg end &rest _)
   (let ((overlay (make-overlay beg end)))
     (overlay-put overlay 'face 'fwar34-hi-yellow)
+    ;; (overlay-put overlay 'fwar34-flag t) ;; set my overlay flag
     (make-thread (lambda ()
                    (sleep-for 0 500)
-                   (remove-overlays beg end 'face 'fwar34-hi-yellow))))
-  )
+                   ;; (remove-overlays beg end 'face 'fwar34-hi-yellow)))
+                   (delete-overlay overlay)))
+    ))
 ;; (advice-add #'evil-yank :after #'fwar34/highlight-yank) ;; evil-delete also use evil-yank
 (advice-add #'evil-yank-rectangle :after #'fwar34/highlight-yank)
 (advice-add #'evil-yank-lines :after #'fwar34/highlight-yank)
 (advice-add #'evil-yank-characters :after #'fwar34/highlight-yank)
 
 (advice-add #'lispyville-yank :after #'fwar34/highlight-yank)
+
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Finding-Overlays.html#Finding-Overlays
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Managing-Overlays.html#Managing-Overlays
+(defun fwar34/remove-fwar34-overlay-before-paste (&rest _)
+  (interactive)
+  (let ((overlays (overlays-at (point))))
+    (while overlays
+      (let ((overlay (car overlays)))
+        (when (overlay-get overlay 'fwar34-flag)
+          (delete-overlay overlay)))
+      (setq overlays (cdr overlays)))))
+;; (advice-add #'evil-paste-before :after #'fwar34/remove-fwar34-overlay-before-paste)
+;; (advice-add #'evil-paste-after :after #'fwar34/remove-fwar34-overlay-before-paste)
 
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
