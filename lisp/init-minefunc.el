@@ -314,7 +314,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
                    (sleep-for 0 500)
                    (remove-overlays beg end 'face 'fwar34-hi-yellow))))
   )
-;; (advice-add #'evil-yank :after #'fwar34/highlight-yank) ;; delete also to use evil-yank
+;; (advice-add #'evil-yank :after #'fwar34/highlight-yank) ;; evil-delete also use evil-yank
 (advice-add #'evil-yank-rectangle :after #'fwar34/highlight-yank)
 (advice-add #'evil-yank-lines :after #'fwar34/highlight-yank)
 (advice-add #'evil-yank-characters :after #'fwar34/highlight-yank)
