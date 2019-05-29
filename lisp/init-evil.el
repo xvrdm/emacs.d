@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (use-package evil-ex-registers
-  ;; :disabled
+  :disabled
   :after evil
   :load-path "lisp"
   ;; :straight
@@ -51,6 +51,31 @@
   (evil-scroll-line-to-center nil))
 (advice-add 'evil-search-next :after #'my-center-line)
 (advice-add 'evil-search-previous :after #'my-center-line)
+
+;;-------------------------------------------------------------
+;; highlight yank region
+;;-------------------------------------------------------------
+(defface fwar34-hi-yellow
+  '((((min-colors 88) (background dark))
+     (:background "yellow1" :foreground "black"))
+    (((background dark)) (:background "yellow" :foreground "black"))
+    (((min-colors 88)) (:background "yellow1"))
+    (t (:background "yellow")))
+  "Default face for hi-lock mode.")
+
+(defun fwar34/highlight-yank (beg end &rest _)
+  (let ((overlay (make-overlay beg end)))
+    (overlay-put overlay 'face 'fwar34-hi-yellow)
+    (make-thread (lambda ()
+                   (sleep-for 0 500)
+                   (remove-overlays beg end 'face 'fwar34-hi-yellow))))
+  )
+;; (advice-add #'evil-yank :after #'fwar34/highlight-yank) ;; evil-delete also use evil-yank
+(advice-add #'evil-yank-rectangle :after #'fwar34/highlight-yank)
+(advice-add #'evil-yank-lines :after #'fwar34/highlight-yank)
+(advice-add #'evil-yank-characters :after #'fwar34/highlight-yank)
+
+(advice-add #'lispyville-yank :after #'fwar34/highlight-yank)
 
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
