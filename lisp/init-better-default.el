@@ -268,4 +268,86 @@
                                                     (select-window (get-buffer-window "*Apropos*")))))))
   )
 
+;; https://emacs-china.org/t/scratch-lexical-binding/9378
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (let ((buffer (get-buffer "*scratch*")))
+              (when buffer
+                (with-current-buffer buffer
+                  (setq lexical-binding t))))))
+
+;; https://emacs-china.org/t/advice/7566/7
+(add-hook 'help-mode-hook 'cursor-sensor-mode)
+(defun function-advices (function)
+  "Return FUNCTION's advices."
+  (let ((function-def (advice--symbol-function function))
+        (ad-functions '()))
+    (while (advice--p function-def)
+      (setq ad-functions (append `(,(advice--car function-def)) ad-functions))
+      (setq function-def (advice--cdr function-def)))
+    ad-functions))
+
+(define-advice describe-function-1 (:after (function) advice-remove-button)
+  "Add a button to remove advice."
+  (when (get-buffer "*Help*")
+    (with-current-buffer "*Help*"
+      (save-excursion
+        (goto-char (point-min))
+        (let ((ad-index 0)
+              (ad-list (reverse (function-advices function))))
+          (while (re-search-forward "^:[-a-z]+ advice: \\(.+\\)$" nil t)
+            (let* ((name (string-trim (match-string 1) "'" "'"))
+                   (advice (or (intern-soft name) (nth ad-index ad-list))))
+              (when (and advice (functionp advice))
+                (let ((inhibit-read-only t))
+                  (insert " » ")
+                  (insert-text-button
+                   "Remove"
+                   'cursor-sensor-functions `((lambda (&rest _) (message "%s" ',advice)))
+                   'help-echo (format "%s" advice)
+                   'action
+                   ;; In case lexical-binding is off
+                   `(lambda (_)
+                      (when (yes-or-no-p (format "Remove %s ? " ',advice))
+                        (message "Removing %s of advice from %s" ',function ',advice)
+                        (advice-remove ',function ',advice)
+                        (revert-buffer nil t)))
+                   'follow-link t))))
+                        (setq ad-index (1+ ad-index))))))))
+
+(defun helm-advice-remove (function)
+  "Remove advice from FUNCTION."
+  (interactive (let* ((fn (function-called-at-point))
+                      (enable-recursive-minibuffers t)
+                      (val (completing-read
+                            (if fn
+                                (format "Function (default %s): " fn)
+                              "Function: ")
+                            #'help--symbol-completion-table
+                            (lambda (f) (or (fboundp f) (get f 'function-documentation)))
+                            t nil nil
+                            (and fn (symbol-name fn)))))
+                 (unless (equal val "")
+                   (setq fn (intern val)))
+                 (unless (and fn (symbolp fn))
+                   (user-error "You didn't specify a function symbol"))
+                 (unless (or (fboundp fn) (get fn 'function-documentation))
+                   (user-error "Symbol's function definition is void: %s" fn))
+                 (list fn)))
+  (let* ((ad-alist (mapcar (lambda (ad) (cons (format "%S" ad) ad)) (function-advices function)))
+         (default-candidates (mapcar (lambda (ad) (car ad)) ad-alist)))
+    (helm :sources
+          (helm-build-sync-source "Advices"
+                                  :candidates default-candidates
+                                  :action
+                                  `(("Remove" . (lambda (_)
+                                                  (let ((items (helm-marked-candidates)))
+                                                    (when (yes-or-no-p (format "Remove %s ? " (if (cdr items) items (car items))))
+                                                      (mapc (lambda (item)
+                                                              (let ((ad (alist-get item ',ad-alist nil nil 'string=)))
+                                                                (message "Removing %s of advice from %s" ',function ad)
+                                                                (advice-remove ',function ad)))
+                                                            items))))))))))
+
+
 (provide 'init-better-default)
