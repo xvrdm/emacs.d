@@ -572,6 +572,8 @@
   :ensure t
   :after evil
   :config
+  ;; must put before (evilnc-default-hotkeys t t)
+  (setq evilnc-use-comment-object-setup nil)
   (evilnc-default-hotkeys t t)
   )
 
