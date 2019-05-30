@@ -364,6 +364,8 @@
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
+                    "st" 'org-shifttab
+                    "TAB" 'outline-toggle-children
                     "eh" 'toggle-company-english-helper
                     ;; "ss" 'sr-speedbar-toggle
                     ;; "ll" 'my-wg-switch-workgroup ; load windows layout
