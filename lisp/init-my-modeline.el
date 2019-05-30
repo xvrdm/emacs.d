@@ -247,9 +247,9 @@ DEFAULT-TEXT."
 
 (defun encoding-string ()
   (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-            (0 "LF ")
-            (1 "CRLF ")
-            (2 "CR "))
+            (0 "LF-unix ")
+            (1 "CRLF-windows ")
+            (2 "CR-mac "))
           (let ((sys (coding-system-plist buffer-file-coding-system)))
             (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
                 "UTF-8"
@@ -259,9 +259,9 @@ DEFAULT-TEXT."
 (setq encoding-mode-line
       '(:eval (propertize 
                (concat (pcase (coding-system-eol-type buffer-file-coding-system)
-                         (0 "LF ")
-                         (1 "CRLF ")
-                         (2 "CR "))
+                         (0 "LF-unix ")
+                         (1 "CRLF-windows ")
+                         (2 "CR-mac "))
                        (let ((sys (coding-system-plist buffer-file-coding-system)))
                          (if (member (plist-get sys :category) '(coding-category-undecided coding-category-utf-8))
                              "UTF-8"
