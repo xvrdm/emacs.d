@@ -11,7 +11,17 @@
      (emacs-lisp . t)
      (C . t)))
   (setq org-confirm-babel-evaluate nil)
-  (setq org-src-fontify-natively t))
+  (setq org-src-fontify-natively t)
+  ;; https://emacs-china.org/t/topic/440/10
+  (case system-type
+    (gnu/linux
+     (custom-set-faces
+      ;; custom-set-faces was added by Custom.
+      ;; If you edit it by hand, you could mess it up, so be careful.
+      ;; Your init file should contain only one such instance.
+      ;; If there is more than one, they won't work right.
+      '(org-table ((t (:foreground "#6c71c4" :family "Ubuntu Mono")))))))
+  )
 
 (use-package htmlize
   :after org
