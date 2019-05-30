@@ -299,6 +299,8 @@
                     "yw" 'youdao-dictionary-search-at-point
                     "yy" 'youdao-dictionary-search-at-point+
                     "yd" 'youdao-dictionary-search-from-input
+                    "ls" 'elisp-index-search
+                    "ms" 'emacs-index-search
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
                     ;; "rm" 'my-recent-file

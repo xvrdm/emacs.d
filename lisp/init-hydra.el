@@ -257,6 +257,20 @@
     ("rv" magit-revert "Revert existing commits, with or without creating new commits." :column "magit commands")
     ("q" nil "cancel" :exit t :column nil))
   (define-key magit-mode-map (kbd "M-u gi") 'hydra-magit/body)
+
+  ;;-------------------------------------------------------------
+  ;; info
+  (defhydra hydra-info (:color blue :hint nil)
+    ("ls" elisp-index-search "Look up TOPIC in the indices of the Emacs Lisp Reference Manual." :column "info commands")
+    ("es" emacs-index-search "Look up TOPIC in the indices of the Emacs User Manual.")
+    ("c" Info-copy-current-node-name "Put the name of the current Info node into the kill ring.")
+    ("h" Info-help "Enter the Info tutorial.")
+    ("n" Info-next-reference "Move cursor to the next cross-reference or menu item in the node." :color red)
+    ("p" Info-prev-reference "Move cursor to the previous cross-reference or menu item in the node." :color red)
+    ("l" Info-final-node "Go to the final node in this file.")
+    ("q" nil "cancel" :exit t :column nil))
+  ;; (global-set-key (kbd "M-u if") #'hydra-info/body)
+  (define-key Info-mode-map (kbd "M-u if") #'hydra-info/body)
   )
 
 (provide 'init-hydra)
