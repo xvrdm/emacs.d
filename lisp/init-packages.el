@@ -571,6 +571,8 @@
 (use-package evil-nerd-commenter
   :ensure t
   :after evil
+  :config
+  (evilnc-default-hotkeys t t)
   )
 
 (use-package evil-easymotion

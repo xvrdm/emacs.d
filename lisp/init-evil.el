@@ -116,8 +116,6 @@
 
 ;; evil-surround setting
 (global-evil-surround-mode)
-;; evil-nerd-commenter
-(evilnc-default-hotkeys)
 ;; evil-escape
 (evil-escape-mode 1)
 (setq-default evil-escape-delay 0.3)
