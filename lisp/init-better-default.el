@@ -154,6 +154,7 @@
                        cmake-mode-hook
                        emacs-lisp-mode-hook
                        matlab-mode-hook
+                       rust-mode-hook
                        python-mode-hook
                        c-mode-common-hook
                        org-mode-hook
