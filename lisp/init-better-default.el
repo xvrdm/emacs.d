@@ -4,7 +4,7 @@
 ;; (set-default-coding-systems 'utf-8)
 (set-default-coding-systems 'utf-8-unix)
 ;; (set-default buffer-file-coding-system 'utf-8)
-(set-default buffer-file-coding-system 'utf-8-unix)
+;; (set-default buffer-file-coding-system 'utf-8-unix)
 ;; (setq-default pathname-coding-system 'euc-cn)
 ;; (setq file-name-coding-system 'euc-cn)
 ;;  另外建议按下面的先后顺序来设置中文编码识别方式。
