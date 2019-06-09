@@ -399,7 +399,8 @@
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
                     "qq" 'save-buffers-kill-terminal
-                    "xx" 'suspend-frame
+                    "xz" 'suspend-frame
+                    "xx" 'highlight-symbol-remove-all
                     "kk" 'scroll-other-window
                     "jj" 'scroll-other-window-up
                     ;; "me" 'mc/edit-lines
