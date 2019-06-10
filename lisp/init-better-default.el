@@ -1,27 +1,80 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; encoding
-(set-language-environment "UTF-8")
-;; (set-default-coding-systems 'utf-8)
-(set-default-coding-systems 'utf-8-unix)
-;; (set-default buffer-file-coding-system 'utf-8)
+
+;; ;; https://blog.csdn.net/lidonghat/article/details/52891343 
+;; ;; 打开文件出现乱码时，可以尝试修改字符的编码：
+;; ;; M-x revert-buffer-with-coding-system
+;; ;; 然后输入对应编码，如：utf-8 或者 chinese-gbk。
+;; ;; 在保存的时候还可以指定文件的保存编码：
+;; ;; M-x set-buffer-file-coding-system
+
+;; ;; encoding
+;; (set-language-environment "UTF-8")
+;; ;; (set-default-coding-systems 'utf-8)
+;; (set-default-coding-systems 'utf-8-unix)
+;; ;; (set-default buffer-file-coding-system 'utf-8)
+;; ;; 文件默认保存为 utf-8
+;; (set-buffer-file-coding-system 'utf-8-unix)
 ;; (set-default buffer-file-coding-system 'utf-8-unix)
-;; (setq-default pathname-coding-system 'euc-cn)
-;; (setq file-name-coding-system 'euc-cn)
-;;  另外建议按下面的先后顺序来设置中文编码识别方式。
-;;  重要提示:写在最后一行的，实际上最优先使用; 最前面一行，反而放到最后才识别。
-;;  utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成
-;;  utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature等多种)
-;; (prefer-coding-system 'cp950)
-;; (prefer-coding-system 'gb2312)
-;; (prefer-coding-system 'cp936)
-;; (prefer-coding-system 'gb18030)
+;; (set-default-coding-systems 'utf-8-unix)
+;; ;; (setq-default pathname-coding-system 'euc-cn)
+;; ;; (setq file-name-coding-system 'euc-cn)
+;; ;;  另外建议按下面的先后顺序来设置中文编码识别方式。
+;; ;;  重要提示:写在最后一行的，实际上最优先使用; 最前面一行，反而放到最后才识别。
+;; ;;  utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成
+;; ;;  utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature等多种)
+;; ;; (prefer-coding-system 'cp950)
+;; ;; (prefer-coding-system 'gb2312)
+;; ;; (prefer-coding-system 'cp936)
+;; ;; (prefer-coding-system 'gb18030)
+;; ;; (prefer-coding-system 'gb18030-dos)
+;; (prefer-coding-system 'gb18030-unix)
+;; ;; (prefer-coding-system 'utf-16le-with-signature)
+;; ;; (prefer-coding-system 'utf-16)
+;; ;; (prefer-coding-system 'utf-8)
+;; ;; (prefer-coding-system 'utf-8-dos)
+;; (prefer-coding-system 'utf-8-unix)
+;; ;;  编码设置 end
+
+;; -----------------------------------------------------------------
+;; https://blog.csdn.net/yo746862873/article/details/52291780
+;;;; 设置编辑环境
+;; 设置为中文简体语言环境
+;; (set-language-environment 'Chinese-GB)
+(set-language-environment 'UTF-8)
+(set-default-coding-systems 'utf-8-unix)
+;; 设置emacs 使用 utf-8-unix
+;; (setq locale-coding-system 'utf-8-unix)
+;; 设置键盘输入时的字符编码
+(set-keyboard-coding-system 'utf-8-unix)
+(set-selection-coding-system 'utf-8-unix)
+;; 文件默认保存为 utf-8-unix
+(set-buffer-file-coding-system 'utf-8-unix)
+(set-default buffer-file-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+;; 解决粘贴中文出现乱码的问题
+(set-clipboard-coding-system 'utf-8-unix)
+;; 终端中文乱码
+(set-terminal-coding-system 'utf-8-unix)
+(modify-coding-system-alist 'process "*" 'utf-8-unix)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; 解决文件目录的中文名乱码
+(setq-default pathname-coding-system 'utf-8-unix)
+(set-file-name-coding-system 'utf-8-unix)
 (prefer-coding-system 'gb18030-unix)
-;; (prefer-coding-system 'utf-16le-with-signature)
-;; (prefer-coding-system 'utf-16)
-;; (prefer-coding-system 'utf-8)
-;; (prefer-coding-system 'utf-8-dos)
 (prefer-coding-system 'utf-8-unix)
-;;  编码设置 end
+
+;; 解决 Shell Mode(cmd) 下中文乱码问题
+;; (defun change-shell-mode-coding ()
+;;   (progn
+;;     (set-terminal-coding-system 'gbk)
+;;     (set-keyboard-coding-system 'gbk)
+;;     (set-selection-coding-system 'gbk)
+;;     (set-buffer-file-coding-system 'gbk)
+;;     (set-file-name-coding-system 'gbk)
+;;     (modify-coding-system-alist 'process "*" 'gbk)
+;;     (set-buffer-process-coding-system 'gbk 'gbk)
+;;     (set-file-name-coding-system 'gbk)))
+;; -----------------------------------------------------------------
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; (when (eq system-type 'windows-nt)
