@@ -403,6 +403,7 @@
                     "xx" 'highlight-symbol-remove-all
                     "kk" 'scroll-other-window
                     "jj" 'scroll-other-window-up
+                    "lm" 'display-line-numbers-mode
                     ;; "me" 'mc/edit-lines
                     ;; "=" 'increase-default-font-height ; GUI emacs onl
                     ;; "-" 'decrease-default-font-height ; GUI emacs only

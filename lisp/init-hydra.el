@@ -73,6 +73,8 @@
     ("l" outline-next-visible-heading)
     ("j" outline-forward-same-level)
     ("k" outline-backward-same-level)
+    ("tb" org-cycle)
+    ("sb" org-shifttab)
     ("oa" org-agenda :exit t)
     ("oc" org-capture :exit t)
     ("q" nil "cancel" :color bule))
