@@ -19,8 +19,8 @@
    ((member "Hack" (font-family-list))
     (if (equal (system-name) "feng-desktop")
         (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
-      (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique)))
-   ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12")))
+      (set-face-attribute 'default nil :font "Hack-15" :slant 'Oblique)))
+   ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-16")))
 
   ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
   ;; 而且解决了中文字体导致emacs卡的现象。
