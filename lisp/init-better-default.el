@@ -210,7 +210,7 @@
                        rust-mode-hook
                        python-mode-hook
                        c-mode-common-hook
-                       org-mode-hook
+                       ;; org-mode-hook
                        package-menu-mode-hook
                        makefile-gmake-mode-hook
                        ;;  Gnome
