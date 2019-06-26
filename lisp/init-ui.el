@@ -29,7 +29,11 @@
       ;; 台式电脑
       (if (equal (system-name) "DESKTOP-LL8PBC8")
           (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 15))))))
+        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 15)))))
+
+  (when (equal system-type 'gnu/linux)
+    (set-fontset-font "fontset-default" 'gb18030 '("Noto Sans CJK SC" . "unicode-bmp")))
+  )
 
 ;; 高亮当前行
 (global-hl-line-mode 1)
