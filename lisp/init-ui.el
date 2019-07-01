@@ -20,7 +20,10 @@
     (if (equal (system-name) "feng-desktop")
         (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
       (set-face-attribute 'default nil :font "Hack-16" :slant 'Oblique)))
-   ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-16")))
+   ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-16"))
+   ((member "DejaVu Sans Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
+   ;; ((member "Roboto Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "Roboto Mono"))
+   )
 
   ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
   ;; 而且解决了中文字体导致emacs卡的现象。
