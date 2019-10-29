@@ -508,6 +508,7 @@
 
 (use-package lispy
   :ensure t
+  :disabled
   :hook
   (emacs-lisp-mode . lispy-mode)
   :config
@@ -520,6 +521,7 @@
 
 (use-package lispyville
   :ensure t
+  :disabled
   :hook
   (lispy-mode . lispyville-mode)
   :config
@@ -532,8 +534,7 @@
    ;; '((escape insert emacs) 
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
    '((escape insert emacs) 
-     additional-movement slurp/barf-cp additional))
-  )
+     additional-movement slurp/barf-cp additional)))
 
 ;; linum-relative
 ;; (use-package linum-relative
