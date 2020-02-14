@@ -25,6 +25,7 @@
         (set-face-attribute 'default nil :font "Courier New-12")
       (set-face-attribute 'default nil :font "Courier New-16")))
    ;; ((member "DejaVu Sans Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
+   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch"))
    ((member "Roboto Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "Roboto Mono"))
    ((member "DejaVu Sans Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
    )
