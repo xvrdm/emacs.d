@@ -128,9 +128,10 @@
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+  ;;根据环境自动切换到半角标点输入模式
+  ;; (setq-default pyim-punctuation-half-width-functions
+  ;;               '(pyim-probe-punctuation-line-beginning
+  ;;                 pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
   ;; (pyim-isearch-mode 1)

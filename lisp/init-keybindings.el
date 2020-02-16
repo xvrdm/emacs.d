@@ -61,5 +61,9 @@
 (global-set-key (kbd "M-m .") #'imenu-anywhere)
 (global-set-key (kbd "M-o c") #'(lambda() (interactive) (set-input-method "pyim")))
 
+;; font sizes
+;; 使用C-+和C--增加和减小字体大小
+;; (global-set-key [C-kp-add] 'text-scale-increase)
+;; (global-set-key [C-kp-subtract] 'text-scale-decrease)
 
 (provide 'init-keybindings)
