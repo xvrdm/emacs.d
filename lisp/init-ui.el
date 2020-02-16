@@ -20,7 +20,7 @@
     (if (equal (system-name) "feng-desktop")
         (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
       (set-face-attribute 'default nil :font "Hack-16" :slant 'Oblique)))
-   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 120 :slant 'Oblique :font "Courier 10 Pitch"))
+   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 130 :slant 'Oblique :font "Courier 10 Pitch"))
    ((member "Courier New" (font-family-list))
     (if (equal system-type 'windows-nt)
         (set-face-attribute 'default nil :font "Courier New-12")
