@@ -5,9 +5,9 @@
   ;; (set-default 'cursor-type 'bar)
   ;; (setq cursor-type 'bar)
   (setq cursor-type 'box)
-  ;;设置窗口位置为屏库左上角(0,0)
+  ;; 设置窗口位置为屏库左上角(0,0)
   ;; (set-frame-position (selected-frame) 200 50)
-  ;;设置宽和高
+  ;; 设置宽和高
   ;; (set-frame-width (selected-frame) 100)
   ;; (set-frame-height (selected-frame) 35)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -20,7 +20,8 @@
     (if (equal (system-name) "feng-desktop")
         (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
       (set-face-attribute 'default nil :font "Hack-16" :slant 'Oblique)))
-   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 130 :slant 'Oblique :font "Courier 10 Pitch"))
+   ;; ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 180 :slant 'Oblique :font "Courier 10 Pitch"))
+   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 180 :font "Courier 10 Pitch"))
    ((member "Courier New" (font-family-list))
     (if (equal system-type 'windows-nt)
         (set-face-attribute 'default nil :font "Courier New-12")
