@@ -261,6 +261,13 @@
   (define-key magit-mode-map (kbd "M-u gi") 'hydra-magit/body)
 
   ;;-------------------------------------------------------------
+  ;; shell
+  (defhydra hydra-shell (:color blue :hint nil)
+    ("0" (delete-window) "delete window" :column "shell commands")
+    ("q" nil "cancel" :exit t :column nil))
+  (define-key shell-mode-map (kbd "M-u sh") 'hydra-shell/body)
+
+  ;;-------------------------------------------------------------
   ;; info
   (defhydra hydra-info (:color blue :hint nil)
     ("ls" elisp-index-search "Look up TOPIC in the indices of the Emacs Lisp Reference Manual." :column "info commands")

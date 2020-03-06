@@ -969,4 +969,24 @@
   ;; toggle-company-english-helper
   )
 
+;; (use-package vterm
+;;     :ensure t
+;; )
+
+;; (use-package vterm-toggle
+;;     :ensure t
+;;     :config
+;;     (global-set-key [f2] 'vterm-toggle)
+;; )
+
+;; (use-package terminal-toggle
+;;     :ensure t
+;;     :config
+;; )
+
+(use-package multi-term
+    :ensure t
+    :config
+)
+
 (provide 'init-packages)
