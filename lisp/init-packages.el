@@ -985,8 +985,61 @@
 ;; )
 
 (use-package multi-term
-    :ensure t
-    :config
-)
+  :ensure t
+  :config
+
+  (cond
+   ((equal system-type 'windows-nt) (setq multi-term-program "eshell"))
+   ((equal system-type 'gnu/linux) (setq multi-term-program "/usr/bin/zsh")))
+
+  ;; (setq mykey (read-kbd-macro "C-l"))
+  ;; (define-key term-mode-map mykey 'evil-buffer)
+  ;; (define-key term-mode-map "\e\C-l" 'evil-buffer)
+  ;; (define-key term-raw-map ";bb" 'evil-buffer)
+
+  ;; (cl-dolist (element term-bind-key-alist)
+  ;;   (setq bind-key (car element))
+  ;;   (setq bind-command (cdr element))
+  ;;   (cond
+  ;;    ((stringp bind-key) (setq bind-key (read-kbd-macro bind-key)))
+  ;;    ((vectorp bind-key) nil)
+  ;;    (t (signal 'wrong-type-argument (list 'array bind-key))))
+  ;;   (define-key term-raw-map bind-key bind-command))
+
+  (add-to-list 'term-bind-key-alist '("M-l" . evil-buffer))
+  (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
+
+  (defun my-multi-term ()
+    (interactive)
+    (let ((index 1)
+          (term-buffer))
+      (catch 'break
+        (while (<= index 10)
+          (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
+          (when (buffer-live-p (get-buffer target-buffer))
+            (setq term-buffer target-buffer)
+            (throw 'break nil))
+          (setq index (1+ index))))
+      (if term-buffer
+          (progn
+            (setq orig-default-directory default-directory)
+            (switch-to-buffer term-buffer)
+            (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
+            )
+        (multi-term)))
+    )
+
+;; (with-parsed-tramp-file-name default-directory path
+;;       (let ((method (cadr (assoc `tramp-login-program (assoc path-method tramp-methods)))))
+;;         (message (concat method " " (when path-user (concat path-user "@")) path-host "\C-m"))
+;;         (message (concat "cd " path-localname "\C-m"))))
+
+;; (with-parsed-tramp-file-name default-directory path
+;;   (message path-user)
+;;   )
+
+  )
+
+    
 
 (provide 'init-packages)
