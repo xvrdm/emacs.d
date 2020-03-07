@@ -257,7 +257,7 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Style-Variables.html#Style-Variables
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Custom-Line_002dUp.html#Custom-Line_002dUp
 (c-set-offset 'innamespace 0)
-(c-set-offset 'inclass 4)
+;; (c-set-offset 'inclass 4)
 (c-set-offset 'inline-open 0)
 (c-set-offset 'inline-close 0)
 ;; disable guess python indent warning
