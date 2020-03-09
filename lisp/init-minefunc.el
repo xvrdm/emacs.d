@@ -248,7 +248,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
            ("go" . "go run")
            ("py" . ,(if (string-equal system-type "windows-nt") "python" "python3"))
            ("rs" . "cargo run")
-           ("cpp" . "g++ -lpthread -std=c++11")
+           ("cpp" . "g++ -pthread -std=c++11")
            ("java" . "javac")
            ("c". "gcc")))
         $filename
