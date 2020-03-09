@@ -18,9 +18,9 @@
      ;; (add-to-list 'company-backends 'company-cmake)
      (add-to-list 'company-backends 'company-c-headers)
      ;; can't work with TRAMP
-     (setq company-backends (delete 'company-ropemacs company-backends))
+     ;; (setq company-backends (delete 'company-ropemacs company-backends))
      ;; (setq company-backends (delete 'company-capf company-backends))
-     (setq company-backends (delete 'company-clang company-backends))
+     ;; (setq company-backends (delete 'company-clang company-backends))
 
      ;; I don't like the downcase word in company-dabbrev!
      (setq company-dabbrev-downcase nil
@@ -116,22 +116,29 @@
      (add-to-list 'company-etags-modes 'web-mode)
      (add-to-list 'company-etags-modes 'lua-mode)))
 
+(when (and (equal system-type 'gnu/linux) nil)
+  (use-package lsp-mode :commands lsp)
+  (use-package lsp-ui :commands lsp-ui-mode)
+  (use-package company-lsp :commands company-lsp)
+  ;; (use-package ccls
+  ;;   :hook
+  ;;   ((c-mode c++-mode objc-mode cuda-mode) . (lambda () (require 'ccls) (lsp))))
 
-(use-package lsp-mode :commands lsp)
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package company-lsp :commands company-lsp)
+  (use-package emacs-ccls
+    :defer t
+    :config
+    ;; (setq ccls-executable "/path/to/ccls/Release/ccls")
+    ;; (setq ccls-args '("--log-file=/tmp/ccls.log"))
+    )
 
-(use-package emacs-ccls
-  :defer t
-  :config
-  ;; (setq ccls-executable "/path/to/ccls/Release/ccls")
-  ;; (setq ccls-args '("--log-file=/tmp/ccls.log"))
   )
 
+(use-package company-tabnine
+  :disabled
+  :ensure t
+  :config
+  (add-to-list 'company-backends #'company-tabnine))
 
-;; (use-package ccls
-;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-;;          (lambda () (require 'ccls) (lsp))))
 
 ;; (defun cquery//enable ()
 ;;   (condition-case nil
@@ -147,11 +154,5 @@
 ;;   :config
 ;;   (setq cquery-executable "/usr/local/bin/cquery")
 ;;   )
-
-(use-package company-tabnine
-  :ensure t
-  :config
-  (add-to-list 'company-backends #'company-tabnine)
-  )
 
 (provide 'init-company)
