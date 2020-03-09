@@ -348,7 +348,16 @@
                     ;; "gq" 'w3m-stackoverflow-search
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
-                    "tm" 'eshell
+                    ;; "tm" 'eshell
+                    "tm" 'my-multi-term
+                    ;; "sh" (lambda ()
+                    ;;        (interactive)
+                    ;;        (if (equal system-type 'windows-nt)
+                    ;;            (message "shell did not work on windows")
+                    ;;          (ansi-term "/usr/bin/zsh")
+                    ;;          ))
+                    ;; "sh" 'multi-term
+                    "sh" 'eshell
                     "rr" 'fwar34/counsel-goto-recent-directory
                     "rc" 'fwar34/run-current-file)
 ;; }}

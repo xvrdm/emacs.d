@@ -116,4 +116,10 @@
      (add-to-list 'company-etags-modes 'web-mode)
      (add-to-list 'company-etags-modes 'lua-mode)))
 
+(use-package company-tabnine
+  :ensure t
+  :config
+  (add-to-list 'company-backends #'company-tabnine)
+  )
+
 (provide 'init-company)

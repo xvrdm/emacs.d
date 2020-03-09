@@ -261,6 +261,13 @@
   (define-key magit-mode-map (kbd "M-u gi") 'hydra-magit/body)
 
   ;;-------------------------------------------------------------
+  ;; shell
+  (defhydra hydra-shell (:color blue :hint nil)
+    ("0" (delete-window) "delete window" :column "shell commands")
+    ("q" nil "cancel" :exit t :column nil))
+  (define-key shell-mode-map (kbd "M-u sh") 'hydra-shell/body)
+
+  ;;-------------------------------------------------------------
   ;; info
   (defhydra hydra-info (:color blue :hint nil)
     ("ls" elisp-index-search "Look up TOPIC in the indices of the Emacs Lisp Reference Manual." :column "info commands")
@@ -273,6 +280,24 @@
     ("q" nil "cancel" :exit t :column nil))
   ;; (global-set-key (kbd "M-u if") #'hydra-info/body)
   (define-key Info-mode-map (kbd "M-u if") #'hydra-info/body)
+
+  ;;-------------------------------------------------------------
+  ;; font settings
+  (defhydra hydra-font (:color blue :hint nil)
+    ;; 增加字体大小
+    ("+" (lambda ()
+           (interactive)
+           (let ((old-face-attribute (face-attribute 'default :height)))
+             (set-face-attribute 'default nil :height (+ old-face-attribute 10)))) "increase font 10" :column "fonts commands")
+    ;; 减小字体大小
+    ("-" (lambda ()
+           (interactive)
+           (let ((old-face-attribute (face-attribute 'default :height)))
+             (set-face-attribute 'default nil :height (- old-face-attribute 10)))) "decrease font 10" :column "fonts commands")
+    ("q" nil "cancel" :exit t :column nil))
+  ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
+  ;; (global-set-key (kbd "M-u ft") #'hydra-M-um/body)
+  (evil-define-key 'normal 'global (kbd "M-u ft") #'hydra-font/body)
   )
 
 (provide 'init-hydra)

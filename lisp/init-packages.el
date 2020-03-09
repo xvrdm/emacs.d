@@ -128,9 +128,10 @@
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+  ;;根据环境自动切换到半角标点输入模式
+  ;; (setq-default pyim-punctuation-half-width-functions
+  ;;               '(pyim-probe-punctuation-line-beginning
+  ;;                 pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
   ;; (pyim-isearch-mode 1)
@@ -508,6 +509,7 @@
 
 (use-package lispy
   :ensure t
+  :disabled
   :hook
   (emacs-lisp-mode . lispy-mode)
   :config
@@ -520,6 +522,7 @@
 
 (use-package lispyville
   :ensure t
+  :disabled
   :hook
   (lispy-mode . lispyville-mode)
   :config
@@ -532,8 +535,7 @@
    ;; '((escape insert emacs) 
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
    '((escape insert emacs) 
-     additional-movement slurp/barf-cp additional))
-  )
+     additional-movement slurp/barf-cp additional)))
 
 ;; linum-relative
 ;; (use-package linum-relative
@@ -965,6 +967,77 @@
   (:host github :repo "manateelazycat/company-english-helper")
   :config
   ;; toggle-company-english-helper
+  )
+
+;; (use-package vterm
+;;     :ensure t
+;; )
+
+;; (use-package vterm-toggle
+;;     :ensure t
+;;     :config
+;;     (global-set-key [f2] 'vterm-toggle)
+;; )
+
+;; (use-package terminal-toggle
+;;     :ensure t
+;;     :config
+;; )
+
+(use-package multi-term
+  :ensure t
+  :config
+
+  (cond
+   ((equal system-type 'windows-nt) (setq multi-term-program "eshell"))
+   ((equal system-type 'gnu/linux) (setq multi-term-program "/usr/bin/zsh")))
+
+  ;; (setq mykey (read-kbd-macro "C-l"))
+  ;; (define-key term-mode-map mykey 'evil-buffer)
+  ;; (define-key term-mode-map "\e\C-l" 'evil-buffer)
+  ;; (define-key term-raw-map ";bb" 'evil-buffer)
+
+  ;; (cl-dolist (element term-bind-key-alist)
+  ;;   (setq bind-key (car element))
+  ;;   (setq bind-command (cdr element))
+  ;;   (cond
+  ;;    ((stringp bind-key) (setq bind-key (read-kbd-macro bind-key)))
+  ;;    ((vectorp bind-key) nil)
+  ;;    (t (signal 'wrong-type-argument (list 'array bind-key))))
+  ;;   (define-key term-raw-map bind-key bind-command))
+
+  (add-to-list 'term-bind-key-alist '("M-l" . evil-buffer))
+  (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
+
+  (defun my-multi-term ()
+    (interactive)
+    (let ((index 1)
+          (term-buffer))
+      (catch 'break
+        (while (<= index 10)
+          (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
+          (when (buffer-live-p (get-buffer target-buffer))
+            (setq term-buffer target-buffer)
+            (throw 'break nil))
+          (setq index (1+ index))))
+      (if term-buffer
+          (progn
+            (setq orig-default-directory default-directory)
+            (switch-to-buffer term-buffer)
+            (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
+            )
+        (multi-term)))
+    )
+
+;; (with-parsed-tramp-file-name default-directory path
+;;       (let ((method (cadr (assoc `tramp-login-program (assoc path-method tramp-methods)))))
+;;         (message (concat method " " (when path-user (concat path-user "@")) path-host "\C-m"))
+;;         (message (concat "cd " path-localname "\C-m"))))
+
+;; (with-parsed-tramp-file-name default-directory path
+;;   (message path-user)
+;;   )
+
   )
 
 (provide 'init-packages)

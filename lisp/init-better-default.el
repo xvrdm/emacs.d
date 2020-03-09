@@ -197,7 +197,10 @@
 
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
-  (delete-selection-mode 1))
+  (delete-selection-mode 1)
+
+  (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+  )
 
 ;; 行号
 (if (>= emacs-major-version 26)
@@ -210,7 +213,7 @@
                        rust-mode-hook
                        python-mode-hook
                        c-mode-common-hook
-                       org-mode-hook
+                       ;; org-mode-hook
                        package-menu-mode-hook
                        makefile-gmake-mode-hook
                        ;;  Gnome
@@ -276,12 +279,12 @@
 ;;     (y-or-n-p (message "%s not exist! create it?" filename))))
 ;; (advice-add #'find-file :before-while #'advice-find-file)
 
-(defadvice find-file (around advice-find-file activate)
-  (if (file-exists-p filename)
-      ad-do-it
-    (if (y-or-n-p (message "%s not exist! create it!" filename))
-        ad-do-it))
-  )
+;; (defadvice find-file (around advice-find-file activate)
+;;   (if (file-exists-p filename)
+;;       ad-do-it
+;;     (if (y-or-n-p (message "%s not exist! create it!" filename))
+;;         ad-do-it))
+;;   )
 
 ;; after execute shell-command goto bottom of output buffer
 (defadvice shell-command (around adivce-shell-command activate)
