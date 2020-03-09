@@ -116,6 +116,38 @@
      (add-to-list 'company-etags-modes 'web-mode)
      (add-to-list 'company-etags-modes 'lua-mode)))
 
+
+(use-package lsp-mode :commands lsp)
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+
+(use-package emacs-ccls
+  :defer t
+  :config
+  ;; (setq ccls-executable "/path/to/ccls/Release/ccls")
+  ;; (setq ccls-args '("--log-file=/tmp/ccls.log"))
+  )
+
+
+;; (use-package ccls
+;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
+;;          (lambda () (require 'ccls) (lsp))))
+
+;; (defun cquery//enable ()
+;;   (condition-case nil
+;;       (lsp)
+;;     (user-error nil)))
+
+;; (use-package cquery
+;;   :ensure t
+;;   :commands lsp
+;;   :init
+;;   (add-hook 'c-mode-hook #'cquery//enable)
+;;   (add-hook 'c++-mode-hook #'cquery//enable)
+;;   :config
+;;   (setq cquery-executable "/usr/local/bin/cquery")
+;;   )
+
 (use-package company-tabnine
   :ensure t
   :config

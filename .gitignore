@@ -36,3 +36,4 @@ org/.directory
 straight/*
 stale_outputs_checked
 diary
+.lsp-session*
