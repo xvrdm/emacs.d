@@ -185,6 +185,10 @@
                end-of-defun
                lispyville-beginning-of-defun
                lispyville-end-of-defun
+               counsel-etags-find-tag-at-point
+               counsel-etags-list-tag
+               counsel-etags-grep
+               counsel-etags-find-tag
                ))
   (evil-add-command-properties con :jump t))
 
@@ -275,7 +279,7 @@
                     "hr" 'counsel-etags-recent-tag
                     "hf" 'counsel-etags-find-tag
                     "hg" 'counsel-etags-grep
-
+                    "hl" 'counsel-etags-list-tag
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring

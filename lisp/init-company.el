@@ -142,6 +142,7 @@
   (add-to-list 'company-backends #'company-tabnine))
 
 (use-package irony
+  :disabled
   :ensure t
   :defer t
   :config
@@ -154,6 +155,7 @@
   )
 
 (use-package company-irony
+  :disabled
   :ensure t
   :defer t
   :config
