@@ -279,7 +279,7 @@
                     "hr" 'counsel-etags-recent-tag
                     "hf" 'counsel-etags-find-tag
                     "hg" 'counsel-etags-grep
-                    "hl" 'counsel-etags-list-tag
+                    "hh" 'counsel-etags-list-tag
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
