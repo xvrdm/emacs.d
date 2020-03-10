@@ -163,4 +163,25 @@
   (message "company-irony")
   )
 
+(use-package ycmd
+  :ensure t
+  :config
+  ;; (add-hook 'after-init-hook #'global-ycmd-mode)
+  (add-hook 'c++-mode-hook 'ycmd-mode)
+  (set-variable 'ycmd-server-command `("python3" ,(file-truename "~/Downloads/YouCompleteMe/third_party/ycmd/ycmd")))
+
+  ;; (defun ycmd-setup-completion-at-point-function ()
+  ;;   "Setup `completion-at-point-functions' for `ycmd-mode'."
+  ;;   (add-hook 'completion-at-point-functions
+  ;;             #'ycmd-complete-at-point nil :local))
+  ;; (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
+  )
+
+(use-package company-ycmd
+  :ensure t
+  :config
+  ;; (require 'company-ycmd)
+  (company-ycmd-setup)
+  )
+
 (provide 'init-company)
