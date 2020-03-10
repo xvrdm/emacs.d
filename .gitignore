@@ -37,3 +37,5 @@ straight/*
 stale_outputs_checked
 diary
 .lsp-session*
+irony/
+irony/*

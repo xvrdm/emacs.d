@@ -142,6 +142,7 @@
   (add-to-list 'company-backends #'company-tabnine))
 
 (use-package irony
+  :ensure t
   :defer t
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -149,12 +150,15 @@
   (add-hook 'objc-mode-hook 'irony-mode)
 
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  (message "irony")
   )
 
 (use-package company-irony
+  :ensure t
   :defer t
   :config
   (add-to-list 'company-backends 'company-irony)
+  (message "company-irony")
   )
 
 (provide 'init-company)

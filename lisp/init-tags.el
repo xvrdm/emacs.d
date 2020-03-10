@@ -42,10 +42,16 @@
   (setq counsel-gtags-auto-update t)
   )
 
+;; https://github.com/redguardtoo/counsel-etags#ctags-setup
 (use-package counsel-etags
-  ;; :disabled
   :ensure t
-  :defer
+  :defer t
+  :init
+  ;; Setup auto update now
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook
+                        'counsel-etags-virtual-update-tags 'append 'local)))
   :config
   (eval-after-load 'counsel-etags
     '(progn
@@ -56,6 +62,8 @@
        (add-to-list 'counsel-etags-ignore-filenames "*.log")
        (add-to-list 'counsel-etags-ignore-filenames "*.html")
        (add-to-list 'counsel-etags-ignore-filenames "*.tag")
+       (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+       (add-to-list 'counsel-etags-ignore-filenames "*.xml")
        (add-to-list 'counsel-etags-ignore-filenames "*.json")))
 
   ;; auto update tags
@@ -63,11 +71,7 @@
   (setq tags-revert-without-query t)
   ;; Don't warn when TAGS files are large
   (setq large-file-warning-threshold nil)
-  ;; Setup auto update now
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook
-                        'counsel-etags-virtual-update-tags 'append 'local)))
+  (setq counsel-etags-update-interval 60)
   )
 
 (provide 'init-tags)
