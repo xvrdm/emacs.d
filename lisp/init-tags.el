@@ -43,7 +43,7 @@
   )
 
 (use-package counsel-etags
-  :disabled
+  ;; :disabled
   :ensure t
   :defer
   :config
