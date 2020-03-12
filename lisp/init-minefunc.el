@@ -3,7 +3,7 @@
 (define-namespace fwar34-)
 (defun open-init-file()
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (find-file "~/.emacs.d/lisp/init-packages.el"))
 
 ;; 隐藏windows换行符
 (defun hidden-dos-eol()

@@ -189,6 +189,9 @@
                counsel-etags-list-tag
                counsel-etags-grep
                counsel-etags-find-tag
+               evil-backward-section-begin
+               evil-backward-section-end
+               counsel-ag
                ))
   (evil-add-command-properties con :jump t))
 
