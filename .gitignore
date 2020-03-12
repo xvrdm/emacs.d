@@ -39,3 +39,4 @@ diary
 .lsp-session*
 irony/
 irony/*
+request/
