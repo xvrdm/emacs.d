@@ -376,6 +376,7 @@
                     :prefix "SPC"
                     ;; :non-normal-prefix "M-SPC"
                     "SPC" 'evil-ex
+                    "cc" 'convert-file-to-utf8-unix
                     "ef" 'with-editor-finish
                     "ec" 'with-editor-cancel
                     ;; "ss" 'wg-create-workgroup ; save windows layout
