@@ -95,7 +95,9 @@
   ;; 禁用响铃
   (setq ring-bell-function 'ignore)
   ;; 光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
+  ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Mouse-Avoidance.html
   (mouse-avoidance-mode 'animate)
+  ;; (mouse-avoidance-mode 'banish)
   ;; 当光标在行尾上下移动的时候，始终保持在行尾
   (setq track-eol t)
   ;; display time in modeline

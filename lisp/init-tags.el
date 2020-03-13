@@ -44,6 +44,7 @@
 
 ;; https://github.com/redguardtoo/counsel-etags#ctags-setup
 (use-package counsel-etags
+  :disabled
   :ensure t
   :defer t
   :init

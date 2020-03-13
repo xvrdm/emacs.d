@@ -173,6 +173,7 @@
                evil-indent
                counsel-gtags-dwim
                counsel-gtags-find-definition
+               counsel-gtags-find-reference
                counsel-gtags-find-symbol
                counsel-gtags-find-file
                counsel-gtags-go-forward
