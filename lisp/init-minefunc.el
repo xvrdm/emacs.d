@@ -311,4 +311,12 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (save-some-buffers)
   (kill-emacs))
 
+;; https://emacs.stackexchange.com/questions/10967/how-to-examine-the-new-line-characters-in-emacs
+;; also save in Youdao Note
+(defun convert-file-to-utf8-unix ()
+  "convert current file to utf-8 and end of line is unix"
+  (interactive)
+  (set-buffer-file-coding-system 'utf-8-unix)
+  )
+
 (provide 'init-minefunc)
