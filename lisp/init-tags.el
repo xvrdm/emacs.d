@@ -44,7 +44,6 @@
 
 ;; https://github.com/redguardtoo/counsel-etags#ctags-setup
 (use-package counsel-etags
-  :disabled
   :ensure t
   :defer t
   :init
@@ -72,7 +71,6 @@
   (setq tags-revert-without-query t)
   ;; Don't warn when TAGS files are large
   (setq large-file-warning-threshold nil)
-  (setq counsel-etags-update-interval 60)
   )
 
 (provide 'init-tags)

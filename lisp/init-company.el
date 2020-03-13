@@ -109,14 +109,14 @@
 ;; (add-hook 'org-mode-hook 'company-ispell-setup)
 ;; }}
 
-;; (eval-after-load 'company-etags
-;;   '(progn
-;;      ;; insert major-mode not inherited from prog-mode
-;;      ;; to make company-etags work
-;;      (add-to-list 'company-etags-modes 'web-mode)
-;;      (add-to-list 'company-etags-modes 'c-mode)
-;;      (add-to-list 'company-etags-modes 'c++-mode)
-;;      (add-to-list 'company-etags-modes 'lua-mode)))
+(eval-after-load 'company-etags
+  '(progn
+     ;; insert major-mode not inherited from prog-mode
+     ;; to make company-etags work
+     (add-to-list 'company-etags-modes 'web-mode)
+     (add-to-list 'company-etags-modes 'c-mode)
+     (add-to-list 'company-etags-modes 'c++-mode)
+     (add-to-list 'company-etags-modes 'lua-mode)))
 
 (when (and (equal system-type 'gnu/linux) nil)
   (use-package lsp-mode :commands lsp)
