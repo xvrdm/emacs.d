@@ -935,6 +935,7 @@
   )
 
 (use-package exec-path-from-shell
+  :disabled
   :if (memq window-system '(mac ns))
   :after evil
   :ensure t

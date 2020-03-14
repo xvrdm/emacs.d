@@ -25,6 +25,16 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
+(defun local-require (pkg)
+  (unless (featurep pkg)
+    (load (expand-file-name
+           (cond
+            ((eq pkg 'go-mode-load)
+             (format "~/.emacs.d/site-lisp/go-mode/%s" pkg))
+            (t
+             (format "~/.emacs.d/site-lisp/%s/%s" pkg pkg))))
+          t t)))
+
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)

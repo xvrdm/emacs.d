@@ -179,4 +179,29 @@
   (company-ycmd-setup)
   )
 
+;; https://github.com/redguardtoo/company-ctags
+(use-package company-ctags
+  :ensure t
+  :after company
+  :config
+  (company-ctags-auto-setup)
+  (setq company-ctags-extra-tags-files '("$HOME/TAGS" "/usr/include/c++/TAGS"))
+
+  ;; Set company-ctags-fuzzy-match-p to fuzzy match the candidates.
+  ;; The input could match any part of the candidate instead of the beginning of the candidate.
+  ;; Here is example how to combine counsel with company-ctags,
+  (require 'counsel)
+  (defun my-counsel-company ()
+    "Input code from company backend using fuzzy matching."
+    (interactive)
+    (company-abort)
+    (let* ((company-backends '(company-ctags))
+           (company-ctags-fuzzy-match-p t))
+      (counsel-company)))
+
+  ;; Use rusty-tags to generate tags file for Rust programming language.
+  ;; Add below code into ~/.emacs,
+  (setq company-ctags-tags-file-name "rusty-tags.emacs")
+  )
+
 (provide 'init-company)

@@ -246,7 +246,8 @@
                     ;; "ww" 'narrow-or-widen-dwim
                     "ii" 'counsel-imenu
                     "il" 'imenu-list-smart-toggle
-                    "tb" 'taglist-list-tags
+                    ;; "tb" 'taglist-list-tags
+                    "jj" 'taglist-list-tags
                     "xm" 'my-M-x
                     ;; "bk" 'buf-move-up
                     ;; "bj" 'buf-move-down

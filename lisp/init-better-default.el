@@ -410,5 +410,10 @@
                                                                 (advice-remove ',function ad)))
                                                             items))))))))))
 
+;; *Message* buffer should be writable in 24.4+
+(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+  (if (string= "*Messages*" (buffer-name))
+      (read-only-mode -1)))
+
 
 (provide 'init-better-default)
