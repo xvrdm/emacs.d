@@ -6,6 +6,7 @@
   (progn
     (local-require 'auto-save)
     ;; (add-to-list 'auto-save-exclude 'file-too-big-p t)
+    (add-to-list 'auto-save-exclude "COMMIT_EDITMSG")
     (setq auto-save-idle 2) ; 2 seconds
     ;; (setq auto-save-slient t)
     (auto-save-enable)
