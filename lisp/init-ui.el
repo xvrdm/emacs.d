@@ -13,25 +13,44 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   ;; set a default font
   (cond
-   ;; ((member "Hack" (font-family-list)) (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
-   ;; ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
-   
+   ;; --------------------------------------------------------------------------------------------------
+   ((member "Hack" (font-family-list))
+    (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
+   ;; ((member "Courier New" (font-family-list))
+   ;; (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
+   ;; --------------------------------------------------------------------------------------------------
    ((member "Hack" (font-family-list))
     (if (equal (system-name) "feng-desktop")
         (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
       (set-face-attribute 'default nil :font "Hack-16" :slant 'Oblique)))
-   ;; ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 180 :slant 'Oblique :font "Courier 10 Pitch"))
-   ((member "RobotoMono Nerd Font" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font"))
-   ((member "Courier New" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "Courier New" :weight 'bold))
-      ;; ((member "FiraCode Nerd Font Mono" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "FiraCode Nerd Font Mono" :weight))
-   ((member "DejaVu Sans Mono" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "DejaVu Sans Mono"))
-   ((member "Courier 10 Pitch" (font-family-list)) (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch" :weight 'bold))
+   ;; --------------------------------------------------------------------------------------------------
+   ;; ((member "Courier 10 Pitch" (font-family-list))
+   ;;  (set-face-attribute 'default nil :height 180 :slant 'Oblique :font "Courier 10 Pitch"))
+   ;; --------------------------------------------------------------------------------------------------
+   ((member "RobotoMono Nerd Font" (font-family-list))
+    (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font"))
+   ;; --------------------------------------------------------------------------------------------------
+   ((member "Courier New" (font-family-list))
+    (set-face-attribute 'default nil :height 120 :font "Courier New" :weight 'bold))
+   ;; --------------------------------------------------------------------------------------------------
+   ;; ((member "FiraCode Nerd Font Mono" (font-family-list))
+   ;;  (set-face-attribute 'default nil :height 120 :font "FiraCode Nerd Font Mono" :weight))
+   ;; --------------------------------------------------------------------------------------------------
+   ((member "DejaVu Sans Mono" (font-family-list))
+    (set-face-attribute 'default nil :height 120 :font "DejaVu Sans Mono"))
+   ;; --------------------------------------------------------------------------------------------------
+   ((member "Courier 10 Pitch" (font-family-list))
+    (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch" :weight 'bold))
+   ;; --------------------------------------------------------------------------------------------------
    ((member "Courier New" (font-family-list))
     (if (equal system-type 'windows-nt)
         (set-face-attribute 'default nil :font "Courier New-12")
       ;; (set-face-attribute 'default nil :font "Courier New-13" :slant 'Oblique :weight 'bold)))
       (set-face-attribute 'default nil :font "Courier New-13")))
-   ;; ((member "DejaVu Sans Mono" (font-family-list)) (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
+   ;; --------------------------------------------------------------------------------------------------
+   ;; ((member "DejaVu Sans Mono" (font-family-list))
+   ;;  (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
+   ;; --------------------------------------------------------------------------------------------------
    )
 
   ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
