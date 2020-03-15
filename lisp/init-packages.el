@@ -124,14 +124,15 @@
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
   (setq-default pyim-english-input-switch-functions
                 '(pyim-probe-dynamic-english
+                  ;; pyim-probe-auto-english
                   pyim-probe-isearch-mode
-                  pyim-probe-program-mode
+                  ;; pyim-probe-program-mode
                   pyim-probe-org-structure-template))
 
   ;;根据环境自动切换到半角标点输入模式
-  ;; (setq-default pyim-punctuation-half-width-functions
-  ;;               '(pyim-probe-punctuation-line-beginning
-  ;;                 pyim-probe-punctuation-after-punctuation))
+  (setq-default pyim-punctuation-half-width-functions
+                '(pyim-probe-punctuation-line-beginning
+                  pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
   ;; (pyim-isearch-mode 1)
@@ -152,8 +153,10 @@
 
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
-   ("M-o o" . pyim-convert-string-at-point)) ;与 pyim-probe-dynamic-english 配合
-  )
+   ;; ("M-o o" . pyim-convert-string-at-point)
+   ("M-i" . pyim-convert-string-at-point)
+   )) ;与 pyim-probe-dynamic-english 配合
+  
 
 ;; (setq evil-want-keybinding nil) must put before load evil
 ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
