@@ -1,4 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
+(setq print-font nil)
+
 (when window-system
   ;; 更改光标样式
   ;; (set-default 'cursor-type 'box)
@@ -7,6 +9,7 @@
   (setq cursor-type 'box)
   ;; 设置窗口位置为屏库左上角(0,0)
   ;; (set-frame-position (selected-frame) 200 50)
+  (set-frame-position (selected-frame) 0 0)
   ;; 设置宽和高
   ;; (set-frame-width (selected-frame) 100)
   ;; (set-frame-height (selected-frame) 35)
@@ -15,41 +18,35 @@
   (cond
    ;; --------------------------------------------------------------------------------------------------
    ((member "Hack" (font-family-list))
-    (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique))
-   ;; ((member "Courier New" (font-family-list))
-   ;; (set-face-attribute 'default nil :font "Courier New-12" :slant 'Oblique))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "Hack" (font-family-list))
-    (if (equal (system-name) "feng-desktop")
-        (set-face-attribute 'default nil :font "Hack-14" :slant 'Oblique)
-      (set-face-attribute 'default nil :font "Hack-16" :slant 'Oblique)))
+    (progn
+      (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique)
+      (when print-font (message "Hack"))))
    ;; --------------------------------------------------------------------------------------------------
    ;; ((member "Courier 10 Pitch" (font-family-list))
    ;;  (set-face-attribute 'default nil :height 180 :slant 'Oblique :font "Courier 10 Pitch"))
    ;; --------------------------------------------------------------------------------------------------
    ((member "RobotoMono Nerd Font" (font-family-list))
-    (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font"))
+    (progn
+      (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font")
+      (when print-font (message "RobotoMono Nerd Font"))))
    ;; --------------------------------------------------------------------------------------------------
    ((member "Courier New" (font-family-list))
-    (set-face-attribute 'default nil :height 120 :font "Courier New" :weight 'bold))
+    (progn
+    (set-face-attribute 'default nil :height 120 :font "Courier New" :weight 'bold)
+    (when print-font (message "Courier New"))))
    ;; --------------------------------------------------------------------------------------------------
    ;; ((member "FiraCode Nerd Font Mono" (font-family-list))
    ;;  (set-face-attribute 'default nil :height 120 :font "FiraCode Nerd Font Mono" :weight))
    ;; --------------------------------------------------------------------------------------------------
    ((member "DejaVu Sans Mono" (font-family-list))
-    (set-face-attribute 'default nil :height 120 :font "DejaVu Sans Mono"))
+    (progn
+    (set-face-attribute 'default nil :height 120 :font "DejaVu Sans Mono")
+    (when print-font (message "DejaVu Sans Mono"))))
    ;; --------------------------------------------------------------------------------------------------
    ((member "Courier 10 Pitch" (font-family-list))
-    (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch" :weight 'bold))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "Courier New" (font-family-list))
-    (if (equal system-type 'windows-nt)
-        (set-face-attribute 'default nil :font "Courier New-12")
-      ;; (set-face-attribute 'default nil :font "Courier New-13" :slant 'Oblique :weight 'bold)))
-      (set-face-attribute 'default nil :font "Courier New-13")))
-   ;; --------------------------------------------------------------------------------------------------
-   ;; ((member "DejaVu Sans Mono" (font-family-list))
-   ;;  (set-face-attribute 'default nil :height 165 :font "DejaVu Sans Mono"))
+    (progn
+    (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch" :weight 'bold)
+    (when print-font (message "Courier 10 Pitch"))))
    ;; --------------------------------------------------------------------------------------------------
    )
 
