@@ -59,7 +59,8 @@
         ;; 设置英文和中文
         (fwar34/set-fonts englist-font-list 120 chinese-font-list)
       ;; 设置英文
-      (fwar34/set-fonts englist-font-list 120)))
+      ;; (fwar34/set-fonts englist-font-list 120)
+      (fwar34/set-fonts englist-font-list 120 chinese-font-list)))
   )
 
   ;; --------------------------------------------------------------------------------------------------
