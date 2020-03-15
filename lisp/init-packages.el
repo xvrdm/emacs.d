@@ -157,7 +157,6 @@
    ("M-j" . pyim-convert-string-at-point)
    ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
    )) ;与 pyim-probe-dynamic-english 配合
-  
 
 ;; (setq evil-want-keybinding nil) must put before load evil
 ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
