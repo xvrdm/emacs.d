@@ -371,6 +371,27 @@
                     "rc" 'fwar34/run-current-file)
 ;; }}
 
+;; {{ 
+(general-define-key
+ :states 'motion
+ ;; swap ; and :
+ ":" 'evil-ex
+ ";" 'evil-repeat-find-char)
+;; }}
+
+;; {{
+;; (general-define-key
+;;  :keymaps 'lispyville-mode-map
+;;  "gcc" 'lispyville-comment-or-uncomment
+;;  "[" 'lispyville-previous-opening 
+;;  "]" 'lispyville-next-closing)
+
+(evil-define-key 'normal lispyville-mode-map
+  "gc"  #'lispyville-comment-or-uncomment
+   "[" 'lispyville-previous-opening 
+   "]" 'lispyville-next-closing)
+;; }}
+
  ;; {{ Use `SPC` as one leader key
 (general-define-key :keymaps '(normal visual)
                     ;; :states '(normal insert emacs)

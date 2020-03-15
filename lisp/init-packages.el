@@ -523,11 +523,18 @@
   ;; (define-key lispy-mode-map (kbd “C-e”) #'lispy-move-end-of-line) 
   )
 
+;; https://github.com/noctuid/lispyville
 (use-package lispyville
   :ensure t
-  :disabled
+  ;; :disabled
+  ;; :hook
+  ;; lispyvill used with lispy
+  ;; (lispy-mode . lispyville-mode)
+
+  ;; Lispyville can also be used without lispy:
   :hook
-  (lispy-mode . lispyville-mode)
+  (emacs-lisp-mode . lispyville-mode)
+  (lisp-mode . lispyville-mode)
   :config
   (lispyville-set-key-theme
    ;; his is probably the simplest method of improving things. By default,
