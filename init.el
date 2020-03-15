@@ -53,6 +53,7 @@
 (add-hook 'after-init-hook (lambda ()
                              (require 'init-minefunc)
                              (require 'init-c)))
+(add-hook 'after-init-hook (lambda () (require 'init-misc)))
 (require 'init-calendar)
 ;; (require 'unicad)
 (add-hook 'after-init-hook
