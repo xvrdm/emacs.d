@@ -154,7 +154,8 @@
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
    ;; ("M-o o" . pyim-convert-string-at-point)
-   ("M-i" . pyim-convert-string-at-point)
+   ("M-j" . pyim-convert-string-at-point)
+   ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
    )) ;与 pyim-probe-dynamic-english 配合
   
 
