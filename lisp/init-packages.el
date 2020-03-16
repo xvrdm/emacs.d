@@ -1054,6 +1054,7 @@
 ;; https://github.com/purcell/disable-mouse
 (use-package disable-mouse
   :ensure t
+  :if window-system
   :config
   (global-disable-mouse-mode)
   (with-eval-after-load 'evil
