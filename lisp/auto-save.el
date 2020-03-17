@@ -13,7 +13,7 @@
 ;; 第三个参数是变量的解释， 一般在 Alt + x describe-variable 的时候就会显示具体变量的文档描述
 ;; 第四个参数用于定义变量的类型， 这里定义为整形， 这样在 customize-group 的时候只有输入整型才是正确保存
 ;; 第五个参数表示这个变量属于 auto-save 这个组， 主要作用就是 customize-group 的时候能够在一个界面中设置同一组的所有变量 
-(defcustom auto-save-idle 1
+(defcustom auto-save-idle 2
   "The idle seconds to auto save file."
   :type 'integer
   :group 'auto-save)
