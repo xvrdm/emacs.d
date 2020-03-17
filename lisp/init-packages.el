@@ -29,7 +29,7 @@
 ;; C-x C-f ~/gnu-elpa-keyring-update-2019.3.tar
 ;; M-x package-install-from-buffer
 ;; http://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
-(use-package 'gnu-elpa-keyring-update
+(use-package gnu-elpa-keyring-update
   :ensure t)
 
 ;; straight.el
