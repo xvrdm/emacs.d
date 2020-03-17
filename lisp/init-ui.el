@@ -22,7 +22,6 @@
 
   (require 'cl) ;; find-if is in common list package
 
-  (defvar chinese-font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
   (defun fwar34/font-exist-p (font)
     (if (null (x-list-fonts font))
         nil
@@ -36,23 +35,31 @@
                         ;; :slant 'Oblique
                         :font (find-if #'fwar34/font-exist-p english-fonts)) 
     (message (format "set englist font: %s size: %d" (find-if #'fwar34/font-exist-p english-fonts) englist-font-size))
+
     ;; 中文字体设置
-    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    ;;   ;; (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-    ;;   (set-fontset-font (frame-parameter nil 'font)
-    ;;                     charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
-    ;;                                        :size chinese-font-size)))
+    (when chinese-fonts
+        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+          ;; (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
+          (set-fontset-font (frame-parameter nil 'font)
+                            charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
+                                               :size chinese-font-size)))
+        (message (format "set chinese font: %s" (find-if #'fwar34/font-exist-p chinese-fonts))))
     )
 
-  ;; 英文设置
-  (fwar34/set-fonts '("RobotoMono Nerd Font" "Hack" "Courier 10 Pitch" "Courier New" "DejaVu Sans Mono") 120)
-  ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-  ;;   (set-fontset-font (frame-parameter nil 'font)
-  ;;                     charset (font-spec :family "黑体"
-  ;;                     ;; charset (font-spec :family "WenQuanYi Zen Hei Mono"
-  ;;                                        ;; :size 23 
-  ;;                                        )))
-  ;;   )
+  (defvar englist-font-list '("RobotoMono Nerd Font" "Hack" "Courier 10 Pitch" "Courier New" "DejaVu Sans Mono"))
+  (defvar chinese-font-list '("黑体" "Microsoft Yahei" "文泉驿等宽微米黑" "新宋体" "宋体"))
+
+  (let ((is-set-chinese nil))
+    (if (file-readable-p "/etc/os-release")
+        (with-temp-buffer
+           (insert-file-contents "/etc/os-release")
+           (if (string-match "ID=arch" (buffer-string))
+               (setq is-set-chinese t))))
+    (if is-set-chinese 
+        ;; 设置英文和中文
+        (fwar34/set-fonts englist-font-list 120 chinese-font-list)
+      ;; 设置英文
+      (fwar34/set-fonts englist-font-list 120)))
   )
 
   ;; --------------------------------------------------------------------------------------------------
