@@ -123,7 +123,7 @@
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
   (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-dynamic-english
+                '(;; pyim-probe-dynamic-english
                   ;; pyim-probe-auto-english
                   pyim-probe-isearch-mode
                   ;; pyim-probe-program-mode
@@ -156,7 +156,9 @@
    ;; ("M-o o" . pyim-convert-string-at-point)
    ("M-j" . pyim-convert-string-at-point)
    ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
-   )) ;与 pyim-probe-dynamic-english 配合
+   ;; ("M-j" . pyim-toggle-input-ascii)
+   ("C-\\" . pyim-toggle-input-ascii)
+   )) ;;与 pyim-probe-dynamic-english 配合
 
 ;; (setq evil-want-keybinding nil) must put before load evil
 ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
