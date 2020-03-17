@@ -186,8 +186,8 @@
   :ensure t
   :after company
   :config
-  (company-ctags-auto-setup)
   (setq company-ctags-extra-tags-files '("$HOME/TAGS" "/usr/include/c++/TAGS"))
+  (company-ctags-auto-setup)
 
   ;; Set company-ctags-fuzzy-match-p to fuzzy match the candidates.
   ;; The input could match any part of the candidate instead of the beginning of the candidate.

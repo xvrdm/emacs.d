@@ -14,54 +14,54 @@
   ;; (set-frame-width (selected-frame) 100)
   ;; (set-frame-height (selected-frame) 35)
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  ;; set a default font
-  (cond
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "Hack" (font-family-list))
-    (progn
-      (set-face-attribute 'default nil :font "Hack-12" :slant 'Oblique)
-      (when print-font (message "Hack"))))
-   ;; --------------------------------------------------------------------------------------------------
-   ;; ((member "Courier 10 Pitch" (font-family-list))
-   ;;  (set-face-attribute 'default nil :height 180 :slant 'Oblique :font "Courier 10 Pitch"))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "RobotoMono Nerd Font" (font-family-list))
-    (progn
-      (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font")
-      (when print-font (message "RobotoMono Nerd Font"))))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "Courier New" (font-family-list))
-    (progn
-    (set-face-attribute 'default nil :height 120 :font "Courier New" :weight 'bold)
-    (when print-font (message "Courier New"))))
-   ;; --------------------------------------------------------------------------------------------------
-   ;; ((member "FiraCode Nerd Font Mono" (font-family-list))
-   ;;  (set-face-attribute 'default nil :height 120 :font "FiraCode Nerd Font Mono" :weight))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "DejaVu Sans Mono" (font-family-list))
-    (progn
-    (set-face-attribute 'default nil :height 120 :font "DejaVu Sans Mono")
-    (when print-font (message "DejaVu Sans Mono"))))
-   ;; --------------------------------------------------------------------------------------------------
-   ((member "Courier 10 Pitch" (font-family-list))
-    (progn
-    (set-face-attribute 'default nil :height 120 :font "Courier 10 Pitch" :weight 'bold)
-    (when print-font (message "Courier 10 Pitch"))))
-   ;; --------------------------------------------------------------------------------------------------
-   )
 
-  ;; 中文字体的设置，同时解决中英文字体宽度不一致的问题（org-mode的表格可以中英文对齐）。
-  ;; 而且解决了中文字体导致emacs卡的现象。
-  (when (equal system-type 'windows-nt)
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      ;; 台式电脑
-      (if (equal (system-name) "DESKTOP-LL8PBC8")
-          (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-        (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 15)))))
+  ;; font setting start============================================================================================
+  ;; http://zhuoqiang.me/torture-emacs.html同样在YoudaoNote中保存
+  ;; (x-list-fonts "*")
+  ;; (print (font-family-list)) 打印字体
 
-  (when (equal system-type 'gnu/linux)
-    (set-fontset-font "fontset-default" 'gb18030 '("Noto Sans CJK SC" . "unicode-bmp")))
+  (require 'cl) ;; find-if is in common list package
+
+  (defvar chinese-font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
+  (defun fwar34/font-exist-p (font)
+    (if (null (x-list-fonts font))
+        nil
+      t))
+
+  (defun fwar34/set-fonts (english-fonts englist-font-size &optional chinese-fonts chinese-font-size)
+    ;; 英文字体设置
+    (set-face-attribute 'default nil
+                        :height englist-font-size
+                        ;; :weight 'bold
+                        ;; :slant 'Oblique
+                        :font (find-if #'fwar34/font-exist-p english-fonts)) 
+    (message (format "set englist font: %s size: %d" (find-if #'fwar34/font-exist-p english-fonts) englist-font-size))
+    ;; 中文字体设置
+    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    ;;   ;; (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
+    ;;   (set-fontset-font (frame-parameter nil 'font)
+    ;;                     charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
+    ;;                                        :size chinese-font-size)))
+    )
+
+  ;; 英文设置
+  (fwar34/set-fonts '("RobotoMono Nerd Font" "Hack" "Courier 10 Pitch" "Courier New" "DejaVu Sans Mono") 120)
+  ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  ;;   (set-fontset-font (frame-parameter nil 'font)
+  ;;                     charset (font-spec :family "黑体"
+  ;;                     ;; charset (font-spec :family "WenQuanYi Zen Hei Mono"
+  ;;                                        ;; :size 23 
+  ;;                                        )))
+  ;;   )
   )
+
+  ;; --------------------------------------------------------------------------------------------------
+  ;; (cond
+  ;;  ((member "RobotoMono Nerd Font" (font-family-list))
+  ;;   (progn
+  ;;     (set-face-attribute 'default nil :height 120 :font "RobotoMono Nerd Font")
+  ;;     (when print-font (message "RobotoMono Nerd Font")))))
+;; font setting end============================================================================================
 
 ;; 高亮当前行
 (global-hl-line-mode 1)

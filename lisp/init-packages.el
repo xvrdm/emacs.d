@@ -96,7 +96,7 @@
 ;;   (color-theme-molokai)
 ;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (and (display-graphic-p) (>= emacs-major-version))
+(when (and (display-graphic-p) (>= emacs-major-version 26))
   (use-package posframe :ensure t))
 
 (use-package pyim
@@ -123,7 +123,7 @@
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
   (setq-default pyim-english-input-switch-functions
-                '(;; pyim-probe-dynamic-english
+                '(pyim-probe-dynamic-english
                   ;; pyim-probe-auto-english
                   pyim-probe-isearch-mode
                   ;; pyim-probe-program-mode
@@ -145,7 +145,7 @@
     (setq pyim-page-tooltip 'popup))
 
   ;; 选词框显示5个候选词
-  (setq pyim-page-length 5)
+  (setq pyim-page-length 7)
 
   ;; 让 Emacs 启动时自动加载 pyim 词库
   ;; (add-hook 'emacs-startup-hook
@@ -154,10 +154,10 @@
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
    ;; ("M-o o" . pyim-convert-string-at-point)
-   ("M-j" . pyim-convert-string-at-point)
-   ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
+   ("M-i" . pyim-convert-string-at-point)
+   ;; ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
    ;; ("M-j" . pyim-toggle-input-ascii)
-   ("C-\\" . pyim-toggle-input-ascii)
+   ("M-j" . pyim-toggle-input-ascii)
    )) ;;与 pyim-probe-dynamic-english 配合
 
 ;; (setq evil-want-keybinding nil) must put before load evil
