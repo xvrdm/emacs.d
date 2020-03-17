@@ -25,6 +25,13 @@
 (require 'use-package)
 ;; (setq use-package-always-ensure t)
 
+;; install manually
+;; C-x C-f ~/gnu-elpa-keyring-update-2019.3.tar
+;; M-x package-install-from-buffer
+;; http://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
+(use-package 'gnu-elpa-keyring-update
+  :ensure t)
+
 ;; straight.el
 ;; https://github.com/raxod502/straight.el#integration-with-use-package
 (defvar bootstrap-version)
