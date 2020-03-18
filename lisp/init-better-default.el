@@ -306,7 +306,8 @@
 
 ;; adjust for work server
 (when (or (equal system-name "tms2")
-          (equal system-name "ceph1"))
+          (equal system-name "ceph1")
+          (equal system-name "ubuntu"))
   (add-hook
    'emacs-startup-hook
    (lambda ()
