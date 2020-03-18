@@ -870,7 +870,7 @@
   (custom-set-variables '(git-gutter:hide-gutter t))
   ;; If you set git-gutter :update-interval seconds larger than 0,
   ;; git-gutter updates diff information in real-time by idle timer.
-  (custom-set-variables '(git-gutter:update-interval 2))
+  (custom-set-variables '(git-gutter:update-interval 0))
   (custom-set-variables '(git-gutter:visual-line t))
 
   ;; console not display, because git-gutter has bug in emacs26 no window
