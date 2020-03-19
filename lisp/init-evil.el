@@ -646,7 +646,13 @@
                     "pf" 'projectile-find-file-dwim
                     "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
-                    "py" (lambda () (interactive) (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim"))
+                    "py" (lambda ()
+                           (interactive)
+                           (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")
+                           (pyim-export "~/.emacs.d/pyim-mine.cipin"))
+                    "pi" (lambda ()
+                           (interactive)
+                           (pyim-import "~/.emacs.d/pyim-mine.cipin"))
                     "ar" 'align-regexp
                     "ww" 'ace-jump-mode
                     "ec" 'ace-jump-char-mode
