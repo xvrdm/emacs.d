@@ -114,6 +114,8 @@
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
 (evil-define-key 'normal package-menu-mode-map "s" #'swiper)
 
+;; (define-key evil-normal-state-map (kbd "M-j") 'pyim-toggle-input-ascii)
+
 ;; evil-surround setting
 (global-evil-surround-mode)
 ;; evil-escape

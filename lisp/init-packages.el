@@ -173,10 +173,10 @@
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
    ;; ("M-o o" . pyim-convert-string-at-point)
-   ("M-i" . pyim-convert-string-at-point)  ;;与 pyim-probe-dynamic-english 配合
+   ("M-j" . pyim-convert-string-at-point)  ;;与 pyim-probe-dynamic-english 配合
    ;; ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
    ;; ("M-j" . pyim-toggle-input-ascii)
-   ("M-j" . pyim-toggle-input-ascii)
+   ("M-i" . pyim-toggle-input-ascii)
    ;; ("C-<SPC>" . toggle-input-method)
    )) 
 ;; (global-set-key (kbd "C-<SPC>") 'toggle-input-method)
@@ -246,7 +246,9 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
-  :bind ([remap switch-to-buffer] . #'ivy-switch-buffer)
+  :bind
+  ([remap switch-to-buffer] . #'ivy-switch-buffer)
+  ([remap isearch-forward] . #'swiper)
   :after evil
   :config
   (setq ivy-initial-inputs-alist nil
