@@ -56,7 +56,8 @@
     ("m" maximize-window "maximize current window")
     ("M" minimize-window "minimize current window")
     ("q" nil "quit menu" :color blue :column nil))
-  (global-set-key (kbd "M-u w") #'hydra-window/body)
+  ;; (global-set-key (kbd "M-u w") #'hydra-window/body)
+  (evil-define-key '(normal insert) 'global (kbd "M-u wi") #'hydra-window/body)
 
   ;;-------------------------------------------------------------
   ;; org
@@ -78,7 +79,7 @@
     ("oa" org-agenda :exit t)
     ("oc" org-capture :exit t)
     ("q" nil "cancel" :color bule))
-  (evil-define-key 'normal 'global (kbd "M-u og") #'hydra-org/body)
+  (evil-define-key '(normal insert) 'global (kbd "M-u og") #'hydra-org/body)
   ;; (with-eval-after-load 'org
   ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
@@ -112,7 +113,8 @@
     ("d" fix-word-downcase :exit t)
     ("c" fix-word-capitalize :exit t)
     ("q" nil "cancale" :color blue))
-  (global-set-key (kbd "M-u m") #'hydra-M-um/body)
+  ;; (global-set-key (kbd "M-u m") #'hydra-M-um/body)
+  (evil-define-key '(normal insert) 'global (kbd "M-u mm") #'hydra-M-um/body)
   ;; (define-key evil-ex-completion-map (kbd "M-u m") #'hydra-M-um/body)
   ;; (define-key evil-ex-search-keymap (kbd "M-u m") #'hydra-M-um/body)
 
@@ -177,9 +179,11 @@
     ^^^^^^^^-----------------
     _si_: set input pyim
     _co_: convert string at point
+    _to_: toggle input english
     "
     ("si" (lambda () (set-input-method "pyim")))
-    ("co" pyim-convert-string-at-point )
+    ("co" pyim-convert-string-at-point)
+    ("to" pyim-toggle-input-ascii)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u py") #'hydra-pyim/body)
 
@@ -251,7 +255,7 @@
     ("ud" dired-undo "Undo in a Dired buffer." :column "dired commands")
     ("ha" dired-hide-all "Hide all subdirectories, leaving only their header lines.")
     ("q" nil "cancel" :exit t :column nil))
-  (define-key dired-mode-map (kbd "M-u dd") 'hydra-dired/body)
+  (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
 
   ;;-------------------------------------------------------------
   ;; magit
@@ -283,7 +287,7 @@
 
   ;;-------------------------------------------------------------
   ;; font settings
-  (defhydra hydra-font (:color blue :hint nil)
+  (defhydra hydra-font (:color red :hint nil)
     ;; 增加字体大小
     ("+" (lambda ()
            (interactive)
