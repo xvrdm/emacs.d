@@ -166,6 +166,9 @@
         (add-hook 'emacs-startup-hook #'(lambda() (pyim-restart-1 t)))
         )
     (message "你的pyim词库文件没有找到，请先去安装"))
+  (add-hook 'kill-emacs-hook (lambda ()
+                               (pyim-export "~/.emacs.d/pyim-mine.cipin")
+                               (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")))
 
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
