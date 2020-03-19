@@ -154,11 +154,13 @@
   ;; 选词框显示5个候选词
   (setq pyim-page-length 7)
 
-  (if (file-exists-p (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))
+  (if (and (file-exists-p (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))
+           (file-exists-p (expand-file-name "~/.emacs.d/pyim-mine.pyim"))
       (progn
         ;; 个人词库
         (setq pyim-dicts
-              `((:name "pyim-bigdict" :file ,(expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))))
+              `((:name "pyim-bigdict" :file ,(expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))
+                (:name "pyim-mine" :file ,(expand-file-name "~/.emacs.d/pyim-mine.pyim"))))
         ;; 让 Emacs 启动时自动加载 pyim 词库
         (add-hook 'emacs-startup-hook #'(lambda() (pyim-restart-1 t))))
     (message "你的pyim词库文件没有找到，请先去安装"))

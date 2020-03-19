@@ -646,6 +646,7 @@
                     "pf" 'projectile-find-file-dwim
                     "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
+                    "py" (lambda () (interactive) (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim"))
                     "ar" 'align-regexp
                     "ww" 'ace-jump-mode
                     "ec" 'ace-jump-char-mode
