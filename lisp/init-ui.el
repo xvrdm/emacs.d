@@ -63,6 +63,20 @@
       (fwar34/set-fonts englist-font-list 120 chinese-font-list)))
   )
 
+;; https://github.com/tumashu/cnfonts
+(use-package cnfonts
+  :ensure t
+  :defer t
+  :config
+  ;; (cnfonts-enable)
+
+  ;; 1. 在scratch执行后，就会在 scratch 中插入当前可用字体的名称列表，这是一个很有用的技巧。
+  ;; (cl-prettyprint (font-family-list))
+  ;; (cl-prettyprint (x-list-fonts "*"))
+  ;; 2. 命令：`cnfonts-insert-fontname', 可以让用户选择一个可用字体插入到当前光 标处。
+  ;; 3. 使用命令: `describe-char' 可以了解光标处字符使用什么字体。
+  )
+
   ;; --------------------------------------------------------------------------------------------------
   ;; (cond
   ;;  ((member "RobotoMono Nerd Font" (font-family-list))
