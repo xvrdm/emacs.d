@@ -154,9 +154,14 @@
   ;; 选词框显示5个候选词
   (setq pyim-page-length 7)
 
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  ;; (add-hook 'emacs-startup-hook
-  ;;           #'(lambda() (pyim-restart-1 t)))
+  (if (file-exists-p (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))
+      (progn
+        ;; 个人词库
+        (setq pyim-dicts
+              '((:name "pyim-bigdict" :file (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))))
+        ;; 让 Emacs 启动时自动加载 pyim 词库
+        (add-hook 'emacs-startup-hook #'(lambda() (pyim-restart-1 t))))
+    (message "你的词库文件没有找到，请先去安装"))
 
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
