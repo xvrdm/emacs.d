@@ -158,19 +158,21 @@
       (progn
         ;; 个人词库
         (setq pyim-dicts
-              '((:name "pyim-bigdict" :file (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))))
+              `((:name "pyim-bigdict" :file ,(expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))))
         ;; 让 Emacs 启动时自动加载 pyim 词库
         (add-hook 'emacs-startup-hook #'(lambda() (pyim-restart-1 t))))
-    (message "你的词库文件没有找到，请先去安装"))
+    (message "你的pyim词库文件没有找到，请先去安装"))
 
   :bind
   (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
    ;; ("M-o o" . pyim-convert-string-at-point)
-   ("M-i" . pyim-convert-string-at-point)
+   ("M-i" . pyim-convert-string-at-point)  ;;与 pyim-probe-dynamic-english 配合
    ;; ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
    ;; ("M-j" . pyim-toggle-input-ascii)
    ("M-j" . pyim-toggle-input-ascii)
-   )) ;;与 pyim-probe-dynamic-english 配合
+   ;; ("C-<SPC>" . toggle-input-method)
+   )) 
+;; (global-set-key (kbd "C-<SPC>") 'toggle-input-method)
 
 ;; (setq evil-want-keybinding nil) must put before load evil
 ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
