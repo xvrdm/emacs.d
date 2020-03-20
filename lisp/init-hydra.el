@@ -340,7 +340,7 @@
                (set-face-attribute 'default nil :height (- old-face-attribute 10)))) "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
-    (global-set-key (kbd "M-u ft") #'hydra-M-um/body))
+    (global-set-key (kbd "M-u ft") #'hydra-font/body))
   ;; (evil-define-key 'normal 'global (kbd "M-u ft") #'hydra-font/body)
   )
 

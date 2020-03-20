@@ -46,8 +46,17 @@
         (message (format "set chinese font: %s" (find-if #'fwar34/font-exist-p chinese-fonts))))
     )
 
-  (defvar englist-font-list '("RobotoMono Nerd Font" "Hack" "Courier 10 Pitch" "Courier New" "DejaVu Sans Mono"))
-  (defvar chinese-font-list '("黑体" "Microsoft Yahei" "文泉驿等宽微米黑" "新宋体" "宋体"))
+  (defvar englist-font-list '("PragmataPro Mono"
+                              "RobotoMono Nerd Font"
+                              "Hack"
+                              "Courier 10 Pitch"
+                              "Courier New"
+                              "DejaVu Sans Mono"))
+  (defvar chinese-font-list '("黑体"
+                              "Microsoft Yahei"
+                              "文泉驿等宽微米黑"
+                              "新宋体"
+                              "宋体"))
 
   (let ((is-set-chinese nil))
     (if (file-readable-p "/etc/os-release")
@@ -57,11 +66,23 @@
                (setq is-set-chinese t))))
     (if is-set-chinese 
         ;; 设置英文和中文
-        (fwar34/set-fonts englist-font-list 120 chinese-font-list)
+        (fwar34/set-fonts englist-font-list 130 chinese-font-list 24)
       ;; 设置英文
       ;; (fwar34/set-fonts englist-font-list 120)
-      (fwar34/set-fonts englist-font-list 120 chinese-font-list)))
+      (fwar34/set-fonts englist-font-list 130 chinese-font-list 24)))
   )
+
+;; (use-package emacs-pragmatapro-ligatures
+;;   ;; :defer t
+;;   :straight
+;;   (:host github :repo "lumiknit/emacs-pragmatapro-ligatures")
+;;   :config
+;;   ;; Enable pragmatapro-lig-mode for specific modes
+;;   (add-hook 'text-mode-hook 'pragmatapro-lig-mode)
+;;   (add-hook 'prog-mode-hook 'pragmatapro-lig-mode)
+;;   ;; or globally
+;;   ;;(pragmatapro-lig-global-mode)
+;;   )
 
 ;; https://github.com/tumashu/cnfonts
 (use-package cnfonts
