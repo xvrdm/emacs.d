@@ -416,5 +416,14 @@
   (if (string= "*Messages*" (buffer-name))
       (read-only-mode -1)))
 
+;; after key sequence SPC r p y(run-python) switch to python window
+(if (fboundp 'make-thread)
+      (add-hook 'inferior-python-mode-hook
+                (lambda ()
+                  (make-thread (lambda ()
+                                 (while (not (get-buffer-window "*Python*"))
+                                   (sleep-for 0 100))
+                                 (select-window (get-buffer-window "*Python*")))))))
+
 
 (provide 'init-better-default)

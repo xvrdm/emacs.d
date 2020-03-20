@@ -295,7 +295,10 @@
                     ;; "cs" 'counsel-git-grep-by-selected ; quickest grep should be easy to press
                     ;; "cm" 'counsel-git-find-my-file
                     ;; buffer ;;;;;
-                    "bk" 'kill-buffer
+                    ;; "bk" 'kill-buffer
+                    ;; "wk" 'kill-buffer-and-window
+                    "kb" 'kill-buffer
+                    "kw" 'kill-buffer-and-window
                     ;; "bs" 'switch-to-buffer
                     ;; "bs" 'counsel-switch-buffer
                     "bs" 'ivy-switch-buffer
