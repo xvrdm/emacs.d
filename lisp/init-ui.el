@@ -87,6 +87,7 @@
 ;; https://github.com/tumashu/cnfonts
 (use-package cnfonts
   :ensure t
+  :if window-system
   :defer t
   :config
   ;; (cnfonts-enable)
