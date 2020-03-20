@@ -66,10 +66,10 @@
                (setq is-set-chinese t))))
     (if is-set-chinese 
         ;; 设置英文和中文
-        (fwar34/set-fonts englist-font-list 130 chinese-font-list 24)
+        (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)
       ;; 设置英文
       ;; (fwar34/set-fonts englist-font-list 120)
-      (fwar34/set-fonts englist-font-list 130 chinese-font-list 24)))
+      (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
   )
 
 ;; (use-package emacs-pragmatapro-ligatures
