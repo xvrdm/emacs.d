@@ -191,6 +191,28 @@
     ("to" pyim-toggle-input-ascii)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u py") #'hydra-pyim/body)
+  (with-eval-after-load 
+      ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
+      ;; 上面两个搜索内部使用的是isearch相关的函数
+      (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body))
+  ;; (add-hook 'isearch-mode-hook #'(lambda ()
+  ;;                                  (local-set-key (kbd "M-u py") #'hydra-pyim/body)))
+  ;; (define-key evil-motion-state-map (kbd "M-u py") #'hydra-pyim/body)
+  ;; (evil-define-key 'normal motion  (kbd "M-u py") #'hydra-pyim/body)
+
+  ;;-------------------------------------------------------------
+  ;; isearch
+  (with-eval-after-load 'isearch
+    (defhydra hydra-isearch (:color blue :hint nil)
+      "
+    ^isearch^                  
+    ^^^^^^^^-----------------
+    _sl_: pull rest of line from buffer into search string.
+    "
+      ("sl" isearch-yank-line)
+      ("q" nil "cancale" :color blue))
+      (define-key isearch-mode-map (kbd "M-u is") 'hydra-isearch/body)
+    )
 
   ;;-------------------------------------------------------------
   (require 'windmove)

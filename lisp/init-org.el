@@ -13,6 +13,9 @@
      (C . t)))
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
+  ;; indent codes in org mode
+  ;; https://stackoverflow.com/questions/15773354/indent-code-in-org-babel-src-blocks
+  (setq org-src-tab-acts-natively t)
   ;; https://emacs-china.org/t/topic/440/10
   (case system-type
     (gnu/linux
