@@ -1,0 +1,42 @@
+#+STARTUP: showall
+#+STARTUP: hidestars
+#+OPTIONS: H:2 num:nil tags:nil toc:nil timestamps:t
+#+LAYOUT: post
+#+AUTHOR: feng
+#+DATE: 2020-03-20 Fri 14:59
+#+TITLE: test
+#+DESCRIPTION: test
+#+TAGS: test
+#+CATEGORIES: test
+
+#+TITLE: 一些emacs和elisp的cheatsheet
+#+OPTIONS: toc:nil
+
+#<<t1>> top
+
+** *emacs相关*
+   1. M-t 交换两个相邻的word
+
+** *elisp相关*
+   1. with-eval-after-load和eval-after-load的区别
+      [[[[https://stackoverflow.com/questions/21880139/what-is-with-eval-after-load-in-emacs-lisp]]][stackoverflow]]
+      #+BEGIN_QUOTE
+      Lisp Changes in Emacs 24.4
+      ...
+      New macro `with-eval-after-load'.
+      This is like the old `eval-after-load', but better behaved.
+      #+END_QUOTE
+      #+BEGIN_SRC elisp -n
+      (eval-after-load "foo"
+       '(progn
+           (setq foo 42)
+           (setq bar 17)))
+      #+END_SRC
+      与下面的相等
+      #+BEGIN_SRC elisp
+      (with-eval-after-load "foo"
+         (setq foo 42)
+         (setq bar 17))
+      #+END_SRC
+
+   [[t1][top]]

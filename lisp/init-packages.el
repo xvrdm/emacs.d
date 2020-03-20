@@ -258,6 +258,7 @@
         ivy-format-function #'ivy-format-function-line
         ivy-use-virtual-buffers t)
   (ivy-mode 1) ;; M-j ivy-yank-word，将光标的word读入minibuffer，很像vim中的功能
+               ;; C-y yank，可以在minibuffer中粘贴
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
@@ -699,6 +700,7 @@
   :config
   (fa-config-default)
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
   )
 
 (use-package symon
