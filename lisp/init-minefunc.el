@@ -266,7 +266,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
      ((string-equal $file-suffix "el")
       (load $filename))
      ((string-equal $file-suffix "go")
-      (fwar34-run-current-go-file))
+      (fwar34/run-current-go-file))
      ((string-equal $file-suffix "java")
       (shell-command (format "java %s" (file-name-sans-extension (file-name-nondirectory $filename)))))
      (t (if $prog-name

@@ -574,6 +574,8 @@
                     ;; "rmz" 'run-mozilla
                     "rpy" 'run-python
                     "rlu" 'run-lua
+                    "rru" 'rust-run
+                    "rfm" 'rust-format-buffer
                     "tci" 'toggle-company-ispell
                     ;; liang.feng
                     ;; "kb" 'kill-buffer-and-window ;; "k" is preserved to replace "C-g"
