@@ -10,7 +10,7 @@
     (add-to-list 'auto-save-exclude "TAGS")
     (add-to-list 'auto-save-exclude "tags")
     (setq auto-save-idle 2) ; 2 seconds
-    ;; (setq auto-save-slient t)
+    (setq auto-save-slient t)
     (auto-save-enable)
     ))
 ;; }}

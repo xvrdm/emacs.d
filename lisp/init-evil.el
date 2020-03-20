@@ -250,6 +250,7 @@
                     "il" 'imenu-list-smart-toggle
                     ;; "tb" 'taglist-list-tags
                     "jj" 'taglist-list-tags
+                    "sw" 'transpose-words ;;swap two words next to each other
                     "xm" 'my-M-x
                     ;; "bk" 'buf-move-up
                     ;; "bj" 'buf-move-down
