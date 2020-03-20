@@ -686,6 +686,9 @@
 (use-package browse-kill-ring
   :ensure t
   :defer t
+  :config
+  (evil-define-key 'normal browse-kill-ring-mode-map "q"
+    #'browse-kill-ring-quit)
   )
 
 (use-package function-args

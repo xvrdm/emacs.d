@@ -104,7 +104,12 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 ;; initial apropos-mode to evil-normal-state
-(evil-set-initial-state 'apropos-mode 'normal)
+;; (dolist (p '((apropos-mode . normal)
+;;              (browse-kill-ring-mode . normal)))
+;;   (evil-set-initial-state (car p) (cdr p)))
+(loop for (mode . state) in '((apropos-mode . normal)
+                              (browse-kill-ring-mode . normal))
+      do (evil-set-initial-state mode state))
 
 ;; TAB and C-i is the same
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
