@@ -72,6 +72,14 @@
       (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
   )
 
+(defvar font-flag nil)
+(defun my-change-englist-font ()
+  (interactive)
+  (if font-flag
+      (fwar34/set-fonts '("PragmataPro Mono") 130)
+    (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
+  (setq font-flag (not font-flag)))
+
 ;; (use-package emacs-pragmatapro-ligatures
 ;;   ;; :defer t
 ;;   :straight
