@@ -353,11 +353,11 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 	  (my-non-fullscreen)
 	(my-fullscreen)))
 ;; ----------------------------------------------------------------------------------------------------
-
 (defun my-display-function ()
   "display function declared"
   (interactive)
   (save-excursion
+
     (beginning-of-defun)
     (setq begin (point))
     (evil-end-of-line)
@@ -369,14 +369,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
       (setq end-char (buffer-substring-no-properties end (+ 1 end))))
 
     (if (string= end-char "{")
+        ;; (display-message-or-buffer (buffer-substring begin end)) ;; 最后一个字符是{的话去除最后个{后输出
         (message (buffer-substring begin end)) ;; 最后一个字符是{的话去除最后个{后输出
       (progn
         (while (not (string= end-char ")"))
-          (next-line)
+          (evil-next-line)
           (evil-end-of-line)
           (setq end (point))
           (setq end-char (buffer-substring-no-properties end (+ 1 end))))
         ;; (message (buffer-substring-no-properties begin end)))
+        ;; (display-message-or-buffer (buffer-substring begin (+ 1 end)))
         (message (buffer-substring begin (+ 1 end))))))
   )
 

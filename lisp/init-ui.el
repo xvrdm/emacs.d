@@ -128,4 +128,8 @@
 ;; 关闭启动画面
 (setq inhibit-splash-screen 1)
 
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Displaying-Messages.html
+;; 设置mini-window高度，例如echo area
+(setq max-mini-window-height 1.0) 
+
 (provide 'init-ui)
