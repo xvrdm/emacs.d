@@ -130,6 +130,9 @@
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Displaying-Messages.html
 ;; 设置mini-window高度，例如echo area
+;; Maximum height for resizing mini-windows (the minibuffer and the echo area).
+;; If a float, it specifies a fraction of the mini-window frame’s height.
+;; If an integer, it specifies a number of lines.
 (setq max-mini-window-height 1.0) 
 
 (provide 'init-ui)
