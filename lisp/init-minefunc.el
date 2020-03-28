@@ -361,6 +361,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (setq begin (point))
     (evil-end-of-line)
     (setq end (+ 1 (point)))
-    (message (buffer-substring-no-properties begin end))))
+    ;; (message (buffer-substring-no-properties begin end))
+    (message (buffer-substring begin end))))
 
 (provide 'init-minefunc)
