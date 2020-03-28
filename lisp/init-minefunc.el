@@ -355,13 +355,27 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;; ----------------------------------------------------------------------------------------------------
 
 (defun my-display-function ()
+  "display function"
   (interactive)
   (save-excursion
     (beginning-of-defun)
     (setq begin (point))
     (evil-end-of-line)
-    (setq end (+ 1 (point)))
-    ;; (message (buffer-substring-no-properties begin end))
-    (message (buffer-substring begin end))))
+    (setq end (point))
+    (setq end-char (buffer-substring-no-properties end (+ 1 end)))
+    (message end-char)
+    (if (string= end-char "\\)")
+        (message "==="))
+
+    (while (not (or (string= end-char "{") (string= end-char "\\)")))
+      (message "yyyyxxxxy")
+      (evil-next-line)
+      (evil-end-of-line)
+      (setq end (point))
+      (setq end-char (buffer-substring-no-properties end (+ 1 end))))
+    (message "zzzzz")
+    ;; (message (buffer-substring-no-properties begin end)))
+    (message (buffer-substring begin  end))
+    ))
 
 (provide 'init-minefunc)
