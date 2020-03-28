@@ -354,4 +354,13 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 	(my-fullscreen)))
 ;; ----------------------------------------------------------------------------------------------------
 
+(defun my-display-function ()
+  (interactive)
+  (save-excursion
+    (beginning-of-defun)
+    (setq begin (point))
+    (evil-end-of-line)
+    (setq end (+ 1 (point)))
+    (message (buffer-substring-no-properties begin end))))
+
 (provide 'init-minefunc)
