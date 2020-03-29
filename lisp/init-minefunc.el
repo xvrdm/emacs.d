@@ -369,7 +369,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
       (setq end-char (buffer-substring-no-properties end (+ 1 end))))
 
     (if (string= end-char "{")
-        (message (buffer-substring begin end))
+        (message (buffer-substring begin end)) ;; 最后一个字符是{的话去除最后个{后输出
       (progn
         (while (not (string= end-char ")"))
           (next-line)
