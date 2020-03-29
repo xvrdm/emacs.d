@@ -368,13 +368,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
       (setq end (- end 1))
       (setq end-char (buffer-substring-no-properties end (+ 1 end))))
 
-    (while (not (or (string= end-char "{") (string= end-char ")")))
-      (next-line)
-      (evil-end-of-line)
-      (setq end (point))
-      (setq end-char (buffer-substring-no-properties end (+ 1 end))))
-    ;; (message (buffer-substring-no-properties begin end)))
-    (message (buffer-substring begin (+ 1 end))))
+    (if (string= end-char "{")
+        (message (buffer-substring begin end))
+      (progn
+        (while (not (string= end-char ")"))
+          (next-line)
+          (evil-end-of-line)
+          (setq end (point))
+          (setq end-char (buffer-substring-no-properties end (+ 1 end))))
+        ;; (message (buffer-substring-no-properties begin end)))
+        (message (buffer-substring begin (+ 1 end))))))
   )
 
 (defun my-test-point ()
