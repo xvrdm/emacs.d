@@ -282,8 +282,8 @@
   ;; dired
   (with-eval-after-load 'dired
     (defhydra hydra-dired (:color blue :hint nil)
-      ("ud" dired-undo "Undo in a Dired buffer." :column "dired commands")
-      ("ha" dired-hide-all "Hide all subdirectories, leaving only their header lines.")
+      ("ud" dired-undo "undo in a dired buffer." :column "dired commands")
+      ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
       (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body))

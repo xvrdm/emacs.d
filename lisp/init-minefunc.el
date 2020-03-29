@@ -354,7 +354,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 	(my-fullscreen)))
 ;; ----------------------------------------------------------------------------------------------------
 
-(defun my-display-function ()  
+(defun my-display-function ()
   "display function declared"
   (interactive)
   (save-excursion
