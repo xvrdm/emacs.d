@@ -354,8 +354,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 	(my-fullscreen)))
 ;; ----------------------------------------------------------------------------------------------------
 
-(defun my-display-function ()
-  "display function"
+(defun my-display-function ()  
+  "display function declared"
   (interactive)
   (save-excursion
     (beginning-of-defun)
@@ -363,13 +363,26 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (evil-end-of-line)
     (setq end (point))
     (setq end-char (buffer-substring-no-properties end (+ 1 end)))
+    ;; 去除每行末尾的空字符
+    (while (string= end-char " ")
+      (setq end (- end 1))
+      (setq end-char (buffer-substring-no-properties end (+ 1 end))))
+
     (while (not (or (string= end-char "{") (string= end-char ")")))
-      (evil-next-line)
+      (next-line)
       (evil-end-of-line)
       (setq end (point))
       (setq end-char (buffer-substring-no-properties end (+ 1 end))))
     ;; (message (buffer-substring-no-properties begin end)))
     (message (buffer-substring begin (+ 1 end))))
   )
+
+(defun my-test-point ()
+  (interactive)
+  (print (point)))
+
+(defun my-test-point-eol ()
+  (interactive)
+  (print (point-at-eol)))
 
 (provide 'init-minefunc)
