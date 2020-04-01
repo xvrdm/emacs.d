@@ -197,6 +197,8 @@
                counsel-etags-list-tag
                counsel-etags-grep
                counsel-etags-find-tag
+               evil-search-next
+               evil-search-previous
                evil-backward-section-begin
                evil-backward-section-end
                counsel-ag
