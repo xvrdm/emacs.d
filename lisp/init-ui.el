@@ -43,7 +43,7 @@
           (set-fontset-font (frame-parameter nil 'font)
                             charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
                                                :size chinese-font-size)))
-        (message (format "set chinese font: %s" (find-if #'fwar34/font-exist-p chinese-fonts))))
+        (message (format "set chinese font: %s size: %d" (find-if #'fwar34/font-exist-p chinese-fonts) chinese-font-size)))
     )
 
   (defvar englist-font-list '("PragmataPro Mono"
@@ -64,12 +64,17 @@
            (insert-file-contents "/etc/os-release")
            (if (string-match "ID=arch" (buffer-string))
                (setq is-set-chinese t))))
-    (if is-set-chinese 
-        ;; 设置英文和中文
-        (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)
-      ;; 设置英文
-      ;; (fwar34/set-fonts englist-font-list 120)
-      (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
+    ;; (if is-set-chinese
+    ;;     ;; 设置英文和中文
+    ;;     (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)
+    ;;   ;; 设置英文
+    ;;   ;; (fwar34/set-fonts englist-font-list 120)
+    ;;   (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
+    )
+
+  (if (string= system-name "Taishiji")
+      (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
+    (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
   )
 
 (defvar font-flag nil)
